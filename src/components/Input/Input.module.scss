@@ -1,0 +1,48 @@
+@import './src/scss/index';
+
+.wrapper {
+	position: relative;
+	width: 100%;
+
+	.input {
+		width: 100%;
+		padding: 15px 30px;
+
+		color: gray;
+		border: 1px solid rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
+		background: none;
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+		font-size: 16px;
+		font-weight: 400;
+		-webkit-box-shadow: inset 0 0 0 50px #fff;
+		-webkit-text-fill-color: #000;
+		&::placeholder {
+			opacity: 1;
+			color: gray;
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		@include _laptopL {
+			font-size: 14px;
+		}
+	}
+
+	.error {
+		border: 1px solid red;
+	}
+
+	.errorMessage {
+		position: absolute;
+		top: -18px;
+		left: 0;
+
+		color: red;
+
+		font-size: 14px;
+	}
+}

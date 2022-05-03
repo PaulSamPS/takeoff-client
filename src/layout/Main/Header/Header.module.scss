@@ -1,0 +1,10 @@
+.wrapper {
+  color: white;
+  background-color: rgb(1, 49, 77);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  .logout {
+    cursor: pointer;
+  }
+}

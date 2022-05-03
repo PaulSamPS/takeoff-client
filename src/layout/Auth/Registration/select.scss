@@ -1,0 +1,51 @@
+.select {
+  &__control {
+    background-color: transparent !important;
+    border: 1px solid rgba(0, 0, 0, 0.5) !important;
+    color: var(--black);
+    padding: 5px 30px;
+    border-radius: 10px !important;
+    font-size: 16px;
+
+    &--is-focused {
+      border: 1px solid rgba(0, 0, 0, 0.5) !important;
+      box-shadow: none !important;
+    }
+
+    &--minu-is-open {
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &__single-value {
+    color: var(--black) !important;
+  }
+
+  &__indicator {
+    color: rgba(0, 0, 0, 0.5) !important;
+    &-separator {
+      display: none !important;
+    }
+  }
+
+  &__menu {
+    border-radius: 10px !important;
+
+    &-list {
+      padding: 10px 0 !important;
+    }
+  }
+
+  &__option {
+    cursor: pointer;
+    &--is-focused {
+      background-color: var(--blue-light) !important;
+      color: var(--textWhite) !important;
+    }
+
+    &--is-selected {
+      background-color: var(--blue) !important;
+    }
+  }
+}

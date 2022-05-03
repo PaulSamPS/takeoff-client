@@ -1,0 +1,84 @@
+@import './src/scss/index';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 30% 70%;
+
+  min-height: 100vh;
+
+  h3 {
+    margin: 0;
+  }
+
+  .forgotPassword {
+    color: gray;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all ease .2s;
+
+    &:hover {
+      color: rgb(1, 49, 77);
+    }
+  }
+  .top {
+    background-color: rgb(1, 49, 77);
+    color: white;
+    font-size: 32px;
+    display: table;
+
+    h1 {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+  .bottom {
+    width: 450px;
+    margin: 0 auto;
+    padding: 50px 20px 0;
+
+    .form {
+      position: relative;
+      @include flexColumn;
+      row-gap: 20px;
+
+      .responseError {
+        position: absolute;
+        top: -35px;
+        color: orangered;
+      }
+
+      .selectContainer {
+        width: 100%;
+      }
+
+      .err {
+        position: absolute;
+        top: -35px;
+        color: orangered;
+      }
+
+      .submit {
+        @include flexColumn;
+        row-gap: 20px;
+
+        .btn {
+          border: none;
+          border-radius: 10px;
+          background-color: rgb(1, 49, 77);
+          color: white;
+          font-size: 18px;
+          font-weight: 700;
+          padding: 15px 50px;
+          cursor: pointer;
+
+          &:disabled {
+            pointer-events: none;
+            opacity: 0.3;
+          }
+        }
+      }
+    }
+  }
+}
