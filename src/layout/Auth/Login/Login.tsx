@@ -1,23 +1,24 @@
 import React from 'react';
-import styles from '../AuthLayout.module.scss';
 import { useForm } from 'react-hook-form';
 import { Input } from '../../../components/Input/Input';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ILoginForm } from '../../../interfaces/loginForm.interface';
+import styles from '../AuthLayout.module.scss';
 
 export const Login = (): JSX.Element => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({ mode: 'onChange' });
+  } = useForm<ILoginForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
   const navigate = useNavigate();
 
   const handleChangeMethod = () => {
     navigate('/registration');
   };
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit = async (formData: ILoginForm) => {
     console.log(formData);
   };
 
@@ -30,7 +31,9 @@ export const Login = (): JSX.Element => {
       viewport={{ once: true }}
     >
       <Input
-        {...register('name', { required: { value: true, message: 'Введите имя' } })}
+        {...register('name', {
+          required: { value: true, message: 'Введите имя' },
+        })}
         placeholder='Логин'
         type='text'
         error={errors.name}

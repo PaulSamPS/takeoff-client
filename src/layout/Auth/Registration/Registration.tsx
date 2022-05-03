@@ -58,13 +58,21 @@ export const Registration = () => {
       viewport={{ once: true }}
     >
       <Input
-        {...register('name', { required: { value: true, message: 'Введите имя' } })}
+        {...register('name', {
+          required: { value: true, message: 'Введите имя' },
+          minLength: { value: 3, message: 'Не короче  3 символов' },
+          maxLength: { value: 15, message: 'Имя не должно превышать 15 символов' },
+        })}
         placeholder='Логин'
         type='text'
         error={errors.name}
       />
       <Input
-        {...register('password', { required: { value: true, message: 'Введите пароль' } })}
+        {...register('password', {
+          required: { value: true, message: 'Введите пароль' },
+          minLength: { value: 5, message: 'Не короче 5 символов' },
+          maxLength: { value: 20, message: 'Пароль не должен превышать 20 символов' },
+        })}
         placeholder='Пароль'
         type='password'
         error={errors.password}
