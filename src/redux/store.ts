@@ -3,12 +3,14 @@ import positionReducer from './reducers/positionReducer';
 import levelReducer from './reducers/levelReducer';
 import registrationReducer from './reducers/auth/registrationReducer';
 import loginReducer from './reducers/auth/loginReducer';
+import usersReducer from './reducers/usersReducer';
 
 const rootReducer = combineReducers({
   positionReducer,
   levelReducer,
   registrationReducer,
   loginReducer,
+  usersReducer,
 });
 
 export const createStore = () => {

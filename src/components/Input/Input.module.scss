@@ -20,7 +20,7 @@
 		-webkit-text-fill-color: #000;
 		&::placeholder {
 			opacity: 0.5;
-			color: gray;
+			color: var(--grey-light);
 		}
 
 		&:focus {
@@ -33,7 +33,7 @@
 	}
 
 	.error {
-		border: 1px solid red;
+		border: 1px solid var(--red);
 	}
 
 	.errorMessage {
@@ -41,7 +41,7 @@
 		top: -18px;
 		left: 0;
 
-		color: red;
+		color: var(--red);
 
 		font-size: 14px;
 	}

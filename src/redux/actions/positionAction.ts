@@ -8,7 +8,7 @@ import { ILevelInterface } from '../../interfaces/level.interface';
 
 export const getPosition = () => async (dispatch: AppDispatch) => {
   await $api
-    .get(`/api/position`)
+    .get(`api/position`)
     .then((res: AxiosResponse<IPositionInterface[]>) => {
       dispatch(positionReducer.actions.setPositionSuccess(res.data));
     })
@@ -19,7 +19,7 @@ export const getPosition = () => async (dispatch: AppDispatch) => {
 
 export const getLevel = () => async (dispatch: AppDispatch) => {
   await $api
-    .get(`/api/level`)
+    .get(`api/level`)
     .then((res: AxiosResponse<ILevelInterface[]>) => {
       dispatch(levelReducer.actions.setLevelSuccess(res.data));
     })

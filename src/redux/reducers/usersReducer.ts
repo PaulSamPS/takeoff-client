@@ -1,29 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../../../interfaces/user.interface';
+import { IUser } from '../../interfaces/user.interface';
 
 interface IRegistration {
   error: string | undefined;
   isLoading: boolean;
-  user: IUser;
+  users: IUser[];
 }
 
 const initialState: IRegistration = {
   error: '',
   isLoading: false,
-  user: {} as IUser,
+  users: [],
 };
 
-export const loginReducer = createSlice({
-  name: 'login',
+export const usersReducer = createSlice({
+  name: 'users',
   initialState,
   reducers: {
     setLoading(state) {
       state.isLoading = true;
     },
-    setSuccess(state, action: PayloadAction<IUser>) {
+    setSuccess(state, action: PayloadAction<IUser[]>) {
       state.isLoading = false;
       state.error = '';
-      state.user = action.payload;
+      state.users = action.payload;
     },
     setError(state, action: PayloadAction<string | undefined>) {
       state.isLoading = false;
@@ -32,4 +32,4 @@ export const loginReducer = createSlice({
   },
 });
 
-export default loginReducer.reducer;
+export default usersReducer.reducer;

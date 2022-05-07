@@ -5,7 +5,7 @@
 
 body {
 	overflow-y: scroll;
-
+	background: #E5E5E5;
 	margin: 0 auto;
 
 	font-family:
@@ -35,16 +35,11 @@ body {
 }
 
 :root {
-	--blue: #01314D;
-	--blue-light: #047abb;
-	--tetxGray: #CFCFCF;
-	--textWhite: #FFF;
-	--greenGradient: linear-gradient(114.93deg, #618967 5.11%, #72A479 94%);
-	--brownGradient: linear-gradient(90deg, #494544 0%, #504B4A 100%);
-	--footerGradient: linear-gradient(270.7deg, #44403F 0.4%, #211F20 100%);
-	--darkBrown: #403C3B;
-	--black: #211F20;
-	--green: #618967;
-	--brown: #504B4A;
-	--red: #ca7289;
+	--grey: #808080;
+	--grey-light: #E2E2E2;
+	--blue: #587da3;
+	--black: #05070a;
+	--green: #00A800;
+	--white: #FFF;
+	--red: #dd070a;
 }

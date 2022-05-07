@@ -1,9 +1,24 @@
 .wrapper {
   color: white;
-  background-color: rgb(1, 49, 77);
+  background-color: var(--blue);
   display: flex;
-  justify-content: space-between;
   padding: 20px;
+  margin-bottom: 50px;
+  justify-content: right;
+  align-items: center;
+
+  .profile {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+    cursor: pointer;
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
   .logout {
     cursor: pointer;
   }

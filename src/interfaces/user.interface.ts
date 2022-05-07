@@ -9,5 +9,5 @@ export interface IUser {
 
 export interface IResponseUser {
   accessToken: string;
-  user: IUser[];
+  user: IUser;
 }

@@ -1,9 +1,8 @@
 .select {
   &__control {
-    background-color: transparent !important;
     border: 1px solid rgba(0, 0, 0, 0.5) !important;
     color: var(--black);
-    padding: 5px 30px;
+    padding: 5px 20px;
     border-radius: 10px !important;
     font-size: 16px;
 
@@ -40,8 +39,8 @@
   &__option {
     cursor: pointer;
     &--is-focused {
-      background-color: var(--blue-light) !important;
-      color: var(--textWhite) !important;
+      background-color: var(--blue) !important;
+      color: var(--white) !important;
     }
 
     &--is-selected {

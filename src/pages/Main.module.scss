@@ -1,20 +1,7 @@
 .wrapper {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 20px;
   margin: 0 auto;
   max-width: 990px;
-  margin-top: 50px;
-  cursor: pointer;
-
-  .table {
-    width: 200px;
-    height: 150px;
-    background-color: rgb(1, 49, 77);
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-  }
 }
