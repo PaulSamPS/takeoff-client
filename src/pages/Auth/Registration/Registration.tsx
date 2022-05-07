@@ -9,16 +9,20 @@ import { getLevel, getPosition } from '../../../redux/actions/positionAction';
 import { ISelectOption } from '../../../interfaces/select.interface';
 import { optionsCreator } from '../../../helpers/optionsCrearot';
 import { IRegistrationForm } from '../../../interfaces/registrationForm.interface';
-import styles from '../AuthLayout.module.scss';
+import { registration } from '../../../redux/actions/authAction';
+import { Spinner } from '../../../components/Spinner/Spinner';
+import styles from '../Auth.module.scss';
 import './select.scss';
 
-export const Registration = () => {
+export const Registration = (): JSX.Element => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     control,
+    reset,
   } = useForm<IRegistrationForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
+  const { isLoading, status, error } = useAppSelector((state) => state.registrationReducer);
   const { position } = useAppSelector((state) => state.positionReducer);
   const { level } = useAppSelector((state) => state.levelReducer);
   const dispatch = useAppDispatch();
@@ -30,7 +34,7 @@ export const Registration = () => {
   optionsCreator(position, optionsPosition);
   optionsCreator(level, optionsLevel);
 
-  const handleChangeMethod = () => {
+  const handleSwitchMethod = () => {
     navigate('/');
   };
 
@@ -41,13 +45,29 @@ export const Registration = () => {
     if (typeof formData.level !== 'string') {
       formData.level = formData.level.value;
     }
-    console.log(formData);
+    dispatch(registration(formData));
+    reset();
   };
 
   React.useEffect(() => {
     dispatch(getPosition());
     dispatch(getLevel());
   }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (status === 200) {
+    return (
+      <h2 className={styles.success}>
+        Успешная регистрация, теперь вы можете
+        <span className={styles.switch} onClick={handleSwitchMethod}>
+          войти
+        </span>
+      </h2>
+    );
+  }
 
   return (
     <motion.form
@@ -57,6 +77,7 @@ export const Registration = () => {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
     >
+      {error && <span className={styles.err}>{error}</span>}
       <Input
         {...register('name', {
           required: { value: true, message: 'Введите имя' },
@@ -78,7 +99,10 @@ export const Registration = () => {
         error={errors.password}
       />
       <Input
-        {...register('email', { required: { value: true, message: 'Введите email' } })}
+        {...register('email', {
+          required: { value: true, message: 'Введите email' },
+          pattern: { value: /[^@\s]+@[^@\s]+\.[^@\s]+/g, message: 'Неверный формат  email' },
+        })}
         placeholder='Email'
         type='email'
         error={errors.email}
@@ -116,7 +140,7 @@ export const Registration = () => {
           Регистрация
         </button>
       </div>
-      <span className={styles.forgotPassword} onClick={handleChangeMethod}>
+      <span className={styles.switch} onClick={handleSwitchMethod}>
         Войти
       </span>
     </motion.form>

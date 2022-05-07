@@ -1,0 +1,49 @@
+@import '../../scss/index';
+
+.form {
+  position: relative;
+  @include flexColumn;
+  row-gap: 20px;
+
+  .selectContainer {
+    width: 100%;
+  }
+
+  .err {
+    position: absolute;
+    top: -35px;
+    color: orangered;
+  }
+
+  .submit {
+    @include flexColumn;
+    row-gap: 20px;
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      background-color: rgb(1, 49, 77);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 15px 50px;
+      cursor: pointer;
+
+      &:disabled {
+        pointer-events: none;
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+.switch {
+  color: gray;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all ease .2s;
+
+  &:hover {
+    color: rgb(1, 49, 77);
+  }
+}

@@ -1,10 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import positionReducer from './reducers/positionReducer';
 import levelReducer from './reducers/levelReducer';
+import registrationReducer from './reducers/auth/registrationReducer';
+import loginReducer from './reducers/auth/loginReducer';
 
 const rootReducer = combineReducers({
   positionReducer,
   levelReducer,
+  registrationReducer,
+  loginReducer,
 });
 
 export const createStore = () => {

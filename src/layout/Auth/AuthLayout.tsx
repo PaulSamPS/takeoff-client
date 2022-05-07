@@ -1,8 +1,16 @@
 import React from 'react';
 import styles from './AuthLayout.module.scss';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 export const AuthLayout = () => {
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (localStorage.getItem('AccessToken')) {
+      navigate('/main');
+    }
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
