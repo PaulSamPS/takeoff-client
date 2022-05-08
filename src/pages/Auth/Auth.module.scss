@@ -1,49 +1,52 @@
-@import '../../scss/index';
+@import "../../scss/index";
 
 .form {
-  position: relative;
-  @include flexColumn;
-  row-gap: 20px;
+	position: relative;
 
-  .selectContainer {
-    width: 100%;
-  }
+	@include flexColumn;
 
-  .err {
-    position: absolute;
-    top: -35px;
-    color: var(--red);
-  }
+	row-gap: 20px;
 
-  .submit {
-    @include flexColumn;
-    row-gap: 20px;
+	.selectContainer {
+		width: 100%;
+	}
 
-    .btn {
-      border: none;
-      border-radius: 10px;
-      background: var(--blue);
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 15px 50px;
-      cursor: pointer;
+	.err {
+		position: absolute;
+		top: -35px;
+		color: var(--red);
+	}
 
-      &:disabled {
-        pointer-events: none;
-        opacity: 0.3;
-      }
-    }
-  }
+	.submit {
+		@include flexColumn;
+
+		row-gap: 20px;
+
+		.btn {
+			padding: 15px 50px;
+			color: white;
+			font-weight: 700;
+			font-size: 18px;
+			background: var(--blue);
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+
+			&:disabled {
+				opacity: 0.3;
+				pointer-events: none;
+			}
+		}
+	}
 }
 
 .switch {
-  color: var(--grey);
-  cursor: pointer;
-  font-weight: 700;
-  transition: all ease .2s;
+	color: var(--grey);
+	font-weight: 700;
+	cursor: pointer;
+	transition: all ease 0.2s;
 
-  &:hover {
-    color: var(--blue);
-  }
+	&:hover {
+		color: var(--blue);
+	}
 }

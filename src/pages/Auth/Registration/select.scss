@@ -1,50 +1,52 @@
 .select {
-  &__control {
-    border: 1px solid rgba(0, 0, 0, 0.5) !important;
-    color: var(--black);
-    padding: 5px 20px;
-    border-radius: 10px !important;
-    font-size: 16px;
+	&__control {
+		padding: 5px 20px;
+		color: var(--black);
+		font-size: 16px;
+		border: 1px solid rgb(0 0 0 / 50%) !important;
+		border-radius: 10px !important;
 
-    &--is-focused {
-      border: 1px solid rgba(0, 0, 0, 0.5) !important;
-      box-shadow: none !important;
-    }
+		&--is-focused {
+			border: 1px solid rgb(0 0 0 / 50%) !important;
+			box-shadow: none !important;
+		}
 
-    &--minu-is-open {
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      box-shadow: none !important;
-    }
-  }
+		&--minu-is-open {
+			border: 1px solid rgb(255 255 255 / 10%) !important;
+			box-shadow: none !important;
+		}
+	}
 
-  &__single-value {
-    color: var(--black) !important;
-  }
+	&__single-value {
+		color: var(--black) !important;
+	}
 
-  &__indicator {
-    color: rgba(0, 0, 0, 0.5) !important;
-    &-separator {
-      display: none !important;
-    }
-  }
+	&__indicator {
+		color: rgb(0 0 0 / 50%) !important;
 
-  &__menu {
-    border-radius: 10px !important;
+		&-separator {
+			display: none !important;
+		}
+	}
 
-    &-list {
-      padding: 10px 0 !important;
-    }
-  }
+	&__menu {
+		border-radius: 10px !important;
 
-  &__option {
-    cursor: pointer;
-    &--is-focused {
-      background-color: var(--blue) !important;
-      color: var(--white) !important;
-    }
+		&-list {
+			padding: 10px 0 !important;
+		}
+	}
 
-    &--is-selected {
-      background-color: var(--blue) !important;
-    }
-  }
+	&__option {
+		cursor: pointer;
+
+		&--is-focused {
+			color: var(--white) !important;
+			background-color: var(--blue) !important;
+		}
+
+		&--is-selected {
+			background-color: var(--blue) !important;
+		}
+	}
 }

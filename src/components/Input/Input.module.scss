@@ -1,4 +1,4 @@
-@import './src/scss/index';
+@import "./src/scss/index";
 
 .wrapper {
 	position: relative;
@@ -7,20 +7,19 @@
 	.input {
 		width: 100%;
 		padding: 15px 30px;
-
 		color: gray;
-		border: 1px solid rgba(0, 0, 0, 0.5);
-		border-radius: 10px;
-		background: none;
-		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-
-		font-size: 16px;
 		font-weight: 400;
-		-webkit-box-shadow: inset 0 0 0 50px #fff;
+		font-size: 16px;
+		background: none;
+		border: 1px solid rgb(0 0 0 / 50%);
+		border-radius: 10px;
+		box-shadow: inset 0 0 0 50px #FFF;
+		box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
 		-webkit-text-fill-color: #000;
+
 		&::placeholder {
-			opacity: 0.5;
 			color: var(--grey-light);
+			opacity: 0.5;
 		}
 
 		&:focus {
@@ -40,9 +39,7 @@
 		position: absolute;
 		top: -18px;
 		left: 0;
-
 		color: var(--red);
-
 		font-size: 14px;
 	}
 }

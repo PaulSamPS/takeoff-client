@@ -1,22 +1,20 @@
-@import './src/scss/index';
+@import "./src/scss/index";
 
 .spinner {
 	@include flexCenterCenter;
+
 	min-height: calc(100vh - 350px);
 
 	&::after {
 		display: block;
-
 		width: 64px;
 		height: 64px;
 		margin: 8px;
-
-		content: " ";
-		animation: ldsDualRing 1.2s linear infinite;
-
 		border: 3px solid var(--blue);
 		border-color: var(--blue) transparent var(--blue) transparent;
 		border-radius: 50%;
+		animation: ldsDualRing 1.2s linear infinite;
+		content: " ";
 	}
 
 	@keyframes ldsDualRing {

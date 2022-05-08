@@ -1,25 +1,31 @@
-.wrapper {
-  color: white;
-  background-color: var(--blue);
-  display: flex;
-  padding: 20px;
-  margin-bottom: 50px;
-  justify-content: right;
-  align-items: center;
+@import "./src/scss/index";
 
-  .profile {
-    width: 25px;
-    height: 25px;
-    margin-right: 15px;
-    cursor: pointer;
+.container {
+	margin-bottom: 50px;
+	background-color: var(--blue);
 
-    svg {
-      width: 25px;
-      height: 25px;
-    }
-  }
+	.wrapper {
+		display: grid;
+		grid-template-columns: 1fr auto auto;
+		align-items: center;
+		max-width: 990px;
+		margin: 0 auto;
+		padding: 20px;
+		color: white;
 
-  .logout {
-    cursor: pointer;
-  }
+		.profile {
+			margin-right: 20px;
+			padding-right: 20px;
+			column-gap: 5px;
+			border-right: 1px solid rgb(255 255 255 / 30%);
+			cursor: pointer;
+
+			@include flex;
+
+			svg {
+				width: 25px;
+				height: 25px;
+			}
+		}
+	}
 }

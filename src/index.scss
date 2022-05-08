@@ -1,32 +1,27 @@
 @import-normalize;
 
-@import 'scss/media_mixins';
-@import 'scss/flex_mixins';
+@import "scss/media_mixins";
+@import "scss/flex_mixins";
 
 body {
-	overflow-y: scroll;
-	background: #E5E5E5;
 	margin: 0 auto;
-
+	overflow-y: scroll;
 	font-family:
 		-apple-system,
 		BlinkMacSystemFont,
-		'Segoe UI',
-		'Roboto',
-		'Oxygen',
-		'Ubuntu',
-		'Cantarell',
-		'Fira Sans',
-		'Droid Sans',
-		'Helvetica Neue',
+		"Segoe UI",
+		Roboto,
+		Oxygen,
+		Ubuntu,
+		Cantarell,
+		"Fira Sans",
+		"Droid Sans",
+		"Helvetica Neue",
 		sans-serif;
+	background: #E5E5E5;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
-//.css-b62m3t-container {
-//	width: 100%;
-//}
 
 * {
 	box-sizing: border-box;
@@ -37,9 +32,10 @@ body {
 :root {
 	--grey: #808080;
 	--grey-light: #E2E2E2;
-	--blue: #587da3;
-	--black: #05070a;
+	--modal: #E5E5E5;
+	--blue: #587DA3;
+	--black: #05070A;
 	--green: #00A800;
 	--white: #FFF;
-	--red: #dd070a;
+	--red: #DD070A;
 }

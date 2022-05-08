@@ -14,13 +14,21 @@ export const Header = () => {
     navigate('/');
   };
 
+  const navigateToProfile = () => {
+    navigate('profile');
+  };
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.profile}>
-        <ProfileIcon />
-      </div>
-      <div className={styles.logout} onClick={handleLogout}>
-        Выйти
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <h2 className={styles.logo}>TakeOff</h2>
+        <div className={styles.profile} onClick={navigateToProfile}>
+          <ProfileIcon />
+          <span>Профиль</span>
+        </div>
+        <div className={styles.logout} onClick={handleLogout}>
+          Выйти
+        </div>
       </div>
     </div>
   );

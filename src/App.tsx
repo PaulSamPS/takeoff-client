@@ -7,6 +7,7 @@ import { Layout } from './layout/Main/Layout';
 import { Main } from './pages/Main';
 import { AuthLayout } from './layout/Auth/AuthLayout';
 import { PrivateAuth } from './helpers/PrivateAuth';
+import { Profile } from './pages/Profile/Profile';
 
 export const App = () => {
   return (
@@ -25,6 +26,7 @@ export const App = () => {
           }
         >
           <Route index element={<Main />} />
+          <Route path='profile' element={<Profile />} />
         </Route>
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
