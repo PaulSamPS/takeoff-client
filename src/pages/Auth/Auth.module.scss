@@ -17,26 +17,8 @@
 		color: var(--red);
 	}
 
-	.submit {
-		@include flexColumn;
-
-		row-gap: 20px;
-
-		.btn {
-			padding: 15px 50px;
-			color: white;
-			font-weight: 700;
-			font-size: 18px;
-			background: var(--blue);
-			border: none;
-			border-radius: 10px;
-			cursor: pointer;
-
-			&:disabled {
-				opacity: 0.3;
-				pointer-events: none;
-			}
-		}
+	.switchBlock {
+		color: var(--grey);
 	}
 }
 
@@ -45,6 +27,7 @@
 	font-weight: 700;
 	cursor: pointer;
 	transition: all ease 0.2s;
+	margin-left: 5px;
 
 	&:hover {
 		color: var(--blue);

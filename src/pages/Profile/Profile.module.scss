@@ -1,5 +1,31 @@
+@import './src/scss/index';
+
 .wrapper {
-	padding: 20px;
+	padding: 0 20px;
+
+	.back {
+		@include flex;
+		color: var(--grey);
+		font-weight: 500;
+		font-size: 20px;
+		cursor: pointer;
+		transition: all ease .2s;
+		margin-bottom: 50px;
+
+		svg {
+			transition: all ease .2s;
+			margin-right: 5px;
+			height: 25px;
+			width: 25px;
+		}
+
+		&:hover {
+			color: var(--blue);
+			svg {
+				fill: var(--blue);
+			}
+		}
+	}
 
 	.avatar {
 		position: relative;
@@ -32,6 +58,21 @@
 			background: rgb(0 0 0 / 50%);
 			border-radius: 50%;
 			cursor: pointer;
+		}
+	}
+
+	.removeAvatar {
+		@include flexColumn;
+		row-gap: 40px;
+
+		span {
+			font-weight: 700;
+			color: var(--grey);
+		}
+
+		.choose {
+			@include flex;
+			column-gap: 20px;
 		}
 	}
 }

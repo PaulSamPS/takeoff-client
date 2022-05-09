@@ -35,7 +35,7 @@ export const login = (formData: ILoginForm) => async (dispatch: AppDispatch) => 
 
 export const logout = () => async (dispatch: AppDispatch) => {
   dispatch(loginReducer.actions.setLoading());
-  localStorage.removeItem('AccessToken');
+  localStorage.clear();
   await $api
     .post(`api/user/logout`)
     .then(() => {

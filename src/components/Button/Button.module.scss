@@ -1,0 +1,52 @@
+@import '../../scss/index';
+
+.button {
+	padding: 10px 20px;
+
+	cursor: pointer;
+	transition: all ease 0.2s;
+	min-width: 150px;
+
+	color: var(--white);
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 17px;
+
+	@include flexCenterCenter;
+
+	&:disabled {
+		pointer-events: none;
+
+		opacity: 0.5;
+	}
+}
+
+.primary {
+	background: var(--blue);
+
+	&:hover {
+		filter: brightness(1.1);
+	}
+
+	&:active {
+		transform: translateY(2px);
+	}
+}
+
+.transparent {
+	background: transparent;
+	color: var(--blue);
+
+	&:hover {
+		background: var(--blue);
+		color: var(--white);
+	}
+
+	&:active {
+		transform: translateY(2px);
+	}
+}

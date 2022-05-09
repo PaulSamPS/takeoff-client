@@ -11,6 +11,7 @@ import { optionsCreator } from '../../../helpers/optionsCrearot';
 import { IRegistrationForm } from '../../../interfaces/registrationForm.interface';
 import { registration } from '../../../redux/actions/authAction';
 import { Spinner } from '../../../components/Spinner/Spinner';
+import { Button } from '../../../components/Button/Button';
 import styles from '../Auth.module.scss';
 import './select.scss';
 
@@ -45,7 +46,7 @@ export const Registration = (): JSX.Element => {
     if (typeof formData.level !== 'string') {
       formData.level = formData.level.value;
     }
-    dispatch(registration(formData));
+    await dispatch(registration(formData));
     reset();
   };
 
@@ -136,13 +137,16 @@ export const Registration = (): JSX.Element => {
         )}
       />
       <div className={styles.submit}>
-        <button type='submit' disabled={!isValid} className={styles.btn}>
+        <Button appearance='primary' type='submit' disabled={!isValid}>
           Регистрация
-        </button>
+        </Button>
       </div>
-      <span className={styles.switch} onClick={handleSwitchMethod}>
-        Войти
-      </span>
+      <div className={styles.switchBlock}>
+        Есть аккаунт?
+        <span className={styles.switch} onClick={handleSwitchMethod}>
+          Войти
+        </span>
+      </div>
     </motion.form>
   );
 };

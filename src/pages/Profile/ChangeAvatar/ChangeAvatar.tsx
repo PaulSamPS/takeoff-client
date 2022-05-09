@@ -1,18 +1,17 @@
 import React, { ChangeEvent } from 'react';
 import { Input } from '../../../components/Input/Input';
 import styles from './ChangeAvatar.module.scss';
-import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { IAppendAvatarInterface } from '../../../interfaces/AppendNews.interface';
+import { Button } from '../../../components/Button/Button';
+import { ChangeAvatarProps } from './ChangeAvatar.props';
+import { useAppDispatch } from '../../../hooks/redux';
+import { uploadAvatar } from '../../../redux/actions/usersAction';
 
-export const ChangeAvatar = (): JSX.Element => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: 'onChange' });
+export const ChangeAvatar = ({ setModal, userId }: ChangeAvatarProps): JSX.Element => {
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
+  const dispatch = useAppDispatch();
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
@@ -21,15 +20,21 @@ export const ChangeAvatar = (): JSX.Element => {
     setFilesAvatar(e.target.files);
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     const formData = new FormData();
     if (filesAvatar) {
       formData.append('avatar', filesAvatar[0]);
     }
+    dispatch(uploadAvatar(userId, formData)).then(() => {
+      setModal(false);
+      setFilesAvatar(null);
+      setPreviewAvatar([]);
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.append}>
+    <form className={styles.append} onSubmit={onSubmit}>
       <div className={styles.inputFile}>
         {previewAvatar.length > 0 && (
           <div className={styles.previewBlock} id='previewNews'>
@@ -42,28 +47,22 @@ export const ChangeAvatar = (): JSX.Element => {
             )}
           </div>
         )}
+        <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
         <label htmlFor='avatar'>
-          Изображение:
-          <Input
-            {...register('avatar', { required: { value: true, message: 'Выберите изображение' } })}
-            placeholder='Выберите изображение'
-            type='file'
-            id='avatar'
-            error={errors.img}
-            onChange={selectFileAvatar}
-            className={styles.file}
-          />
-          <label htmlFor='avatar'>
-            <span
-              className={cn(styles.inputBtn, {
-                [styles.fileSuccess]: previewAvatar.length > 0,
-              })}
-            >
-              {previewAvatar.length <= 0 ? 'Выберите аватар' : 'Аватар выбран'}
-            </span>
-          </label>
+          <span
+            className={cn(styles.inputBtn, {
+              [styles.fileSuccess]: previewAvatar.length > 0,
+            })}
+          >
+            {previewAvatar.length <= 0 ? 'Выберите аватар' : 'Аватар выбран'}
+          </span>
         </label>
       </div>
+      {previewAvatar.length > 0 && (
+        <Button appearance='primary' type='submit' className={styles.btn}>
+          Загрузить
+        </Button>
+      )}
     </form>
   );
 };

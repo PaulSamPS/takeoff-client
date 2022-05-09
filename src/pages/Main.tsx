@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Main.module.scss';
+
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { User } from '../components/User/User';
 import { getUsers } from '../redux/actions/usersAction';

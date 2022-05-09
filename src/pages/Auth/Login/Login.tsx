@@ -7,6 +7,7 @@ import { ILoginForm } from '../../../interfaces/loginForm.interface';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { login } from '../../../redux/actions/authAction';
 import { Spinner } from '../../../components/Spinner/Spinner';
+import { Button } from '../../../components/Button/Button';
 import styles from '../Auth.module.scss';
 
 export const Login = (): JSX.Element => {
@@ -59,14 +60,15 @@ export const Login = (): JSX.Element => {
         type='password'
         error={errors.password}
       />
-      <div className={styles.submit}>
-        <button type='submit' disabled={!isValid} className={styles.btn}>
-          Войти
-        </button>
+      <Button appearance='primary' type='submit' disabled={!isValid}>
+        Войти
+      </Button>
+      <div className={styles.switchBlock}>
+        Нет аккаунта?
+        <span className={styles.switch} onClick={handleSwitchMethod}>
+          Зарегистрироваться
+        </span>
       </div>
-      <span className={styles.switch} onClick={handleSwitchMethod}>
-        Регистрация
-      </span>
     </motion.form>
   );
 };

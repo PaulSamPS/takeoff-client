@@ -34,7 +34,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
           <span>{user.level}</span>
         </label>
       </div>
-      <div className={styles.favouriteBlock}>
+      <div className={styles.settingsBlock}>
         <SettingsIcon />
         <div className={cn(styles.dropdownContent, styles.settings)}>
           <span>Изменить</span>
