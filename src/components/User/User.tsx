@@ -4,8 +4,16 @@ import { ReactComponent as SettingsIcon } from '../../helpers/icons/settings.svg
 import styles from './User.module.scss';
 import { API_URL } from '../../http/axios';
 import cn from 'classnames';
+import { useAppDispatch } from '../../hooks/redux';
+import { removeUser } from '../../redux/actions/usersAction';
 
 export const User = ({ user }: UserProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  const deleteUser = (userId: number) => {
+    dispatch(removeUser(userId));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.avatar}>
@@ -38,7 +46,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
         <SettingsIcon />
         <div className={cn(styles.dropdownContent, styles.settings)}>
           <span>Изменить</span>
-          <span>Удалить</span>
+          <span onClick={() => deleteUser(user.id)}>Удалить</span>
         </div>
       </div>
     </div>

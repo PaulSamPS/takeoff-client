@@ -9,12 +9,14 @@ import { ReactComponent as ArrowBackIcon } from '../../helpers/icons/arrowBack.s
 import { ChangeAvatar } from './ChangeAvatar/ChangeAvatar';
 import { Button } from '../../components/Button/Button';
 import { removeAvatar } from '../../redux/actions/usersAction';
+import { useNavigate } from 'react-router-dom';
 
 export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleRemoveAvatar = (id: number, avatar: string) => {
     dispatch(removeAvatar(id, avatar)).then(() => {
@@ -22,9 +24,13 @@ export const Profile = (): JSX.Element => {
     });
   };
 
+  const hanndleNavigateToMain = () => {
+    navigate('/main');
+  };
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.back}>
+      <div className={styles.back} onClick={hanndleNavigateToMain}>
         <ArrowBackIcon />
         Назад
       </div>
