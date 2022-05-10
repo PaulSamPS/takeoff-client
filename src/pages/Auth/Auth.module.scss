@@ -18,17 +18,17 @@
 	}
 
 	.switchBlock {
-		color: var(--grey);
 		margin-top: 50px;
+		color: var(--grey);
 	}
 }
 
 .switch {
+	margin-left: 10px;
 	color: var(--grey);
 	font-weight: 700;
 	cursor: pointer;
 	transition: all ease 0.2s;
-	margin-left: 10px;
 
 	&:hover {
 		color: var(--blue);

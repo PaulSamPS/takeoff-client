@@ -1,0 +1,18 @@
+@import "./src/scss/index";
+
+.removeAvatar {
+	@include flexColumn;
+
+	row-gap: 40px;
+
+	span {
+		color: var(--grey);
+		font-weight: 700;
+	}
+
+	.choose {
+		@include flex;
+
+		column-gap: 20px;
+	}
+}

@@ -1,85 +1,75 @@
-@import './src/scss/index';
+@import "./src/scss/index";
 
 .append {
+	.previewBlock {
+		width: 100%;
 
-  .previewBlock {
-    width: 100%;
+		.previewAvatar {
+			img {
+				width: 36px;
+				height: 36px;
+				object-fit: cover;
+				border-radius: 50%;
+				box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
+			}
+		}
 
-    .previewAvatar {
-      img {
-        width: 36px;
-        height: 36px;
+		.previewImage {
+			@include flexCenterCenter;
 
-        border-radius: 50%;
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-        object-fit: cover;
-      }
-    }
+			margin-bottom: 20px;
 
-    .previewImage {
-      @include flexCenterCenter;
-      margin-bottom: 20px;
+			img {
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+				border-radius: 50%;
+				box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
+			}
+		}
+	}
 
-      img {
-        border-radius: 50%;
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
+	.inputFile {
+		position: relative;
 
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-      }
-    }
-  }
+		@include _tablet {
+			width: 100%;
+		}
 
-  .inputFile {
-    position: relative;
+		.file {
+			position: absolute;
+			visibility: hidden;
+			opacity: 0;
+		}
 
-    @include _tablet {
-      width: 100%;
-    }
+		.inputBtn {
+			display: inline-block;
+			box-sizing: border-box;
+			width: 300px;
+			padding: 10px 30px;
+			color: var(--white);
+			font-weight: 700;
+			font-size: 14px;
+			text-align: center;
+			background: var(--blue);
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all ease 0.2s;
 
-    .file {
-      position: absolute;
+			&:active {
+				box-shadow: 0 5px 10px 0 #72A379B2;
+				transform: translateY(2px);
+			}
+		}
 
-      visibility: hidden;
+		.fileSuccess {
+			background: var(--green);
+		}
+	}
 
-      opacity: 0;
-    }
-
-    .inputBtn {
-      display: inline-block;
-
-      box-sizing: border-box;
-      width: 300px;
-      padding: 10px 30px;
-
-      cursor: pointer;
-      transition: all ease 0.2s;
-      text-align: center;
-
-      color: var(--white);
-
-      border: none;
-      border-radius: 5px;
-      background: var(--blue);
-
-      font-size: 14px;
-      font-weight: 700;
-
-      &:active {
-        transform: translateY(2px);
-
-        box-shadow: 0 5px 10px 0 #72A379B2;
-      }
-    }
-
-    .fileSuccess {
-      background: var(--green);
-    }
-  }
-
-  .btn {
-    margin-top: 20px;
-    width: 100%;
-  }
+	.btn {
+		width: 100%;
+		margin-top: 20px;
+	}
 }

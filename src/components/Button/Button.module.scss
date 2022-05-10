@@ -1,27 +1,23 @@
-@import '../../scss/index';
+@import "../../scss/index";
 
 .button {
-	padding: 10px 20px;
-
-	cursor: pointer;
-	transition: all ease 0.2s;
 	min-width: 150px;
-
+	padding: 10px 20px;
 	color: var(--white);
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 17px;
 	border: none;
 	border-radius: 5px;
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 17px;
+	box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
+	cursor: pointer;
+	transition: all ease 0.2s;
 
 	@include flexCenterCenter;
 
 	&:disabled {
-		pointer-events: none;
-
 		opacity: 0.5;
+		pointer-events: none;
 	}
 }
 
@@ -38,12 +34,12 @@
 }
 
 .transparent {
-	background: transparent;
 	color: var(--blue);
+	background: transparent;
 
 	&:hover {
-		background: var(--blue);
 		color: var(--white);
+		background: var(--blue);
 	}
 
 	&:active {
