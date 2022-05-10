@@ -4,14 +4,15 @@ import { ReactComponent as SettingsIcon } from '../../helpers/icons/settings.svg
 import styles from './User.module.scss';
 import { API_URL } from '../../http/axios';
 import cn from 'classnames';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { removeUser } from '../../redux/actions/usersAction';
 
 export const User = ({ user }: UserProps): JSX.Element => {
   const dispatch = useAppDispatch();
+  const currentUserId = useAppSelector((state) => state.loginReducer.user.id);
 
-  const deleteUser = (userId: number) => {
-    dispatch(removeUser(userId));
+  const deleteUser = (userId: number, avatar: string) => {
+    dispatch(removeUser(userId, avatar));
   };
 
   return (
@@ -42,13 +43,15 @@ export const User = ({ user }: UserProps): JSX.Element => {
           <span>{user.level}</span>
         </label>
       </div>
-      <div className={styles.settingsBlock}>
-        <SettingsIcon />
-        <div className={cn(styles.dropdownContent, styles.settings)}>
-          <span>Изменить</span>
-          <span onClick={() => deleteUser(user.id)}>Удалить</span>
+      {currentUserId != user.id && (
+        <div className={styles.settingsBlock}>
+          <SettingsIcon />
+          <div className={cn(styles.dropdownContent, styles.settings)}>
+            <span>Изменить</span>
+            <span onClick={() => deleteUser(user.id, user.avatar)}>Удалить</span>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

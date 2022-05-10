@@ -34,8 +34,8 @@ export const removeAvatar = (id: number, avatar: string) => async (dispatch: App
     });
 };
 
-export const removeUser = (id: number) => async (dispatch: AppDispatch) => {
-  await $apiAuth.post(`api/user/${id}/remove`).then((res: AxiosResponse<IUser[]>) => {
+export const removeUser = (id: number, avatar: string) => async (dispatch: AppDispatch) => {
+  await $apiAuth.post(`api/user/${id}/remove/${avatar}`).then((res: AxiosResponse<IUser[]>) => {
     dispatch(usersReducer.actions.setSuccess(res.data));
   });
 };
