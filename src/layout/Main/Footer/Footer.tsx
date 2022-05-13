@@ -7,7 +7,7 @@ export const Footer = ({ className, ...props }: FooterType): JSX.Element => {
   return (
     <div className={cn(styles.container, className)} {...props}>
       <div className={styles.wrapper}>
-        <h2>TakeOff</h2>
+        <span>© {new Date().getFullYear()} Copyright TakeOff</span>
       </div>
     </div>
   );

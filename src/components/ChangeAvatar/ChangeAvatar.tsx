@@ -1,17 +1,19 @@
 import React, { ChangeEvent } from 'react';
-import { Input } from '../../../components/Input/Input';
+import { Input } from '../Input/Input';
 import styles from './ChangeAvatar.module.scss';
 import cn from 'classnames';
-import { IAppendAvatarInterface } from '../../../interfaces/AppendNews.interface';
-import { Button } from '../../../components/Button/Button';
+import { IAppendAvatarInterface } from '../../interfaces/AppendNews.interface';
+import { Button } from '../Button/Button';
 import { ChangeAvatarProps } from './ChangeAvatar.props';
-import { useAppDispatch } from '../../../hooks/redux';
-import { uploadAvatar } from '../../../redux/actions/usersAction';
+import { useAppDispatch } from '../../hooks/redux';
+import { adminUploadAvatar, uploadAvatar } from '../../redux/actions/usersAction';
+import { useLocation } from 'react-router-dom';
 
 export const ChangeAvatar = ({ setModal, userId }: ChangeAvatarProps): JSX.Element => {
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
@@ -26,11 +28,19 @@ export const ChangeAvatar = ({ setModal, userId }: ChangeAvatarProps): JSX.Eleme
     if (filesAvatar) {
       formData.append('avatar', filesAvatar[0]);
     }
-    dispatch(uploadAvatar(userId, formData)).then(() => {
-      setModal(false);
-      setFilesAvatar(null);
-      setPreviewAvatar([]);
-    });
+    if (location.pathname == '/main') {
+      dispatch(adminUploadAvatar(userId, formData)).then(() => {
+        setModal(false);
+        setFilesAvatar(null);
+        setPreviewAvatar([]);
+      });
+    } else {
+      dispatch(uploadAvatar(userId, formData)).then(() => {
+        setModal(false);
+        setFilesAvatar(null);
+        setPreviewAvatar([]);
+      });
+    }
   };
 
   return (

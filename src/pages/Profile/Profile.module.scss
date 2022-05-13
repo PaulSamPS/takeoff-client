@@ -32,8 +32,10 @@
 	.card {
 		position: relative;
 		display: grid;
-		grid-template-areas: "avatar info";
 		grid-template-columns: 150px auto;
+		grid-template-areas:
+			'avatar info'
+			'. editProfile';
 		align-items: center;
 		padding: 20px;
 		column-gap: 50px;
@@ -106,14 +108,18 @@
 			position: absolute;
 			top: 20px;
 			right: 20px;
-			width: 25px;
-			height: 25px;
+			width: 20px;
+			height: 20px;
 			cursor: pointer;
 			transition: all ease 0.2s;
 
 			&:hover {
 				fill: var(--blue);
 			}
+		}
+
+		.editProfile {
+			grid-area: editProfile;
 		}
 	}
 }

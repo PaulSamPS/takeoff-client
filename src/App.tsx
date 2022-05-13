@@ -8,6 +8,7 @@ import { Main } from './pages/Main';
 import { AuthLayout } from './layout/Auth/AuthLayout';
 import { PrivateAuth } from './helpers/PrivateAuth';
 import { Profile } from './pages/Profile/Profile';
+import { RegistrationSuccess } from './pages/Auth/RegistrationSuccess/RegistrationSuccess';
 
 export const App = () => {
   return (
@@ -16,6 +17,7 @@ export const App = () => {
         <Route path='/' element={<AuthLayout />}>
           <Route index element={<Login />} />
           <Route path='/registration' element={<Registration />} />
+          <Route path='/registration/success' element={<RegistrationSuccess />} />
         </Route>
         <Route
           path='/main'

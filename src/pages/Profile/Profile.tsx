@@ -5,16 +5,20 @@ import { API_URL } from '../../http/axios';
 import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
 import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
 import { ReactComponent as EditIcon } from '../../helpers/icons/edit.svg';
+import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { Modal } from '../../components/Modal/Modal';
 import { ReactComponent as ArrowBackIcon } from '../../helpers/icons/arrowBack.svg';
-import { ChangeAvatar } from './ChangeAvatar/ChangeAvatar';
+import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { useNavigate } from 'react-router-dom';
-import { RemoveAvatar } from './RemoveAvatar/RemoveAvatar';
+import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
+import { EditProfile } from './EditProfile/EditProfile';
+import { AnimatePresence } from 'framer-motion';
 
 export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
+  const [edit, setEdit] = React.useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleNavigateToMain = () => {
@@ -61,21 +65,32 @@ export const Profile = (): JSX.Element => {
             <span>{user.level}</span>
           </label>
         </div>
-        <EditIcon className={styles.edit} />
+        {edit ? (
+          <CloseIcon className={styles.edit} onClick={() => setEdit(false)} />
+        ) : (
+          <EditIcon className={styles.edit} onClick={() => setEdit(true)} />
+        )}
+        <AnimatePresence>
+          {edit && <EditProfile className={styles.editProfile} isOpen={edit} setIsOpen={setEdit} />}
+        </AnimatePresence>
       </div>
-      {modal && (
-        <Modal setModal={setModal} modal={modal}>
-          <ChangeAvatar setModal={setModal} userId={user.id} />
-        </Modal>
-      )}
-      {removeAvatarModal && (
-        <RemoveAvatar
-          avatar={user.avatar}
-          modal={removeAvatarModal}
-          setModal={setRemoveAvatarModal}
-          userId={user.id}
-        />
-      )}
+      <AnimatePresence>
+        {modal && (
+          <Modal setModal={setModal} modal={modal}>
+            <ChangeAvatar setModal={setModal} userId={user.id} />
+          </Modal>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {removeAvatarModal && (
+          <RemoveAvatar
+            avatar={user.avatar}
+            modal={removeAvatarModal}
+            setModal={setRemoveAvatarModal}
+            userId={user.id}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

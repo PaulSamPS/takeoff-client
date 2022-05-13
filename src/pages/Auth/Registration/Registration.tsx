@@ -23,7 +23,7 @@ export const Registration = (): JSX.Element => {
     control,
     reset,
   } = useForm<IRegistrationForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
-  const { isLoading, status, error } = useAppSelector((state) => state.registrationReducer);
+  const { isLoading, error } = useAppSelector((state) => state.registrationReducer);
   const { position } = useAppSelector((state) => state.positionReducer);
   const { level } = useAppSelector((state) => state.levelReducer);
   const dispatch = useAppDispatch();
@@ -46,7 +46,9 @@ export const Registration = (): JSX.Element => {
     if (typeof formData.level !== 'string') {
       formData.level = formData.level.value;
     }
-    await dispatch(registration(formData));
+    await dispatch(registration(formData)).then(() => {
+      navigate('/registration/success');
+    });
     reset();
   };
 
@@ -57,17 +59,6 @@ export const Registration = (): JSX.Element => {
 
   if (isLoading) {
     return <Spinner />;
-  }
-
-  if (status === 200) {
-    return (
-      <h2 className={styles.success}>
-        Успешная регистрация, теперь вы можете
-        <span className={styles.switch} onClick={handleSwitchMethod}>
-          войти
-        </span>
-      </h2>
-    );
   }
 
   return (

@@ -31,14 +31,14 @@
 	}
 
 	.error {
-		border: 1px solid var(--red);
+		border: 1px solid var(--red)!important;
 	}
 
 	.errorMessage {
 		position: absolute;
 		top: -18px;
 		left: 0;
-		color: var(--red);
+		color: var(--red)!important;
 		font-size: 14px;
 	}
 }

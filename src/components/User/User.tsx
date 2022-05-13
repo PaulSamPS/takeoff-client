@@ -1,57 +1,110 @@
 import React from 'react';
 import { UserProps } from './User.props';
-import { ReactComponent as SettingsIcon } from '../../helpers/icons/settings.svg';
-import styles from './User.module.scss';
 import { API_URL } from '../../http/axios';
-import cn from 'classnames';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { removeUser } from '../../redux/actions/usersAction';
+import { useAppSelector } from '../../hooks/redux';
+import { ReactComponent as EditIcon } from '../../helpers/icons/more.svg';
+import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
+import { ReactComponent as DeleteIcon } from '../../helpers/icons/delete.svg';
+import styles from './User.module.scss';
+import { AnimatePresence } from 'framer-motion';
+import { EditProfile } from '../../pages/Profile/EditProfile/EditProfile';
+import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
+import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
+import { ChangeAvatar } from '../ChangeAvatar/ChangeAvatar';
+import { Modal } from '../Modal/Modal';
+import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
 
 export const User = ({ user }: UserProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const currentUserId = useAppSelector((state) => state.loginReducer.user.id);
+  const { role, id } = useAppSelector((state) => state.loginReducer.user);
+  const [edit, setEdit] = React.useState<boolean>(false);
+  const [modal, setModal] = React.useState<boolean>(false);
+  const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
+  const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
 
-  const deleteUser = (userId: number, avatar: string) => {
-    dispatch(removeUser(userId, avatar));
+  const handleDelete = () => {
+    setDeleteUser(true);
+    setRemoveAvatarModal(true);
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.avatar}>
-        <img
-          src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-          alt={user.name}
-        />
-      </div>
-      <div className={styles.info}>
-        <label>
-          Логин:
-          <span>{user.name}</span>
-        </label>
-        <label>
-          Email:
-          <span>{user.email}</span>
-        </label>
-      </div>
-      <div className={styles.position}>
-        <label>
-          Позиция:
-          <span>{user.position}</span>
-        </label>
-        <label>
-          Уровень:
-          <span>{user.level}</span>
-        </label>
-      </div>
-      {currentUserId != user.id && (
-        <div className={styles.settingsBlock}>
-          <SettingsIcon />
-          <div className={cn(styles.dropdownContent, styles.settings)}>
-            <span>Изменить</span>
-            <span onClick={() => deleteUser(user.id, user.avatar)}>Удалить</span>
-          </div>
+    <>
+      <div className={styles.wrapper}>
+        <div className={styles.avatar}>
+          <img
+            src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+            alt={user.name}
+          />
+          {role === 'admin' && user.avatar == null && (
+            <div className={styles.uploadAvatar} onClick={() => setModal(true)}>
+              <AddAvatarIcon />
+            </div>
+          )}
+          {role === 'admin' && user.avatar != null && (
+            <div className={styles.uploadAvatar} onClick={() => setRemoveAvatarModal(true)}>
+              <DeleteAvatarIcon />
+            </div>
+          )}
         </div>
-      )}
-    </div>
+        <div className={styles.info}>
+          <label>
+            Логин:
+            <span>{user.name}</span>
+          </label>
+          <label>
+            Email:
+            <span>{user.email}</span>
+          </label>
+        </div>
+        <div className={styles.position}>
+          <label>
+            Позиция:
+            <span>{user.position}</span>
+          </label>
+          <label>
+            Уровень:
+            <span>{user.level}</span>
+          </label>
+        </div>
+        <AnimatePresence>
+          {edit && (
+            <EditProfile
+              adminUser={user.id}
+              className={styles.editProfile}
+              isOpen={edit}
+              setIsOpen={setEdit}
+            />
+          )}
+        </AnimatePresence>
+        {role === 'admin' && id != user.id && (
+          <div className={styles.settingsBlock}>
+            <DeleteIcon className={styles.delete} onClick={handleDelete} />
+            {edit ? (
+              <CloseIcon className={styles.edit} onClick={() => setEdit(false)} />
+            ) : (
+              <EditIcon className={styles.edit} onClick={() => setEdit(true)} />
+            )}
+          </div>
+        )}
+      </div>
+      <AnimatePresence>
+        {modal && (
+          <Modal setModal={setModal} modal={modal}>
+            <ChangeAvatar setModal={setModal} userId={user.id} />
+          </Modal>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {removeAvatarModal && (
+          <RemoveAvatar
+            avatar={user.avatar}
+            modal={removeAvatarModal}
+            setModal={setRemoveAvatarModal}
+            userId={user.id}
+            deleteUser={deleteUser}
+            setDeleteUser={setDeleteUser}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 };

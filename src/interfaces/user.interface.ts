@@ -4,6 +4,7 @@ export interface IUser {
   email: string;
   position: string;
   level: string;
+  role: string;
   avatar: string;
 }
 

@@ -1,7 +1,8 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { IUser } from '../../interfaces/user.interface';
 
-export interface UserProps
+export interface EditProfileProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  user: IUser;
+  setIsOpen: (click: boolean) => void;
+  isOpen: boolean;
+  adminUser?: number;
 }
