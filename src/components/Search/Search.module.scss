@@ -1,0 +1,22 @@
+@import './src/scss/index';
+
+.search {
+  position: relative;
+
+  width: 100%;
+
+  .input input {
+    width: 100%;
+    padding-right: 50px;
+    border: none!important;
+  }
+
+  .icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0.5;
+      width: 30px;
+      height: 30px;
+  }
+}

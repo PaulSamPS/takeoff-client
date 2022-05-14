@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppSelector } from '../../hooks/redux';
-import styles from './Profile.module.scss';
 import { API_URL } from '../../http/axios';
 import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
 import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
@@ -12,7 +11,8 @@ import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { useNavigate } from 'react-router-dom';
 import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
 import { EditProfile } from './EditProfile/EditProfile';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import styles from './Profile.module.scss';
 
 export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -26,7 +26,12 @@ export const Profile = (): JSX.Element => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <motion.div
+      className={styles.wrapper}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
       <div className={styles.back} onClick={handleNavigateToMain}>
         <ArrowBackIcon />
         Назад
@@ -91,6 +96,6 @@ export const Profile = (): JSX.Element => {
           />
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };

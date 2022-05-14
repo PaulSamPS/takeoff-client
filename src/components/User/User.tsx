@@ -6,7 +6,7 @@ import { ReactComponent as EditIcon } from '../../helpers/icons/more.svg';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { ReactComponent as DeleteIcon } from '../../helpers/icons/delete.svg';
 import styles from './User.module.scss';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { EditProfile } from '../../pages/Profile/EditProfile/EditProfile';
 import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
 import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
@@ -28,7 +28,12 @@ export const User = ({ user }: UserProps): JSX.Element => {
 
   return (
     <>
-      <div className={styles.wrapper}>
+      <motion.div
+        className={styles.wrapper}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
         <div className={styles.avatar}>
           <img
             src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
@@ -85,7 +90,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
             )}
           </div>
         )}
-      </div>
+      </motion.div>
       <AnimatePresence>
         {modal && (
           <Modal setModal={setModal} modal={modal}>

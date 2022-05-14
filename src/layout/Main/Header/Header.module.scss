@@ -12,6 +12,13 @@
 		margin: 0 auto;
 		padding: 20px;
 		color: white;
+		
+		.logo {
+			h2 {
+				cursor: pointer;
+				display: inline-block;
+			}
+		}
 
 		.profile {
 			margin-right: 20px;

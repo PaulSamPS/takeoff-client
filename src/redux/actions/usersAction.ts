@@ -12,7 +12,13 @@ export const getUsers = () => async (dispatch: AppDispatch) => {
   await $apiAuth
     .get(`api/user`)
     .then((res: AxiosResponse<IUser[]>) => {
-      dispatch(usersReducer.actions.setSuccess(res.data));
+      dispatch(
+        usersReducer.actions.setSuccess(
+          res.data.sort((a, b) => {
+            return a.id - b.id;
+          })
+        )
+      );
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(usersReducer.actions.setError(e.response?.data.message));

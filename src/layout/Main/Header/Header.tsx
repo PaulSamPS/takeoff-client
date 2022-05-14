@@ -19,10 +19,16 @@ export const Header = () => {
     navigate('profile');
   };
 
+  const navigateTeoMain = () => {
+    navigate('main');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <h2 className={styles.logo}>TakeOff</h2>
+        <div className={styles.logo}>
+          <h2 onClick={navigateTeoMain}>TakeOff</h2>
+        </div>
         <div className={styles.profile} onClick={navigateToProfile}>
           <ProfileIcon />
           <span>{user.name}</span>
