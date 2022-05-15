@@ -2,6 +2,7 @@ import React from 'react';
 import { UserProps } from './User.props';
 import { API_URL } from '../../http/axios';
 import { useAppSelector } from '../../hooks/redux';
+import { ReactComponent as ChatIcon } from '../../helpers/icons/chat.svg';
 import { ReactComponent as EditIcon } from '../../helpers/icons/more.svg';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { ReactComponent as DeleteIcon } from '../../helpers/icons/delete.svg';
@@ -35,10 +36,12 @@ export const User = ({ user }: UserProps): JSX.Element => {
         viewport={{ once: true }}
       >
         <div className={styles.avatar}>
-          <img
-            src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-            alt={user.name}
-          />
+          <div className={styles.img}>
+            <img
+              src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+              alt={user.name}
+            />
+          </div>
           {role === 'admin' && user.avatar == null && (
             <div className={styles.uploadAvatar} onClick={() => setModal(true)}>
               <AddAvatarIcon />
@@ -50,6 +53,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
             </div>
           )}
         </div>
+        <ChatIcon className={styles.chat} />
         <div className={styles.info}>
           <label>
             Логин:

@@ -6,6 +6,7 @@ import { User } from '../components/User/User';
 import { getUsers } from '../redux/actions/usersAction';
 import { Spinner } from '../components/Spinner/Spinner';
 import { Search } from '../components/Search/Search';
+import { refreshToken } from '../redux/actions/authAction';
 
 export const Main = (): JSX.Element => {
   const { users, isLoading } = useAppSelector((state) => state.usersReducer);
@@ -21,7 +22,11 @@ export const Main = (): JSX.Element => {
   });
 
   React.useEffect(() => {
-    dispatch(getUsers());
+    if (localStorage.getItem('AccessToken')) {
+      dispatch(refreshToken()).then(() => {
+        dispatch(getUsers());
+      });
+    }
   }, []);
 
   if (isLoading) {
