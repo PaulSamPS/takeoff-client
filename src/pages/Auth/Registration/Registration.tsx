@@ -2,18 +2,16 @@ import React from 'react';
 import Select from 'react-select';
 import { Input } from '../../../components/Input/Input';
 import { useForm, Controller } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { getLevel, getPosition } from '../../../redux/actions/positionAction';
-import { ISelectOption } from '../../../interfaces/select.interface';
-import { optionsCreator } from '../../../helpers/optionsCrearot';
+import { useAppSelector } from '../../../hooks/redux';
 import { IRegistrationForm } from '../../../interfaces/registrationForm.interface';
-import { registration } from '../../../redux/actions/authAction';
 import { Spinner } from '../../../components/Spinner/Spinner';
 import { Button } from '../../../components/Button/Button';
 import styles from '../Auth.module.scss';
 import './select.scss';
+import { usePosition } from '../../../hooks/usePosition';
+import { useLevel } from '../../../hooks/useLevel';
+import { useRegistration } from '../../../hooks/useRegistration';
 
 export const Registration = (): JSX.Element => {
   const {
@@ -24,38 +22,9 @@ export const Registration = (): JSX.Element => {
     reset,
   } = useForm<IRegistrationForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
   const { isLoading, error } = useAppSelector((state) => state.registrationReducer);
-  const { position } = useAppSelector((state) => state.positionReducer);
-  const { level } = useAppSelector((state) => state.levelReducer);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const optionsPosition: ISelectOption[] = [];
-  const optionsLevel: ISelectOption[] = [];
-
-  optionsCreator(position, optionsPosition);
-  optionsCreator(level, optionsLevel);
-
-  const handleSwitchMethod = () => {
-    navigate('/');
-  };
-
-  const onSubmit = async (formData: IRegistrationForm) => {
-    if (typeof formData.position !== 'string') {
-      formData.position = formData.position.value;
-    }
-    if (typeof formData.level !== 'string') {
-      formData.level = formData.level.value;
-    }
-    await dispatch(registration(formData)).then(() => {
-      navigate('/registration/success');
-    });
-    reset();
-  };
-
-  React.useEffect(() => {
-    dispatch(getPosition());
-    dispatch(getLevel());
-  }, []);
+  const { handleSwitchMethod, onSubmit } = useRegistration({ reset, error });
+  const optionsPosition = usePosition();
+  const optionsLevel = useLevel();
 
   if (isLoading) {
     return <Spinner />;

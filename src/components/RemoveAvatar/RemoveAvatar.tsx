@@ -1,11 +1,9 @@
 import React from 'react';
 import { Button } from '../Button/Button';
 import { Modal } from '../Modal/Modal';
-import { adminRemoveAvatar, removeAvatar, removeUser } from '../../redux/actions/usersAction';
-import { useAppDispatch } from '../../hooks/redux';
 import { RemoveAvatarProps } from './RemoveAvatar.props';
 import styles from './RemoveAvatar.module.scss';
-import { useLocation } from 'react-router-dom';
+import { useRemoveAvatar } from '../../hooks/useRemoveAvatar';
 
 export const RemoveAvatar = ({
   modal,
@@ -15,29 +13,13 @@ export const RemoveAvatar = ({
   deleteUser,
   setDeleteUser,
 }: RemoveAvatarProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const location = useLocation();
-
-  const handleRemoveAvatar = () => {
-    if (deleteUser) {
-      dispatch(removeUser(userId, avatar)).then(() => {
-        if (setDeleteUser) {
-          setDeleteUser(false);
-        }
-        setModal(false);
-      });
-    } else {
-      if (location.pathname == '/main') {
-        dispatch(adminRemoveAvatar(userId, avatar)).then(() => {
-          setModal(false);
-        });
-      } else {
-        dispatch(removeAvatar(userId, avatar)).then(() => {
-          setModal(false);
-        });
-      }
-    }
-  };
+  const handleRemoveAvatar = useRemoveAvatar({
+    avatar,
+    userId,
+    setModal,
+    setDeleteUser,
+    deleteUser,
+  });
 
   return (
     <Modal setModal={setModal} modal={modal}>

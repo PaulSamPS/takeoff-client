@@ -1,19 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { EditProfileProps } from './EditProfile.props';
-import { Input } from '../../../components/Input/Input';
+import { Input } from '../Input/Input';
 import { Controller, useForm } from 'react-hook-form';
-import { IEditProfileForm } from '../../../interfaces/editProfile.interface';
-import { Button } from '../../../components/Button/Button';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { adminUpdateUser, updateUser } from '../../../redux/actions/usersAction';
+import { IEditProfileForm } from '../../interfaces/editProfile.interface';
+import { Button } from '../Button/Button';
+import '../../pages/Auth/Registration/select.scss';
+import { useLevel } from '../../hooks/useLevel';
+import { usePosition } from '../../hooks/usePosition';
+import { useEditProfile } from '../../hooks/useEditProfile';
+import Select from 'react-select';
 import cn from 'classnames';
 import styles from './EditProfile.module.scss';
-import Select from 'react-select';
-import { ISelectOption } from '../../../interfaces/select.interface';
-import { optionsCreator } from '../../../helpers/optionsCrearot';
-import '../../Auth/Registration/select.scss';
-import { getLevel, getPosition } from '../../../redux/actions/positionAction';
 
 export const EditProfile = ({
   className,
@@ -21,11 +19,8 @@ export const EditProfile = ({
   setIsOpen,
   adminUser,
 }: EditProfileProps): JSX.Element => {
-  const { user } = useAppSelector((state) => state.loginReducer);
-
-  const { position } = useAppSelector((state) => state.positionReducer);
-  const { level } = useAppSelector((state) => state.levelReducer);
-  const dispatch = useAppDispatch();
+  const optionsPosition = usePosition();
+  const optionsLevel = useLevel();
   const {
     register,
     handleSubmit,
@@ -33,48 +28,12 @@ export const EditProfile = ({
     formState: { errors },
     reset,
   } = useForm<IEditProfileForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
-
-  const optionsPosition: ISelectOption[] = [];
-  const optionsLevel: ISelectOption[] = [];
-
-  optionsCreator(position, optionsPosition);
-  optionsCreator(level, optionsLevel);
+  const onSubmit = useEditProfile({ setIsOpen, adminUser, reset });
 
   const variants = {
     visibleEdit: { opacity: 1, height: 'auto', marginTop: 15 },
     hiddenEdit: { opacity: 0, height: 0, marginTop: 0 },
   };
-
-  const onSubmit = async (formData: IEditProfileForm) => {
-    if (formData.name || formData.email || formData.position || formData.level != '') {
-      if (!adminUser) {
-        dispatch(updateUser(user.id, formData)).then(() => {
-          setIsOpen(false);
-          reset();
-        });
-      } else {
-        if (formData.position) {
-          if (typeof formData.position !== 'string') {
-            formData.position = formData.position.value;
-          }
-        }
-        if (formData.level) {
-          if (typeof formData.level !== 'string') {
-            formData.level = formData.level.value;
-          }
-        }
-        dispatch(adminUpdateUser(adminUser, formData)).then(() => {
-          setIsOpen(false);
-          reset();
-        });
-      }
-    }
-  };
-
-  React.useEffect(() => {
-    dispatch(getPosition());
-    dispatch(getLevel());
-  }, []);
 
   return (
     <motion.form

@@ -8,12 +8,13 @@ import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { ReactComponent as DeleteIcon } from '../../helpers/icons/delete.svg';
 import styles from './User.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
-import { EditProfile } from '../../pages/Profile/EditProfile/EditProfile';
+import { EditProfile } from '../EditProfile/EditProfile';
 import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
 import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
 import { ChangeAvatar } from '../ChangeAvatar/ChangeAvatar';
 import { Modal } from '../Modal/Modal';
 import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
+import { useNavigate } from 'react-router-dom';
 
 export const User = ({ user }: UserProps): JSX.Element => {
   const { role, id } = useAppSelector((state) => state.loginReducer.user);
@@ -21,6 +22,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleDelete = () => {
     setDeleteUser(true);
@@ -53,7 +55,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
             </div>
           )}
         </div>
-        <ChatIcon className={styles.chat} />
+        <ChatIcon className={styles.chat} onClick={() => navigate('message')} />
         <div className={styles.info}>
           <label>
             Логин:

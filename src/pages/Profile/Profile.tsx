@@ -10,7 +10,7 @@ import { ReactComponent as ArrowBackIcon } from '../../helpers/icons/arrowBack.s
 import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { useNavigate } from 'react-router-dom';
 import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
-import { EditProfile } from './EditProfile/EditProfile';
+import { EditProfile } from '../../components/EditProfile/EditProfile';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Profile.module.scss';
 

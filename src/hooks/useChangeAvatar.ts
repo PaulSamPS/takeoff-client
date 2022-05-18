@@ -1,0 +1,53 @@
+import React, { ChangeEvent, SyntheticEvent } from 'react';
+import { IAppendAvatarInterface } from '../interfaces/AppendNews.interface';
+import { useAppDispatch } from './redux';
+import { useLocation } from 'react-router-dom';
+import { adminUploadAvatar, uploadAvatar } from '../redux/actions/usersAction';
+
+interface IUseChangeAvatarProps {
+  setModal: (click: boolean) => void;
+  userId: number;
+}
+
+interface IUseChangeAvatar {
+  onSubmit: (e: SyntheticEvent) => void;
+  previewAvatar: IAppendAvatarInterface[];
+  selectFileAvatar: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IUseChangeAvatar => {
+  const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
+  const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+    const avatar = [] as any[];
+    avatar.push({ avatar: URL.createObjectURL(e.target.files![0]), number: Date.now() });
+    setPreviewAvatar(avatar);
+    setFilesAvatar(e.target.files);
+  };
+
+  const onSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+    if (filesAvatar) {
+      formData.append('avatar', filesAvatar[0]);
+    }
+    if (location.pathname == '/main') {
+      dispatch(adminUploadAvatar(userId, formData)).then(() => {
+        setModal(false);
+        setFilesAvatar(null);
+        setPreviewAvatar([]);
+      });
+    } else {
+      dispatch(uploadAvatar(userId, formData)).then(() => {
+        setModal(false);
+        setFilesAvatar(null);
+        setPreviewAvatar([]);
+      });
+    }
+  };
+
+  return { onSubmit, previewAvatar, selectFileAvatar };
+};

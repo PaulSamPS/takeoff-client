@@ -1,6 +1,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { PrivateAuthProps } from './PrivateAuth.props';
+
+interface PrivateAuthProps {
+  children: JSX.Element;
+}
 
 export const PrivateAuth = ({ children }: PrivateAuthProps) => {
   const isAuth = localStorage.getItem('AccessToken');
