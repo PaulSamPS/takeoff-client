@@ -1,5 +1,5 @@
 export interface IUser {
-  id: number;
+  id: string;
   name: string;
   email: string;
   position: string;
@@ -11,4 +11,14 @@ export interface IUser {
 export interface IResponseUser {
   accessToken: string;
   user: IUser;
+}
+
+export interface IUserAll {
+  _id: string;
+  name: string;
+  email: string;
+  position: string;
+  level: string;
+  role: string;
+  avatar: string;
 }

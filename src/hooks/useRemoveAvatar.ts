@@ -4,7 +4,7 @@ import { adminRemoveAvatar, removeAvatar, removeUser } from '../redux/actions/us
 
 interface IRemoveAvatar {
   avatar: string;
-  userId: number;
+  userId: string;
   setModal: (click: boolean) => void;
   setDeleteUser?: (click: boolean) => void;
   deleteUser?: boolean;

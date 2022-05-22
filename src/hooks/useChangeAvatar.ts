@@ -6,7 +6,7 @@ import { adminUploadAvatar, uploadAvatar } from '../redux/actions/usersAction';
 
 interface IUseChangeAvatarProps {
   setModal: (click: boolean) => void;
-  userId: number;
+  userId: string;
 }
 
 interface IUseChangeAvatar {

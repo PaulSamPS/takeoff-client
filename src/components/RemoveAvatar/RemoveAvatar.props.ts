@@ -6,6 +6,6 @@ export interface RemoveAvatarProps
   modal: boolean;
   setDeleteUser?: (click: boolean) => void;
   deleteUser?: boolean;
-  userId: number;
+  userId: string;
   avatar: string;
 }

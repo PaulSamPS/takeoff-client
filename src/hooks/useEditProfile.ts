@@ -6,7 +6,7 @@ import { IRegistrationForm } from '../interfaces/registrationForm.interface';
 
 interface useEditProfileProps {
   setIsOpen: (click: boolean) => void;
-  adminUser?: number;
+  adminUser?: string;
   reset: (
     values?: DefaultValues<IRegistrationForm> | UnpackNestedValue<IRegistrationForm>,
     keepStateOptions?: KeepStateOptions
@@ -16,8 +16,7 @@ interface useEditProfileProps {
 export const useEditProfile = ({ setIsOpen, adminUser, reset }: useEditProfileProps) => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const dispatch = useAppDispatch();
-
-  const onSubmit = async (formData: IEditProfileForm) => {
+  return async (formData: IEditProfileForm) => {
     if (formData.name || formData.email || formData.position || formData.level != '') {
       if (!adminUser) {
         dispatch(updateUser(user.id, formData)).then(() => {
@@ -42,6 +41,4 @@ export const useEditProfile = ({ setIsOpen, adminUser, reset }: useEditProfilePr
       }
     }
   };
-
-  return onSubmit;
 };

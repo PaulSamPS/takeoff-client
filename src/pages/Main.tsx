@@ -7,7 +7,7 @@ import { getUsers } from '../redux/actions/usersAction';
 import { Spinner } from '../components/Spinner/Spinner';
 import { Search } from '../components/Search/Search';
 import { refreshToken } from '../redux/actions/authAction';
-import { IUser } from '../interfaces/user.interface';
+import { IUserAll } from '../interfaces/user.interface';
 
 export const Main = (): JSX.Element => {
   const { users, isLoading } = useAppSelector((state) => state.usersReducer);
@@ -38,8 +38,8 @@ export const Main = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <Search setSearch={setSearch} search={search} />
-      {filteredUsers.map((user: IUser) => (
-        <User key={user.id} user={user} />
+      {filteredUsers.map((user: IUserAll) => (
+        <User key={user._id} user={user} />
       ))}
       {filteredUsers.length == 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
     </div>

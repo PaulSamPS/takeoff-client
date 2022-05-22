@@ -4,5 +4,5 @@ export interface EditProfileProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   setIsOpen: (click: boolean) => void;
   isOpen: boolean;
-  adminUser?: number;
+  adminUser?: string;
 }

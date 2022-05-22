@@ -29,6 +29,10 @@ export const User = ({ user }: UserProps): JSX.Element => {
     setRemoveAvatarModal(true);
   };
 
+  const navigateToChat = (userName: string) => {
+    navigate(`message/${userName}`);
+  };
+
   return (
     <>
       <motion.div
@@ -55,11 +59,13 @@ export const User = ({ user }: UserProps): JSX.Element => {
             </div>
           )}
         </div>
-        <ChatIcon className={styles.chat} onClick={() => navigate('message')} />
+        {user._id != id && (
+          <ChatIcon className={styles.chat} onClick={() => navigateToChat(user.name)} />
+        )}
         <div className={styles.info}>
           <label>
             Логин:
-            <span>{user.name}</span>
+            <span onClick={() => console.log(user._id)}>{user.name}</span>
           </label>
           <label>
             Email:
@@ -79,14 +85,14 @@ export const User = ({ user }: UserProps): JSX.Element => {
         <AnimatePresence>
           {edit && (
             <EditProfile
-              adminUser={user.id}
+              adminUser={user._id}
               className={styles.editProfile}
               isOpen={edit}
               setIsOpen={setEdit}
             />
           )}
         </AnimatePresence>
-        {role === 'admin' && id != user.id && (
+        {role === 'admin' && id != user._id && (
           <div className={styles.settingsBlock}>
             <DeleteIcon className={styles.delete} onClick={handleDelete} />
             {edit ? (
@@ -100,7 +106,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
       <AnimatePresence>
         {modal && (
           <Modal setModal={setModal} modal={modal}>
-            <ChangeAvatar setModal={setModal} userId={user.id} />
+            <ChangeAvatar setModal={setModal} userId={user._id} />
           </Modal>
         )}
       </AnimatePresence>
@@ -110,7 +116,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
             avatar={user.avatar}
             modal={removeAvatarModal}
             setModal={setRemoveAvatarModal}
-            userId={user.id}
+            userId={user._id}
             deleteUser={deleteUser}
             setDeleteUser={setDeleteUser}
           />

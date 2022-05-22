@@ -28,6 +28,7 @@ export const login = (formData: ILoginForm) => async (dispatch: AppDispatch) => 
   await $api
     .post(`api/user/login`, formData)
     .then((res: AxiosResponse<IResponseUser>) => {
+      console.log(res.data.user);
       dispatch(loginReducer.actions.setSuccess(res.data.user));
       localStorage.setItem('AccessToken', 'Bearer ' + res.data.accessToken);
     })
