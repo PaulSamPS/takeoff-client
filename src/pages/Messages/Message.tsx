@@ -3,28 +3,27 @@ import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import styles from './Message.module.scss';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
-import { useParams } from 'react-router-dom';
 import { useChat } from '../../hooks/useChat';
-import { useAppSelector } from '../../hooks/redux';
 import 'moment/locale/ru';
 import moment from 'moment';
+import { API_URL } from '../../http/axios';
+import { useAppSelector } from '../../hooks/redux';
 
 interface IMessage {
-  text: string;
-  userId: string;
-  userName: string;
-  createdAt: string;
+  receiver: string;
+  sender: string;
+  message: string;
+  date: string;
+  _id: string;
 }
 
 export const Message = (): JSX.Element => {
-  const { name } = useParams();
-  const { messages, sendMessage } = useChat(name);
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
+  const { sendMessage, messages, bannerData } = useChat(text);
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   // иммутабельная ссылка на инпут для ввода текста сообщения
   const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const roomId = `23242`;
   moment.locale('ru');
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
 
@@ -35,16 +34,7 @@ export const Message = (): JSX.Element => {
   const onSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (submitDisabled) return;
-    // извлекаем данные пользователя и формируем начальное сообщение
-    const message = {
-      userId: user.id,
-      userName: user.name,
-      roomId: roomId,
-      text: text,
-    };
-    // отправляем сообщение
-    sendMessage(message);
-    // сбрасываем состояние
+    sendMessage(text);
     setText('');
   };
 
@@ -56,27 +46,38 @@ export const Message = (): JSX.Element => {
 
   return (
     <div className={styles.wrapper}>
-      <h2>{name}</h2>
       <form onSubmit={onSubmit} className={styles.grid}>
-        <div className={styles.sidebar}>left</div>
+        <div className={styles.sidebar}>
+          <div className={styles.user}>
+            <img
+              src={
+                bannerData.avatar === '' || bannerData.avatar === null
+                  ? `/photo.png`
+                  : `${API_URL}/avatar/${bannerData.avatar}`
+              }
+              alt={bannerData.name}
+            />
+            <span>{bannerData.name}</span>
+          </div>
+        </div>
         <div className={styles.chat}>
           {messages.map((m: IMessage, index) => (
             <div key={index} className={styles.messages}>
-              {user.name == m.userName ? (
+              {user.id == m.sender ? (
                 <>
                   <div className={styles.send}>
-                    <span className={styles.userName}>{m.userName}</span>
-                    <p className={styles.text}>{m.text}</p>
+                    <span className={styles.userName}>{m.sender}</span>
+                    <p className={styles.text}>{m.message}</p>
                   </div>
-                  <span className={styles.timeRight}>{moment(m.createdAt).fromNow()}</span>
+                  <span className={styles.timeRight}>{moment(m.date).fromNow()}</span>
                 </>
               ) : (
                 <>
                   <div className={styles.receive}>
-                    <span className={styles.userName}>{m.userName}</span>
-                    <p className={styles.text}>{m.text}</p>
+                    <span className={styles.userName}>{m.receiver}</span>
+                    <p className={styles.text}>{m.message}</p>
                   </div>
-                  <span className={styles.timeLeft}>{moment(m.createdAt).fromNow()}</span>
+                  <span className={styles.timeLeft}>{moment(m.date).fromNow()}</span>
                 </>
               )}
               <p ref={bottomRef} />

@@ -10,7 +10,6 @@ export const Header = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const name = user.name;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -26,7 +25,7 @@ export const Header = () => {
   };
 
   const navigateToDialogs = () => {
-    navigate(`dialogs/${name}`);
+    navigate(`dialogs/${user.id}`);
   };
 
   return (
@@ -37,7 +36,7 @@ export const Header = () => {
         </div>
         <div className={styles.messages} onClick={navigateToDialogs}>
           <ChatIcon />
-          <div className={styles.unreadMessages}>1</div>
+          <div className={styles.unreadMessages}>9</div>
         </div>
         <div className={styles.profile} onClick={navigateToProfile}>
           <ProfileIcon />

@@ -18,6 +18,18 @@
     grid-area: sidebar;
 
     border-right: 1px solid var(--grey-light);
+
+    .user {
+      @include flexCenterCenter;
+      justify-content: unset;
+
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
   }
 
   .chat {

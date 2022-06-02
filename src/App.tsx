@@ -31,7 +31,7 @@ export const App = () => {
         >
           <Route index element={<Main />} />
           <Route path='profile' element={<Profile />} />
-          <Route path='message/:name' element={<Message />} />
+          <Route path='message/:_id' element={<Message />} />
           <Route path='dialogs/:name' element={<Dialogs />} />
         </Route>
         <Route path='*' element={<Navigate to='/' replace />} />

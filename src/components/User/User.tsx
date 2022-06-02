@@ -29,8 +29,9 @@ export const User = ({ user }: UserProps): JSX.Element => {
     setRemoveAvatarModal(true);
   };
 
-  const navigateToChat = (userName: string) => {
-    navigate(`message/${userName}`);
+  const navigateToChat = (id: string) => {
+    localStorage.setItem('id', id);
+    navigate(`message/${id}`);
   };
 
   return (
@@ -60,7 +61,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
           )}
         </div>
         {user._id != id && (
-          <ChatIcon className={styles.chat} onClick={() => navigateToChat(user.name)} />
+          <ChatIcon className={styles.chat} onClick={() => navigateToChat(user._id)} />
         )}
         <div className={styles.info}>
           <label>
