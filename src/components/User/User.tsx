@@ -43,6 +43,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
     if (submitDisabled) return;
     sendMessage(text);
     setText('');
+    setConversationModal(false);
   };
 
   React.useEffect(() => {

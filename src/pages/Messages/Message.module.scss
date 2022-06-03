@@ -7,35 +7,34 @@
   .grid {
     min-height: 400px;
     display: grid;
-    grid-auto-columns: 200px 1fr;
+    grid-auto-columns: 1fr;
     grid-template-areas:
-            'sidebar chat'
-            'sidebar bottom';
+            'chat'
+            'bottom';
     grid-template-rows: 1fr auto;
   }
 
-  .sidebar {
-    grid-area: sidebar;
-
-    border-right: 1px solid var(--grey-light);
-
-    .user {
-      @include flexCenterCenter;
-      justify-content: unset;
-
-      img {
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-    }
-  }
 
   .chat {
     grid-area: chat;
     max-height: 50vh;
     overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: #f9f9fd;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: var(--blue);
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+      border-radius: 10px;
+      background-color: #f9f9fd;
+    }
 
     .messages {
       display: flex;
@@ -43,7 +42,7 @@
       padding: 20px;
       position: relative;
 
-      div {
+      .messageBlock {
         max-width: 100%;
         word-wrap: break-word;
         margin-bottom: 12px;
@@ -51,6 +50,9 @@
         position: relative;
         padding: 10px 20px;
         border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
 
         &:before, &:after {
           content: "";
@@ -131,6 +133,24 @@
     .send {
       height: 30px;
       width: 30px;
+    }
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 10px;
+
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    span {
+      font-weight: 700;
     }
   }
 }

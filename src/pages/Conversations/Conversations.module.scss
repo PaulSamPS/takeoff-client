@@ -1,4 +1,37 @@
-img {
-  width: 100px;
-  height: 100px;
+@import "../../scss/index";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  .conversation {
+    padding: 20px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    column-gap: 20px;
+    background: var(--white);
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px auto;
+
+    p {
+      color: var(--grey);
+      cursor: pointer;
+    }
+  }
+
+  span {
+    align-self: center;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
 }

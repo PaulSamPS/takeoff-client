@@ -1,7 +1,7 @@
 import React from 'react';
 import { io } from 'socket.io-client';
 import { useAppDispatch, useAppSelector } from './redux';
-import { getChatUser } from '../redux/actions/chatAction';
+import { getChatUser, getConversations } from '../redux/actions/chatAction';
 
 const URL = 'http://localhost:4000';
 
@@ -24,6 +24,9 @@ export const useChat = () => {
   const [chats, setChats] = React.useState<any>(conversation);
 
   React.useEffect(() => {
+    dispatch(getConversations(user.id)).then(() => {
+      setChats(conversation);
+    });
     if (!socket.current) {
       socket.current = io(URL);
     }

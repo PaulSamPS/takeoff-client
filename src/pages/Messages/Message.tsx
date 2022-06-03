@@ -6,8 +6,9 @@ import { Button } from '../../components/Button/Button';
 import { useChat } from '../../hooks/useChat';
 import 'moment/locale/ru';
 import moment from 'moment';
-import { API_URL } from '../../http/axios';
 import { useAppSelector } from '../../hooks/redux';
+import { API_URL } from '../../http/axios';
+import cn from 'classnames';
 
 interface IMessage {
   senderName: string;
@@ -48,34 +49,41 @@ export const Message = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <form onSubmit={onSubmit} className={styles.grid}>
-        <div className={styles.sidebar}>
-          <div className={styles.user}>
-            <img
-              src={
-                bannerData.avatar === '' || bannerData.avatar === null
-                  ? `/photo.png`
-                  : `${API_URL}/avatar/${bannerData.avatar}`
-              }
-              alt={bannerData.name}
-            />
-            <span>{bannerData.name}</span>
-          </div>
-        </div>
         <div className={styles.chat}>
           {messages.map((m: IMessage, index) => (
             <div key={index} className={styles.messages}>
               {user.id == m.sender ? (
                 <>
-                  <div className={styles.send}>
-                    <span className={styles.userName}>{user.name}</span>
+                  <div className={cn(styles.send, styles.messageBlock)}>
+                    <div className={styles.user}>
+                      <span>{user.name}</span>
+                      <img
+                        src={
+                          user.avatar === '' || user.avatar === null
+                            ? `/photo.png`
+                            : `${API_URL}/avatar/${user.avatar}`
+                        }
+                        alt={user.name}
+                      />
+                    </div>
                     <p className={styles.text}>{m.message}</p>
                   </div>
                   <span className={styles.timeRight}>{moment(m.date).fromNow()}</span>
                 </>
               ) : (
                 <>
-                  <div className={styles.receive}>
-                    <span className={styles.userName}>{bannerData.name}</span>
+                  <div className={cn(styles.receive, styles.messageBlock)}>
+                    <div className={styles.user}>
+                      <img
+                        src={
+                          bannerData.avatar === '' || bannerData.avatar === null
+                            ? `/photo.png`
+                            : `${API_URL}/avatar/${bannerData.avatar}`
+                        }
+                        alt={bannerData.name}
+                      />
+                      <span>{bannerData.name}</span>
+                    </div>
                     <p className={styles.text}>{m.message}</p>
                   </div>
                   <span className={styles.timeLeft}>{moment(m.date).fromNow()}</span>
