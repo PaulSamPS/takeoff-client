@@ -19,7 +19,6 @@ export const getConversations = (id: string) => async (dispatch: AppDispatch) =>
   await $apiAuth
     .get(`api/chat/${id}`)
     .then((res: AxiosResponse<IConversation[]>) => {
-      console.log(res.data);
       dispatch(conversationReducer.actions.setSuccess(res.data));
     })
     .catch((e: AxiosError<IErrorResponse>) => {

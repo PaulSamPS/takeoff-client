@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { UserProps } from './User.props';
 import { API_URL } from '../../http/axios';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks/redux';
 import { ReactComponent as ChatIcon } from '../../helpers/icons/chat.svg';
 import { ReactComponent as EditIcon } from '../../helpers/icons/more.svg';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
@@ -17,7 +17,6 @@ import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
 import { Input } from '../Input/Input';
 import { useChat } from '../../hooks/useChat';
 import { Button } from '../Button/Button';
-import { getConversations } from '../../redux/actions/chatAction';
 
 export const User = ({ user }: UserProps): JSX.Element => {
   const { role, id } = useAppSelector((state) => state.loginReducer.user);
@@ -28,7 +27,6 @@ export const User = ({ user }: UserProps): JSX.Element => {
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string>('');
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
-  const dispatch = useAppDispatch();
   const { sendMessage } = useChat();
 
   const handleDelete = () => {
@@ -50,10 +48,6 @@ export const User = ({ user }: UserProps): JSX.Element => {
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
   }, [text]);
-
-  React.useEffect(() => {
-    dispatch(getConversations(id));
-  }, []);
 
   return (
     <>

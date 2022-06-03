@@ -46,12 +46,14 @@ export const useChat = () => {
       messagesWith: _id,
     });
 
-    socket.current.on('message_list:update', async ({ chat }: any) => {
+    socket.current.on('message_list:update', async ({ chat, chatsToBeSent }: any) => {
       setMessages(chat.messages.slice(-20));
       setBannerData({
         name: chat.messagesWith.name,
         avatar: chat.messagesWith.avatar,
       });
+      console.log(chatsToBeSent);
+      setChats(chatsToBeSent);
       openChatId.current = chat.messagesWith._id;
     });
 
@@ -80,9 +82,8 @@ export const useChat = () => {
             const previousChat = prev.find(
               (chat: any) => chat.messagesWith === newMessage.receiver
             );
-            console.log(previousChat);
-            // previousChat.lastMessage = newMessage.message;
-            // previousChat.date = newMessage.date;
+            previousChat.lastMessage = newMessage.message;
+            previousChat.date = newMessage.date;
 
             return [...prev];
           });
@@ -97,9 +98,8 @@ export const useChat = () => {
             const previousChat = prev.find(
               (chat: { messagesWith: any }) => chat.messagesWith === newMessage.sender
             );
-            // previousChat.lastMessage = newMessage.message;
-            // previousChat.date = newMessage.date;
-            console.log('2', previousChat);
+            previousChat.lastMessage = newMessage.message;
+            previousChat.date = newMessage.date;
 
             return [...prev];
           });

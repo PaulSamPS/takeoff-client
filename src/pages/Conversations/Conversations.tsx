@@ -2,8 +2,6 @@ import React from 'react';
 import { useChat } from '../../hooks/useChat';
 import { API_URL } from '../../http/axios';
 import styles from './Conversations.module.scss';
-import { getConversations } from '../../redux/actions/chatAction';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 interface IChats {
   avatar: string | null;
@@ -14,15 +12,8 @@ interface IChats {
 }
 
 export const Conversations = () => {
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.loginReducer);
-
-  const { chats } = useChat();
-
-  React.useEffect(() => {
-    dispatch(getConversations(user.id));
-  }, []);
-
+  const { chats, messages } = useChat();
+  console.log(messages);
   return (
     <div className={styles.wrapper}>
       {chats.map((chat: IChats, index: number) => (
