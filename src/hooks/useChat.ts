@@ -2,7 +2,6 @@ import React from 'react';
 import { io } from 'socket.io-client';
 import { useAppDispatch, useAppSelector } from './redux';
 import { getChatUser } from '../redux/actions/chatAction';
-import axios from 'axios';
 
 const URL = 'http://localhost:4000';
 
@@ -11,8 +10,9 @@ interface IBanner {
   avatar: string | undefined;
 }
 
-export const useChat = (text: string) => {
+export const useChat = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
+  const { conversation } = useAppSelector((state) => state.conversationReducer);
   const _id = localStorage.getItem('id');
   const dispatch = useAppDispatch();
   const [users, setUsers] = React.useState([]);
@@ -21,15 +21,9 @@ export const useChat = (text: string) => {
   const socket = React.useRef<any>();
   const openChatId = React.useRef<string | null>('');
 
-  const [chats, setChats] = React.useState<any>([]);
-  console.log('chats', chats);
+  const [chats, setChats] = React.useState<any>(conversation);
 
-  const res = async () => {
-    const { data } = await axios.get(`http://localhost:4000/api/chat/${user.id}`);
-    return setChats(data);
-  };
   React.useEffect(() => {
-    res();
     if (!socket.current) {
       socket.current = io(URL);
     }
@@ -80,16 +74,15 @@ export const useChat = (text: string) => {
   React.useEffect(() => {
     if (socket.current) {
       socket.current.on('messages:sent', ({ newMessage }: any) => {
-        if (newMessage.receiver === openChatId.current) {
+        if (newMessage.receiver === _id) {
           setMessages((prev: any) => [...prev, newMessage]);
-
           setChats((prev: any) => {
-            console.log('prev', prev);
             const previousChat = prev.find(
-              (chat: { messagesWith: any }) => chat.messagesWith === newMessage.receiver
+              (chat: any) => chat.messagesWith === newMessage.receiver
             );
-            previousChat.lastMessage = newMessage.message;
-            previousChat.date = newMessage.date;
+            console.log(previousChat);
+            // previousChat.lastMessage = newMessage.message;
+            // previousChat.date = newMessage.date;
 
             return [...prev];
           });
@@ -104,8 +97,9 @@ export const useChat = (text: string) => {
             const previousChat = prev.find(
               (chat: { messagesWith: any }) => chat.messagesWith === newMessage.sender
             );
-            previousChat.lastMessage = newMessage.message;
-            previousChat.date = newMessage.date;
+            // previousChat.lastMessage = newMessage.message;
+            // previousChat.date = newMessage.date;
+            console.log('2', previousChat);
 
             return [...prev];
           });
@@ -144,5 +138,5 @@ export const useChat = (text: string) => {
     }
   }, []);
 
-  return { users, user, messages, bannerData, sendMessage };
+  return { users, user, messages, bannerData, sendMessage, chats };
 };

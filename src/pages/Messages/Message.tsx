@@ -10,6 +10,8 @@ import { API_URL } from '../../http/axios';
 import { useAppSelector } from '../../hooks/redux';
 
 interface IMessage {
+  senderName: string;
+  receiverName: string;
   receiver: string;
   sender: string;
   message: string;
@@ -20,13 +22,12 @@ interface IMessage {
 export const Message = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
-  const { sendMessage, messages, bannerData } = useChat(text);
+  const { sendMessage, messages, bannerData } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   // иммутабельная ссылка на инпут для ввода текста сообщения
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   moment.locale('ru');
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
-
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
   }, [text]);
@@ -66,7 +67,7 @@ export const Message = (): JSX.Element => {
               {user.id == m.sender ? (
                 <>
                   <div className={styles.send}>
-                    <span className={styles.userName}>{m.sender}</span>
+                    <span className={styles.userName}>{user.name}</span>
                     <p className={styles.text}>{m.message}</p>
                   </div>
                   <span className={styles.timeRight}>{moment(m.date).fromNow()}</span>
@@ -74,7 +75,7 @@ export const Message = (): JSX.Element => {
               ) : (
                 <>
                   <div className={styles.receive}>
-                    <span className={styles.userName}>{m.receiver}</span>
+                    <span className={styles.userName}>{bannerData.name}</span>
                     <p className={styles.text}>{m.message}</p>
                   </div>
                   <span className={styles.timeLeft}>{moment(m.date).fromNow()}</span>

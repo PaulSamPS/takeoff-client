@@ -34,6 +34,7 @@ export const Header = () => {
         <div className={styles.logo}>
           <h2 onClick={navigateTeoMain}>TakeOff</h2>
         </div>
+        <div onClick={() => navigate('conversations')}>conversations</div>
         <div className={styles.messages} onClick={navigateToDialogs}>
           <ChatIcon />
           <div className={styles.unreadMessages}>9</div>

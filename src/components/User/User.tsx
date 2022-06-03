@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { UserProps } from './User.props';
 import { API_URL } from '../../http/axios';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ReactComponent as ChatIcon } from '../../helpers/icons/chat.svg';
 import { ReactComponent as EditIcon } from '../../helpers/icons/more.svg';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
@@ -14,15 +14,22 @@ import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAv
 import { ChangeAvatar } from '../ChangeAvatar/ChangeAvatar';
 import { Modal } from '../Modal/Modal';
 import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
-import { useNavigate } from 'react-router-dom';
+import { Input } from '../Input/Input';
+import { useChat } from '../../hooks/useChat';
+import { Button } from '../Button/Button';
+import { getConversations } from '../../redux/actions/chatAction';
 
 export const User = ({ user }: UserProps): JSX.Element => {
   const { role, id } = useAppSelector((state) => state.loginReducer.user);
   const [edit, setEdit] = React.useState<boolean>(false);
   const [modal, setModal] = React.useState<boolean>(false);
+  const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
-  const navigate = useNavigate();
+  const [text, setText] = React.useState<string>('');
+  const [submitDisabled, setSubmitDisabled] = React.useState(true);
+  const dispatch = useAppDispatch();
+  const { sendMessage } = useChat();
 
   const handleDelete = () => {
     setDeleteUser(true);
@@ -31,8 +38,22 @@ export const User = ({ user }: UserProps): JSX.Element => {
 
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);
-    navigate(`message/${id}`);
+    setConversationModal(true);
   };
+
+  const onSubmit = async () => {
+    if (submitDisabled) return;
+    sendMessage(text);
+    setText('');
+  };
+
+  React.useEffect(() => {
+    setSubmitDisabled(!text.trim());
+  }, [text]);
+
+  React.useEffect(() => {
+    dispatch(getConversations(id));
+  }, []);
 
   return (
     <>
@@ -104,25 +125,28 @@ export const User = ({ user }: UserProps): JSX.Element => {
           </div>
         )}
       </motion.div>
-      <AnimatePresence>
-        {modal && (
-          <Modal setModal={setModal} modal={modal}>
-            <ChangeAvatar setModal={setModal} userId={user._id} />
-          </Modal>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {removeAvatarModal && (
-          <RemoveAvatar
-            avatar={user.avatar}
-            modal={removeAvatarModal}
-            setModal={setRemoveAvatarModal}
-            userId={user._id}
-            deleteUser={deleteUser}
-            setDeleteUser={setDeleteUser}
-          />
-        )}
-      </AnimatePresence>
+      <Modal setModal={setModal} modal={modal}>
+        <ChangeAvatar setModal={setModal} userId={user._id} />
+      </Modal>
+      <RemoveAvatar
+        avatar={user.avatar}
+        modal={removeAvatarModal}
+        setModal={setRemoveAvatarModal}
+        userId={user._id}
+        deleteUser={deleteUser}
+        setDeleteUser={setDeleteUser}
+      />
+      <Modal setModal={setConversationModal} modal={conversationModal}>
+        <Input
+          placeholder='Введите сообщение...'
+          autoFocus
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+          value={text}
+        />
+        <Button appearance='primary' disabled={submitDisabled} onClick={onSubmit}>
+          Отправить
+        </Button>
+      </Modal>
     </>
   );
 };
