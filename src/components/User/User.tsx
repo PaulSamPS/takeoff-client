@@ -18,7 +18,7 @@ import { Input } from '../Input/Input';
 import { useChat } from '../../hooks/useChat';
 import { Button } from '../Button/Button';
 
-export const User = ({ user }: UserProps): JSX.Element => {
+export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const { role, id } = useAppSelector((state) => state.loginReducer.user);
   const [edit, setEdit] = React.useState<boolean>(false);
   const [modal, setModal] = React.useState<boolean>(false);
@@ -39,7 +39,7 @@ export const User = ({ user }: UserProps): JSX.Element => {
     setConversationModal(true);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     if (submitDisabled) return;
     sendMessage(text);
     setText('');
@@ -144,4 +144,4 @@ export const User = ({ user }: UserProps): JSX.Element => {
       </Modal>
     </>
   );
-};
+});

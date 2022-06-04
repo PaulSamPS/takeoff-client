@@ -2,6 +2,7 @@ import React from 'react';
 import { io } from 'socket.io-client';
 import { useAppDispatch, useAppSelector } from './redux';
 import { getChatUser, getConversations } from '../redux/actions/chatAction';
+import { filteredChats } from '../helpers/filteChats';
 
 const URL = 'http://localhost:4000';
 
@@ -42,7 +43,6 @@ export const useChat = () => {
     });
 
     socket.current.on('message_list:update', async ({ chat, chatsToBeSent }: any) => {
-      console.log('chat', chat);
       setMessages(chat.messages.slice(-20));
       setBannerData({
         name: chat.messagesWith.name,
@@ -58,8 +58,6 @@ export const useChat = () => {
     });
   }, [window.location.pathname]);
 
-  console.log(window.location.pathname);
-
   const sendMessage = (message: any) => {
     socket.current.emit('message:add', {
       userId: user.id,
@@ -74,12 +72,8 @@ export const useChat = () => {
         if (newMessage.receiver === _id) {
           setMessages((prev: any) => [...prev, newMessage]);
           setChats((prev: any) => {
-            const previousChat = prev.find(
-              (chat: any) => chat.messagesWith === newMessage.receiver
-            );
-            previousChat.lastMessage = newMessage.message;
-            previousChat.date = newMessage.date;
-
+            const receiver = newMessage.receiver;
+            filteredChats(prev, newMessage, receiver);
             return [...prev];
           });
         }
@@ -88,14 +82,8 @@ export const useChat = () => {
       socket.current.on('message:received', async ({ newMessage }: any) => {
         if (newMessage.sender === _id) {
           setMessages((prev) => [...prev, newMessage]);
-
           setChats((prev: any) => {
-            const previousChat = prev.find(
-              (chat: { messagesWith: any }) => chat.messagesWith === newMessage.sender
-            );
-            previousChat.lastMessage = newMessage.message;
-            previousChat.date = newMessage.date;
-
+            filteredChats(prev, newMessage);
             return [...prev];
           });
         } else {
@@ -104,12 +92,7 @@ export const useChat = () => {
 
           if (ifPreviouslyMessaged) {
             setChats((prev: any) => {
-              const previousChat = prev.find(
-                (chat: any) => chat.messagesWith === newMessage.sender
-              );
-              previousChat.lastMessage = newMessage.message;
-              previousChat.date = newMessage.date;
-
+              const { previousChat } = filteredChats(prev, newMessage);
               return [
                 previousChat,
                 ...prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),

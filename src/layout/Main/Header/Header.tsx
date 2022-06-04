@@ -24,8 +24,8 @@ export const Header = () => {
     navigate('main');
   };
 
-  const navigateToDialogs = () => {
-    navigate(`dialogs/${user.id}`);
+  const navigateToConversations = () => {
+    navigate('conversations');
   };
 
   return (
@@ -34,8 +34,7 @@ export const Header = () => {
         <div className={styles.logo}>
           <h2 onClick={navigateTeoMain}>TakeOff</h2>
         </div>
-        <div onClick={() => navigate('conversations')}>conversations</div>
-        <div className={styles.messages} onClick={navigateToDialogs}>
+        <div className={styles.messages} onClick={navigateToConversations}>
           <ChatIcon />
           <div className={styles.unreadMessages}>9</div>
         </div>
