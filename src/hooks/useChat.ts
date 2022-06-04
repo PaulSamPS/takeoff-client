@@ -20,7 +20,6 @@ export const useChat = () => {
   const [bannerData, setBannerData] = React.useState<IBanner>({ name: '', avatar: '' });
   const socket = React.useRef<any>();
   const openChatId = React.useRef<string | null>('');
-
   const [chats, setChats] = React.useState<any>(conversation);
 
   React.useEffect(() => {
@@ -34,13 +33,6 @@ export const useChat = () => {
     socket.current.on('user_list:update', ({ users }: any) => {
       users.length > 0 && setUsers(users);
     });
-
-    return () => {
-      if (socket) {
-        socket.current.emit('disconect');
-        socket.current.off();
-      }
-    };
   }, []);
 
   React.useEffect(() => {
@@ -50,23 +42,23 @@ export const useChat = () => {
     });
 
     socket.current.on('message_list:update', async ({ chat, chatsToBeSent }: any) => {
+      console.log('chat', chat);
       setMessages(chat.messages.slice(-20));
       setBannerData({
         name: chat.messagesWith.name,
         avatar: chat.messagesWith.avatar,
       });
-      console.log(chatsToBeSent);
       setChats(chatsToBeSent);
       openChatId.current = chat.messagesWith._id;
     });
 
     socket.current.on('chat:notFound', async () => {
-      const user = await dispatch(getChatUser(_id));
-      setBannerData({ name: user?.name, avatar: user?.avatar });
       setMessages([]);
       openChatId.current = _id;
     });
-  }, []);
+  }, [window.location.pathname]);
+
+  console.log(window.location.pathname);
 
   const sendMessage = (message: any) => {
     socket.current.emit('message:add', {
@@ -94,7 +86,7 @@ export const useChat = () => {
       });
 
       socket.current.on('message:received', async ({ newMessage }: any) => {
-        if (newMessage.sender === openChatId.current) {
+        if (newMessage.sender === _id) {
           setMessages((prev) => [...prev, newMessage]);
 
           setChats((prev: any) => {
