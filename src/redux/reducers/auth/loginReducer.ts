@@ -29,7 +29,12 @@ export const loginReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    setOnline(state, action: PayloadAction<boolean>) {
+      state.user.isOnline = action.payload;
+    },
   },
 });
+
+export const { setSuccess } = loginReducer.actions;
 
 export default loginReducer.reducer;

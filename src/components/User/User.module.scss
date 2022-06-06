@@ -62,6 +62,16 @@
 				width: 20px;
 			}
 		}
+
+		.online {
+			position: absolute;
+			right: 5px;
+			bottom: 0;
+			background: var(--green);
+			border-radius: 50%;
+			width: 10px;
+			height: 10px;
+		}
 	}
 
 	.chat {

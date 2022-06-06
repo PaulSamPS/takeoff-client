@@ -6,7 +6,6 @@ import { User } from '../components/User/User';
 import { getUsers } from '../redux/actions/usersAction';
 import { Spinner } from '../components/Spinner/Spinner';
 import { Search } from '../components/Search/Search';
-import { refreshToken } from '../redux/actions/authAction';
 import { IUserAll } from '../interfaces/user.interface';
 
 export const Main = (): JSX.Element => {
@@ -25,9 +24,9 @@ export const Main = (): JSX.Element => {
 
   React.useEffect(() => {
     if (localStorage.getItem('AccessToken')) {
-      dispatch(refreshToken()).then(() => {
-        dispatch(getUsers());
-      });
+      // dispatch(refreshToken()).then(() => {
+      dispatch(getUsers());
+      // });
     }
   }, []);
 

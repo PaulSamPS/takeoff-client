@@ -6,6 +6,10 @@ export interface IUser {
   level: string;
   role: string;
   avatar: string;
+  unreadMessage: boolean;
+  countUnreadMessages: number;
+  lastVisit: Date;
+  isOnline: boolean;
 }
 
 export interface IResponseUser {
@@ -21,4 +25,6 @@ export interface IUserAll {
   level: string;
   role: string;
   avatar: string;
+  lastVisit: Date;
+  isOnline: boolean;
 }

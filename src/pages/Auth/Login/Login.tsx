@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ILoginForm } from '../../../interfaces/loginForm.interface';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { login } from '../../../redux/actions/authAction';
 import { Spinner } from '../../../components/Spinner/Spinner';
 import { Button } from '../../../components/Button/Button';
 import styles from '../Auth.module.scss';
+import { IResponseUser } from '../../../interfaces/user.interface';
+import { setSuccess } from '../../../redux/reducers/auth/loginReducer';
+import { socket } from '../../../helpers/socket';
 
 export const Login = (): JSX.Element => {
   const {
@@ -26,15 +28,22 @@ export const Login = (): JSX.Element => {
   };
 
   const onSubmit = async (formData: ILoginForm) => {
-    await dispatch(login(formData));
-    if (localStorage.getItem('AccessToken')) {
-      navigate('/main');
-    }
+    socket.emit('login', { name: formData.name, password: formData.password });
+
+    socket.once('login:success', ({ accessToken, user }: IResponseUser) => {
+      dispatch(setSuccess(user));
+      localStorage.setItem('AccessToken', 'Bearer ' + accessToken);
+    });
+    // await dispatch(login(formData));
     reset();
   };
 
   if (isLoading) {
     return <Spinner />;
+  }
+
+  if (localStorage.getItem('AccessToken')) {
+    navigate('/main');
   }
 
   return (

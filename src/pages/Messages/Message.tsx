@@ -68,7 +68,7 @@ export const Message = (): JSX.Element => {
                     </div>
                     <p className={styles.text}>{m.message}</p>
                   </div>
-                  <span className={styles.timeRight}>{moment(m.date).fromNow()}</span>
+                  <span className={styles.timeRight}>{moment(m.date).calendar()}</span>
                 </>
               ) : (
                 <>
@@ -86,7 +86,7 @@ export const Message = (): JSX.Element => {
                     </div>
                     <p className={styles.text}>{m.message}</p>
                   </div>
-                  <span className={styles.timeLeft}>{moment(m.date).fromNow()}</span>
+                  <span className={styles.timeLeft}>{moment(m.date).calendar()}</span>
                 </>
               )}
               <p ref={bottomRef} />

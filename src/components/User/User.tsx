@@ -75,6 +75,7 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
               <DeleteAvatarIcon />
             </div>
           )}
+          {user.isOnline && <div className={styles.online} />}
         </div>
         {user._id != id && (
           <ChatIcon className={styles.chat} onClick={() => navigateToChat(user._id)} />
