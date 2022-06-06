@@ -27,7 +27,9 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string>('');
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
-  const { sendMessage } = useChat();
+  const { sendMessage, users } = useChat();
+  const statusOnline = users.map((user: any) => user.userId);
+  console.log(users);
 
   const handleDelete = () => {
     setDeleteUser(true);
@@ -75,7 +77,7 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
               <DeleteAvatarIcon />
             </div>
           )}
-          {user.isOnline && <div className={styles.online} />}
+          {statusOnline.includes(user._id) && <div className={styles.online} />}
         </div>
         {user._id != id && (
           <ChatIcon className={styles.chat} onClick={() => navigateToChat(user._id)} />

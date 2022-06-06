@@ -168,7 +168,13 @@ export const useChat = () => {
             lastMessage: newMessage.message,
             date: newMessage.date,
           };
-          setChats((prev: any) => [...prev, newChat]);
+
+          setChats((prev: any) => {
+            prev.find(
+              (chat: { messagesWith: string }) => chat.messagesWith === newMessage.receiver
+            );
+            return [newChat, ...prev];
+          });
         }
       }
     });
