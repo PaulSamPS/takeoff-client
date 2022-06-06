@@ -8,9 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Spinner } from '../../../components/Spinner/Spinner';
 import { Button } from '../../../components/Button/Button';
 import styles from '../Auth.module.scss';
-import { IResponseUser } from '../../../interfaces/user.interface';
-import { setSuccess } from '../../../redux/reducers/auth/loginReducer';
-import { socket } from '../../../helpers/socket';
+import { login } from '../../../redux/actions/authAction';
 
 export const Login = (): JSX.Element => {
   const {
@@ -28,22 +26,22 @@ export const Login = (): JSX.Element => {
   };
 
   const onSubmit = async (formData: ILoginForm) => {
-    socket.emit('login', { name: formData.name, password: formData.password });
-
-    socket.once('login:success', ({ accessToken, user }: IResponseUser) => {
-      dispatch(setSuccess(user));
-      localStorage.setItem('AccessToken', 'Bearer ' + accessToken);
+    // socket.emit('login', { name: formData.name, password: formData.password });
+    //
+    // socket.once('login:success', ({ accessToken, user }: IResponseUser) => {
+    //   dispatch(setSuccess(user));
+    //   localStorage.setItem('AccessToken', 'Bearer ' + accessToken);
+    // });
+    dispatch(login(formData)).then(() => {
+      if (localStorage.getItem('AccessToken')) {
+        navigate('/main');
+      }
     });
-    // await dispatch(login(formData));
     reset();
   };
 
   if (isLoading) {
     return <Spinner />;
-  }
-
-  if (localStorage.getItem('AccessToken')) {
-    navigate('/main');
   }
 
   return (

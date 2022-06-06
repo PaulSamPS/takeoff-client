@@ -25,7 +25,7 @@ export const Conversations = () => {
     navigate(`${id}`);
   };
 
-  console.log('user', usersOnline);
+  console.log('user', users);
   //
   // React.useEffect(() => {
   //   socket.emit('user:online', users);

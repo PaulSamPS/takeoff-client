@@ -83,15 +83,15 @@ export const useChat = () => {
   React.useEffect(() => {
     socket.emit('user:add', { userId: user.id });
     socket.on('user_list:update', ({ users }: IUsers) => {
-      return users.length > 0 && setUsers(users);
-    });
-
-    socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
-      setChats(chatsToBeSent);
+      return setUsers(users);
     });
   }, []);
 
   React.useEffect(() => {
+    socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
+      setChats(chatsToBeSent);
+    });
+
     socket.emit('messages:get', {
       userId: user.id,
       messagesWith: _id,
