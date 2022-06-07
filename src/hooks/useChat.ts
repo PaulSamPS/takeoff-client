@@ -79,6 +79,8 @@ export const useChat = () => {
   });
   const openChatId = React.useRef<string | null>('');
   const [chats, setChats] = React.useState<any>(conversation);
+  const [lastMessage, setLastMessage] = React.useState<any>();
+  console.log('last', lastMessage);
 
   React.useEffect(() => {
     socket.emit('user:add', { userId: user.id });
@@ -90,6 +92,7 @@ export const useChat = () => {
   React.useEffect(() => {
     socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
       setChats(chatsToBeSent);
+      setLastMessage(chatsToBeSent);
     });
 
     socket.emit('messages:get', {
@@ -135,6 +138,11 @@ export const useChat = () => {
           filteredChats(prev, newMessage, receiver);
           return [...prev];
         });
+        setLastMessage((prev: IChatToBoSent[]) => {
+          const receiver = newMessage.receiver;
+          filteredChats(prev, newMessage, receiver);
+          return [...prev];
+        });
       }
     });
 
@@ -142,6 +150,10 @@ export const useChat = () => {
       if (newMessage.sender === _id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev: IChatToBoSent[]) => {
+          filteredChats(prev, newMessage);
+          return [...prev];
+        });
+        setLastMessage((prev: IChatToBoSent[]) => {
           filteredChats(prev, newMessage);
           return [...prev];
         });
@@ -180,5 +192,5 @@ export const useChat = () => {
     });
   }, []);
 
-  return { users, user, messages, bannerData, sendMessage, chats };
+  return { users, user, messages, bannerData, sendMessage, chats, lastMessage };
 };

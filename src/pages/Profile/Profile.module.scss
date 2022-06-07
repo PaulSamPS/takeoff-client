@@ -59,7 +59,7 @@
 				width: 150px;
 				height: 150px;
 				object-fit: cover;
-				border-radius: 50%;
+				border-radius: 11px;
 			}
 
 			.uploadAvatar {
@@ -73,8 +73,18 @@
 				justify-content: center;
 				color: var(--white);
 				background: rgb(0 0 0 / 50%);
-				border-radius: 50%;
+				border-radius: 11px;
 				cursor: pointer;
+			}
+
+			.online {
+				position: absolute;
+				right: 5px;
+				bottom: 0;
+				background: var(--green);
+				border-radius: 50%;
+				width: 10px;
+				height: 10px;
 			}
 		}
 

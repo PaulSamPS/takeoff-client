@@ -17,15 +17,13 @@ interface IChats {
 moment.locale('ru');
 
 export const Conversations = () => {
-  const { chats, users } = useChat();
+  const { lastMessage, users } = useChat();
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);
     navigate(`${id}`);
   };
-
-  console.log('user', chats);
   //
   // React.useEffect(() => {
   //   socket.emit('user:online', users);
@@ -33,25 +31,25 @@ export const Conversations = () => {
 
   return (
     <div className={styles.wrapper}>
-      {chats &&
-        chats.map((chat: IChats) => (
-          <div key={chat.messagesWith} className={styles.conversation}>
+      {lastMessage &&
+          lastMessage.map((msg: IChats, index: number) => (
+          <div key={index} className={styles.conversation}>
             <div className={styles.avatar}>
               <img
                 src={
-                  chat.avatar === '' || chat.avatar === null
+                  msg.avatar === '' || msg.avatar === null
                     ? `/photo.png`
-                    : `${API_URL}/avatar/${chat.avatar}`
+                    : `${API_URL}/avatar/${msg.avatar}`
                 }
-                alt={chat.name}
+                alt={msg.name}
               />
-              {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
+              {usersOnline.includes(msg.messagesWith) && <div className={styles.online} />}
             </div>
             <div className={styles.item}>
-              <h3>{chat.name}</h3>
-              <p onClick={() => navigateToChat(chat.messagesWith)}>{chat.lastMessage}</p>
+              <h3>{msg.name}</h3>
+              <p onClick={() => navigateToChat(msg.messagesWith)}>{msg.lastMessage}</p>
             </div>
-            <span>{moment(chat.date).calendar()}</span>
+            <span>{moment(msg.date).calendar()}</span>
           </div>
         ))}
     </div>

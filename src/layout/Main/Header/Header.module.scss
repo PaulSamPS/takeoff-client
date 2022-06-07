@@ -8,6 +8,7 @@
 		display: grid;
 		grid-template-columns: 1fr repeat(3, auto);
 		align-items: center;
+		column-gap: 20px;
 		max-width: 990px;
 		margin: 0 auto;
 		padding: 20px;
@@ -21,7 +22,6 @@
 		}
 
 		.messages {
-			margin-right: 20px;
 			@include flexBetweenCenter;
 			cursor: pointer;
 			position: relative;
@@ -47,7 +47,6 @@
 		}
 
 		.profile {
-			margin-right: 20px;
 			padding-right: 20px;
 			column-gap: 5px;
 			border-right: 1px solid rgb(255 255 255 / 30%);
@@ -55,10 +54,30 @@
 
 			@include flex;
 
-			svg {
-				fill: var(--white);
-				width: 25px;
-				height: 25px;
+			.avatar {
+				position: relative;
+				display: flex;
+				align-items: unset;
+				justify-content: center;
+				width: 30px;
+				height: 30px;
+
+				img {
+					width: 30px;
+					height: 30px;
+					object-fit: cover;
+					border-radius: 50%;
+				}
+
+				.online {
+					position: absolute;
+					right: 0;
+					bottom: 2px;
+					background: var(--green);
+					border-radius: 50%;
+					width: 10px;
+					height: 10px;
+				}
 			}
 		}
 
