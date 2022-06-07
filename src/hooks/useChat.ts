@@ -158,6 +158,7 @@ export const useChat = () => {
             ];
           });
         } else {
+          const chatsFind = chats.find()
           const user = await dispatch(getChatUser(newMessage.sender));
           setBannerData({ name: user?.name, avatar: user?.avatar });
 
@@ -169,12 +170,7 @@ export const useChat = () => {
             date: newMessage.date,
           };
 
-          setChats((prev: any) => {
-            prev.find(
-              (chat: { messagesWith: string }) => chat.messagesWith === newMessage.receiver
-            );
-            return [newChat, ...prev];
-          });
+          setChats((prev: any) => [newChat, ...prev]);
         }
       }
     });

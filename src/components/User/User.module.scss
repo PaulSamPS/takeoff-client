@@ -123,17 +123,17 @@
 		}
 
 		.delete  {
-				transition: all ease .2s;
+			transition: all ease .2s;
 			margin-right: 10px;
-				&:hover {
-					fill: var(--blue);
-				}
+			&:hover {
+				fill: var(--blue);
+			}
 		}
 
 		.edit {
 			transition: all ease .2s;
 			&:hover {
-					fill: var(--blue);
+				fill: var(--blue);
 			}
 		}
 

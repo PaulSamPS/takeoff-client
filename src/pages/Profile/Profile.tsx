@@ -13,12 +13,15 @@ import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
 import { EditProfile } from '../../components/EditProfile/EditProfile';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Profile.module.scss';
+import { useChat } from '../../hooks/useChat';
 
 export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const [edit, setEdit] = React.useState<boolean>(false);
+  const { users } = useChat();
+  const statusOnline = users.map((user: any) => user.userId);
   const navigate = useNavigate();
 
   const handleNavigateToMain = () => {
@@ -68,6 +71,10 @@ export const Profile = (): JSX.Element => {
           <label>
             Уровень:
             <span>{user.level}</span>
+          </label>
+          <label>
+            Статус:
+            <span>{statusOnline.includes(user.id) ? 'Онлайн' : 'Был в сети'}</span>
           </label>
         </div>
         {edit ? (
