@@ -105,7 +105,7 @@ export const useChat = () => {
       console.log(newMessage);
     });
 
-    socket.on('message_list:update', async ({ chat }: IChat) => {
+    socket.on('message_list:update', ({ chat }: IChat) => {
       setMessages(chat.messages.slice(-20));
       setBannerData({
         name: chat.messagesWith.name,
@@ -114,7 +114,7 @@ export const useChat = () => {
       openChatId.current = chat.messagesWith._id;
     });
 
-    socket.on('chat:notFound', async () => {
+    socket.on('chat:notFound', () => {
       setMessages([]);
       openChatId.current = _id;
     });

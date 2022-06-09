@@ -12,6 +12,7 @@ import { RegistrationSuccess } from './pages/Auth/RegistrationSuccess/Registrati
 import { Message } from './pages/Messages/Message';
 import { Dialogs } from './pages/Dialogs/Dialogs';
 import { Conversations } from './pages/Conversations/Conversations';
+import { UserInfo } from './pages/UserInfo/UserInfo';
 
 export const App = () => {
   return (
@@ -32,6 +33,7 @@ export const App = () => {
         >
           <Route index element={<Main />} />
           <Route path='profile' element={<Profile />} />
+          <Route path='user-info/:id' element={<UserInfo />} />
           <Route path='dialogs/:name' element={<Dialogs />} />
           <Route path='conversations/:id' element={<Message />} />
           <Route path='conversations' element={<Conversations />} />

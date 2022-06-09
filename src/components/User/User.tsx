@@ -17,6 +17,7 @@ import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
 import { Input } from '../Input/Input';
 import { useChat } from '../../hooks/useChat';
 import { Button } from '../Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const { role, id } = useAppSelector((state) => state.loginReducer.user);
@@ -27,12 +28,18 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string>('');
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
-  const { sendMessage, users } = useChat();
+  const { sendMessage, users, chats } = useChat();
   const statusOnline = users.map((user: any) => user.userId);
+  const navigate = useNavigate();
 
   const handleDelete = () => {
     setDeleteUser(true);
     setRemoveAvatarModal(true);
+  };
+
+  const navigateToMessages = (id: string) => {
+    localStorage.setItem('id', id);
+    navigate(`conversations/${user._id}`);
   };
 
   const navigateToChat = (id: string) => {
@@ -58,6 +65,7 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
+        onClick={() => navigate(`user-info/${user._id}`)}
       >
         <div className={styles.avatar}>
           <div className={styles.img}>
@@ -79,7 +87,14 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
           {statusOnline.includes(user._id) && <div className={styles.online} />}
         </div>
         {user._id != id && (
-          <ChatIcon className={styles.chat} onClick={() => navigateToChat(user._id)} />
+          <ChatIcon
+            className={styles.chat}
+            onClick={
+              chats && chats.filter((user: any) => user.messagesWith === user._id)
+                ? () => navigateToMessages(user._id)
+                : () => navigateToChat(user._id)
+            }
+          />
         )}
         <div className={styles.info}>
           <label>

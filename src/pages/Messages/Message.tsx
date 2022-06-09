@@ -22,10 +22,11 @@ interface IMessage {
 export const Message = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
-  const { sendMessage, messages, bannerData } = useChat();
+  const { sendMessage, messages, bannerData, users } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
+  const usersOnline = users.map((user: any) => user.userId);
 
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
@@ -68,6 +69,7 @@ export const Message = (): JSX.Element => {
                     }
                     alt={user.name}
                   />
+                  {usersOnline.includes(m.sender) && <div className={styles.online} />}
                 </div>
                 <p className={styles.text}>{m.message}</p>
               </div>
