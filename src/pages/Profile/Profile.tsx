@@ -73,6 +73,10 @@ export const Profile = (): JSX.Element => {
             Уровень:
             <span>{user.level}</span>
           </label>
+          <label>
+            Статус:
+            <span>{statusOnline.includes(user.id) ? 'Онлайн' : 'Был в сети'}</span>
+          </label>
         </div>
         {edit ? (
           <CloseIcon className={styles.edit} onClick={() => setEdit(false)} />
