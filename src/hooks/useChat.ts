@@ -80,7 +80,6 @@ export const useChat = () => {
   const openChatId = React.useRef<string | null>('');
   const [chats, setChats] = React.useState<any>(conversation);
   const [lastMessage, setLastMessage] = React.useState<any>();
-  console.log('last', lastMessage);
 
   React.useEffect(() => {
     socket.emit('user:add', { userId: user.id });
@@ -170,7 +169,6 @@ export const useChat = () => {
             ];
           });
         } else {
-          const chatsFind = chats.find()
           const user = await dispatch(getChatUser(newMessage.sender));
           setBannerData({ name: user?.name, avatar: user?.avatar });
 
@@ -181,7 +179,6 @@ export const useChat = () => {
             lastMessage: newMessage.message,
             date: newMessage.date,
           };
-
           setChats((prev: any) => [newChat, ...prev]);
         }
       }

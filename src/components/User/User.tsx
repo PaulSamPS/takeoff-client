@@ -29,7 +29,6 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const { sendMessage, users } = useChat();
   const statusOnline = users.map((user: any) => user.userId);
-  console.log(users);
 
   const handleDelete = () => {
     setDeleteUser(true);
