@@ -134,8 +134,8 @@ export const useChat = () => {
         setMessages((prev: any) => [...prev, newMessage]);
         setChats((prev: IChatToBoSent[]) => {
           const receiver = newMessage.receiver;
-          filteredChats(prev, newMessage, receiver);
-          return [...prev];
+          const { previous } = filteredChats(prev, newMessage, receiver);
+          return [...previous];
         });
         setLastMessage((prev: IChatToBoSent[]) => {
           const receiver = newMessage.receiver;
@@ -149,8 +149,8 @@ export const useChat = () => {
       if (newMessage.sender === _id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev: IChatToBoSent[]) => {
-          filteredChats(prev, newMessage);
-          return [...prev];
+          const { previous } = filteredChats(prev, newMessage);
+          return [...previous];
         });
         setLastMessage((prev: IChatToBoSent[]) => {
           filteredChats(prev, newMessage);
@@ -162,10 +162,10 @@ export const useChat = () => {
 
         if (ifPreviouslyMessaged) {
           setChats((prev: IChatToBoSent[]) => {
-            const { previousChat } = filteredChats(prev, newMessage);
+            const { previousChat, previous } = filteredChats(prev, newMessage);
             return [
               previousChat,
-              ...prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),
+              ...previous.filter((chat: any) => chat.messagesWith !== newMessage.sender),
             ];
           });
         } else {
