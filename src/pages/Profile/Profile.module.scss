@@ -89,29 +89,7 @@
 		}
 
 		.info {
-			@include flexColumn;
-
 			grid-area: info;
-			align-items: unset;
-			padding-left: 50px;
-			border-left: 1px solid rgba(0 0 0 / 30%);
-
-			span {
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
-			}
-		}
-
-		label {
-			display: grid;
-			grid-template-columns: 80px auto;
-			margin-bottom: 5px;
-			color: var(--blue);
-
-			span {
-				color: var(--black);
-			}
 		}
 
 		.edit {

@@ -14,6 +14,7 @@ import { EditProfile } from '../../components/EditProfile/EditProfile';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Profile.module.scss';
 import { useChat } from '../../hooks/useChat';
+import { Info } from '../../components/Info/Info';
 
 export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -56,28 +57,7 @@ export const Profile = (): JSX.Element => {
           )}
           {statusOnline.includes(user.id) && <div className={styles.online} />}
         </div>
-        <div className={styles.info}>
-          <label>
-            Логин:
-            <span>{user.name}</span>
-          </label>
-          <label>
-            Email:
-            <span>{user.email}</span>
-          </label>
-          <label>
-            Позиция:
-            <span>{user.position}</span>
-          </label>
-          <label>
-            Уровень:
-            <span>{user.level}</span>
-          </label>
-          <label>
-            Статус:
-            <span>{statusOnline.includes(user.id) ? 'Онлайн' : 'Был в сети'}</span>
-          </label>
-        </div>
+        <Info user={user} className={styles.info} />
         {edit ? (
           <CloseIcon className={styles.edit} onClick={() => setEdit(false)} />
         ) : (

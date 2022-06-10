@@ -11,13 +11,13 @@ export const calculateTime = (createdAt: Date) => {
   if (diffInHours < 24) {
     return (
       <>
-        Сегодня <Moment format='HH:mm'>{createdAt}</Moment>
+        сегодня в <Moment format='HH:mm'>{createdAt}</Moment>
       </>
     );
   } else if (diffInHours > 24 && diffInHours < 36) {
     return (
       <>
-        Вчера <Moment format='HH:mm'>{createdAt}</Moment>
+        вчера в <Moment format='HH:mm'>{createdAt}</Moment>
       </>
     );
   } else if (diffInHours > 36) {

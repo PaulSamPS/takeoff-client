@@ -1,0 +1,48 @@
+@import "./src/scss/index";
+
+.container {
+
+  .wrapper {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 11px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    column-gap: 40px;
+    row-gap: 20px;
+    .avatar {
+      width: 300px;
+
+      img{
+      border-radius: 11px;
+        box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .bio {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+
+      .online {
+        position: relative;
+
+        .green {
+          position: absolute;
+          left: 55px;
+          top: 5px;
+          background: var(--green);
+          border-radius: 50%;
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      .lastVisit {
+        color: var(--grey);
+      }
+    }
+  }
+}
