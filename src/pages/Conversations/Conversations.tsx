@@ -7,7 +7,7 @@ import { calculateTime } from '../../helpers/calculateTime';
 
 interface IChats {
   avatar: string | null;
-  date: string;
+  date: Date;
   lastMessage: string;
   messagesWith: string;
   name: string;

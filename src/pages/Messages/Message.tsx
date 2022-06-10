@@ -15,7 +15,7 @@ interface IMessage {
   receiver: string;
   sender: string;
   message: string;
-  date: string;
+  date: Date;
   _id: string;
 }
 
