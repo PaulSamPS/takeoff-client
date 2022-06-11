@@ -6,5 +6,5 @@ export const filteredChats = (previous: any, newMessage: any, receiver?: string)
   );
   previousChat.lastMessage = newMessage.message;
   previousChat.date = newMessage.date;
-  return { previousChat, previous };
+  return { previousChat };
 };

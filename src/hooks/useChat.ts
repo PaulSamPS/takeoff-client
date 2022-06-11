@@ -9,34 +9,34 @@ interface IBanner {
   avatar: string | undefined;
 }
 
-interface IMessagesWith {
-  _id: string;
-  name: string;
-  email: string;
-  position: string;
-  level: string;
-  role: string;
-  avatar: string;
-  unreadMessage: boolean;
-  countUnreadMessages: number;
-  lastVisit: Date;
-  isOnline: boolean;
-}
+// interface IMessagesWith {
+//   _id: string;
+//   name: string;
+//   email: string;
+//   position: string;
+//   level: string;
+//   role: string;
+//   avatar: string;
+//   unreadMessage: boolean;
+//   countUnreadMessages: number;
+//   lastVisit: Date;
+//   isOnline: boolean;
+// }
 
-interface IMessages {
-  message: string;
-  sender: string;
-  receiver: string;
-  date: Date;
-  _id: string;
-}
+// interface IMessages {
+//   message: string;
+//   sender: string;
+//   receiver: string;
+//   date: Date;
+//   _id: string;
+// }
 
-interface IChat {
-  chat: {
-    messagesWith: IMessagesWith;
-    messages: IMessages[];
-  };
-}
+// interface IChat {
+//   chat: {
+//     messagesWith: IMessagesWith;
+//     messages: IMessages[];
+//   };
+// }
 
 interface INewMessage {
   newMessage: {
@@ -79,38 +79,27 @@ export const useChat = () => {
   });
   const openChatId = React.useRef<string | null>('');
   const [chats, setChats] = React.useState<any>(conversation);
-  const [lastMessage, setLastMessage] = React.useState<any>();
 
   React.useEffect(() => {
     socket.emit('user:add', { userId: user.id });
     socket.on('user_list:update', ({ users }: IUsers) => {
-      return setUsers(users);
+      setUsers(users);
     });
   }, []);
 
   React.useEffect(() => {
-    socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
-      setChats(chatsToBeSent);
-      setLastMessage(chatsToBeSent);
-    });
-
     socket.emit('messages:get', {
       userId: user.id,
       messagesWith: _id,
     });
 
-    socket.emit('chat:get', { userId: user.id });
-
-    socket.on('message:last', ({ newMessage }: INewMessage) => {
-      console.log(newMessage);
-    });
-
-    socket.on('message_list:update', ({ chat }: IChat) => {
+    socket.on('message_list:update', ({ chat, chatsToBeSent }: any) => {
       setMessages(chat.messages.slice(-20));
       setBannerData({
         name: chat.messagesWith.name,
         avatar: chat.messagesWith.avatar,
       });
+      setChats(chatsToBeSent);
       openChatId.current = chat.messagesWith._id;
     });
 
@@ -134,11 +123,6 @@ export const useChat = () => {
         setMessages((prev: any) => [...prev, newMessage]);
         setChats((prev: IChatToBoSent[]) => {
           const receiver = newMessage.receiver;
-          const { previous } = filteredChats(prev, newMessage, receiver);
-          return [...previous];
-        });
-        setLastMessage((prev: IChatToBoSent[]) => {
-          const receiver = newMessage.receiver;
           filteredChats(prev, newMessage, receiver);
           return [...prev];
         });
@@ -149,10 +133,6 @@ export const useChat = () => {
       if (newMessage.sender === _id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev: IChatToBoSent[]) => {
-          const { previous } = filteredChats(prev, newMessage);
-          return [...previous];
-        });
-        setLastMessage((prev: IChatToBoSent[]) => {
           filteredChats(prev, newMessage);
           return [...prev];
         });
@@ -162,10 +142,10 @@ export const useChat = () => {
 
         if (ifPreviouslyMessaged) {
           setChats((prev: IChatToBoSent[]) => {
-            const { previousChat, previous } = filteredChats(prev, newMessage);
+            const { previousChat } = filteredChats(prev, newMessage);
             return [
               previousChat,
-              ...previous.filter((chat: any) => chat.messagesWith !== newMessage.sender),
+              prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),
             ];
           });
         } else {
@@ -185,5 +165,5 @@ export const useChat = () => {
     });
   }, []);
 
-  return { users, user, messages, bannerData, sendMessage, chats, lastMessage };
+  return { users, user, messages, bannerData, sendMessage, chats };
 };

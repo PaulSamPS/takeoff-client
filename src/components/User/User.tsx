@@ -1,8 +1,7 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { UserProps } from './User.props';
 import { API_URL } from '../../http/axios';
 import { useAppSelector } from '../../hooks/redux';
-import { ReactComponent as ChatIcon } from '../../helpers/icons/chat.svg';
 import { ReactComponent as EditIcon } from '../../helpers/icons/more.svg';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { ReactComponent as DeleteIcon } from '../../helpers/icons/delete.svg';
@@ -14,21 +13,17 @@ import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAv
 import { ChangeAvatar } from '../ChangeAvatar/ChangeAvatar';
 import { Modal } from '../Modal/Modal';
 import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
-import { Input } from '../Input/Input';
 import { useChat } from '../../hooks/useChat';
-import { Button } from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { Info } from '../Info/Info';
 
 export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const { role, id } = useAppSelector((state) => state.loginReducer.user);
   const [edit, setEdit] = React.useState<boolean>(false);
   const [modal, setModal] = React.useState<boolean>(false);
-  const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
-  const [text, setText] = React.useState<string>('');
-  const [submitDisabled, setSubmitDisabled] = React.useState(true);
-  const { sendMessage, users, chats } = useChat();
+  const { users } = useChat();
   const statusOnline = users.map((user: any) => user.userId);
   const navigate = useNavigate();
 
@@ -36,27 +31,6 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
     setDeleteUser(true);
     setRemoveAvatarModal(true);
   };
-
-  const navigateToMessages = (id: string) => {
-    localStorage.setItem('id', id);
-    navigate(`conversations/${user._id}`);
-  };
-
-  const navigateToChat = (id: string) => {
-    localStorage.setItem('id', id);
-    setConversationModal(true);
-  };
-
-  const onSubmit = () => {
-    if (submitDisabled) return;
-    sendMessage(text);
-    setText('');
-    setConversationModal(false);
-  };
-
-  React.useEffect(() => {
-    setSubmitDisabled(!text.trim());
-  }, [text]);
 
   return (
     <>
@@ -86,36 +60,7 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
           )}
           {statusOnline.includes(user._id) && <div className={styles.online} />}
         </div>
-        {user._id != id && (
-          <ChatIcon
-            className={styles.chat}
-            onClick={
-              chats && chats.filter((user: any) => user.messagesWith === user._id)
-                ? () => navigateToMessages(user._id)
-                : () => navigateToChat(user._id)
-            }
-          />
-        )}
-        <div className={styles.info}>
-          <label>
-            Логин:
-            <span onClick={() => console.log(user._id)}>{user.name}</span>
-          </label>
-          <label>
-            Email:
-            <span>{user.email}</span>
-          </label>
-        </div>
-        <div className={styles.position}>
-          <label>
-            Позиция:
-            <span>{user.position}</span>
-          </label>
-          <label>
-            Уровень:
-            <span>{user.level}</span>
-          </label>
-        </div>
+        <Info user={user} />
         <AnimatePresence>
           {edit && (
             <EditProfile
@@ -148,17 +93,6 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
         deleteUser={deleteUser}
         setDeleteUser={setDeleteUser}
       />
-      <Modal setModal={setConversationModal} modal={conversationModal}>
-        <Input
-          placeholder='Введите сообщение...'
-          autoFocus
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
-          value={text}
-        />
-        <Button appearance='primary' disabled={submitDisabled} onClick={onSubmit}>
-          Отправить
-        </Button>
-      </Modal>
     </>
   );
 });

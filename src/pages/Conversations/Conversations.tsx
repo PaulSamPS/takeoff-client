@@ -14,7 +14,7 @@ interface IChats {
 }
 
 export const Conversations = () => {
-  const { lastMessage, users } = useChat();
+  const { chats, users } = useChat();
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
   const navigateToChat = (id: string) => {
@@ -24,25 +24,25 @@ export const Conversations = () => {
 
   return (
     <div className={styles.wrapper}>
-      {lastMessage &&
-        lastMessage.map((msg: IChats, index: number) => (
+      {chats &&
+        chats.map((chat: IChats, index: number) => (
           <div key={index} className={styles.conversation}>
             <div className={styles.avatar}>
               <img
                 src={
-                  msg.avatar === '' || msg.avatar === null
+                  chat.avatar === '' || chat.avatar === null
                     ? `/photo.png`
-                    : `${API_URL}/avatar/${msg.avatar}`
+                    : `${API_URL}/avatar/${chat.avatar}`
                 }
-                alt={msg.name}
+                alt={chat.name}
               />
-              {usersOnline.includes(msg.messagesWith) && <div className={styles.online} />}
+              {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
             </div>
             <div className={styles.item}>
-              <h3>{msg.name}</h3>
-              <p onClick={() => navigateToChat(msg.messagesWith)}>{msg.lastMessage}</p>
+              <h3>{chat.name}</h3>
+              <p onClick={() => navigateToChat(chat.messagesWith)}>{chat.lastMessage}</p>
             </div>
-            <span>{calculateTime(msg.date)}</span>
+            <span>{calculateTime(chat.date)}</span>
           </div>
         ))}
     </div>

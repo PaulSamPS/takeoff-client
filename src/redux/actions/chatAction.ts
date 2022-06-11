@@ -14,7 +14,7 @@ export const getChatUser = (id: string | null) => async () => {
   }
 };
 
-export const getConversations = (id: string) => async (dispatch: AppDispatch) => {
+export const getConversations = (id: string | null) => async (dispatch: AppDispatch) => {
   dispatch(conversationReducer.actions.setLoading());
   await $apiAuth
     .get(`api/chat/${id}`)
