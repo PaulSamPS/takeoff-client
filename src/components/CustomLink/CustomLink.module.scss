@@ -1,0 +1,42 @@
+@import './src/scss/index';
+
+.link {
+  transition: color ease 0.2s;
+  text-decoration: none;
+  font-weight: 500;
+  display: grid;
+  grid-template-columns: 18px 1fr 25px;
+  column-gap: 10px;
+  align-items: center;
+
+  color: var(--grey);
+
+  font-size: 18px;
+
+  svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  &:hover {
+    color: var(--blue);
+    svg {
+      fill: var(--blue);
+    }
+  }
+
+  @include _laptopL {
+    font-size: 14px;
+  }
+
+  @include _tablet {
+    margin-left: 0;
+  }
+}
+
+.active {
+  color: var(--blue);
+  svg {
+    fill: var(--blue);
+  }
+}

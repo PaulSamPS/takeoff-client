@@ -7,6 +7,7 @@ import { socket } from '../../helpers/socket';
 import { getChatUser } from '../../redux/actions/chatAction';
 import { useAppDispatch } from '../../hooks/redux';
 import { Toast } from '../../components/Toast/Toast';
+import { Sidebar } from './Sidebar/Sidebar';
 
 export const Layout = () => {
   const dispatch = useAppDispatch();
@@ -16,17 +17,8 @@ export const Layout = () => {
     name: '',
     avatar: '',
   });
-  console.log(
-    'NewMessage',
-    newMessageReceived,
-    'MessageModal',
-    newMessageModal,
-    'BannerData',
-    bannerData
-  );
 
   React.useEffect(() => {
-    console.log(window.location.pathname);
     socket.on('message:received', async ({ newMessage }) => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
@@ -47,8 +39,11 @@ export const Layout = () => {
     <>
       <div className={styles.wrapper}>
         <Header />
-        <div className={styles.content}>
-          <Outlet />
+        <div className={styles.main}>
+          <Sidebar />
+          <div className={styles.content}>
+            <Outlet />
+          </div>
         </div>
         <Footer className={styles.footer} />
       </div>

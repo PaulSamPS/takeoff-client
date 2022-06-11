@@ -6,7 +6,7 @@
 
 	.wrapper {
 		display: grid;
-		grid-template-columns: 1fr repeat(3, auto);
+		grid-template-columns: 1fr repeat(2, auto);
 		align-items: center;
 		column-gap: 20px;
 		max-width: 990px;
@@ -18,31 +18,6 @@
 			h2 {
 				cursor: pointer;
 				display: inline-block;
-			}
-		}
-
-		.messages {
-			@include flexBetweenCenter;
-			cursor: pointer;
-			position: relative;
-
-			.unreadMessages {
-				@include flexCenterCenter;
-				font-size: 12px;
-				position: absolute;
-				right: -7px;
-				top: -5px;
-				background: var(--red);
-				color: var(--white);
-				border-radius: 50%;
-				width: 20px;
-				height: 20px;
-			}
-
-			svg {
-				fill: var(--white);
-				width: 25px;
-				height: 25px;
 			}
 		}
 

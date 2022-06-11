@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { logout } from '../../../redux/actions/authAction';
 import styles from './Header.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as ChatIcon } from '../../../helpers/icons/chat.svg';
 import { socket } from '../../../helpers/socket';
 import { API_URL } from '../../../http/axios';
 import { useChat } from '../../../hooks/useChat';
@@ -29,21 +28,11 @@ export const Header = () => {
     navigate('main');
   };
 
-  const navigateToConversations = () => {
-    navigate('conversations');
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.logo}>
           <h2 onClick={navigateTeoMain}>TakeOff</h2>
-        </div>
-        <div className={styles.messages} onClick={navigateToConversations}>
-          <ChatIcon />
-          {user.countUnreadMessages > 0 && (
-            <div className={styles.unreadMessages}>{user.countUnreadMessages}</div>
-          )}
         </div>
         <div className={styles.profile} onClick={navigateToProfile}>
           <div className={styles.avatar}>

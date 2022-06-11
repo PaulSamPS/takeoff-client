@@ -6,9 +6,7 @@ import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAv
 import { ReactComponent as EditIcon } from '../../helpers/icons/edit.svg';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { Modal } from '../../components/Modal/Modal';
-import { ReactComponent as ArrowBackIcon } from '../../helpers/icons/arrowBack.svg';
 import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
-import { useNavigate } from 'react-router-dom';
 import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
 import { EditProfile } from '../../components/EditProfile/EditProfile';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -23,11 +21,6 @@ export const Profile = (): JSX.Element => {
   const [edit, setEdit] = React.useState<boolean>(false);
   const { users } = useChat();
   const statusOnline = users.map((user: any) => user.userId);
-  const navigate = useNavigate();
-
-  const handleNavigateToMain = () => {
-    navigate('/main');
-  };
 
   return (
     <motion.div
@@ -36,10 +29,6 @@ export const Profile = (): JSX.Element => {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
     >
-      <div className={styles.back} onClick={handleNavigateToMain}>
-        <ArrowBackIcon />
-        Назад
-      </div>
       <div className={styles.card}>
         <div className={styles.avatar}>
           <img
