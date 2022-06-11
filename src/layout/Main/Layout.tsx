@@ -6,8 +6,7 @@ import React from 'react';
 import { socket } from '../../helpers/socket';
 import { getChatUser } from '../../redux/actions/chatAction';
 import { useAppDispatch } from '../../hooks/redux';
-import { Modal } from '../../components/Modal/Modal';
-import { API_URL } from '../../http/axios';
+import { Toast } from '../../components/Toast/Toast';
 
 export const Layout = () => {
   const dispatch = useAppDispatch();
@@ -45,28 +44,21 @@ export const Layout = () => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <Header />
-      <div className={styles.content}>
-        <Outlet />
-      </div>
-      <Footer className={styles.footer} />
-      <Modal setModal={showNewMessageModal} modal={newMessageModal}>
-        <div className={styles.toast}>
-          <div className={styles.avatar}>
-            <img
-              src={
-                bannerData.avatar === '' || bannerData.avatar === null
-                  ? `/photo.png`
-                  : `${API_URL}/avatar/${bannerData.avatar}`
-              }
-              alt={bannerData.name}
-            />
-          </div>
-          <h4>{newMessageReceived?.name}</h4>
-          <p>{newMessageReceived?.message}</p>
+    <>
+      <div className={styles.wrapper}>
+        <Header />
+        <div className={styles.content}>
+          <Outlet />
         </div>
-      </Modal>
-    </div>
+        <Footer className={styles.footer} />
+      </div>
+      <Toast
+        setModal={showNewMessageModal}
+        modal={newMessageModal}
+        className={styles.toast}
+        bannerData={bannerData}
+        newMessageReceived={newMessageReceived}
+      />
+    </>
   );
 };

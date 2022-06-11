@@ -1,8 +1,9 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-export interface ModalProps
+export interface ToastProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   setModal: (click: boolean) => void;
   modal: boolean;
-  children: ReactNode;
+  bannerData: any;
+  newMessageReceived: any;
 }
