@@ -23,8 +23,6 @@ export const Conversations = () => {
     navigate(`${id}`);
   };
 
-  console.log('conv', chats);
-
   return (
     <div className={styles.wrapper}>
       {chats &&

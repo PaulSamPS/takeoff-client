@@ -4,7 +4,7 @@ import { ModalProps } from './Modal.props';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Modal.module.scss';
 
-export const Modal: React.FC<ModalProps> = ({ children, setModal, modal }): JSX.Element => {
+export const Modal = ({ children, setModal, modal }: ModalProps): JSX.Element => {
   const handleCloseModal = () => {
     setModal(false);
   };
