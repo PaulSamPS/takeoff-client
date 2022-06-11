@@ -88,18 +88,22 @@ export const useChat = () => {
   }, []);
 
   React.useEffect(() => {
+    socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
+      setChats(chatsToBeSent);
+    });
+
     socket.emit('messages:get', {
       userId: user.id,
       messagesWith: _id,
     });
+    socket.emit('chat:get', { userId: user.id });
 
-    socket.on('message_list:update', ({ chat, chatsToBeSent }: any) => {
+    socket.on('message_list:update', ({ chat }: any) => {
       setMessages(chat.messages.slice(-20));
       setBannerData({
         name: chat.messagesWith.name,
         avatar: chat.messagesWith.avatar,
       });
-      setChats(chatsToBeSent);
       openChatId.current = chat.messagesWith._id;
     });
 
@@ -143,9 +147,10 @@ export const useChat = () => {
         if (ifPreviouslyMessaged) {
           setChats((prev: IChatToBoSent[]) => {
             const { previousChat } = filteredChats(prev, newMessage);
+            console.log(previousChat);
             return [
               previousChat,
-              prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),
+              ...prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),
             ];
           });
         } else {
@@ -159,7 +164,10 @@ export const useChat = () => {
             lastMessage: newMessage.message,
             date: newMessage.date,
           };
-          setChats((prev: any) => [newChat, ...prev]);
+          setChats((prev: any) => [
+            newChat,
+            ...prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),
+          ]);
         }
       }
     });

@@ -17,10 +17,13 @@ export const Conversations = () => {
   const { chats, users } = useChat();
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
+
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);
     navigate(`${id}`);
   };
+
+  console.log('conv', chats);
 
   return (
     <div className={styles.wrapper}>
