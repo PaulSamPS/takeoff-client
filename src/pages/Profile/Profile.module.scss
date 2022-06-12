@@ -1,39 +1,31 @@
 @import "./src/scss/index";
 
-.wrapper {
-	padding: 0 20px;
+.container {
 
-	.card {
-		position: relative;
-		display: grid;
-		grid-template-columns: 150px auto;
-		grid-template-areas:
-			'avatar info'
-			'. editProfile';
-		align-items: center;
-		padding: 20px;
-		column-gap: 50px;
+	.wrapper {
 		background: var(--white);
-		border-radius: 5px;
-		box-shadow: 0 0 2px 0 rgb(0 0 0 / 20%);
-
+		padding: 20px;
+		border-radius: 11px;
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		column-gap: 40px;
+		row-gap: 20px;
 		.avatar {
+			width: 300px;
+			height: 300px;
 			position: relative;
-			grid-area: avatar;
-			width: 150px;
-			height: 150px;
-
 			&:hover {
 				.uploadAvatar {
 					display: flex;
 				}
 			}
 
-			img {
-				width: 150px;
-				height: 150px;
-				object-fit: cover;
+			img{
 				border-radius: 11px;
+				//box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
 			}
 
 			.uploadAvatar {
@@ -50,38 +42,30 @@
 				border-radius: 11px;
 				cursor: pointer;
 			}
+		}
+
+		.bio {
+			display: flex;
+			flex-direction: column;
+			row-gap: 20px;
 
 			.online {
-				position: absolute;
-				right: 5px;
-				bottom: 0;
-				background: var(--green);
-				border-radius: 50%;
-				width: 10px;
-				height: 10px;
+				position: relative;
+
+				.green {
+					position: absolute;
+					left: 55px;
+					top: 5px;
+					background: var(--green);
+					border-radius: 50%;
+					width: 10px;
+					height: 10px;
+				}
 			}
-		}
 
-		.info {
-			grid-area: info;
-		}
-
-		.edit {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			width: 20px;
-			height: 20px;
-			cursor: pointer;
-			transition: all ease 0.2s;
-
-			&:hover {
-				fill: var(--blue);
+			.lastVisit {
+				color: var(--grey);
 			}
-		}
-
-		.editProfile {
-			grid-area: editProfile;
 		}
 	}
 }

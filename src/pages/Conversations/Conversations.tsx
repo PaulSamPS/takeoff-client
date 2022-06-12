@@ -4,6 +4,7 @@ import { API_URL } from '../../http/axios';
 import styles from './Conversations.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
+import { Search } from '../../components/Search/Search';
 
 interface IChats {
   avatar: string | null;
@@ -17,6 +18,16 @@ export const Conversations = () => {
   const { chats, users } = useChat();
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
+  const [search, setSearch] = React.useState<string>('');
+
+  const filteredChats = React.useMemo(() => {
+    if (search.length < 2) {
+      return chats;
+    }
+    return chats.filter((chat: IChats) => {
+      return chat.name.toLocaleLowerCase().search(search.toLocaleLowerCase()) !== -1;
+    });
+  }, [search, users]);
 
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);
@@ -25,8 +36,10 @@ export const Conversations = () => {
 
   return (
     <div className={styles.wrapper}>
-      {chats &&
-        chats.map((chat: IChats, index: number) => (
+      <Search setSearch={setSearch} search={search} />
+      {filteredChats.length == 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
+      {filteredChats &&
+        filteredChats.map((chat: IChats, index: number) => (
           <div key={index} className={styles.conversation}>
             <div className={styles.avatar}>
               <img

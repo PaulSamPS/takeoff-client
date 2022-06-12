@@ -21,7 +21,7 @@ export const Header = () => {
   };
 
   const navigateToProfile = () => {
-    navigate('profile');
+    navigate(`profile`);
   };
 
   const navigateTeoMain = () => {

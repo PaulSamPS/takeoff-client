@@ -6,7 +6,6 @@ import { Button } from '../../components/Button/Button';
 import { useChat } from '../../hooks/useChat';
 import { useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
-import cn from 'classnames';
 import { calculateTime } from '../../helpers/calculateTime';
 
 interface IMessage {
@@ -38,7 +37,7 @@ export const Message = (): JSX.Element => {
     sendMessage(text);
     setText('');
   };
-
+  console.log(messages);
   React.useEffect(() => {
     bottomRef.current?.scrollIntoView({
       behavior: 'smooth',
@@ -51,31 +50,43 @@ export const Message = (): JSX.Element => {
         <div className={styles.chat}>
           {messages.map((m: IMessage, index) => (
             <div key={index} className={styles.messages}>
-              <div
-                className={cn(
-                  m.sender === user.id ? styles.send : styles.receive,
-                  styles.messageBlock
-                )}
-              >
-                <div className={styles.user}>
-                  <span>{m.sender === user.id ? user.name : bannerData.name}</span>
-                  <img
-                    src={
-                      user.avatar === '' || user.avatar === null
-                        ? `/photo.png`
-                        : m.sender === user.id
-                        ? `${API_URL}/avatar/${user.avatar}`
-                        : `${API_URL}/avatar/${bannerData.avatar}`
-                    }
-                    alt={user.name}
-                  />
-                  {usersOnline.includes(m.sender) && <div className={styles.online} />}
-                </div>
-                <p className={styles.text}>{m.message}</p>
-              </div>
-              <span className={m.sender === user.id ? styles.timeRight : styles.timeLeft}>
-                {calculateTime(m.date)}
-              </span>
+              {user.id == m.sender ? (
+                <>
+                  <div className={styles.messageBlock}>
+                    <div className={styles.avatar}>
+                      <img
+                        src={
+                          user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`
+                        }
+                        alt={user.name}
+                      />
+                      {usersOnline.includes(m.sender) && <div className={styles.online} />}
+                    </div>
+                    <span className={styles.userName}>{user.name}</span>
+                    <span className={styles.time}>{calculateTime(m.date)}</span>
+                    <p className={styles.text}>{m.message}</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className={styles.messageBlock}>
+                    <div className={styles.avatar}>
+                      <img
+                        src={
+                          bannerData.avatar === null
+                            ? `/photo.png`
+                            : `${API_URL}/avatar/${bannerData.avatar}`
+                        }
+                        alt={bannerData.name}
+                      />
+                      {usersOnline.includes(m.sender) && <div className={styles.online} />}
+                    </div>
+                    <span className={styles.userName}>{bannerData.name}</span>
+                    <span className={styles.time}>{calculateTime(m.date)}</span>
+                    <p className={styles.text}>{m.message}</p>
+                  </div>
+                </>
+              )}
               <p ref={bottomRef} />
             </div>
           ))}
