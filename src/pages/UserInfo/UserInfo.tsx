@@ -86,7 +86,7 @@ export const UserInfo = () => {
             </div>
           ) : (
             <div className={styles.lastVisit}>
-              Был в сети {user && calculateTime(user.lastVisit)}
+              Был(а) в сети {user && calculateTime(user.lastVisit)}
             </div>
           )}
           <h1>{user?.name}</h1>
