@@ -11,6 +11,7 @@ import styles from './Profile.module.scss';
 import { useChat } from '../../hooks/useChat';
 import { Info } from '../../components/Info/Info';
 import { calculateTime } from '../../helpers/calculateTime';
+import { Post } from '../../components/Post/Post';
 
 export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -55,6 +56,7 @@ export const Profile = (): JSX.Element => {
           <h1>{user?.name}</h1>
           <Info user={user} />
         </div>
+        <Post />
       </div>
       <Modal setModal={setModal} modal={modal}>
         <ChangeAvatar setModal={setModal} userId={user.id} />

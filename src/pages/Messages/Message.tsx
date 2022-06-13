@@ -7,6 +7,7 @@ import { useChat } from '../../hooks/useChat';
 import { useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
+import { Link } from 'react-router-dom';
 
 interface IMessage {
   senderName: string;
@@ -70,7 +71,7 @@ export const Message = (): JSX.Element => {
               ) : (
                 <>
                   <div className={styles.messageBlock}>
-                    <div className={styles.avatar}>
+                    <Link to={`/main/user-info/${m._id}`} className={styles.avatar}>
                       <img
                         src={
                           bannerData.avatar === null
@@ -80,7 +81,7 @@ export const Message = (): JSX.Element => {
                         alt={bannerData.name}
                       />
                       {usersOnline.includes(m.sender) && <div className={styles.online} />}
-                    </div>
+                    </Link>
                     <span className={styles.userName}>{bannerData.name}</span>
                     <span className={styles.time}>{calculateTime(m.date)}</span>
                     <p className={styles.text}>{m.message}</p>
