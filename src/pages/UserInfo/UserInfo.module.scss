@@ -10,10 +10,17 @@
     grid-template-columns: 300px 1fr;
     column-gap: 40px;
     row-gap: 20px;
+    grid-template-areas:
+      'avatar bio'
+    'message followers'
+    'follow followers'
+  ;
+
     .avatar {
       width: 300px;
       height: 300px;
       position: relative;
+      grid-area: avatar;
       &:hover {
         .uploadAvatar {
           display: flex;
@@ -48,6 +55,7 @@
       display: flex;
       flex-direction: column;
       row-gap: 20px;
+      grid-area: bio;
 
       .online {
         position: relative;
@@ -65,6 +73,29 @@
 
       .lastVisit {
         color: var(--grey);
+      }
+    }
+
+    .message {
+      grid-area: message;
+    }
+
+    .follow {
+      grid-area: follow;
+    }
+
+    .followersWrapper {
+      grid-area: followers;
+      display: flex;
+      column-gap: 10px;
+
+      .followers {
+        display: flex;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
       }
     }
   }

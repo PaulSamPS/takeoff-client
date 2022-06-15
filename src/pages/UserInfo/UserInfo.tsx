@@ -31,6 +31,9 @@ export const UserInfo = () => {
   const [text, setText] = React.useState<string>('');
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
+  const [followers, setFollowers] = React.useState<any[]>([]);
+
+  console.log(followers.find((i) => i.id === loginUser.id));
 
   const sendMessageModal = () => {
     if (typeof id === 'string') {
@@ -46,14 +49,28 @@ export const UserInfo = () => {
     setConversationModal(false);
   };
 
+  const handleFollow = () => {
+    socket.emit('follow', { userId: id, userToFollowId: loginUser.id });
+  };
+
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
   }, [text]);
 
   React.useEffect(() => {
-    socket.emit('userInfo: get', { userId: id });
+    socket.emit('userInfo:get', { userId: id });
     socket.on('userInfo:user', ({ user }: IUserInfo) => {
       setUser(user);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    socket.emit('followers:get', { userId: id });
+    socket.on('followers:sent', ({ followersUser }) => {
+      setFollowers(followersUser);
+    });
+    socket.on('follow:done', ({ followersUser }) => {
+      setFollowers(followersUser);
     });
   }, []);
 
@@ -93,10 +110,35 @@ export const UserInfo = () => {
           <Info user={user} />
         </div>
         {loginUser.id !== id && (
-          <Button appearance='primary' onClick={() => sendMessageModal()}>
+          <Button
+            appearance='primary'
+            className={styles.message}
+            onClick={() => sendMessageModal()}
+          >
             Написать
           </Button>
         )}
+        {followers.find((i) => i.id === loginUser.id) ? (
+          <Button appearance='primary' className={styles.follow} onClick={handleFollow}>
+            Отписаться
+          </Button>
+        ) : (
+          <Button appearance='primary' className={styles.follow} onClick={handleFollow}>
+            Подписаться
+          </Button>
+        )}
+
+        <div className={styles.followersWrapper}>
+          {followers.length > 0 &&
+            followers.map((f) => (
+              <div key={f.id} className={styles.followers}>
+                <img
+                  src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
+                  alt={f.name}
+                />
+              </div>
+            ))}
+        </div>
       </div>
       <Modal setModal={setConversationModal} modal={conversationModal}>
         <Input

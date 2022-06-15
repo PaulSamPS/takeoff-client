@@ -71,7 +71,7 @@ export const Message = (): JSX.Element => {
               ) : (
                 <>
                   <div className={styles.messageBlock}>
-                    <Link to={`/main/user-info/${m._id}`} className={styles.avatar}>
+                    <Link to={`/main/user-info/${m.receiver}`} className={styles.avatar}>
                       <img
                         src={
                           bannerData.avatar === null
