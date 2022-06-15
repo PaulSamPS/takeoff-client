@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useChat } from '../../hooks/useChat';
 import styles from './UserInfo.module.scss';
 import { socket } from '../../helpers/socket';
@@ -31,9 +31,9 @@ export const UserInfo = () => {
   const [text, setText] = React.useState<string>('');
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
+  const [followings, setFollowings] = React.useState<any[]>([]);
   const [followers, setFollowers] = React.useState<any[]>([]);
-
-  console.log(followers.find((i) => i.id === loginUser.id));
+  console.log(followers);
 
   const sendMessageModal = () => {
     if (typeof id === 'string') {
@@ -66,17 +66,19 @@ export const UserInfo = () => {
     socket.on('userInfo:user', ({ user }: IUserInfo) => {
       setUser(user);
     });
-  }, []);
+  }, [id]);
 
   React.useEffect(() => {
-    socket.emit('followers:get', { userId: id });
-    socket.on('followers:sent', ({ followersUser }) => {
+    socket.emit('followings:get', { userId: id });
+    socket.on('followings:sent', ({ followingsUser, followersUser }) => {
+      setFollowings(followingsUser);
       setFollowers(followersUser);
     });
-    socket.on('follow:done', ({ followersUser }) => {
+    socket.on('followings:done', ({ followingsUser, followersUser }) => {
+      setFollowings(followingsUser);
       setFollowers(followersUser);
     });
-  }, []);
+  }, [id]);
 
   return (
     <div className={styles.container}>
@@ -122,7 +124,7 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {followers.find((i) => i.id === loginUser.id) ? (
+        {followings.find((i) => i.id === loginUser.id) ? (
           <Button appearance='primary' className={styles.follow} onClick={handleUnfollow}>
             Отписаться
           </Button>
@@ -133,17 +135,22 @@ export const UserInfo = () => {
         )}
 
         <div className={styles.followersWrapper}>
-          <div className={styles.name}>Подписчики {followers.length}</div>
+          <div className={styles.name}>Подписчики {followings.length}</div>
           <div className={styles.grid}>
-            {followers.length > 0 &&
-              followers.map((f) => (
-                <div key={f.id} className={styles.followers}>
+            {followings.length > 0 &&
+              followings.map((f) => (
+                <Link
+                  to={`/main/user-info/${f.id}`}
+                  replace
+                  key={f.id}
+                  className={styles.followers}
+                >
                   <img
                     src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
                     alt={f.name}
                   />
                   {usersOnline.includes(f.id) && <div className={styles.onlineStatus} />}
-                </div>
+                </Link>
               ))}
           </div>
         </div>
