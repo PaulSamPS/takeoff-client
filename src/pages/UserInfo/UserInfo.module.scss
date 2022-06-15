@@ -12,8 +12,9 @@
     row-gap: 20px;
     grid-template-areas:
       'avatar bio'
-    'message followers'
-    'follow followers'
+    'message .'
+    'follow .'
+    'followers .'
   ;
 
     .avatar {
@@ -86,17 +87,41 @@
 
     .followersWrapper {
       grid-area: followers;
-      display: flex;
-      column-gap: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas: 'name' 'grid';
+      row-gap: 20px;
 
-      .followers {
-        display: flex;
-        img {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-        }
+      .name {
+        grid-area: name;
+        color: var(--grey);
       }
+
+     .grid {
+       grid-area: grid;
+       display: grid;
+       grid-template-columns: repeat(5, 52px);
+       column-gap: 10px;
+
+       .followers {
+         position: relative;
+         img {
+           width: 50px;
+           height: 50px;
+           border-radius: 50%;
+         }
+
+         .onlineStatus {
+           position: absolute;
+           right: 5px;
+           bottom: 5px;
+           background: var(--green);
+           border-radius: 50%;
+           width: 10px;
+           height: 10px;
+         }
+       }
+     }
     }
   }
 }

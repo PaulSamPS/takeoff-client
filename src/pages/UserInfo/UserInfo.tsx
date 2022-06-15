@@ -53,6 +53,10 @@ export const UserInfo = () => {
     socket.emit('follow', { userId: id, userToFollowId: loginUser.id });
   };
 
+  const handleUnfollow = () => {
+    socket.emit('unfollow', { userId: id, userToUnfollowId: loginUser.id });
+  };
+
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
   }, [text]);
@@ -119,7 +123,7 @@ export const UserInfo = () => {
           </Button>
         )}
         {followers.find((i) => i.id === loginUser.id) ? (
-          <Button appearance='primary' className={styles.follow} onClick={handleFollow}>
+          <Button appearance='primary' className={styles.follow} onClick={handleUnfollow}>
             Отписаться
           </Button>
         ) : (
@@ -129,15 +133,19 @@ export const UserInfo = () => {
         )}
 
         <div className={styles.followersWrapper}>
-          {followers.length > 0 &&
-            followers.map((f) => (
-              <div key={f.id} className={styles.followers}>
-                <img
-                  src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
-                  alt={f.name}
-                />
-              </div>
-            ))}
+          <div className={styles.name}>Подписчики {followers.length}</div>
+          <div className={styles.grid}>
+            {followers.length > 0 &&
+              followers.map((f) => (
+                <div key={f.id} className={styles.followers}>
+                  <img
+                    src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
+                    alt={f.name}
+                  />
+                  {usersOnline.includes(f.id) && <div className={styles.onlineStatus} />}
+                </div>
+              ))}
+          </div>
         </div>
       </div>
       <Modal setModal={setConversationModal} modal={conversationModal}>
