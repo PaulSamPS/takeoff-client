@@ -83,6 +83,9 @@
 
     .follow {
       grid-area: follow;
+      button {
+        width: 100%;
+      }
     }
 
     .followersWrapper {

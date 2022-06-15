@@ -15,6 +15,7 @@ import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
 import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
 import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
+import { useFollow } from '../../hooks/useFollow';
 
 interface IUserInfo {
   user: IUserAll;
@@ -31,9 +32,7 @@ export const UserInfo = () => {
   const [text, setText] = React.useState<string>('');
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
-  const [followings, setFollowings] = React.useState<any[]>([]);
-  const [followers, setFollowers] = React.useState<any[]>([]);
-  console.log(followers);
+  const { followings, handleFollow, handleUnfollow } = useFollow(id);
 
   const sendMessageModal = () => {
     if (typeof id === 'string') {
@@ -49,14 +48,6 @@ export const UserInfo = () => {
     setConversationModal(false);
   };
 
-  const handleFollow = () => {
-    socket.emit('follow', { userId: id, userToFollowId: loginUser.id });
-  };
-
-  const handleUnfollow = () => {
-    socket.emit('unfollow', { userId: id, userToUnfollowId: loginUser.id });
-  };
-
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
   }, [text]);
@@ -65,18 +56,6 @@ export const UserInfo = () => {
     socket.emit('userInfo:get', { userId: id });
     socket.on('userInfo:user', ({ user }: IUserInfo) => {
       setUser(user);
-    });
-  }, [id]);
-
-  React.useEffect(() => {
-    socket.emit('followings:get', { userId: id });
-    socket.on('followings:sent', ({ followingsUser, followersUser }) => {
-      setFollowings(followingsUser);
-      setFollowers(followersUser);
-    });
-    socket.on('followings:done', ({ followingsUser, followersUser }) => {
-      setFollowings(followingsUser);
-      setFollowers(followersUser);
     });
   }, [id]);
 
@@ -124,14 +103,18 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {followings.find((i) => i.id === loginUser.id) ? (
-          <Button appearance='primary' className={styles.follow} onClick={handleUnfollow}>
-            Отписаться
-          </Button>
-        ) : (
-          <Button appearance='primary' className={styles.follow} onClick={handleFollow}>
-            Подписаться
-          </Button>
+        {loginUser.id !== id && (
+          <div className={styles.follow}>
+            {followings.find((i) => i.id === loginUser.id) ? (
+              <Button appearance='primary' onClick={handleUnfollow}>
+                Отписаться
+              </Button>
+            ) : (
+              <Button appearance='primary' onClick={handleFollow}>
+                Подписаться
+              </Button>
+            )}
+          </div>
         )}
 
         <div className={styles.followersWrapper}>
