@@ -8,11 +8,11 @@ import { socket } from '../../helpers/socket';
 
 export const Requests = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
-  const addFriend = (addFriendUserId: string) => {
-    console.log(addFriendUserId);
-  };
-
   const [request, setRequest] = React.useState<any[]>([]);
+
+  const addFriend = (addFriendUserId: string) => {
+    socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
+  };
 
   React.useEffect(() => {
     socket.emit('friendsRequest:get', {

@@ -12,8 +12,6 @@ export const Sidebar = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [request, setRequest] = React.useState<any[]>([]);
 
-  console.log(request);
-
   React.useEffect(() => {
     socket.emit('friendsRequest:get', {
       userId: user.id,

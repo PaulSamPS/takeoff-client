@@ -1,0 +1,38 @@
+.followersWrapper {
+  grid-area: followers;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 10px;
+    row-gap: 20px;
+
+    .request {
+      background: var(--white);
+      border-radius: 11px;
+      padding: 20px;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 50px 1fr auto auto;
+      column-gap: 10px;
+
+      .userName {
+        font-weight: 500;
+        color: var(--grey);
+      }
+
+      .followers {
+        position: relative;
+        cursor: pointer;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
