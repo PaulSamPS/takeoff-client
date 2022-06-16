@@ -8,6 +8,7 @@ import { getChatUser } from '../../redux/actions/chatAction';
 import { useAppDispatch } from '../../hooks/redux';
 import { Toast } from '../../components/Toast/Toast';
 import { Sidebar } from './Sidebar/Sidebar';
+import { useRequest } from '../../hooks/useRequest';
 
 export const Layout = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ export const Layout = () => {
     name: '',
     avatar: '',
   });
+  const { request } = useRequest();
 
   React.useEffect(() => {
     socket.on('message:received', async ({ newMessage }) => {
@@ -40,7 +42,7 @@ export const Layout = () => {
       <div className={styles.wrapper}>
         <Header />
         <div className={styles.main}>
-          <Sidebar />
+          <Sidebar requests={request} />
           <div className={styles.content}>
             <Outlet />
           </div>

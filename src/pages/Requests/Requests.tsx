@@ -3,28 +3,11 @@ import styles from './Requests.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../http/axios';
 import { Button } from '../../components/Button/Button';
-import { useAppSelector } from '../../hooks/redux';
-import { socket } from '../../helpers/socket';
+import { useRequest } from '../../hooks/useRequest';
 
 export const Requests = () => {
-  const { user } = useAppSelector((state) => state.loginReducer);
-  const [request, setRequest] = React.useState<any[]>([]);
-
-  const addFriend = (addFriendUserId: string) => {
-    socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
-  };
-
-  React.useEffect(() => {
-    socket.emit('friendsRequest:get', {
-      userId: user.id,
-    });
-    socket.on('friendsRequest:sent', ({ followersUser }) => {
-      setRequest(followersUser);
-    });
-    socket.on('followings:done', ({ followingsUser }) => {
-      setRequest(followingsUser);
-    });
-  }, []);
+  const { request, addFriend } = useRequest();
+  console.log(request);
 
   return (
     <div className={styles.followersWrapper}>

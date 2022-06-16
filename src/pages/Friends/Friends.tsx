@@ -1,22 +1,11 @@
 import React from 'react';
 import styles from './Friends.module.scss';
-import { socket } from '../../helpers/socket';
-import { useAppSelector } from '../../hooks/redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../http/axios';
+import { useRequest } from '../../hooks/useRequest';
 
 export const Friends = () => {
-  const { user } = useAppSelector((state) => state.loginReducer);
-  const [friends, setFriends] = React.useState<any[]>([]);
-  console.log(friends);
-
-  React.useEffect(() => {
-    socket.emit('friends:get', { userId: user.id });
-    socket.on('friends:set', ({ friendsUser }) => {
-      setFriends(friendsUser);
-    });
-  }, []);
-
+  const { friends } = useRequest();
   return (
     <div className={styles.followersWrapper}>
       <div className={styles.grid}>

@@ -4,7 +4,6 @@ import { useAppSelector } from './redux';
 
 export const useFollow = (id?: string | undefined) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const [friends, setFriends] = React.useState<any[]>([]);
   const [followings, setFollowings] = React.useState<any[]>([]);
   const [followers, setFollowers] = React.useState<any[]>([]);
 
@@ -14,10 +13,6 @@ export const useFollow = (id?: string | undefined) => {
 
   const handleUnfollow = () => {
     socket.emit('unfollow', { userId: id, userToUnfollowId: loginUser.id });
-  };
-
-  const handleAddFriend = (addFriendUserId: string) => {
-    socket.emit('friends:add', { userId: addFriendUserId, userToFriendId: loginUser.id });
   };
 
   React.useEffect(() => {
@@ -32,13 +27,7 @@ export const useFollow = (id?: string | undefined) => {
       setFollowings(followingsUser);
       setFollowers(followersUser);
     });
-  }, [id]);
+  }, [id, followings]);
 
-  React.useEffect(() => {
-    socket.on('friends:sent', ({ userFriends }) => {
-      setFriends(userFriends);
-    });
-  }, []);
-
-  return { friends, followings, followers, handleFollow, handleUnfollow, handleAddFriend };
+  return { followings, followers, handleFollow, handleUnfollow };
 };

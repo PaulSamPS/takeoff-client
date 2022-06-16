@@ -2,24 +2,10 @@ import React from 'react';
 import styles from './Friendslist.module.scss';
 import { CustomLink } from '../../components/CustomLink/CustomLink';
 import { Outlet } from 'react-router-dom';
-import { socket } from '../../helpers/socket';
-import { useAppSelector } from '../../hooks/redux';
+import { useRequest } from '../../hooks/useRequest';
 
 export const FriendsList = () => {
-  const { user } = useAppSelector((state) => state.loginReducer);
-  const [request, setRequest] = React.useState<any[]>([]);
-
-  React.useEffect(() => {
-    socket.emit('friendsRequest:get', {
-      userId: user.id,
-    });
-    socket.on('friendsRequest:sent', ({ followersUser }) => {
-      setRequest(followersUser);
-    });
-    socket.on('followings:done', ({ followingsUser }) => {
-      setRequest(followingsUser);
-    });
-  }, []);
+  const { request } = useRequest();
 
   return (
     <div className={styles.wrapper}>
