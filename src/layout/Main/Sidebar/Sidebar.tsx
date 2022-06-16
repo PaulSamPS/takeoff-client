@@ -37,8 +37,11 @@ export const Sidebar = () => {
           <div className={styles.unreadMessages}>{user.countUnreadMessages}</div>
         )}
       </CustomLink>
-      <CustomLink to={'followers'}>
+      <CustomLink to={'friends'}>
         <FriendsIcon /> Друзья <div className={styles.requestFriends}>{request.length}</div>
+      </CustomLink>
+      <CustomLink to='requests' className={styles.name}>
+        Заявки в друзья <div>{request.length}</div>
       </CustomLink>
       <CustomLink to={'people'}>
         <PeopleSearchIcon /> Люди
