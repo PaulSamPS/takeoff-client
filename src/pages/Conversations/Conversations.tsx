@@ -12,6 +12,7 @@ interface IChats {
   lastMessage: string;
   messagesWith: string;
   name: string;
+  countUnreadMessages: number;
 }
 
 export const Conversations = () => {
@@ -19,6 +20,7 @@ export const Conversations = () => {
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
   const [search, setSearch] = React.useState<string>('');
+  console.log(chats);
 
   const filteredChats = React.useMemo(() => {
     if (search.length < 2) {
@@ -57,6 +59,7 @@ export const Conversations = () => {
               <p onClick={() => navigateToChat(chat.messagesWith)}>{chat.lastMessage}</p>
             </div>
             <span>{calculateTime(chat.date)}</span>
+            <div>{chat.countUnreadMessages}</div>
           </div>
         ))}
     </div>

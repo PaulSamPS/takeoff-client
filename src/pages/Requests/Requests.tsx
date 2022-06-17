@@ -7,7 +7,6 @@ import { useRequest } from '../../hooks/useRequest';
 
 export const Requests = () => {
   const { request, addFriend } = useRequest();
-  console.log(request);
 
   return (
     <div className={styles.followersWrapper}>

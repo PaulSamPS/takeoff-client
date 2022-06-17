@@ -25,3 +25,11 @@ export const getConversations = (id: string | null) => async (dispatch: AppDispa
       dispatch(conversationReducer.actions.setError(e.response?.data.message));
     });
 };
+
+export const setMessagesRead = (userId: string, id: string | undefined | null) => async () => {
+  try {
+    await $apiAuth.post(`api/chat/messages-read/${userId}`, { id });
+  } catch (e) {
+    console.log(e);
+  }
+};

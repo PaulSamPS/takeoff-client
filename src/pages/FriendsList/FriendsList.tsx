@@ -14,7 +14,7 @@ export const FriendsList = () => {
           Друзья
         </CustomLink>
         <CustomLink to='requests' className={styles.name}>
-          Заявки в друзья <div>{request.length}</div>
+          Заявки в друзья {request.length > 0 && <div>{request.length}</div>}
         </CustomLink>
       </div>
       <div className={styles.main}>

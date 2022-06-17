@@ -54,6 +54,7 @@ interface IChatToBoSent {
     avatar: string;
     lastMessage: string;
     date: string;
+    countUnreadMessages: number;
   };
 }
 

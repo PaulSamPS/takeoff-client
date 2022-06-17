@@ -4,10 +4,11 @@ import styles from './Message.module.scss';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
 import { useChat } from '../../hooks/useChat';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { setMessagesRead } from '../../redux/actions/chatAction';
 
 interface IMessage {
   senderName: string;
@@ -27,6 +28,8 @@ export const Message = (): JSX.Element => {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const usersOnline = users.map((user: any) => user.userId);
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
@@ -38,12 +41,16 @@ export const Message = (): JSX.Element => {
     sendMessage(text);
     setText('');
   };
-  console.log(messages);
+
   React.useEffect(() => {
     bottomRef.current?.scrollIntoView({
       behavior: 'smooth',
     });
   }, [messages]);
+
+  React.useEffect(() => {
+    dispatch(setMessagesRead(user.id, id));
+  }, []);
 
   return (
     <div className={styles.wrapper}>
