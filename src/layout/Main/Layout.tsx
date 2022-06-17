@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Toast } from '../../components/Toast/Toast';
 import { Sidebar } from './Sidebar/Sidebar';
 import { useRequest } from '../../hooks/useRequest';
+import { useChat } from '../../hooks/useChat';
 
 export const Layout = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -20,6 +21,7 @@ export const Layout = () => {
     avatar: '',
   });
   const { request } = useRequest();
+  const { chats } = useChat();
 
   React.useEffect(() => {
     socket.on('message:received', async ({ newMessage }) => {
@@ -37,14 +39,15 @@ export const Layout = () => {
         document.title = `Новое сообщение от ${user?.name}`;
       }
     });
-  }, [newMessageReceived]);
+    console.log('reload');
+  }, []);
 
   return (
     <>
       <div className={styles.wrapper}>
         <Header />
         <div className={styles.main}>
-          <Sidebar requests={request} />
+          <Sidebar requests={request} chats={chats} />
           <div className={styles.content}>
             <Outlet />
           </div>

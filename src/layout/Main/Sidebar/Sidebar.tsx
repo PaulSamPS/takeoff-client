@@ -6,16 +6,13 @@ import { ReactComponent as HomeIcon } from '../../../helpers/icons/home.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
 import { ReactComponent as PeopleSearchIcon } from '../../../helpers/icons/searchPeople.svg';
 import { SidebarProps } from './Sidebar.props';
-import { useChat } from '../../../hooks/useChat';
 
-export const Sidebar = ({ requests }: SidebarProps) => {
-  const { chats } = useChat();
+export const Sidebar = ({ requests, chats }: SidebarProps) => {
   const totalUnreadMessages = chats
     .map((chat: any) => chat.countUnreadMessages)
     .reduce(function (sum: number, elem: number) {
       return sum + elem;
     }, 0);
-
   return (
     <div className={styles.wrapper}>
       <CustomLink to={'/main'}>

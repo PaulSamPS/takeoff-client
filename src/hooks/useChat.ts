@@ -112,7 +112,7 @@ export const useChat = () => {
       setMessages([]);
       openChatId.current = _id;
     });
-  }, []);
+  }, [chats]);
 
   const sendMessage = (message: string) => {
     socket.emit('message:add', {
@@ -172,7 +172,7 @@ export const useChat = () => {
         }
       }
     });
-  }, []);
+  }, [dispatch]);
 
-  return { users, user, messages, bannerData, sendMessage, chats };
+  return { users, user, messages, bannerData, sendMessage, chats, setChats };
 };
