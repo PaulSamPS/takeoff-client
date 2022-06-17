@@ -18,6 +18,7 @@ export const Header = () => {
     socket.emit('logout', { userId: user.id });
     dispatch(logout());
     navigate('/');
+    socket.off();
   };
 
   const navigateToProfile = () => {

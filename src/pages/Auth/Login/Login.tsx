@@ -9,6 +9,7 @@ import { Spinner } from '../../../components/Spinner/Spinner';
 import { Button } from '../../../components/Button/Button';
 import styles from '../Auth.module.scss';
 import { login } from '../../../redux/actions/authAction';
+import { socket } from '../../../helpers/socket';
 
 export const Login = (): JSX.Element => {
   const {
@@ -26,12 +27,6 @@ export const Login = (): JSX.Element => {
   };
 
   const onSubmit = async (formData: ILoginForm) => {
-    // socket.emit('login', { name: formData.name, password: formData.password });
-    //
-    // socket.once('login:success', ({ accessToken, user }: IResponseUser) => {
-    //   dispatch(setSuccess(user));
-    //   localStorage.setItem('AccessToken', 'Bearer ' + accessToken);
-    // });
     dispatch(login(formData)).then(() => {
       if (localStorage.getItem('AccessToken')) {
         navigate('/main');

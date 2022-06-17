@@ -35,6 +35,7 @@ export const UserInfo = () => {
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const { followings, handleFollow, handleUnfollow } = useFollow(id);
   const { friends } = useRequest();
+  const friendsDone = friends.map((f) => f.id);
 
   const sendMessageModal = () => {
     if (typeof id === 'string') {
@@ -105,7 +106,7 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {loginUser.id !== id && friends.includes(id) && (
+        {loginUser.id !== id && !friendsDone.includes(id) && (
           <div className={styles.follow}>
             {followings.find((i) => i.id === loginUser.id) ? (
               <Button appearance='primary' onClick={handleUnfollow}>

@@ -20,7 +20,6 @@ export const Conversations = () => {
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
   const [search, setSearch] = React.useState<string>('');
-  console.log(chats);
 
   const filteredChats = React.useMemo(() => {
     if (search.length < 2) {
@@ -58,8 +57,12 @@ export const Conversations = () => {
               <h3>{chat.name}</h3>
               <p onClick={() => navigateToChat(chat.messagesWith)}>{chat.lastMessage}</p>
             </div>
-            <span>{calculateTime(chat.date)}</span>
-            <div>{chat.countUnreadMessages}</div>
+            <div className={styles.right}>
+              {chat.countUnreadMessages > 0 && (
+                <div className={styles.unreadMessages}>{chat.countUnreadMessages}</div>
+              )}
+              <span>{calculateTime(chat.date)}</span>
+            </div>
           </div>
         ))}
     </div>
