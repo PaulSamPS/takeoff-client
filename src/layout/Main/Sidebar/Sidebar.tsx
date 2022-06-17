@@ -5,11 +5,16 @@ import { ReactComponent as MessagesIcon } from '../../../helpers/icons/chat.svg'
 import { ReactComponent as HomeIcon } from '../../../helpers/icons/home.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
 import { ReactComponent as PeopleSearchIcon } from '../../../helpers/icons/searchPeople.svg';
-import { useAppSelector } from '../../../hooks/redux';
 import { SidebarProps } from './Sidebar.props';
+import { useChat } from '../../../hooks/useChat';
 
 export const Sidebar = ({ requests }: SidebarProps) => {
-  const { user } = useAppSelector((state) => state.loginReducer);
+  const { chats } = useChat();
+  const totalUnreadMessages = chats
+    .map((chat: any) => chat.countUnreadMessages)
+    .reduce(function (sum: number, elem: number) {
+      return sum + elem;
+    }, 0);
 
   return (
     <div className={styles.wrapper}>
@@ -18,8 +23,8 @@ export const Sidebar = ({ requests }: SidebarProps) => {
       </CustomLink>
       <CustomLink to={'conversations'}>
         <MessagesIcon /> Сообщения
-        {user.countUnreadMessages > 0 && (
-          <div className={styles.unreadMessages}>{user.countUnreadMessages}</div>
+        {totalUnreadMessages > 0 && (
+          <div className={styles.unreadMessages}>{totalUnreadMessages}</div>
         )}
       </CustomLink>
       <CustomLink to={'friends'}>

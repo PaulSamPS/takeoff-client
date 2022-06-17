@@ -33,3 +33,11 @@ export const setMessagesRead = (userId: string, id: string | undefined | null) =
     console.log(e);
   }
 };
+
+export const setMessagesUnread = (userId: string, id: string | undefined | null) => async () => {
+  try {
+    await $apiAuth.post(`api/chat/messages-unread/${userId}`, { id });
+  } catch (e) {
+    console.log(e);
+  }
+};

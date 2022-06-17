@@ -4,13 +4,14 @@ import { Footer } from './Footer/Footer';
 import styles from './Layout.module.scss';
 import React from 'react';
 import { socket } from '../../helpers/socket';
-import { getChatUser } from '../../redux/actions/chatAction';
-import { useAppDispatch } from '../../hooks/redux';
+import { getChatUser, setMessagesUnread } from '../../redux/actions/chatAction';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Toast } from '../../components/Toast/Toast';
 import { Sidebar } from './Sidebar/Sidebar';
 import { useRequest } from '../../hooks/useRequest';
 
 export const Layout = () => {
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const dispatch = useAppDispatch();
   const [newMessageReceived, setNewMessageReceived] = React.useState<any>(null);
   const [newMessageModal, showNewMessageModal] = React.useState(false);
@@ -25,6 +26,7 @@ export const Layout = () => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
         setBannerData({ name: user?.name, avatar: user?.avatar });
+        dispatch(setMessagesUnread(loginUser.id, user?.id));
 
         setNewMessageReceived({
           ...newMessage,
@@ -35,7 +37,7 @@ export const Layout = () => {
         document.title = `Новое сообщение от ${user?.name}`;
       }
     });
-  }, []);
+  }, [newMessageReceived]);
 
   return (
     <>
