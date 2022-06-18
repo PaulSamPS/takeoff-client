@@ -23,7 +23,7 @@ interface IMessage {
 export const Message = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
-  const { sendMessage, messages, bannerData, users } = useChat();
+  const { sendMessage, messages, bannerData, users, deleteMessage } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
@@ -57,7 +57,7 @@ export const Message = (): JSX.Element => {
       <form onSubmit={onSubmit} className={styles.grid}>
         <div className={styles.chat}>
           {messages.map((m: IMessage, index) => (
-            <div key={index} className={styles.messages}>
+            <div key={index} className={styles.messages} onClick={() => deleteMessage(m._id)}>
               {user.id == m.sender ? (
                 <>
                   <div className={styles.messageBlock}>

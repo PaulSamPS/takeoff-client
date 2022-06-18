@@ -172,7 +172,19 @@ export const useChat = () => {
         }
       }
     });
-  }, [dispatch]);
+  }, []);
 
-  return { users, user, messages, bannerData, sendMessage, chats, setChats };
+  const deleteMessage = (messageId: string) => {
+    socket.emit('message:delete', {
+      userId: user.id,
+      messagesWith: _id,
+      messageId,
+    });
+
+    socket.on('message:deleted', () => {
+      setMessages((prev) => prev.filter((message) => message._id !== messageId));
+    });
+  };
+
+  return { users, user, messages, bannerData, sendMessage, chats, setChats, deleteMessage };
 };
