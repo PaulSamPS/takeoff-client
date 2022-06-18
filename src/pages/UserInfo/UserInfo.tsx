@@ -93,19 +93,19 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {!friendsDone.includes(id) && !followingDone.includes(id) && !requestsDone.includes(id) && (
-          <div className={styles.follow}>
-            {followings.find((i) => i.id === loginUser.id) ? (
-              <Button appearance='primary' onClick={handleUnfollow}>
-                Отписаться
-              </Button>
-            ) : (
-              <Button appearance='primary' onClick={handleFollow}>
-                Подписаться
-              </Button>
-            )}
-          </div>
-        )}
+        <div className={styles.follow}>
+          {!friendsDone.includes(id) && !followingDone.includes(id) && requestsDone.includes(id) ? (
+            <Button appearance='primary'>Добавить в друзья</Button>
+          ) : followings.find((i) => i.id === loginUser.id) ? (
+            <Button appearance='primary' onClick={handleUnfollow}>
+              Отписаться
+            </Button>
+          ) : (
+            <Button appearance='primary' onClick={handleFollow}>
+              Подписаться
+            </Button>
+          )}
+        </div>
 
         <div className={styles.followersWrapper}>
           <div className={styles.name}>Подписчики {followings.length}</div>
