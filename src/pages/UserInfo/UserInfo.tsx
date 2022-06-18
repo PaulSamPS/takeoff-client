@@ -13,8 +13,6 @@ import { Input } from '../../components/Input/Input';
 import { useAppSelector } from '../../hooks/redux';
 import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
-import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
-import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
 import { useFollow } from '../../hooks/useFollow';
 import { useRequest } from '../../hooks/useRequest';
 
@@ -34,10 +32,10 @@ export const UserInfo = () => {
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const { followings, handleFollow, handleUnfollow } = useFollow(id);
-  const { request } = useRequest();
-  const friendsDone = request.map((f) => f.id);
-  const followingDone = followings.map((f) => f.id);
-  console.log(followingDone, friendsDone);
+  const { friends, request } = useRequest();
+  const friendsDone = friends.map((friend) => friend.id);
+  const requestsDone = request.map((request) => request.id);
+  const followingDone = followings.map((following) => following.id);
 
   const sendMessageModal = () => {
     if (typeof id === 'string') {
@@ -72,19 +70,6 @@ export const UserInfo = () => {
             src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
             alt={user?.name}
           />
-          {loginUser.id === id && (
-            <>
-              {loginUser.avatar == null ? (
-                <div className={styles.uploadAvatar} onClick={() => setModal(true)}>
-                  <AddAvatarIcon />
-                </div>
-              ) : (
-                <div className={styles.uploadAvatar} onClick={() => setRemoveAvatarModal(true)}>
-                  <DeleteAvatarIcon />
-                </div>
-              )}
-            </>
-          )}
         </div>
         <div className={styles.bio}>
           {usersOnline.includes(id) ? (
@@ -108,7 +93,7 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {!friendsDone.includes(id) && !followingDone.includes(id) && (
+        {!friendsDone.includes(id) && !followingDone.includes(id) && !requestsDone.includes(id) && (
           <div className={styles.follow}>
             {followings.find((i) => i.id === loginUser.id) ? (
               <Button appearance='primary' onClick={handleUnfollow}>

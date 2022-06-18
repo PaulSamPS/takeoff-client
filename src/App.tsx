@@ -37,11 +37,11 @@ export const App = () => {
         >
           <Route index element={<Main />} />
           <Route path='profile' element={<Profile />} />
-          <Route path='user-info/:id' element={<UserInfo />} />
           <Route path='dialogs/:name' element={<Dialogs />} />
           <Route path='conversations/:id' element={<Message />} />
           <Route path='conversations' element={<Conversations />} />
           <Route path='people' element={<People />} />
+          <Route path='people/:id' element={<UserInfo />} />
           <Route path='friends' element={<FriendsList />}>
             <Route index element={<Friends />} />
             <Route path='requests' element={<Requests />} />

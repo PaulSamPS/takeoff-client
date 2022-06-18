@@ -43,7 +43,6 @@ export const Conversations = () => {
   return (
     <div className={styles.wrapper}>
       <Search setSearch={setSearch} search={search} />
-      {filteredChats.length == 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
       {filteredChats &&
         filteredChats.map((chat: IChats, index: number) => (
           <div key={index} className={styles.conversation}>
@@ -70,6 +69,7 @@ export const Conversations = () => {
             </div>
           </div>
         ))}
+      {filteredChats.length <= 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
     </div>
   );
 };

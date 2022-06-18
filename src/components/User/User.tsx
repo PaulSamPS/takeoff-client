@@ -39,7 +39,7 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        onClick={() => navigate(`user-info/${user._id}`)}
+        onClick={() => navigate(`${user._id}`)}
       >
         <div className={styles.avatar}>
           <div className={styles.img}>
