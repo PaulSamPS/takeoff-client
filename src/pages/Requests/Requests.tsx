@@ -6,7 +6,7 @@ import { Button } from '../../components/Button/Button';
 import { useRequest } from '../../hooks/useRequest';
 
 export const Requests = () => {
-  const { request, addFriend } = useRequest();
+  const { request, addFriend, rejectFriend } = useRequest();
 
   return (
     <div className={styles.followersWrapper}>
@@ -28,7 +28,11 @@ export const Requests = () => {
               >
                 Принять
               </Button>
-              <Button appearance='transparent' className={styles.done}>
+              <Button
+                appearance='transparent'
+                className={styles.done}
+                onClick={() => rejectFriend(f.id)}
+              >
                 Отклонить
               </Button>
             </div>

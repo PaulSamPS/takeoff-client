@@ -36,6 +36,7 @@ export const UserInfo = () => {
   const { followings, handleFollow, handleUnfollow } = useFollow(id);
   const { friends } = useRequest();
   const friendsDone = friends.map((f) => f.id);
+  const followingDone = followings.map((f) => f.id);
 
   const sendMessageModal = () => {
     if (typeof id === 'string') {
@@ -106,7 +107,7 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {loginUser.id !== id && !friendsDone.includes(id) && (
+        {loginUser.id !== id && !friendsDone.includes(id) && !followingDone.includes(id) && (
           <div className={styles.follow}>
             {followings.find((i) => i.id === loginUser.id) ? (
               <Button appearance='primary' onClick={handleUnfollow}>

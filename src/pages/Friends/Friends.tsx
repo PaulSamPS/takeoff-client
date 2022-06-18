@@ -9,7 +9,7 @@ export const Friends = () => {
   return (
     <div className={styles.followersWrapper}>
       <div className={styles.grid}>
-        {friends.length > 0 &&
+        {friends.length > 0 ? (
           friends.map((f) => (
             <div className={styles.request} key={f.id}>
               <Link to={`/main/user-info/${f.id}`} replace className={styles.followers}>
@@ -20,7 +20,10 @@ export const Friends = () => {
               </Link>
               <span className={styles.userName}>{f.name}</span>
             </div>
-          ))}
+          ))
+        ) : (
+          <h3>Пока друзей нет</h3>
+        )}
       </div>
     </div>
   );

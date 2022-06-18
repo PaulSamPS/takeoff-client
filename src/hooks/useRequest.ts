@@ -11,6 +11,10 @@ export const useRequest = () => {
     socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
   };
 
+  const rejectFriend = (rejectFriendUserId: string) => {
+    socket.emit('friends:reject', { userId: user.id, userToRejectId: rejectFriendUserId });
+  };
+
   React.useEffect(() => {
     socket.emit('friendsRequest:get', {
       userId: user.id,
@@ -27,5 +31,5 @@ export const useRequest = () => {
     });
   }, []);
 
-  return { addFriend, request, friends };
+  return { addFriend, rejectFriend, request, friends };
 };
