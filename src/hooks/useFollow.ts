@@ -27,7 +27,7 @@ export const useFollow = (id?: string | undefined) => {
       setFollowings(followingsUser);
       setFollowers(followersUser);
     });
-  }, [id, followings, followers]);
+  }, [id, followings]);
 
   return { followings, followers, handleFollow, handleUnfollow };
 };

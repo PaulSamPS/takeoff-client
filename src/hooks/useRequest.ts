@@ -8,7 +8,7 @@ export const useRequest = () => {
   const [friends, setFriends] = React.useState<any[]>([]);
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
 
-  const addFriend = (addFriendUserId: string) => {
+  const addFriend = (addFriendUserId: string | undefined) => {
     socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
   };
 
