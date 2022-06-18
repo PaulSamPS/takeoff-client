@@ -16,6 +16,7 @@ import { UserInfo } from './pages/UserInfo/UserInfo';
 import { Friends } from './pages/Friends/Friends';
 import { Requests } from './pages/Requests/Requests';
 import { FriendsList } from './pages/FriendsList/FriendsList';
+import { People } from './pages/People/People';
 
 export const App = () => {
   return (
@@ -40,6 +41,7 @@ export const App = () => {
           <Route path='dialogs/:name' element={<Dialogs />} />
           <Route path='conversations/:id' element={<Message />} />
           <Route path='conversations' element={<Conversations />} />
+          <Route path='people' element={<People />} />
           <Route path='friends' element={<FriendsList />}>
             <Route index element={<Friends />} />
             <Route path='requests' element={<Requests />} />

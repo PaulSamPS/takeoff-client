@@ -11,7 +11,7 @@ export const Requests = () => {
   return (
     <div className={styles.followersWrapper}>
       <div className={styles.grid}>
-        {request.length > 0 &&
+        {request.length > 0 ? (
           request.map((f) => (
             <div className={styles.request} key={f.id}>
               <Link to={`/main/user-info/${f.id}`} replace className={styles.followers}>
@@ -36,7 +36,10 @@ export const Requests = () => {
                 Отклонить
               </Button>
             </div>
-          ))}
+          ))
+        ) : (
+          <h3>Пока нет запросов</h3>
+        )}
       </div>
     </div>
   );
