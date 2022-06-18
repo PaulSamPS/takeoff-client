@@ -80,6 +80,8 @@ export const useChat = () => {
   });
   const openChatId = React.useRef<string | null>('');
   const [chats, setChats] = React.useState<any>(conversation);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     socket.emit('user:add', { userId: user.id });
@@ -91,6 +93,7 @@ export const useChat = () => {
   React.useEffect(() => {
     socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
       setChats(chatsToBeSent);
+      setLoading(false);
     });
 
     socket.emit('messages:get', {
@@ -106,6 +109,7 @@ export const useChat = () => {
         avatar: chat.messagesWith.avatar,
       });
       openChatId.current = chat.messagesWith._id;
+      setLoadingMessages(false);
     });
 
     socket.on('chat:notFound', () => {
@@ -186,5 +190,16 @@ export const useChat = () => {
     });
   };
 
-  return { users, user, messages, bannerData, sendMessage, chats, setChats, deleteMessage };
+  return {
+    users,
+    user,
+    messages,
+    bannerData,
+    sendMessage,
+    chats,
+    setChats,
+    deleteMessage,
+    loading,
+    loadingMessages,
+  };
 };

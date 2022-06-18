@@ -5,6 +5,7 @@ import styles from './Conversations.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Search } from '../../components/Search/Search';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 interface IChats {
   avatar: string | null;
@@ -16,7 +17,7 @@ interface IChats {
 }
 
 export const Conversations = () => {
-  const { chats, users } = useChat();
+  const { chats, users, loading } = useChat();
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
   const [search, setSearch] = React.useState<string>('');
@@ -34,6 +35,10 @@ export const Conversations = () => {
     localStorage.setItem('id', id);
     navigate(`${id}`);
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.wrapper}>

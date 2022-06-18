@@ -6,6 +6,7 @@ export const useRequest = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [request, setRequest] = React.useState<any[]>([]);
   const [friends, setFriends] = React.useState<any[]>([]);
+  const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
 
   const addFriend = (addFriendUserId: string) => {
     socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
@@ -28,8 +29,9 @@ export const useRequest = () => {
     socket.emit('friends:get', { userId: user.id });
     socket.on('friends:set', ({ friendsUser }) => {
       setFriends(friendsUser);
+      setLoadingFriends(false);
     });
   }, []);
 
-  return { addFriend, rejectFriend, request, friends };
+  return { addFriend, rejectFriend, request, friends, loadingFriends };
 };

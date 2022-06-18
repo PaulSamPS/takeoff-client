@@ -3,9 +3,15 @@ import styles from './Friends.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../http/axios';
 import { useRequest } from '../../hooks/useRequest';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const Friends = () => {
-  const { friends } = useRequest();
+  const { friends, loadingFriends } = useRequest();
+
+  if (loadingFriends) {
+    return <Spinner />;
+  }
+
   return (
     <div className={styles.followersWrapper}>
       <div className={styles.grid}>

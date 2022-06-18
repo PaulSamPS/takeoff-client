@@ -9,6 +9,7 @@ import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { setMessagesRead } from '../../redux/actions/chatAction';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 interface IMessage {
   senderName: string;
@@ -23,7 +24,7 @@ interface IMessage {
 export const Message = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
-  const { sendMessage, messages, bannerData, users, deleteMessage } = useChat();
+  const { sendMessage, messages, bannerData, users, deleteMessage, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
@@ -51,6 +52,10 @@ export const Message = (): JSX.Element => {
   React.useEffect(() => {
     dispatch(setMessagesRead(user.id, id));
   }, []);
+
+  if (loadingMessages) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.wrapper}>
