@@ -32,7 +32,7 @@ export const UserInfo = () => {
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const { followings, handleFollow, handleUnfollow } = useFollow(id);
-  const { friends, request, addFriend } = useRequest();
+  const { friends, request, addFriend, friendsUserInfo } = useRequest();
   const friendsDone = friends.map((friend) => friend.id);
   const requestsDone = request.map((request) => request.id);
   const followingDone = followings.map((following) => following.id);
@@ -112,10 +112,10 @@ export const UserInfo = () => {
         )}
 
         <div className={styles.followersWrapper}>
-          <div className={styles.name}>Подписчики {followings.length}</div>
+          <div className={styles.name}>Друзья {friendsUserInfo.length}</div>
           <div className={styles.grid}>
-            {followings.length > 0 &&
-              followings.map((f) => (
+            {friendsUserInfo &&
+              friendsUserInfo.map((f) => (
                 <Link
                   to={`/main/user-info/${f.id}`}
                   replace

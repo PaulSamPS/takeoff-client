@@ -27,6 +27,11 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const statusOnline = users.map((user: any) => user.userId);
   const navigate = useNavigate();
 
+  const handleNavigateToUserInfo = () => {
+    navigate(`${user._id}`);
+    localStorage.setItem('userInfoId', user._id);
+  };
+
   const handleDelete = () => {
     setDeleteUser(true);
     setRemoveAvatarModal(true);
@@ -39,7 +44,7 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        onClick={() => navigate(`${user._id}`)}
+        onClick={handleNavigateToUserInfo}
       >
         <div className={styles.avatar}>
           <div className={styles.img}>

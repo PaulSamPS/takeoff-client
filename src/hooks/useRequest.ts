@@ -7,6 +7,8 @@ export const useRequest = () => {
   const [request, setRequest] = React.useState<any[]>([]);
   const [friends, setFriends] = React.useState<any[]>([]);
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
+  const [friendsUserInfo, setFriendsUserInfo] = React.useState<any[]>([]);
+  const id = localStorage.getItem('userInfoId');
 
   const addFriend = (addFriendUserId: string | undefined) => {
     socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
@@ -31,7 +33,13 @@ export const useRequest = () => {
       setFriends(friendsUser);
       setLoadingFriends(false);
     });
+    socket.emit('friendsUserInfo:get', { userId: id });
+    socket.on('friendsUserInfo:set', ({ friendsUser }) => {
+      setFriendsUserInfo(friendsUser);
+    });
   }, []);
 
-  return { addFriend, rejectFriend, request, friends, loadingFriends };
+  console.log(friendsUserInfo);
+
+  return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };
