@@ -93,7 +93,7 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {!friendsDone.includes(id) && (
+        {!friendsDone.includes(id) ? (
           <div className={styles.follow}>
             {!followingDone.includes(id) && requestsDone.includes(id) ? (
               <Button appearance='primary' onClick={() => addFriend(id)}>
@@ -108,6 +108,10 @@ export const UserInfo = () => {
                 Подписаться
               </Button>
             )}
+          </div>
+        ) : (
+          <div className={styles.follow}>
+            <Button appearance='primary'>Удалить из друзей</Button>
           </div>
         )}
 
