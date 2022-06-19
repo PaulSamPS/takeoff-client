@@ -2,19 +2,46 @@ import { useAppSelector } from './redux';
 import React from 'react';
 import { socket } from '../helpers/socket';
 
-export const useRequest = () => {
+interface IUser {
+  id: string | undefined;
+  name: string;
+  email: string;
+  position: string;
+  level: string;
+  role: string;
+  avatar: string;
+}
+
+interface IRequest {
+  followingsUser: IUser[];
+}
+
+interface IFriends {
+  friendsUser: IUser[];
+}
+
+interface IReturn {
+  request: IUser[];
+  friends: IUser[];
+  loadingFriends: boolean;
+  friendsUserInfo: IUser[];
+  addFriend: (id: string | undefined) => void;
+  rejectFriend: (id: string | undefined) => void;
+}
+
+export const useRequest = (): IReturn => {
   const { user } = useAppSelector((state) => state.loginReducer);
-  const [request, setRequest] = React.useState<any[]>([]);
-  const [friends, setFriends] = React.useState<any[]>([]);
+  const [request, setRequest] = React.useState<IUser[]>([]);
+  const [friends, setFriends] = React.useState<IUser[]>([]);
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
-  const [friendsUserInfo, setFriendsUserInfo] = React.useState<any[]>([]);
+  const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
   const id = localStorage.getItem('userInfoId');
 
   const addFriend = (addFriendUserId: string | undefined) => {
     socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
   };
 
-  const rejectFriend = (rejectFriendUserId: string) => {
+  const rejectFriend = (rejectFriendUserId: string | undefined) => {
     socket.emit('friends:reject', { userId: user.id, userToRejectId: rejectFriendUserId });
   };
 
@@ -22,24 +49,22 @@ export const useRequest = () => {
     socket.emit('friendsRequest:get', {
       userId: user.id,
     });
-    socket.on('friendsRequest:sent', ({ followingsUser }) => {
+    socket.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
     });
   }, [request]);
 
   React.useEffect(() => {
     socket.emit('friends:get', { userId: user.id });
-    socket.on('friends:set', ({ friendsUser }) => {
+    socket.on('friends:set', ({ friendsUser }: IFriends) => {
       setFriends(friendsUser);
       setLoadingFriends(false);
     });
     socket.emit('friendsUserInfo:get', { userId: id });
-    socket.on('friendsUserInfo:set', ({ friendsUser }) => {
+    socket.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
       setFriendsUserInfo(friendsUser);
     });
   }, []);
-
-  console.log(friendsUserInfo);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };
