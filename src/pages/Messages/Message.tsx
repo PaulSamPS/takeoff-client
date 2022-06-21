@@ -24,13 +24,14 @@ interface IMessage {
 export const Message = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
-  const { sendMessage, messages, bannerData, users, deleteMessage, loadingMessages } = useChat();
+  const { sendMessage, messages, bannerData, users, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const usersOnline = users.map((user: any) => user.userId);
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  console.log(messages);
 
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
@@ -62,7 +63,7 @@ export const Message = (): JSX.Element => {
       <form onSubmit={onSubmit} className={styles.grid}>
         <div className={styles.chat}>
           {messages.map((m: IMessage, index) => (
-            <div key={index} className={styles.messages} onClick={() => deleteMessage(m._id)}>
+            <div key={index} className={styles.messages}>
               {user.id == m.sender ? (
                 <>
                   <div className={styles.messageBlock}>
@@ -75,8 +76,10 @@ export const Message = (): JSX.Element => {
                       />
                       {usersOnline.includes(m.sender) && <div className={styles.online} />}
                     </div>
-                    <span className={styles.userName}>{user.name}</span>
-                    <span className={styles.time}>{calculateTime(m.date)}</span>
+                    <div className={styles.name}>
+                      <span className={styles.userName}>{user.name}</span>
+                      <span className={styles.time}>{calculateTime(m.date)}</span>
+                    </div>
                     <p className={styles.text}>{m.message}</p>
                   </div>
                 </>
@@ -94,13 +97,14 @@ export const Message = (): JSX.Element => {
                       />
                       {usersOnline.includes(m.sender) && <div className={styles.online} />}
                     </Link>
-                    <span className={styles.userName}>{bannerData.name}</span>
-                    <span className={styles.time}>{calculateTime(m.date)}</span>
+                    <div className={styles.name}>
+                      <span className={styles.userName}>{bannerData.name}</span>
+                      <span className={styles.time}>{calculateTime(m.date)}</span>
+                    </div>
                     <p className={styles.text}>{m.message}</p>
                   </div>
                 </>
               )}
-              <p ref={bottomRef} />
             </div>
           ))}
         </div>

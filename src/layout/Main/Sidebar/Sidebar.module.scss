@@ -1,31 +1,30 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
+	display: flex;
+	flex-direction: column;
 
-  .unreadMessages {
-    background: var(--blue);
-    color: var(--white);
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    line-height: 0;
-  }
+	.unreadMessages {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		color: var(--white);
+		font-size: 12px;
+		line-height: 0;
+		background: var(--blue);
+		border-radius: 50%;
+	}
 
-  .requestFriends {
-    background: var(--blue);
-    color: var(--white);
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    line-height: 0;
-  }
+	.requestFriends {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 20px;
+		height: 20px;
+		color: var(--white);
+		font-size: 12px;
+		line-height: 0;
+		background: var(--blue);
+		border-radius: 50%;
+	}
 }

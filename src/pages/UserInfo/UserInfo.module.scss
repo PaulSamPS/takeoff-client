@@ -1,112 +1,112 @@
 @import "./src/scss/index";
 
 .container {
+	.wrapper {
+		display: grid;
+		grid-template-areas:
+			"avatar bio"
+			"message ."
+			"follow ."
+			"followers .";
+		grid-template-columns: 300px 1fr;
+		padding: 20px;
+		column-gap: 40px;
+		background: var(--white);
+		border-radius: 11px;
+		row-gap: 20px;
 
-  .wrapper {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 11px;
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    column-gap: 40px;
-    row-gap: 20px;
-    grid-template-areas:
-      'avatar bio'
-    'message .'
-    'follow .'
-    'followers .'
-  ;
+		.avatar {
+			position: relative;
+			grid-area: avatar;
+			width: 300px;
+			height: 300px;
 
-    .avatar {
-      width: 300px;
-      height: 300px;
-      position: relative;
-      grid-area: avatar;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 11px;
+				//box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%);
+			}
+		}
 
-      img{
-      border-radius: 11px;
-        //box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
+		.bio {
+			display: flex;
+			flex-direction: column;
+			grid-area: bio;
+			row-gap: 20px;
 
-    .bio {
-      display: flex;
-      flex-direction: column;
-      row-gap: 20px;
-      grid-area: bio;
+			.online {
+				position: relative;
 
-      .online {
-        position: relative;
+				.green {
+					position: absolute;
+					top: 5px;
+					left: 55px;
+					width: 10px;
+					height: 10px;
+					background: var(--green);
+					border-radius: 50%;
+				}
+			}
 
-        .green {
-          position: absolute;
-          left: 55px;
-          top: 5px;
-          background: var(--green);
-          border-radius: 50%;
-          width: 10px;
-          height: 10px;
-        }
-      }
+			.lastVisit {
+				color: var(--grey);
+			}
+		}
 
-      .lastVisit {
-        color: var(--grey);
-      }
-    }
+		.message {
+			grid-area: message;
+		}
 
-    .message {
-      grid-area: message;
-    }
+		.follow {
+			grid-area: follow;
 
-    .follow {
-      grid-area: follow;
-      button {
-        width: 100%;
-      }
-    }
+			button {
+				width: 100%;
+			}
+		}
 
-    .followersWrapper {
-      grid-area: followers;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-areas: 'name' 'grid';
-      row-gap: 20px;
+		.followersWrapper {
+			display: grid;
+			grid-area: followers;
+			grid-template-areas: "name" "grid";
+			grid-template-columns: 1fr;
+			row-gap: 20px;
 
-      .name {
-        grid-area: name;
-        color: var(--grey);
-      }
+			.name {
+				grid-area: name;
+				color: var(--grey);
+			}
 
-     .grid {
-       grid-area: grid;
-       display: grid;
-       grid-template-columns: repeat(5, 52px);
-       column-gap: 10px;
+			.grid {
+				display: grid;
+				grid-area: grid;
+				grid-template-columns: repeat(5, 52px);
+				column-gap: 10px;
 
-       .followers {
-         position: relative;
-         cursor: pointer;
-         img {
-           width: 50px;
-           height: 50px;
-           border-radius: 50%;
-           object-fit: cover;
-         }
+				.followers {
+					position: relative;
+					cursor: pointer;
 
-         .onlineStatus {
-           position: absolute;
-           right: 5px;
-           bottom: 5px;
-           background: var(--green);
-           border-radius: 50%;
-           width: 10px;
-           height: 10px;
-         }
-       }
-     }
-    }
-  }
+					img {
+						width: 50px;
+						height: 50px;
+						object-fit: cover;
+						border-radius: 50%;
+					}
+
+					.onlineStatus {
+						position: absolute;
+						right: 5px;
+						bottom: 5px;
+						width: 10px;
+						height: 10px;
+						background: var(--green);
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+	}
 }

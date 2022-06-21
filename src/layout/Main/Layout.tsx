@@ -39,7 +39,6 @@ export const Layout = () => {
         document.title = `Новое сообщение от ${user?.name}`;
       }
     });
-    console.log('reload');
   }, []);
 
   return (

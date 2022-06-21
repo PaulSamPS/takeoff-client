@@ -1,111 +1,119 @@
-@import './src/scss/index';
+@import "./src/scss/index";
 
 .wrapper {
-  background: var(--white);
-  padding: 20px;
-  border-radius: 11px;
+	padding: 20px;
+	background: var(--white);
+	border-radius: 11px;
 
-  .grid {
-    min-height: 400px;
-    display: grid;
-    grid-auto-columns: 1fr;
-    grid-template-areas:
-            'chat'
-            'bottom';
-    grid-template-rows: 1fr auto;
-  }
+	.grid {
+		display: grid;
+		grid-auto-columns: 1fr;
+		grid-template-areas:
+			"chat"
+			"bottom";
+		grid-template-rows: 1fr auto;
+		min-height: 400px;
+	}
 
+	.chat {
+		grid-area: chat;
+		max-height: 60vh;
+		overflow: auto;
 
-  .chat {
-    grid-area: chat;
-    max-height: 60vh;
-    overflow: auto;
+		&::-webkit-scrollbar {
+			width: 5px;
+			background-color: #F9F9FD;
+		}
 
-    &::-webkit-scrollbar {
-      width: 5px;
-      background-color: #f9f9fd;
-    }
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--blue);
+			border-radius: 10px;
+		}
 
-    &::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background-color: var(--blue);
-    }
+		&::-webkit-scrollbar-track {
+			background-color: #F9F9FD;
+			border-radius: 10px;
+			box-shadow: inset 0 0 6px rgb(0 0 0 / 20%);
+		}
 
-    &::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
-      border-radius: 10px;
-      background-color: #f9f9fd;
-    }
+		.messages {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			padding: 5px 0;
 
-    .messages {
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      position: relative;
+			.messageBlock {
+				display: grid;
+				grid-template-areas: "avatar name time" "avatar message .";
+				grid-template-columns: 36px 1fr auto;
+				max-width: 100%;
+				word-wrap: break-word;
+				column-gap: 10px;
+			}
 
-      .messageBlock {
-        max-width: 100%;
-        word-wrap: break-word;
-        display: grid;
-        grid-template-columns: 50px 1fr auto;
-        grid-template-areas: 'avatar name time' 'avatar message .';
-        column-gap: 10px;
-      }
+			.avatar {
+				position: relative;
+				display: flex;
+				grid-area: avatar;
+				max-height: 36px;
+				column-gap: 10px;
 
-      .avatar {
-        display: flex;
-        column-gap: 10px;
-        position: relative;
-        grid-area: avatar;
+				img {
+					width: 36px;
+					height: 36px;
+					object-fit: cover;
+					border-radius: 50%;
+				}
 
-        img {
-          height: 50px;
-          width: 50px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
+				.online {
+					position: absolute;
+					right: 3px;
+					bottom: 3px;
+					width: 5px;
+					height: 5px;
+					background: var(--green);
+					border-radius: 50%;
+				}
+			}
 
-        .online {
-          position: absolute;
-          left: 35px;
-          bottom: 5px;
-          background: var(--green);
-          border-radius: 50%;
-          width: 10px;
-          height: 10px;
-        }
-      }
+			.name {
+				.userName {
+					grid-area: name;
+					color: var(--blue);
+					font-weight: 700;
+					font-size: 13px;
+				}
 
-      .userName {
-        color: var(--blue);
-        font-weight: 700;
-        grid-area: name;
-      }
+				.time {
+					grid-area: time;
+					margin-left: 5px;
+					color: var(--grey);
+					font-size: 13px;
+				}
+			}
 
-      .time{
-        grid-area: time;
-        color: var(--grey);
-      }
+			.text {
+				grid-area: message;
+				font-size: 13px;
+				line-height: 18px;
+			}
+		}
+	}
 
-      .text {
-        grid-area: message;
-      }
-    }
-  }
+	.bottom {
+		grid-area: bottom;
+		padding: 20px;
+		column-gap: 20px;
 
-  .bottom {
-    grid-area: bottom;
-    padding: 20px;
-    @include flex;
-    column-gap: 20px;
+		@include flex;
 
-    button {
-      min-width: unset;
-    }
+		button {
+			min-width: unset;
+		}
 
-    .send {
-      height: 30px;
-      width: 30px;
-    }
-  }
+		.send {
+			width: 30px;
+			height: 30px;
+		}
+	}
 }

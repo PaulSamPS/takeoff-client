@@ -52,7 +52,7 @@ export const useRequest = (): IReturn => {
     socket.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
     });
-  }, [request]);
+  }, [window.location.pathname]);
 
   React.useEffect(() => {
     socket.emit('friends:get', { userId: user.id });

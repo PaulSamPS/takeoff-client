@@ -1,3 +1,55 @@
 .wrapper {
+	.createPost {
+		display: grid;
+		grid-template-columns: 30px 1fr auto;
+		align-items: flex-start;
+		padding: 20px;
+		column-gap: 10px;
+		background: var(--white);
+		border-radius: 11px;
 
+		.avatar {
+			width: 30px;
+			height: 30px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+
+		.placeholder {
+			width: 100%;
+			padding: 7px;
+			overflow: hidden;
+			color: var(--grey);
+			font-size: 13px;
+			word-wrap: break-word;
+			resize: none;
+
+			&:focus {
+				outline: none;
+			}
+
+			&[contenteditable="true"]:empty::before {
+				display: block;
+				color: var(--grey);
+				content: attr(placeholder);
+			}
+		}
+
+		.icons {
+			svg {
+				cursor: pointer;
+				transition: all ease 0.2s;
+
+				path {
+					fill: var(--grey);
+				}
+
+				&:hover {
+					path {
+						fill: var(--blue);
+					}
+				}
+			}
+		}
+	}
 }

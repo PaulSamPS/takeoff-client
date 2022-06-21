@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Sidebar.module.scss';
 import { CustomLink } from '../../../components/CustomLink/CustomLink';
 import { ReactComponent as MessagesIcon } from '../../../helpers/icons/chat.svg';
-import { ReactComponent as HomeIcon } from '../../../helpers/icons/home.svg';
+import { ReactComponent as MyProfileIcon } from '../../../helpers/icons/myProfile.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
 import { ReactComponent as PeopleSearchIcon } from '../../../helpers/icons/searchPeople.svg';
 import { SidebarProps } from './Sidebar.props';
@@ -16,7 +16,7 @@ export const Sidebar = ({ requests, chats }: SidebarProps) => {
   return (
     <div className={styles.wrapper}>
       <CustomLink to={'/main'}>
-        <HomeIcon /> Главная
+        <MyProfileIcon /> Главная
       </CustomLink>
       <CustomLink to={'conversations'}>
         <MessagesIcon /> Сообщения

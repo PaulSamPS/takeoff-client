@@ -1,81 +1,86 @@
 @import "../../scss/index";
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+	width: 100%;
 
-  .searchResult {
-    text-align: center;
-    margin-top: 40px;
-  }
+	.searchResult {
+		margin-top: 40px;
+		text-align: center;
+	}
 
-  .conversation {
-    padding: 20px;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: 100px 1fr auto;
-    column-gap: 20px;
-    background: var(--white);
+	.conversation {
+		display: grid;
+		grid-template-columns: 50px 1fr auto;
+		padding: 15px;
+		column-gap: 20px;
+		background: var(--white);
+		border-radius: 10px;
 
-  .avatar {
-    position: relative;
+		.avatar {
+			position: relative;
 
-    img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+			img {
+				width: 50px;
+				height: 50px;
+				object-fit: cover;
+				border-radius: 50%;
+			}
 
+			.online {
+				position: absolute;
+				right: 6px;
+				bottom: 5px;
+				width: 8px;
+				height: 8px;
+				background: var(--green);
+				border-radius: 50%;
+			}
+		}
 
-    .online {
-      position: absolute;
-      right: 15px;
-      bottom: 15px;
-      background: var(--green);
-      border-radius: 50%;
-      width: 10px;
-      height: 10px;
-    }
-  }
+		.text {
+			display: grid;
+			grid-template-columns: 1fr;
 
-  .item {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 40px auto;
+			.name {
+				font-weight: 500;
+				font-size: 13px;
+			}
 
-    p {
-      color: var(--grey);
-      cursor: pointer;
-    }
-  }
+			.message {
+				color: var(--grey);
+				font-size: 13px;
+				cursor: pointer;
+			}
+		}
 
-  .right {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 40px auto;
-    justify-items: center;
-    grid-template-areas: 'count' 'date';
+		.right {
+			display: grid;
+			grid-template-areas: "date" "count";
+			grid-template-columns: 1fr;
+			justify-items: center;
 
-    .unreadMessages {
-      grid-area: count;
-      background: var(--blue);
-      color: var(--white);
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      line-height: 0;
-    }
+			.unreadMessages {
+				display: flex;
+				grid-area: count;
+				align-items: center;
+				justify-content: center;
+				width: 20px;
+				height: 20px;
+				color: var(--white);
+				font-size: 13px;
+				line-height: 0;
+				background: var(--blue);
+				border-radius: 50%;
+			}
 
-    span {
-      grid-area: date;
-    }
-  }
-  }
+			span {
+				grid-area: date;
+				color: var(--grey);
+				font-size: 13px;
+			}
+		}
+	}
 }

@@ -7,16 +7,16 @@
 		display: grid;
 		grid-template-columns: 1fr repeat(2, auto);
 		align-items: center;
-		column-gap: 20px;
 		max-width: 990px;
 		margin: 0 auto;
 		padding: 20px;
 		color: white;
-		
+		column-gap: 20px;
+
 		.logo {
 			h2 {
-				cursor: pointer;
 				display: inline-block;
+				cursor: pointer;
 			}
 		}
 
@@ -45,12 +45,12 @@
 
 				.online {
 					position: absolute;
-					right: 0;
+					right: 1px;
 					bottom: 2px;
+					width: 5px;
+					height: 5px;
 					background: var(--green);
 					border-radius: 50%;
-					width: 10px;
-					height: 10px;
 				}
 			}
 		}

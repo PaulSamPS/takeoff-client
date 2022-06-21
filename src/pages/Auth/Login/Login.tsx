@@ -9,7 +9,6 @@ import { Spinner } from '../../../components/Spinner/Spinner';
 import { Button } from '../../../components/Button/Button';
 import styles from '../Auth.module.scss';
 import { login } from '../../../redux/actions/authAction';
-import { socket } from '../../../helpers/socket';
 
 export const Login = (): JSX.Element => {
   const {

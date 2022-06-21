@@ -57,15 +57,17 @@ export const Conversations = () => {
               />
               {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
             </div>
-            <div className={styles.item}>
-              <h3>{chat.name}</h3>
-              <p onClick={() => navigateToChat(chat.messagesWith)}>{chat.lastMessage}</p>
+            <div className={styles.text}>
+              <span className={styles.name}>{chat.name}</span>
+              <span className={styles.message} onClick={() => navigateToChat(chat.messagesWith)}>
+                {chat.lastMessage.substring(0, 50)}...
+              </span>
             </div>
             <div className={styles.right}>
-              {chat.countUnreadMessages > 0 && (
-                <div className={styles.unreadMessages}>{chat.countUnreadMessages}</div>
-              )}
               <span>{calculateTime(chat.date)}</span>
+              {chat.countUnreadMessages > 0 && (
+                <span className={styles.unreadMessages}>{chat.countUnreadMessages}</span>
+              )}
             </div>
           </div>
         ))}

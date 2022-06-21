@@ -1,31 +1,32 @@
 @import "./src/scss/index";
 
 .container {
-
 	.wrapper {
-		background: var(--white);
-		padding: 20px;
-		border-radius: 11px;
 		display: grid;
 		grid-template-columns: 300px 1fr;
+		padding: 20px;
 		column-gap: 40px;
+		background: var(--white);
+		border-radius: 11px;
 		row-gap: 20px;
+
 		.avatar {
+			position: relative;
 			width: 300px;
 			height: 300px;
-			position: relative;
+
 			&:hover {
 				.uploadAvatar {
 					display: flex;
 				}
 			}
 
-			img{
-				border-radius: 11px;
-				//box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
+			img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				border-radius: 11px;
+				//box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%);
 			}
 
 			.uploadAvatar {
@@ -54,12 +55,12 @@
 
 				.green {
 					position: absolute;
-					left: 55px;
 					top: 5px;
-					background: var(--green);
-					border-radius: 50%;
+					left: 55px;
 					width: 10px;
 					height: 10px;
+					background: var(--green);
+					border-radius: 50%;
 				}
 			}
 

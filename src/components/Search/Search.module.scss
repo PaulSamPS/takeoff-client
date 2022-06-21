@@ -1,22 +1,21 @@
-@import './src/scss/index';
+@import "./src/scss/index";
 
 .search {
-  position: relative;
+	position: relative;
+	width: 100%;
 
-  width: 100%;
+	.input input {
+		width: 100%;
+		padding-right: 50px;
+		border: none !important;
+	}
 
-  .input input {
-    width: 100%;
-    padding-right: 50px;
-    border: none!important;
-  }
-
-  .icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    opacity: 0.5;
-      width: 30px;
-      height: 30px;
-  }
+	.icon {
+		position: absolute;
+		top: 8px;
+		right: 10px;
+		width: 20px;
+		height: 20px;
+		opacity: 0.5;
+	}
 }

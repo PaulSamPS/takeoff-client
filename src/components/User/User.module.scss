@@ -26,10 +26,10 @@
 	}
 
 	.avatar {
+		position: relative;
 		grid-area: avatar;
 		width: 50px;
 		height: 50px;
-		position: relative;
 
 		&:hover {
 			.uploadAvatar {
@@ -57,9 +57,10 @@
 			background: rgb(0 0 0 / 50%);
 			border-radius: 50%;
 			cursor: pointer;
+
 			svg {
-				height: 20px;
 				width: 20px;
+				height: 20px;
 			}
 		}
 
@@ -67,20 +68,20 @@
 			position: absolute;
 			right: 5px;
 			bottom: 0;
-			background: var(--green);
-			border-radius: 50%;
 			width: 10px;
 			height: 10px;
+			background: var(--green);
+			border-radius: 50%;
 		}
 	}
 
 	.chat {
 		grid-area: chat;
+		justify-self: center;
 		width: 20px;
 		height: 20px;
-		justify-self: center;
 		cursor: pointer;
-		transition: all ease .2s;
+		transition: all ease 0.2s;
 
 		&:hover {
 			fill: var(--blue);
@@ -117,31 +118,30 @@
 		align-self: start;
 
 		svg {
-			cursor: pointer;
 			width: 20px;
 			height: 20px;
+			cursor: pointer;
 		}
 
-		.delete  {
-			transition: all ease .2s;
+		.delete {
 			margin-right: 10px;
+			transition: all ease 0.2s;
+
 			&:hover {
 				fill: var(--blue);
 			}
 		}
 
 		.edit {
-			transition: all ease .2s;
+			transition: all ease 0.2s;
+
 			&:hover {
 				fill: var(--blue);
 			}
 		}
 
-
-
 		.settings {
 			bottom: -65px !important;
 		}
-
 	}
 }

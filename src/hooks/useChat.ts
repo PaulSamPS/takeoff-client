@@ -95,6 +95,14 @@ export const useChat = () => {
       setChats(chatsToBeSent);
       setLoading(false);
     });
+    socket.emit('chat:get', { userId: user.id });
+  }, [chats]);
+
+  React.useEffect(() => {
+    socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
+      setChats(chatsToBeSent);
+      setLoading(false);
+    });
 
     socket.emit('messages:get', {
       userId: user.id,
@@ -116,7 +124,7 @@ export const useChat = () => {
       setMessages([]);
       openChatId.current = _id;
     });
-  }, [chats]);
+  }, []);
 
   const sendMessage = (message: string) => {
     socket.emit('message:add', {

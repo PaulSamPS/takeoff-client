@@ -1,10 +1,10 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 20px;
+	display: grid;
+	grid-template-columns: 1fr;
+	row-gap: 20px;
 
-  .searchResult {
-    text-align: center;
-    margin-top: 40px;
-  }
+	.searchResult {
+		margin-top: 40px;
+		text-align: center;
+	}
 }
