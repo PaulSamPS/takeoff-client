@@ -8,6 +8,7 @@ import { Button } from '../components/Button/Button';
 export const Main = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [active, setActive] = React.useState<boolean>(false);
+  const [image, setImage] = React.useState<boolean>(false);
   return (
     <div className={styles.wrapper}>
       <div className={styles.createPost}>
@@ -27,8 +28,16 @@ export const Main = (): JSX.Element => {
         <div className={styles.icons}>
           <FotoIcon />
         </div>
-
-        {active && <Button appearance='primary'>Опубликовать</Button>}
+        {image && (
+          <div className={styles.postImage}>
+            <img src={'/photo.png'} alt={user.name} />
+          </div>
+        )}
+        {active && (
+          <Button appearance='primary' onClick={() => setImage(!image)}>
+            Опубликовать
+          </Button>
+        )}
       </div>
     </div>
   );
