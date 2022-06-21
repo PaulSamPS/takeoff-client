@@ -1,19 +1,28 @@
-import React, { FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import styles from './Main.module.scss';
 import { useAppSelector } from '../hooks/redux';
 import { API_URL } from '../http/axios';
 import { ReactComponent as FotoIcon } from '../helpers/icons/foto.svg';
 import { Button } from '../components/Button/Button';
-import { Modal } from '../components/Modal/Modal';
+import { IAppendAvatarInterface } from '../interfaces/AppendNews.interface';
+import { Input } from '../components/Input/Input';
 
 export const Main = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [active, setActive] = React.useState<boolean>(false);
-  const [image, setImage] = React.useState<boolean>(false);
-  const [modal, setModal] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string | null>('');
+  const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
+  const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
 
-  console.log(text);
+  const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+    const avatar = [] as any[];
+    avatar.push({ avatar: URL.createObjectURL(e.target.files![0]), number: Date.now() });
+    setPreviewAvatar(avatar);
+    setFilesAvatar(e.target.files);
+    setActive(true);
+  };
+
+  console.log(text, filesAvatar);
   return (
     <div className={styles.wrapper}>
       <div className={styles.createPost}>
@@ -31,24 +40,22 @@ export const Main = (): JSX.Element => {
           onInput={(e: FormEvent<HTMLDivElement>) => setText(e.currentTarget.textContent)}
           onClick={() => setActive(true)}
         ></div>
-        <div className={styles.icons} onClick={() => setModal(true)}>
-          <FotoIcon />
+        <div className={styles.icons}>
+          <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
+          <label htmlFor='avatar'>
+            <FotoIcon />
+          </label>
         </div>
-        {image && (
-          <div className={styles.postImage}>
-            <img src={'/photo.png'} alt={user.name} />
-          </div>
-        )}
-        {active && (
-          <Button appearance='primary' onClick={() => setImage(!image)}>
-            Опубликовать
-          </Button>
-        )}
+        {previewAvatar &&
+          previewAvatar.map(
+            (f: IAppendAvatarInterface, index: number): JSX.Element => (
+              <div className={styles.postImage} key={f.number}>
+                <img src={f.avatar} alt={'image' + index} />
+              </div>
+            )
+          )}
+        {active && <Button appearance='primary'>Опубликовать</Button>}
       </div>
-      <Modal setModal={setModal} modal={modal}>
-        {' '}
-        123
-      </Modal>
     </div>
   );
 };
