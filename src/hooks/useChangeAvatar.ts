@@ -13,6 +13,7 @@ interface IUseChangeAvatar {
   onSubmit: (e: SyntheticEvent) => void;
   previewAvatar: IAppendAvatarInterface[];
   selectFileAvatar: (e: ChangeEvent<HTMLInputElement>) => void;
+  filesAvatar: FileList | null;
 }
 
 export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IUseChangeAvatar => {
@@ -49,5 +50,5 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
     }
   };
 
-  return { onSubmit, previewAvatar, selectFileAvatar };
+  return { onSubmit, previewAvatar, selectFileAvatar, filesAvatar };
 };

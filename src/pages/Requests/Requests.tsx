@@ -14,7 +14,7 @@ export const Requests = () => {
         {request.length > 0 ? (
           request.map((f) => (
             <div className={styles.request} key={f.id}>
-              <Link to={`/main/user-info/${f.id}`} replace className={styles.followers}>
+              <Link to={`/main/people/${f.id}`} replace className={styles.followers}>
                 <img
                   src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
                   alt={f.name}
