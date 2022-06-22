@@ -1,18 +1,21 @@
 import React, { ChangeEvent, FormEvent } from 'react';
 import styles from './Main.module.scss';
-import { useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { API_URL } from '../http/axios';
 import { ReactComponent as FotoIcon } from '../helpers/icons/foto.svg';
 import { Button } from '../components/Button/Button';
 import { IAppendAvatarInterface } from '../interfaces/AppendNews.interface';
 import { Input } from '../components/Input/Input';
+import { createPost } from '../redux/actions/postAction';
 
 export const Main = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [active, setActive] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string | null>('');
+  const [placeholder, setPlaceholder] = React.useState<string>('Что у вас нового?');
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
+  const dispatch = useAppDispatch();
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
@@ -22,24 +25,51 @@ export const Main = (): JSX.Element => {
     setActive(true);
   };
 
-  console.log(text, filesAvatar);
+  const onSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+    if (filesAvatar) {
+      formData.append('image', filesAvatar[0]);
+    } else {
+      formData.append('image', null as unknown as Blob);
+    }
+    if (text !== null) {
+      formData.append('text', text);
+    }
+    formData.append('id', user.id);
+    const obj = {
+      image: filesAvatar && filesAvatar[0],
+      text: text,
+      id: user.id,
+    };
+    dispatch(createPost(filesAvatar === null ? obj : formData)).then(() => {
+      setFilesAvatar(null);
+      setPreviewAvatar([]);
+      setText('');
+      setPlaceholder('Что у вас нового?');
+      setActive(false);
+      document.getElementById('placeholder')!.innerHTML = '';
+    });
+  };
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.createPost}>
+      <form className={styles.createPost} onSubmit={onSubmit}>
         <img
           className={styles.avatar}
           src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
           alt={user.name}
         />
         <div
+          id='placeholder'
           className={styles.placeholder}
           contentEditable='true'
-          placeholder={'Что у вас нового?'}
+          placeholder={placeholder}
           role='textbox'
           aria-multiline='true'
           onInput={(e: FormEvent<HTMLDivElement>) => setText(e.currentTarget.textContent)}
           onClick={() => setActive(true)}
-        ></div>
+        />
         <div className={styles.icons}>
           <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
           <label htmlFor='avatar'>
@@ -54,8 +84,12 @@ export const Main = (): JSX.Element => {
               </div>
             )
           )}
-        {active && <Button appearance='primary'>Опубликовать</Button>}
-      </div>
+        {active && (
+          <Button appearance='primary' type='submit'>
+            Опубликовать
+          </Button>
+        )}
+      </form>
     </div>
   );
 };
