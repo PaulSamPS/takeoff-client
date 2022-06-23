@@ -16,7 +16,7 @@ export const Sidebar = ({ requests, chats }: SidebarProps) => {
   return (
     <div className={styles.wrapper}>
       <CustomLink to={'/main'}>
-        <MyProfileIcon /> Главная
+        <MyProfileIcon /> Новости
       </CustomLink>
       <CustomLink to={'conversations'}>
         <MessagesIcon /> Сообщения

@@ -18,9 +18,9 @@ export const Post = ({ post }: PostProps) => {
           src={post.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${post.user.avatar}`}
           alt={post.user.name}
         />
-        <div>
-          <span>{post.user.name}</span>
-          <span>{calculateTime(post.createdAt)}</span>
+        <div className={styles.userPost}>
+          <span className={styles.userName}>{post.user.name}</span>
+          <span className={styles.date}>{calculateTime(post.createdAt)}</span>
         </div>
       </div>
       <span className={styles.text}>{post.text}</span>

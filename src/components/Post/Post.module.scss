@@ -13,11 +13,32 @@
 	}
 
 	.user {
+		display: flex;
+		align-items: center;
+		column-gap: 10px;
+
 		img {
 			width: 50px;
 			height: 50px;
 			object-fit: cover;
 			border-radius: 50%;
+		}
+
+		.userPost {
+			display: flex;
+			flex-direction: column;
+			row-gap: 5px;
+
+			.userName {
+				color: var(--blue);
+				font-weight: 500;
+				font-size: 13px;
+			}
+
+			.date {
+				color: var(--greyDark);
+				font-size: 12.5px;
+			}
 		}
 	}
 
@@ -35,16 +56,16 @@
 		column-gap: 20px;
 
 		.iconBg {
+			display: flex;
+			align-items: center;
 			padding: 5px 15px;
+			column-gap: 10px;
 			background: var(--bg);
 			border-radius: 30px;
 			cursor: pointer;
-			display: flex;
-			align-items: center;
-			column-gap: 10px;
 
 			&:hover {
-				background: #e8e8e8;
+				background: #E8E8E8;
 			}
 
 			svg {
@@ -87,9 +108,9 @@
 			color: var(--grey);
 			font-size: 13px;
 			word-wrap: break-word;
-			resize: none;
 			border: 1px solid var(--borderColor);
 			border-radius: 11px;
+			resize: none;
 
 			&:focus {
 				outline: none;
@@ -104,8 +125,8 @@
 
 		button {
 			min-width: unset;
-			background: none;
 			padding: 5px;
+			background: none;
 			box-shadow: unset;
 
 			.send {
