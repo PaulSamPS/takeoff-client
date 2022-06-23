@@ -32,10 +32,10 @@ export const UserInfo = () => {
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const { followings, handleFollow, handleUnfollow } = useFollow(id);
-  const { friendsUserInfo } = useRequest();
-  // const friendsDone = friends && friends.map((friend) => friend.id);
-  // const requestsDone = request.map((request) => request.id);
-  // const followingDone = followings.map((following) => following.id);
+  const { friendsUserInfo, friends, request, addFriend } = useRequest();
+  const friendsDone = friends.map((friend) => friend.id);
+  const requestsDone = request.map((request) => request.id);
+  const followingDone = followings.map((following) => following.id);
 
   const sendMessageModal = () => {
     if (typeof id === 'string') {
@@ -93,38 +93,38 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {/* {!friendsDone.includes(id) ? (*/}
-        {/*  <div className={styles.follow}>*/}
-        {/*    {!followingDone.includes(id) && requestsDone.includes(id) ? (*/}
-        {/*      <Button appearance='primary' onClick={() => addFriend(id)}>*/}
-        {/*        Добавить в друзья*/}
-        {/*      </Button>*/}
-        {/*    ) : followings.find((i) => i.id === loginUser.id) ? (*/}
-        {/*      <Button appearance='primary' onClick={handleUnfollow}>*/}
-        {/*        Отписаться*/}
-        {/*      </Button>*/}
-        {/*    ) : (*/}
-        {/*      <Button appearance='primary' onClick={handleFollow}>*/}
-        {/*        Подписаться*/}
-        {/*      </Button>*/}
-        {/*    )}*/}
-        {/*  </div>*/}
-        {/* ) : (*/}
-        {/*  <div className={styles.follow}>*/}
-        {/*    <Button appearance='primary'>Удалить из друзей</Button>*/}
-        {/*  </div>*/}
-        {/* )}*/}
-        <div className={styles.follow}>
-          {followings && followings.find((i) => i.id === loginUser.id) ? (
-            <Button appearance='primary' onClick={handleUnfollow}>
-              Отписаться
-            </Button>
-          ) : (
-            <Button appearance='primary' onClick={handleFollow}>
-              Подписаться
-            </Button>
-          )}
-        </div>
+        {!friendsDone.includes(id) ? (
+          <div className={styles.follow}>
+            {!followingDone.includes(id) && requestsDone.includes(id) ? (
+              <Button appearance='primary' onClick={() => addFriend(id)}>
+                Добавить в друзья
+              </Button>
+            ) : followings.find((i) => i.id === loginUser.id) ? (
+              <Button appearance='primary' onClick={handleUnfollow}>
+                Отписаться
+              </Button>
+            ) : (
+              <Button appearance='primary' onClick={handleFollow}>
+                Подписаться
+              </Button>
+            )}
+          </div>
+        ) : (
+          <div className={styles.follow}>
+            <Button appearance='primary'>Удалить из друзей</Button>
+          </div>
+        )}
+        {/* <div className={styles.follow}>*/}
+        {/*  {followings && followings.find((i) => i.id === loginUser.id) ? (*/}
+        {/*    <Button appearance='primary' onClick={handleUnfollow}>*/}
+        {/*      Отписаться*/}
+        {/*    </Button>*/}
+        {/*  ) : (*/}
+        {/*    <Button appearance='primary' onClick={handleFollow}>*/}
+        {/*      Подписаться*/}
+        {/*    </Button>*/}
+        {/*  )}*/}
+        {/* </div>*/}
         <div className={styles.followersWrapper}>
           <div className={styles.name}>
             Друзья {friendsUserInfo && friendsUserInfo.length > 0 ? friendsUserInfo.length : 0}

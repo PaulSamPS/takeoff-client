@@ -1,7 +1,7 @@
 @import "./src/scss/index";
 
 .container {
-	background-color: var(--blue);
+	background-color: var(--white);
 
 	.wrapper {
 		display: grid;
@@ -10,7 +10,7 @@
 		max-width: 990px;
 		margin: 0 auto;
 		padding: 20px;
-		color: white;
+		color: var(--greyDark);
 		column-gap: 20px;
 
 		.logo {
@@ -23,7 +23,7 @@
 		.profile {
 			padding-right: 20px;
 			column-gap: 5px;
-			border-right: 1px solid rgb(255 255 255 / 30%);
+			border-right: 1px solid rgb(128 128 128 / 30%);
 			cursor: pointer;
 
 			@include flex;

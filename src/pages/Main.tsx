@@ -6,16 +6,21 @@ import { ReactComponent as FotoIcon } from '../helpers/icons/foto.svg';
 import { Button } from '../components/Button/Button';
 import { IAppendAvatarInterface } from '../interfaces/AppendNews.interface';
 import { Input } from '../components/Input/Input';
-import { createPost } from '../redux/actions/postAction';
+import { createPost, getPosts } from '../redux/actions/postAction';
+import { Post } from '../components/Post/Post';
+import { Spinner } from '../components/Spinner/Spinner';
 
 export const Main = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
+  const { posts, isLoading } = useAppSelector((state) => state.postsReducer);
   const [active, setActive] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string | null>('');
   const [placeholder, setPlaceholder] = React.useState<string>('Что у вас нового?');
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const dispatch = useAppDispatch();
+
+  console.log(posts);
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
@@ -51,6 +56,14 @@ export const Main = (): JSX.Element => {
       document.getElementById('placeholder')!.innerHTML = '';
     });
   };
+
+  React.useEffect(() => {
+    dispatch(getPosts(user.id));
+  }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -90,6 +103,11 @@ export const Main = (): JSX.Element => {
           </Button>
         )}
       </form>
+      <div className={styles.posts}>
+        {posts.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
+      </div>
     </div>
   );
 };

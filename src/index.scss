@@ -18,7 +18,7 @@ body {
 		"Droid Sans",
 		"Helvetica Neue",
 		sans-serif;
-	background: #edeef0;
+	background: #EDEEF0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -30,11 +30,14 @@ body {
 }
 
 :root {
+	--borderColor: #d3d9de;
+	--bg: #EDEEF0;
 	--grey: #626D7A;
-	--grey300: #99a2ad;
+	--greyDark: #808080;
+	--grey300: #99A2AD;
 	--grey-light: #E2E2E2;
 	--modal: #E5E5E5;
-	--blue: #5181b8;
+	--blue: #5181B8;
 	--black: #120101;
 	--green: #00A800;
 	--white: #FFF;

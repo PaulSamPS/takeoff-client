@@ -1,13 +1,17 @@
 .wrapper {
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+
 	.createPost {
 		display: grid;
+		grid-template-areas: "avatar text icon" "image image image" ". . button";
 		grid-template-columns: 30px 1fr auto;
 		align-items: flex-start;
 		padding: 20px;
 		column-gap: 10px;
 		background: var(--white);
 		border-radius: 11px;
-		grid-template-areas: 'avatar text icon' 'image image image' '. . button';
 
 		.avatar {
 			grid-area: avatar;
@@ -66,14 +70,14 @@
 		}
 
 		.postImage {
-			grid-area: image;
-			width: 100%;
-			margin-top: 40px;
 			display: flex;
+			grid-area: image;
 			align-items: center;
 			justify-content: center;
+			width: 100%;
+			margin-top: 40px;
 
-			img	{
+			img {
 				width: 100%;
 				object-fit: cover;
 			}
@@ -83,5 +87,9 @@
 			grid-area: button;
 			margin-top: 40px;
 		}
+	}
+
+	.posts {
+		max-width: 100%;
 	}
 }
