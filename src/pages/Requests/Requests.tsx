@@ -21,15 +21,11 @@ export const Requests = () => {
                 />
               </Link>
               <span className={styles.userName}>{f.name}</span>
-              <Button
-                appearance='transparent'
-                className={styles.done}
-                onClick={() => addFriend(f.id)}
-              >
+              <Button appearance='primary' className={styles.done} onClick={() => addFriend(f.id)}>
                 Принять
               </Button>
               <Button
-                appearance='transparent'
+                appearance='primary'
                 className={styles.done}
                 onClick={() => rejectFriend(f.id)}
               >

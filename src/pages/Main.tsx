@@ -54,6 +54,7 @@ export const Main = (): JSX.Element => {
       setPlaceholder('Что у вас нового?');
       setActive(false);
       document.getElementById('placeholder')!.innerHTML = '';
+      dispatch(getPosts(user.id));
     });
   };
 
