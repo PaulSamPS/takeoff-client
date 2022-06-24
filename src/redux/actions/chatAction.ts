@@ -14,10 +14,10 @@ export const getChatUser = (id: string | null) => async () => {
   }
 };
 
-export const getConversations = (id: string | null) => async (dispatch: AppDispatch) => {
+export const getConversations = (id: string) => async (dispatch: AppDispatch) => {
   dispatch(conversationReducer.actions.setLoading());
   await $apiAuth
-    .get(`api/chat/${id}`)
+    .get(`api/chat/user-chats/${id}`)
     .then((res: AxiosResponse<IConversation[]>) => {
       dispatch(conversationReducer.actions.setSuccess(res.data));
     })
@@ -37,6 +37,14 @@ export const setMessagesRead = (userId: string, id: string | undefined | null) =
 export const setMessagesUnread = (userId: string, id: string | undefined | null) => async () => {
   try {
     await $apiAuth.post(`api/chat/messages-unread/${userId}`, { id });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getUnreadMessages = (id: string) => async () => {
+  try {
+    await $apiAuth.post(`api/chat/user-chats/${id}`);
   } catch (e) {
     console.log(e);
   }

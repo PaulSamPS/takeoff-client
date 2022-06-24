@@ -20,8 +20,6 @@ export const Main = (): JSX.Element => {
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const dispatch = useAppDispatch();
 
-  console.log(posts);
-
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
     avatar.push({ avatar: URL.createObjectURL(e.target.files![0]), number: Date.now() });

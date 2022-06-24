@@ -6,6 +6,7 @@ export interface IConversation {
   lastMessage: string;
   messagesWith: string;
   name: string;
+  countUnreadMessages: number;
 }
 
 interface IConv {

@@ -1,9 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
-import { Footer } from './Footer/Footer';
 import styles from './Layout.module.scss';
 import React from 'react';
-import { socket } from '../../helpers/socket';
 import { getChatUser, setMessagesUnread } from '../../redux/actions/chatAction';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Toast } from '../../components/Toast/Toast';
@@ -21,15 +19,14 @@ export const Layout = () => {
     avatar: '',
   });
   const { request } = useRequest();
-  const { chats } = useChat();
+  const { chats, socketRef } = useChat();
 
   React.useEffect(() => {
-    socket.on('message:received', async ({ newMessage }) => {
+    socketRef.current?.on('message:received', async ({ newMessage }) => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
         setBannerData({ name: user?.name, avatar: user?.avatar });
         dispatch(setMessagesUnread(loginUser.id, user?.id));
-
         setNewMessageReceived({
           ...newMessage,
           name: user?.name,
@@ -51,7 +48,6 @@ export const Layout = () => {
             <Outlet />
           </div>
         </div>
-        <Footer className={styles.footer} />
       </div>
       <Toast
         setModal={showNewMessageModal}

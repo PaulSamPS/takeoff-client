@@ -1,6 +1,7 @@
 import { useAppSelector } from './redux';
-import React from 'react';
-import { socket } from '../helpers/socket';
+import React, { useRef } from 'react';
+import { io, Socket } from 'socket.io-client';
+import { API_URL_WS } from '../http/axios';
 
 interface IUser {
   id: string | undefined;
@@ -36,35 +37,45 @@ export const useRequest = (): IReturn => {
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
   const id = localStorage.getItem('userInfoId');
+  const socketRef = useRef<Socket>();
+
+  React.useEffect(() => {
+    if (!socketRef.current) {
+      socketRef.current = io(API_URL_WS, { transports: ['websocket'] });
+    }
+  }, []);
 
   const addFriend = (addFriendUserId: string | undefined) => {
-    socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
+    socketRef.current?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
   };
 
   const rejectFriend = (rejectFriendUserId: string | undefined) => {
-    socket.emit('friends:reject', { userId: user.id, userToRejectId: rejectFriendUserId });
+    socketRef.current?.emit('friends:reject', {
+      userId: user.id,
+      userToRejectId: rejectFriendUserId,
+    });
   };
 
   React.useEffect(() => {
-    socket.emit('friendsRequest:get', {
+    socketRef.current?.emit('friendsRequest:get', {
       userId: user.id,
     });
-    socket.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
+    socketRef.current?.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
     });
   }, [request]);
 
   React.useEffect(() => {
-    socket.emit('friends:get', { userId: user.id });
-    socket.on('friends:set', ({ friendsUser }: IFriends) => {
+    socketRef.current?.emit('friends:get', { userId: user.id });
+    socketRef.current?.on('friends:set', ({ friendsUser }: IFriends) => {
       setFriends(friendsUser);
       setLoadingFriends(false);
     });
-    socket.emit('friendsUserInfo:get', { userId: id });
-    socket.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
+    socketRef.current?.emit('friendsUserInfo:get', { userId: id });
+    socketRef.current?.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
       setFriendsUserInfo(friendsUser);
     });
-  }, []);
+  }, [friends]);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };

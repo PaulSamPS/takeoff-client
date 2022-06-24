@@ -10,6 +10,7 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { setMessagesRead } from '../../redux/actions/chatAction';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { socket } from '../../helpers/socket';
 
 interface IMessage {
   senderName: string;
@@ -31,7 +32,6 @@ export const Message = (): JSX.Element => {
   const usersOnline = users.map((user: any) => user.userId);
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  console.log(messages);
 
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
@@ -52,6 +52,7 @@ export const Message = (): JSX.Element => {
 
   React.useEffect(() => {
     dispatch(setMessagesRead(user.id, id));
+    socket.emit('chat:get', { userId: user.id });
   }, []);
 
   if (loadingMessages) {

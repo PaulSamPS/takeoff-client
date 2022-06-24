@@ -5,6 +5,7 @@ import styles from './Conversations.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Search } from '../../components/Search/Search';
+import { useAppSelector } from '../../hooks/redux';
 import { Spinner } from '../../components/Spinner/Spinner';
 
 interface IChats {
@@ -17,7 +18,8 @@ interface IChats {
 }
 
 export const Conversations = () => {
-  const { chats, users, loading } = useChat();
+  const { isLoading } = useAppSelector((state) => state.conversationReducer);
+  const { chats, users } = useChat();
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
   const [search, setSearch] = React.useState<string>('');
@@ -29,14 +31,14 @@ export const Conversations = () => {
     return chats.filter((chat: IChats) => {
       return chat.name.toLocaleLowerCase().search(search.toLocaleLowerCase()) !== -1;
     });
-  }, [search, users]);
+  }, [search, users, chats]);
 
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);
     navigate(`${id}`);
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Spinner />;
   }
 

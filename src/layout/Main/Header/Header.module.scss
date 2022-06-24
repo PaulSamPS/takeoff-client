@@ -2,6 +2,8 @@
 
 .container {
 	background-color: var(--white);
+	width: 100%;
+	position: fixed;
 
 	.wrapper {
 		display: grid;
