@@ -10,35 +10,6 @@ interface IBanner {
   avatar: string | undefined;
 }
 
-// interface IMessagesWith {
-//   _id: string;
-//   name: string;
-//   email: string;
-//   position: string;
-//   level: string;
-//   role: string;
-//   avatar: string;
-//   unreadMessage: boolean;
-//   countUnreadMessages: number;
-//   lastVisit: Date;
-//   isOnline: boolean;
-// }
-
-// interface IMessages {
-//   message: string;
-//   sender: string;
-//   receiver: string;
-//   date: Date;
-//   _id: string;
-// }
-
-// interface IChat {
-//   chat: {
-//     messagesWith: IMessagesWith;
-//     messages: IMessages[];
-//   };
-// }
-
 interface INewMessage {
   newMessage: {
     sender: string;
@@ -101,7 +72,7 @@ export const useChat = () => {
       setChats(chatsToBeSent);
       setLoading(false);
     });
-  }, [chats]);
+  }, [chats, users]);
 
   React.useEffect(() => {
     socketRef.current?.emit('messages:get', {
