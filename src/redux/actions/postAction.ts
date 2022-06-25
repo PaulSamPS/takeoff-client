@@ -47,3 +47,7 @@ export const getPosts = (id: string) => async (dispatch: AppDispatch) => {
       dispatch(postsReducer.actions.setError(e.response?.data.message));
     });
 };
+
+export const setLikePost = (postId: string, userId: string) => async (dispatch: AppDispatch) => {
+  await $apiAuth.post(`api/post/like/${postId}`, { userId });
+};

@@ -10,6 +10,11 @@ interface IUserPost {
   avatar: string | null;
 }
 
+interface ILikes {
+  _id: string;
+  user: string;
+}
+
 interface ICommentsPost {
   _id: string;
   user: IUserPost;
@@ -22,7 +27,7 @@ export interface IPost {
   user: IUserPost;
   text: string;
   image: string | null;
-  likes: IUserPost[];
+  likes: ILikes[];
   comments: ICommentsPost[];
   createdAt: Date;
   updatedAt: Date;

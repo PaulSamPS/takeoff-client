@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './App.scss';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Login } from './pages/Auth/Login/Login';
@@ -17,45 +17,8 @@ import { Friends } from './pages/Friends/Friends';
 import { Requests } from './pages/Requests/Requests';
 import { FriendsList } from './pages/FriendsList/FriendsList';
 import { People } from './pages/People/People';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { io, Socket } from 'socket.io-client';
-import { API_URL_WS } from './http/axios';
-import { getChatUser, setMessagesUnread } from './redux/actions/chatAction';
-import styles from './layout/Main/Layout.module.scss';
-import { Toast } from './components/Toast/Toast';
-import { useChat } from './hooks/useChat';
 
 export const App = () => {
-  const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const dispatch = useAppDispatch();
-  const { messages } = useChat();
-  const [newMessageReceived, setNewMessageReceived] = React.useState<any>(null);
-  const [newMessageModal, showNewMessageModal] = React.useState(false);
-  const [bannerData, setBannerData] = React.useState<any>({
-    name: '',
-    avatar: '',
-  });
-  const socketRef = useRef<Socket>();
-
-  React.useEffect(() => {
-    socketRef.current = io(API_URL_WS, { transports: ['websocket'] });
-    socketRef.current?.emit('user:add', { userId: loginUser.id });
-
-    socketRef.current?.on('message:receivedUnread', async ({ newMessage }) => {
-      if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
-        const user = await dispatch(getChatUser(newMessage.sender));
-        setBannerData({ name: user?.name, avatar: user?.avatar });
-        dispatch(setMessagesUnread(loginUser.id, user?.id));
-        setNewMessageReceived({
-          ...newMessage,
-          name: user?.name,
-          avatar: user?.avatar,
-        });
-        showNewMessageModal(true);
-        document.title = `Новое сообщение от ${user?.name}`;
-      }
-    });
-  }, [messages]);
   return (
     <>
       <BrowserRouter>
@@ -88,13 +51,6 @@ export const App = () => {
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
       </BrowserRouter>
-      <Toast
-        setModal={showNewMessageModal}
-        modal={newMessageModal}
-        className={styles.toast}
-        bannerData={bannerData}
-        newMessageReceived={newMessageReceived}
-      />
     </>
   );
 };

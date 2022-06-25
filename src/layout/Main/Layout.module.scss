@@ -4,14 +4,22 @@
 	min-height: 100vh;
 
 	.main {
-		display: flex;
 		width: 990px;
 		margin: 70px auto 50px;
 		padding: 20px;
-		column-gap: 30px;
+		position: relative;
+
+		.sidebar {
+			position: fixed;
+			left: auto;
+			right: auto;
+			top: 85px;
+			 width: 160px;
+		}
 
 		.content {
-			width: 100%;
+			width: 770px;
+			margin-left: 180px;
 		}
 	}
 

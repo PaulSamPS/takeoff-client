@@ -8,9 +8,24 @@ import cn from 'classnames';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { Button } from '../Button/Button';
 import { calculateTime } from '../../helpers/calculateTime';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { setLikePost } from '../../redux/actions/postAction';
 
 export const Post = ({ post }: PostProps) => {
+  const { user } = useAppSelector((state) => state.loginReducer);
   const [like, setLike] = React.useState<boolean>(false);
+  const dispatch = useAppDispatch();
+
+  console.log(like);
+
+  const handleLike = () => {
+    if (!post.likes.map((p) => p.user).includes(user.id)) {
+      dispatch(setLikePost(post._id, user.id)).then(() => {
+        setLike(true);
+      });
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.user}>
@@ -26,21 +41,22 @@ export const Post = ({ post }: PostProps) => {
       <span className={styles.text}>{post.text}</span>
       {post.image && <img src={`${API_URL}/post/${post.image}`} alt={post.text} />}
       <div className={styles.icons}>
-        <div className={styles.iconBg} onClick={() => setLike(!like)}>
+        <div className={styles.iconBg} onClick={handleLike}>
           <div
             className={cn(styles.icon, {
-              [styles.likeBackgroundImage]: like,
+              [styles.likeBackgroundImage]:
+                post.likes.length > 0 && post.likes.map((p) => p.user).includes(user.id),
             })}
           >
             <LikesIcon />
           </div>
-          <span className={styles.count}>13</span>
+          <span className={styles.count}>{post.likes.length > 0 && post.likes.length}</span>
         </div>
         <div className={styles.iconBg}>
           <div className={styles.icon}>
             <CommentIcon />
           </div>
-          <span className={styles.count}>7</span>
+          <span className={styles.count}>{post.comments.length > 0 && post.comments.length}</span>
         </div>
       </div>
       <div className={styles.sendComment}>
