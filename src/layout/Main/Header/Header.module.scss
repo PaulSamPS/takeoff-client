@@ -4,7 +4,10 @@
 	background-color: var(--white);
 	width: 100%;
 	position: fixed;
-	z-index: 9;
+	top: 0;
+	z-index: 10;
+	border-bottom: 1px solid var(--bg);
+	border-bottom-width: 25px;
 
 	.wrapper {
 		display: grid;

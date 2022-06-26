@@ -14,15 +14,19 @@ import { socket } from '../../helpers/socket';
 export const Post = ({ post }: PostProps) => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [likes, setLikes] = React.useState<any>(post.likes);
+  const [likesLoading, setLikesLoading] = React.useState<boolean>(false);
   const isLiked = likes.length > 0 && likes.filter((like: any) => like.user === user.id).length > 0;
 
   const handleLike = () => {
+    setLikesLoading(true);
     socket.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });
     socket.on('post:liked', () => {
       if (isLiked) {
         setLikes((prev: any) => prev.filter((like: any) => like.user !== user.id));
+        setLikesLoading(false);
       } else {
         setLikes((prev: any) => [...prev, { user: user.id }]);
+        setLikesLoading(false);
       }
     });
   };
@@ -43,15 +47,21 @@ export const Post = ({ post }: PostProps) => {
       {post.image && <img src={`${API_URL}/post/${post.image}`} alt={post.text} />}
       <div className={styles.icons}>
         <div className={styles.iconBg} onClick={handleLike}>
-          <div
-            className={cn(styles.icon, {
-              [styles.likeBackgroundImage]:
-                likes.length > 0 && likes.map((p: any) => p.user).includes(user.id),
-            })}
-          >
-            <LikesIcon />
-          </div>
-          <span className={styles.count}>{likes.length > 0 ? likes.length : 0}</span>
+          {likesLoading ? (
+            'Загрузка'
+          ) : (
+            <>
+              <div
+                className={cn(styles.icon, {
+                  [styles.likeBackgroundImage]:
+                    likes.length > 0 && likes.map((p: any) => p.user).includes(user.id),
+                })}
+              >
+                <LikesIcon />
+              </div>
+              <span className={styles.count}>{likes.length > 0 ? likes.length : 0}</span>
+            </>
+          )}
         </div>
         <div className={styles.iconBg}>
           <div className={styles.icon}>

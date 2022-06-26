@@ -97,7 +97,6 @@
 
 	.sendComment {
 		display: flex;
-		align-items: center;
 		column-gap: 20px;
 
 		.input {
@@ -128,6 +127,7 @@
 			padding: 5px;
 			background: none;
 			box-shadow: unset;
+			height: 47px;
 
 			.send {
 				width: 24px;

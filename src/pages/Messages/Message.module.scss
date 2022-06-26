@@ -1,23 +1,66 @@
 @import "./src/scss/index";
 
-.wrapper {
-	padding: 20px;
+.chatWith {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	position: fixed;
+	width: 770px;
+	top: 90px;
+	z-index: 11;
 	background: var(--white);
-	border-radius: 11px;
+	padding: 20px;
+	border-bottom: 1px solid var(--grey-light);
+	border-radius: 5px 5px 0 0;
 
-.container {
+	.chatWithName {
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+	.avatar {
+		position: relative;
+		display: flex;
+		align-items: unset;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		justify-self: right;
+
+		img {
+			width: 30px;
+			height: 30px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+}
+
+.wrapper {
+	padding: 80px 20px 120px;
+	border-radius: 11px;
+	height: auto;
+	background: var(--white);
+	width: 770px;
+	border-bottom: 0 solid var(--bg);
+	border-bottom-width: 40px;
+
+	.container {
+		min-height: 500px;
+		height: auto;
+
 	.grid {
+		height: 100%;
+
 		display: grid;
 		grid-auto-columns: 1fr;
 		grid-template-areas:
 			"chat"
 			"bottom";
 		grid-template-rows: 1fr auto;
-		min-height: 400px;
 
 		.chat {
 			grid-area: chat;
-			height: auto;
 			width: 100%;
 
 			&::-webkit-scrollbar {
@@ -100,25 +143,43 @@
 			}
 		}
 	}
+}
+}
+
+.bottomContainer {
+	position: fixed;
+	bottom: 20px;
+	z-index: 11;
 	.bottom {
-		position: fixed;
-		bottom: 0;
-		left: auto;
-		right: auto;
 		padding: 20px;
 		column-gap: 20px;
-		max-width: 770px;
+		width: 770px;
+		background: var(--bg-grey-light);
+
+		border-top: 1px solid var(--grey-light);
+		border-radius: 0 0 5px 5px;
 
 		@include flex;
 
 		button {
 			min-width: unset;
+			background: unset;
+			box-shadow: unset;
 		}
 
 		.send {
+			fill: var(--greyDark);
 			width: 30px;
 			height: 30px;
 		}
 	}
 }
+
+.borderBottom {
+	position: fixed;
+	bottom: 0;
+	border-top: 0 solid var(--bg);
+	border-top-width: 30px;
+	width: 100%;
 }
+

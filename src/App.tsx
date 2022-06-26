@@ -9,7 +9,7 @@ import { AuthLayout } from './layout/Auth/AuthLayout';
 import { PrivateAuth } from './helpers/PrivateAuth';
 import { Profile } from './pages/Profile/Profile';
 import { RegistrationSuccess } from './pages/Auth/RegistrationSuccess/RegistrationSuccess';
-import { Message } from './pages/Messages/Message';
+import { Messages } from './pages/Messages/Messages';
 import { Dialogs } from './pages/Dialogs/Dialogs';
 import { Conversations } from './pages/Conversations/Conversations';
 import { UserInfo } from './pages/UserInfo/UserInfo';
@@ -39,7 +39,7 @@ export const App = () => {
             <Route index element={<Main />} />
             <Route path='profile' element={<Profile />} />
             <Route path='dialogs/:name' element={<Dialogs />} />
-            <Route path='conversations/:id' element={<Message />} />
+            <Route path='conversations/:id' element={<Messages />} />
             <Route path='conversations' element={<Conversations />} />
             <Route path='people' element={<People />} />
             <Route path='people/:id' element={<UserInfo />} />
