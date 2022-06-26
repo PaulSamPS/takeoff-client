@@ -51,3 +51,7 @@ export const getPosts = (id: string) => async (dispatch: AppDispatch) => {
 export const setLikePost = (postId: string, userId: string) => async (dispatch: AppDispatch) => {
   await $apiAuth.post(`api/post/like/${postId}`, { userId });
 };
+
+export const setUnlikePost = (postId: string, userId: string) => async (dispatch: AppDispatch) => {
+  await $apiAuth.post(`api/post/unlike/${postId}`, { userId });
+};

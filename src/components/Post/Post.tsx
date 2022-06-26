@@ -8,22 +8,23 @@ import cn from 'classnames';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { Button } from '../Button/Button';
 import { calculateTime } from '../../helpers/calculateTime';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setLikePost } from '../../redux/actions/postAction';
+import { useAppSelector } from '../../hooks/redux';
+import { socket } from '../../helpers/socket';
 
 export const Post = ({ post }: PostProps) => {
   const { user } = useAppSelector((state) => state.loginReducer);
-  const [like, setLike] = React.useState<boolean>(false);
-  const dispatch = useAppDispatch();
-
-  console.log(like);
+  const [likes, setLikes] = React.useState<any>(post.likes);
+  const isLiked = likes.length > 0 && likes.filter((like: any) => like.user === user.id).length > 0;
 
   const handleLike = () => {
-    if (!post.likes.map((p) => p.user).includes(user.id)) {
-      dispatch(setLikePost(post._id, user.id)).then(() => {
-        setLike(true);
-      });
-    }
+    socket.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });
+    socket.on('post:liked', () => {
+      if (isLiked) {
+        setLikes((prev: any) => prev.filter((like: any) => like.user !== user.id));
+      } else {
+        setLikes((prev: any) => [...prev, { user: user.id }]);
+      }
+    });
   };
 
   return (
@@ -45,18 +46,20 @@ export const Post = ({ post }: PostProps) => {
           <div
             className={cn(styles.icon, {
               [styles.likeBackgroundImage]:
-                post.likes.length > 0 && post.likes.map((p) => p.user).includes(user.id),
+                likes.length > 0 && likes.map((p: any) => p.user).includes(user.id),
             })}
           >
             <LikesIcon />
           </div>
-          <span className={styles.count}>{post.likes.length > 0 && post.likes.length}</span>
+          <span className={styles.count}>{likes.length > 0 ? likes.length : 0}</span>
         </div>
         <div className={styles.iconBg}>
           <div className={styles.icon}>
             <CommentIcon />
           </div>
-          <span className={styles.count}>{post.comments.length > 0 && post.comments.length}</span>
+          <span className={styles.count}>
+            {post.comments.length > 0 ? post.comments.length : 0}
+          </span>
         </div>
       </div>
       <div className={styles.sendComment}>
