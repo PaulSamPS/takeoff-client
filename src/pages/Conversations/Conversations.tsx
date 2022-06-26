@@ -31,7 +31,7 @@ export const Conversations = () => {
     return chats.filter((chat: IChats) => {
       return chat.name.toLocaleLowerCase().search(search.toLocaleLowerCase()) !== -1;
     });
-  }, [search, users, chats]);
+  }, [search, users]);
 
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);

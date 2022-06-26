@@ -6,8 +6,7 @@
 	position: fixed;
 	top: 0;
 	z-index: 10;
-	border-bottom: 1px solid var(--bg);
-	border-bottom-width: 25px;
+	border-bottom: 1px solid var(--grey-light);
 
 	.wrapper {
 		display: grid;

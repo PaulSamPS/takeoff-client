@@ -1,5 +1,14 @@
 @import "./src/scss/index";
 
+.borderTop {
+	position: fixed;
+	top: 70px;
+	width: 100%;
+	border-bottom: 0 solid var(--bg);
+	border-bottom-width: 25px;
+	z-index: 9;
+}
+
 .chatWith {
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
@@ -9,9 +18,14 @@
 	top: 90px;
 	z-index: 11;
 	background: var(--white);
-	padding: 20px;
-	border-bottom: 1px solid var(--grey-light);
+	padding: 10px 20px;
 	border-radius: 5px 5px 0 0;
+	box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+
+	.back {
+		color: var(--grey-middle);
+		font-size: 14px;
+	}
 
 	.chatWithName {
 		font-size: 14px;
@@ -44,6 +58,7 @@
 	width: 770px;
 	border-bottom: 0 solid var(--bg);
 	border-bottom-width: 40px;
+	box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
 
 	.container {
 		min-height: 500px;
@@ -150,13 +165,13 @@
 	position: fixed;
 	bottom: 20px;
 	z-index: 11;
+	box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
 	.bottom {
 		padding: 20px;
 		column-gap: 20px;
 		width: 770px;
 		background: var(--bg-grey-light);
 
-		border-top: 1px solid var(--grey-light);
 		border-radius: 0 0 5px 5px;
 
 		@include flex;
@@ -181,5 +196,6 @@
 	border-top: 0 solid var(--bg);
 	border-top-width: 30px;
 	width: 100%;
+	z-index: 9;
 }
 

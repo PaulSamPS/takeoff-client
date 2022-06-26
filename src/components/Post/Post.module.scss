@@ -5,8 +5,9 @@
 	margin-bottom: 20px;
 	padding: 20px;
 	background: var(--white);
-	border-radius: 11px;
+	border-radius: 5px;
 	row-gap: 20px;
+	box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
 
 	&:last-child {
 		margin-bottom: 0;
@@ -108,7 +109,7 @@
 			font-size: 13px;
 			word-wrap: break-word;
 			border: 1px solid var(--borderColor);
-			border-radius: 11px;
+			border-radius: 5px;
 			resize: none;
 
 			&:focus {

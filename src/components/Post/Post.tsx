@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { PostProps } from './Post.props';
 import { API_URL } from '../../http/axios';
 import styles from './Post.module.scss';
@@ -11,11 +11,37 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { useAppSelector } from '../../hooks/redux';
 import { socket } from '../../helpers/socket';
 
+interface IUserPost {
+  _id: string;
+  name: string;
+  email: string;
+  position: string;
+  level: string;
+  role: string;
+  avatar: string | null;
+}
+
+interface ILikes {
+  _id: string;
+  user: string;
+}
+
+interface ICommentsPost {
+  _id: string;
+  user: IUserPost;
+  text: string;
+  date: Date;
+}
+
 export const Post = ({ post }: PostProps) => {
   const { user } = useAppSelector((state) => state.loginReducer);
-  const [likes, setLikes] = React.useState<any>(post.likes);
+  const [likes, setLikes] = React.useState<ILikes[]>(post.likes);
+  const [comments, setComments] = React.useState<ICommentsPost[]>(post.comments);
+  const [text, setText] = React.useState<string | null>('');
   const [likesLoading, setLikesLoading] = React.useState<boolean>(false);
   const isLiked = likes.length > 0 && likes.filter((like: any) => like.user === user.id).length > 0;
+
+  console.log(comments);
 
   const handleLike = () => {
     setLikesLoading(true);
@@ -28,6 +54,20 @@ export const Post = ({ post }: PostProps) => {
         setLikes((prev: any) => [...prev, { user: user.id }]);
         setLikesLoading(false);
       }
+    });
+  };
+
+  const handleComment = () => {
+    socket.emit('comment:post', { postId: post._id, userId: user.id, text: text });
+    socket.once('post:commented', ({ commentId }) => {
+      const newComment = {
+        _id: commentId,
+        user,
+        text,
+        date: Date.now(),
+      };
+      setComments((prev: any) => [...prev, newComment]);
+      document.getElementById('input')!.innerHTML = '';
     });
   };
 
@@ -67,9 +107,7 @@ export const Post = ({ post }: PostProps) => {
           <div className={styles.icon}>
             <CommentIcon />
           </div>
-          <span className={styles.count}>
-            {post.comments.length > 0 ? post.comments.length : 0}
-          </span>
+          <span className={styles.count}>{comments.length > 0 ? comments.length : 0}</span>
         </div>
       </div>
       <div className={styles.sendComment}>
@@ -80,8 +118,9 @@ export const Post = ({ post }: PostProps) => {
           placeholder='Написать комментарий...'
           role='textbox'
           aria-multiline='true'
+          onInput={(e: FormEvent<HTMLDivElement>) => setText(e.currentTarget.textContent)}
         ></div>
-        <Button appearance='primary' disabled={true}>
+        <Button appearance='primary' disabled={!(text && text.length > 0)} onClick={handleComment}>
           <SendIcon className={styles.send} />
         </Button>
       </div>
