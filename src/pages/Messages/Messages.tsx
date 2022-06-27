@@ -64,7 +64,10 @@ export const Messages = (): JSX.Element => {
       <div className={styles.borderTop} />
       <div className={styles.chatWith}>
         <div className={styles.back}>Назад</div>
-        <span className={styles.chatWithName}>{bannerData.name}</span>
+        <div className={styles.chatWithName}>
+          <span className={styles.user}>{bannerData.name}</span>
+          <span className={styles.lastVisit}>Был в сети {calculateTime(bannerData.lastVisit)}</span>
+        </div>
         <div className={styles.avatar}>
           <img
             src={

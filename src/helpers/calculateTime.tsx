@@ -2,7 +2,7 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import 'moment/locale/ru';
 
-export const calculateTime = (createdAt: Date) => {
+export const calculateTime = (createdAt: Date | number | undefined) => {
   moment.locale('ru');
   const today = moment(Date.now());
   const postDate = moment(createdAt);

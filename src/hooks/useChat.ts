@@ -7,6 +7,7 @@ import { socket } from '../helpers/socket';
 interface IBanner {
   name: string | undefined;
   avatar: string | undefined;
+  lastVisit?: Date | number;
 }
 
 // interface IMessagesWith {
@@ -43,7 +44,7 @@ interface INewMessage {
     sender: string;
     receiver: string;
     message: string;
-    date: Date;
+    date: Date | null;
   };
 }
 
@@ -77,6 +78,7 @@ export const useChat = () => {
   const [bannerData, setBannerData] = React.useState<IBanner>({
     name: '',
     avatar: '',
+    lastVisit: 0,
   });
   const openChatId = React.useRef<string | null>('');
   const [chats, setChats] = React.useState<any>(conversation);
@@ -115,6 +117,7 @@ export const useChat = () => {
       setBannerData({
         name: chat.messagesWith.name,
         avatar: chat.messagesWith.avatar,
+        lastVisit: chat.messagesWith.lastVisit,
       });
       openChatId.current = chat.messagesWith._id;
       setLoadingMessages(false);
