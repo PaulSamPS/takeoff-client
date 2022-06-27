@@ -41,8 +41,6 @@ export const Post = ({ post }: PostProps) => {
   const [likesLoading, setLikesLoading] = React.useState<boolean>(false);
   const isLiked = likes.length > 0 && likes.filter((like: any) => like.user === user.id).length > 0;
 
-  console.log(comments);
-
   const handleLike = () => {
     setLikesLoading(true);
     socket.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });
@@ -85,7 +83,10 @@ export const Post = ({ post }: PostProps) => {
       </div>
       <span className={styles.text}>{post.text}</span>
       {post.image && <img src={`${API_URL}/post/${post.image}`} alt={post.text} />}
-      <div className={styles.icons}>
+      <div
+        className={styles.icons}
+        style={{ paddingBottom: `${post.comments.length > 0 && '20px'}` }}
+      >
         <div className={styles.iconBg} onClick={handleLike}>
           {likesLoading ? (
             'Загрузка'
@@ -109,7 +110,34 @@ export const Post = ({ post }: PostProps) => {
           </div>
           <span className={styles.count}>{comments.length > 0 ? comments.length : 0}</span>
         </div>
+        {post.comments.length > 0 && <div className={styles.border} />}
       </div>
+      {post.comments.length > 0 && (
+        <div className={styles.lastComments}>
+          {post.comments.slice(-3).map((comment) => (
+            <div key={comment._id} className={styles.grid}>
+              <img
+                src={
+                  comment.user.avatar === null
+                    ? `/photo.png`
+                    : `${API_URL}/avatar/${comment.user.avatar}`
+                }
+                alt={comment.user.name}
+              />
+              <div className={styles.body}>
+                <span className={styles.user}>{comment.user.name}</span>
+                <span className={styles.comment}>{comment.text}</span>
+                <span className={styles.dateComment}>{calculateTime(comment.date)}</span>
+              </div>
+            </div>
+          ))}
+          {post.comments.length > 0 && (
+            <div className={styles.showAllComments}>
+              <span>Показать все комментарии</span>
+            </div>
+          )}
+        </div>
+      )}
       <div className={styles.sendComment}>
         <div
           className={styles.input}

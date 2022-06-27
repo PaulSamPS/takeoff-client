@@ -55,6 +55,7 @@
 		display: flex;
 		align-items: center;
 		column-gap: 20px;
+		position: relative;
 
 		.iconBg {
 			display: flex;
@@ -94,6 +95,81 @@
 				color: var(--greyDark);
 			}
 		}
+
+		.border {
+			position: absolute;
+			left: -20px;
+			bottom: 0;
+			border-top: 1px solid var(--border);
+			width: 106%;
+		}
+	}
+	
+	.lastComments {
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+
+		.grid {
+			display: grid;
+			grid-template-columns: 34px 1fr;
+			column-gap: 10px;
+			align-items: flex-start;
+
+			&:last-child {
+				.body {
+					border-bottom: none;
+				}
+			}
+
+			img {
+				height: 34px;
+				width: 34px;
+				object-fit: cover;
+				border-radius: 50%;
+			}
+
+			.body {
+				padding-bottom: 30px;
+				display: flex;
+				flex-direction: column;
+				position: relative;
+				border-bottom: 1px solid var(--border);
+
+
+				.user {
+					color: var(--blue);
+					font-size: 13px;
+					font-weight: 500;
+				}
+
+				.comment {
+					word-wrap: break-word;
+					font-size: 13px;
+					line-height: 1.36;
+				}
+
+				.dateComment {
+					position: absolute;
+					bottom: 10px;
+					left: 0;
+					font-size: 12.5px;
+					color: var(--grey);
+				}
+			}
+		}
+
+		.showAllComments {
+			font-size: 13px;
+			color: var(--blue);
+			font-weight: 500;
+			padding: 10px 0;
+			display: inline-block;
+
+			span {
+				cursor: pointer;
+			}
+		}
 	}
 
 	.sendComment {
@@ -103,7 +179,7 @@
 		.input {
 			grid-area: text;
 			width: 100%;
-			padding: 15px;
+			padding: 10px;
 			overflow: hidden;
 			color: var(--grey);
 			font-size: 13px;
@@ -118,7 +194,7 @@
 
 			&[contenteditable="true"]:empty::before {
 				display: block;
-				color: var(--grey);
+				color: var(--grey300);
 				content: attr(placeholder);
 			}
 		}
@@ -128,7 +204,7 @@
 			padding: 5px;
 			background: none;
 			box-shadow: unset;
-			height: 47px;
+			height: 37px;
 
 			.send {
 				width: 24px;
