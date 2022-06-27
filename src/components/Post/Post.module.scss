@@ -57,42 +57,43 @@
 		column-gap: 20px;
 		position: relative;
 
-		.iconBg {
-			display: flex;
-			align-items: center;
-			padding: 5px 15px;
-			column-gap: 10px;
-			background: var(--bg);
-			border-radius: 30px;
-			cursor: pointer;
-
+		.like {
 			&:hover {
-				background: #E8E8E8;
-			}
-
-			svg {
-				width: 24px;
-				height: 24px;
-			}
-
-			.icon {
-				height: 24px;
-			}
-
-			.likeBackgroundImage {
-				width: 24px;
-				height: 24px;
-				background-image: url("http://localhost:4000/like.png");
-				background-repeat: no-repeat;
-				background-size: 24px;
-
-				svg {
-					display: none;
+				.peopleLikedPopup {
+					display: flex;
 				}
 			}
 
-			.count {
-				color: var(--greyDark);
+			.peopleLikedPopup {
+				column-gap: 5px;
+				color: var(--blue);
+				font-size: 12px;
+				align-items: center;
+				box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+				background: var(--white);
+				border-radius: 5px;
+				position: absolute;
+				top: -60px;
+				left: 0;
+				display: none;
+						padding: 10px;
+				.likedPopup {
+					img	{
+						cursor: pointer;
+						border-radius: 50%;
+						width: 30px;
+						height: 30px;
+						object-fit: cover;
+					}
+				}
+
+				.likeMore {
+					font-size: 10px;
+					color: var(--white);
+					background: var(--grey-middle);
+					border-radius: 30px;
+					padding: 5px 10px;
+				}
 			}
 		}
 
@@ -104,7 +105,7 @@
 			width: 106%;
 		}
 	}
-	
+
 	.lastComments {
 		display: flex;
 		flex-direction: column;
@@ -212,5 +213,44 @@
 				fill: var(--greyDark);
 			}
 		}
+	}
+}
+
+.iconBg {
+	display: flex;
+	align-items: center;
+	padding: 5px 15px;
+	column-gap: 10px;
+	background: var(--bg);
+	border-radius: 30px;
+	cursor: pointer;
+
+	&:hover {
+		background: #E8E8E8;
+	}
+
+	svg {
+		width: 24px;
+		height: 24px;
+	}
+
+	.icon {
+		height: 24px;
+	}
+
+	.likeBackgroundImage {
+		width: 24px;
+		height: 24px;
+		background-image: url("http://localhost:4000/like.png");
+		background-repeat: no-repeat;
+		background-size: 24px;
+
+		svg {
+			display: none;
+		}
+	}
+
+	.count {
+		color: var(--greyDark);
 	}
 }

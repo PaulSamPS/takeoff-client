@@ -14,16 +14,12 @@ import { socket } from '../../helpers/socket';
 interface IUserPost {
   _id: string;
   name: string;
-  email: string;
-  position: string;
-  level: string;
-  role: string;
   avatar: string | null;
 }
 
 interface ILikes {
   _id: string;
-  user: string;
+  user: IUserPost;
 }
 
 interface ICommentsPost {
@@ -39,17 +35,29 @@ export const Post = ({ post }: PostProps) => {
   const [comments, setComments] = React.useState<ICommentsPost[]>(post.comments);
   const [text, setText] = React.useState<string | null>('');
   const [likesLoading, setLikesLoading] = React.useState<boolean>(false);
-  const isLiked = likes.length > 0 && likes.filter((like: any) => like.user === user.id).length > 0;
+  const isLiked = likes.length > 0 && likes.filter((like) => like.user._id === user.id).length > 0;
+
+  console.log('likes', likes);
+  console.log(comments);
 
   const handleLike = () => {
     setLikesLoading(true);
     socket.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });
-    socket.on('post:liked', () => {
+    socket.once('post:liked', ({ likeId }) => {
       if (isLiked) {
-        setLikes((prev: any) => prev.filter((like: any) => like.user !== user.id));
+        setLikes((prev: any) => prev.filter((like: ILikes) => like.user._id !== user.id));
         setLikesLoading(false);
       } else {
-        setLikes((prev: any) => [...prev, { user: user.id }]);
+        const newLike = {
+          _id: likeId,
+          user: {
+            _id: user.id,
+            avatar: user.avatar,
+            name: user.name,
+          },
+        };
+        console.log('newLike', newLike);
+        setLikes((prev: any) => [...prev, newLike]);
         setLikesLoading(false);
       }
     });
@@ -87,22 +95,42 @@ export const Post = ({ post }: PostProps) => {
         className={styles.icons}
         style={{ paddingBottom: `${post.comments.length > 0 && '20px'}` }}
       >
-        <div className={styles.iconBg} onClick={handleLike}>
-          {likesLoading ? (
-            'Загрузка'
-          ) : (
-            <>
-              <div
-                className={cn(styles.icon, {
-                  [styles.likeBackgroundImage]:
-                    likes.length > 0 && likes.map((p: any) => p.user).includes(user.id),
-                })}
-              >
-                <LikesIcon />
-              </div>
-              <span className={styles.count}>{likes.length > 0 ? likes.length : 0}</span>
-            </>
+        <div className={styles.like}>
+          {likes.length > 0 && (
+            <div className={styles.peopleLikedPopup}>
+              <span>Нравится</span>
+              {likes.slice(-3).map((like) => (
+                <div className={styles.likedPopup} key={like._id}>
+                  <img
+                    src={
+                      like.user.avatar === null
+                        ? `/photo.png`
+                        : `${API_URL}/avatar/${like.user.avatar}`
+                    }
+                    alt={like.user.name}
+                  />
+                </div>
+              ))}
+              {likes.length > 3 && <div className={styles.likeMore}>{`+${likes.length - 3}`}</div>}
+            </div>
           )}
+          <div className={cn(styles.iconBg)} onClick={handleLike}>
+            {likesLoading ? (
+              'Загрузка'
+            ) : (
+              <>
+                <div
+                  className={cn(styles.icon, {
+                    [styles.likeBackgroundImage]:
+                      likes.length > 0 && likes.map((p) => p.user._id).includes(user.id),
+                  })}
+                >
+                  <LikesIcon />
+                </div>
+                <span className={styles.count}>{likes.length > 0 ? likes.length : 0}</span>
+              </>
+            )}
+          </div>
         </div>
         <div className={styles.iconBg}>
           <div className={styles.icon}>
@@ -114,7 +142,7 @@ export const Post = ({ post }: PostProps) => {
       </div>
       {post.comments.length > 0 && (
         <div className={styles.lastComments}>
-          {post.comments.slice(-3).map((comment) => (
+          {comments.slice(-3).map((comment) => (
             <div key={comment._id} className={styles.grid}>
               <img
                 src={

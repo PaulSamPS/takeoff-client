@@ -3,16 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface IUserPost {
   _id: string;
   name: string;
-  email: string;
-  position: string;
-  level: string;
-  role: string;
   avatar: string | null;
 }
 
 interface ILikes {
   _id: string;
-  user: string;
+  user: IUserPost;
 }
 
 interface ICommentsPost {

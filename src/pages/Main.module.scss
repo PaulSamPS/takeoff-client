@@ -2,6 +2,8 @@
 	display: flex;
 	flex-direction: column;
 	row-gap: 20px;
+	border-bottom: 0 solid var(--bg);
+	border-bottom-width: 40px;
 
 	.createPost {
 		display: grid;
