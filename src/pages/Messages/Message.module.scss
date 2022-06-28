@@ -64,7 +64,6 @@
 .wrapper {
 	padding: 70px 20px 120px;
 	border-radius: 11px;
-	height: auto;
 	background: var(--white);
 	width: 770px;
 	border-bottom: 0 solid var(--bg);
@@ -72,9 +71,8 @@
 	box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
 
 	.container {
-		min-height: 500px;
+		min-height: calc(100vh - (70px + 120px - 40px));
 		height: auto;
-
 	.grid {
 		height: 100%;
 

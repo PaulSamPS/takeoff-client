@@ -90,6 +90,12 @@ export const useChat = () => {
     socket.on('user_list:update', ({ users }: IUsers) => {
       setUsers(users);
     });
+
+    return () => {
+      socket.off('connect');
+      socket.off('user_list:update');
+      socket.off('disconnect');
+    };
   }, []);
 
   React.useEffect(() => {
@@ -98,19 +104,16 @@ export const useChat = () => {
       setLoading(false);
     });
     socket.emit('chat:get', { userId: user.id });
-  }, [chats]);
+    return () => {
+      socket.off('chat:send');
+    };
+  }, [socket, window.location.pathname]);
 
   React.useEffect(() => {
-    socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
-      setChats(chatsToBeSent);
-      setLoading(false);
-    });
-
     socket.emit('messages:get', {
       userId: user.id,
       messagesWith: _id,
     });
-    socket.emit('chat:get', { userId: user.id });
 
     socket.on('message_list:update', ({ chat }: any) => {
       setMessages(chat.messages.slice(-20));

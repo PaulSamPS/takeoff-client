@@ -52,7 +52,11 @@ export const useRequest = (): IReturn => {
     socket.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
     });
-  }, [request]);
+
+    return () => {
+      socket.off('friendsRequest:sent');
+    };
+  }, []);
 
   React.useEffect(() => {
     socket.emit('friends:get', { userId: user.id });
@@ -64,6 +68,10 @@ export const useRequest = (): IReturn => {
     socket.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
       setFriendsUserInfo(friendsUser);
     });
+    return () => {
+      socket.off('friends:set');
+      socket.off('friendsUserInfo:set');
+    };
   }, []);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };

@@ -49,7 +49,12 @@ export const useFollow = (id?: string | undefined): IFollowReturn => {
       setFollowings(followingsUser);
       setFollowers(followersUser);
     });
-  }, [id, followings]);
+
+    return () => {
+      socket.off('followings:sent');
+      socket.off('followings:done');
+    };
+  }, [id]);
 
   return { followings, followers, handleFollow, handleUnfollow };
 };

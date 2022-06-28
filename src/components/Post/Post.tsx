@@ -37,9 +37,6 @@ export const Post = ({ post }: PostProps) => {
   const [likesLoading, setLikesLoading] = React.useState<boolean>(false);
   const isLiked = likes.length > 0 && likes.filter((like) => like.user._id === user.id).length > 0;
 
-  console.log('likes', likes);
-  console.log(comments);
-
   const handleLike = () => {
     setLikesLoading(true);
     socket.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });

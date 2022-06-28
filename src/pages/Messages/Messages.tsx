@@ -4,11 +4,10 @@ import styles from './Message.module.scss';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
 import { useChat } from '../../hooks/useChat';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
-import { setMessagesRead } from '../../redux/actions/chatAction';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { socket } from '../../helpers/socket';
 
@@ -31,7 +30,6 @@ export const Messages = (): JSX.Element => {
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const usersOnline = users.map((user: any) => user.userId);
   const { id } = useParams();
-  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
@@ -51,7 +49,7 @@ export const Messages = (): JSX.Element => {
   }, [messages]);
 
   React.useEffect(() => {
-    dispatch(setMessagesRead(user.id, id));
+    socket.emit('message:read', { userId: user.id, msgSendToUserId: id });
     socket.emit('chat:get', { userId: user.id });
   }, []);
 
@@ -66,7 +64,13 @@ export const Messages = (): JSX.Element => {
         <div className={styles.back}>Назад</div>
         <div className={styles.chatWithName}>
           <span className={styles.user}>{bannerData.name}</span>
-          <span className={styles.lastVisit}>Был в сети {calculateTime(bannerData.lastVisit)}</span>
+          <span className={styles.lastVisit}>
+            {usersOnline.includes(id) ? (
+              'В сети'
+            ) : (
+              <span>Был {calculateTime(bannerData.lastVisit)}</span>
+            )}
+          </span>
         </div>
         <div className={styles.avatar}>
           <img

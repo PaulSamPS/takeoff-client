@@ -15,10 +15,10 @@ export const Header = () => {
   const online = users.map((user: any) => user.userId);
 
   const handleLogout = () => {
-    socket.emit('logout', { userId: user.id });
+    socket.emit('logout');
     dispatch(logout());
     navigate('/');
-    socket.off();
+    socket.close();
   };
 
   const navigateToProfile = () => {
