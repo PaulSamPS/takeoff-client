@@ -10,7 +10,6 @@ export const useScroll = () => {
   };
 
   React.useEffect(() => {
-    window.onload = () => document.getElementById('input')?.focus();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

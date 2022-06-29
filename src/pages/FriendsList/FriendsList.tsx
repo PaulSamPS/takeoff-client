@@ -12,6 +12,10 @@ export const FriendsList = () => {
   const { scrollY } = useScroll();
   console.log(text);
 
+  React.useEffect(() => {
+    document.getElementById('input')?.focus();
+  }, []);
+
   return (
     <>
       <div className={styles.wrapper}>

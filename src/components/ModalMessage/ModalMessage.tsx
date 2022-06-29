@@ -7,7 +7,7 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { Button } from '../Button/Button';
 import { useChat } from '../../hooks/useChat';
 
-export const ModalMessage = ({ friend, setModal }: ModalMessageProps) => {
+export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) => {
   const [text, setText] = React.useState<string | null>('');
   const { sendMessage } = useChat();
 
@@ -15,6 +15,10 @@ export const ModalMessage = ({ friend, setModal }: ModalMessageProps) => {
     sendMessage(text);
     setModal(false);
   };
+
+  React.useEffect(() => {
+    document.getElementById('message')?.focus();
+  }, [isModal]);
 
   return (
     <div className={styles.modalMessage}>
@@ -39,7 +43,7 @@ export const ModalMessage = ({ friend, setModal }: ModalMessageProps) => {
       <div className={styles.message}>
         <div
           className={styles.input}
-          id='input'
+          id='message'
           contentEditable='true'
           placeholder='Написать сообщение...'
           role='textbox'

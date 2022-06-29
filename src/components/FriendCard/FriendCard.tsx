@@ -27,7 +27,7 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
         </div>
       </div>
       <Modal setModal={setModal} modal={modal}>
-        <ModalMessage friend={friend} setModal={setModal} />
+        <ModalMessage friend={friend} setModal={setModal} isModal={modal} />
       </Modal>
     </>
   );

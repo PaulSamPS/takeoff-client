@@ -15,4 +15,5 @@ export interface ModalMessageProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   friend: IUser;
   setModal: (close: boolean) => void;
+  isModal: boolean;
 }
