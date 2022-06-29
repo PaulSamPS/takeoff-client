@@ -1,6 +1,7 @@
 import { useAppSelector } from './redux';
 import React from 'react';
 import { socket } from '../helpers/socket';
+import { useParams } from 'react-router-dom';
 
 interface IUser {
   id: string | undefined;
@@ -35,7 +36,8 @@ export const useRequest = (): IReturn => {
   const [friends, setFriends] = React.useState<IUser[]>([]);
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
-  const id = localStorage.getItem('userInfoId');
+  const { id } = useParams();
+  console.log(request);
 
   const addFriend = (addFriendUserId: string | undefined) => {
     socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
@@ -72,7 +74,7 @@ export const useRequest = (): IReturn => {
       socket.off('friends:set');
       socket.off('friendsUserInfo:set');
     };
-  }, []);
+  }, [id]);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };

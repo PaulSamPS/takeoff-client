@@ -31,10 +31,16 @@ export const useFollow = (id?: string | undefined): IFollowReturn => {
 
   const handleFollow = () => {
     socket.emit('follow', { userId: id, userToFollowId: loginUser.id });
+    socket.emit('friendsRequest:get', {
+      userId: loginUser.id,
+    });
   };
 
   const handleUnfollow = () => {
     socket.emit('unfollow', { userId: id, userToUnfollowId: loginUser.id });
+    socket.emit('friendsRequest:get', {
+      userId: loginUser.id,
+    });
   };
 
   React.useEffect(() => {

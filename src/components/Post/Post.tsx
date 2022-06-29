@@ -53,7 +53,6 @@ export const Post = ({ post }: PostProps) => {
             name: user.name,
           },
         };
-        console.log('newLike', newLike);
         setLikes((prev: any) => [...prev, newLike]);
         setLikesLoading(false);
       }
@@ -69,7 +68,7 @@ export const Post = ({ post }: PostProps) => {
         text,
         date: Date.now(),
       };
-      setComments((prev: any) => [...prev, newComment]);
+      setComments((prev: any) => [newComment, ...prev]);
       document.getElementById('input')!.innerHTML = '';
     });
   };
@@ -139,7 +138,7 @@ export const Post = ({ post }: PostProps) => {
       </div>
       {post.comments.length > 0 && (
         <div className={styles.lastComments}>
-          {comments.slice(-3).map((comment) => (
+          {comments.slice(0, 3).map((comment) => (
             <div key={comment._id} className={styles.grid}>
               <img
                 src={

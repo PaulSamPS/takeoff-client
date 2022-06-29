@@ -9,13 +9,41 @@ import { ReactComponent as SearchIcon } from '../../helpers/icons/search.svg';
 export const FriendsList = () => {
   const { friends } = useRequest();
   const [text, setText] = React.useState<string | null>('');
-  console.log(text);
+
+  const isBrowser = typeof window !== 'undefined';
+
+  const [srollY, setScrollY] = React.useState(0);
+  console.log(text, srollY);
+
+  const handleScroll = () => {
+    const currentScrollY = isBrowser ? window.scrollY : 0;
+    setScrollY(currentScrollY);
+  };
+
+  React.useEffect(() => {
+    window.onload = () => document.getElementById('input')?.focus();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <div className={styles.borderTop} />
       <div className={styles.wrapper}>
-        <form className={styles.search}>
+        <div className={styles.top}>
+          <div>
+            Все друзья <span>21</span>
+          </div>
+          <div>
+            Друзья онлайн <span>2</span>
+          </div>
+        </div>
+        <form
+          className={styles.search}
+          style={{
+            position: srollY >= 75 ? 'sticky' : 'relative',
+            top: srollY >= 75 ? '71px' : '0',
+          }}
+        >
           <div
             className={styles.input}
             id='input'

@@ -60,6 +60,10 @@ export const UserInfo = () => {
     socket.on('userInfo:user', ({ user }: IUserInfo) => {
       setUser(user);
     });
+
+    return () => {
+      socket.off('userInfo:user');
+    };
   }, [id]);
 
   return (
