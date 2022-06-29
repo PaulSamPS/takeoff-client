@@ -11,6 +11,7 @@ interface IUser {
   level: string;
   role: string;
   avatar: string;
+  lastVisit: Date;
 }
 
 interface IRequest {

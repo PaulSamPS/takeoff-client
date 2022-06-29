@@ -4,18 +4,18 @@
 	min-height: 100vh;
 
 	.main {
+		position: relative;
 		width: 990px;
 		margin: 70px auto 50px;
 		padding: 20px;
-		position: relative;
 
 		.sidebar {
 			position: fixed;
-			left: auto;
-			right: auto;
 			top: 85px;
-			 width: 160px;
+			right: auto;
+			left: auto;
 			z-index: 11;
+			width: 160px;
 		}
 
 		.content {

@@ -7,7 +7,7 @@
 	background: var(--white);
 	border-radius: 5px;
 	row-gap: 20px;
-	box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 	&:last-child {
 		margin-bottom: 0;
@@ -52,10 +52,10 @@
 	}
 
 	.icons {
+		position: relative;
 		display: flex;
 		align-items: center;
 		column-gap: 20px;
-		position: relative;
 
 		.like {
 			&:hover {
@@ -65,44 +65,45 @@
 			}
 
 			.peopleLikedPopup {
-				column-gap: 5px;
-				color: var(--blue);
-				font-size: 12px;
-				align-items: center;
-				box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
-				background: var(--white);
-				border-radius: 5px;
 				position: absolute;
 				top: -55px;
 				left: 0;
 				display: none;
-						padding: 10px;
+				align-items: center;
+				padding: 10px;
+				color: var(--blue);
+				font-size: 12px;
+				column-gap: 5px;
+				background: var(--white);
+				border-radius: 5px;
+				box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+
 				.likedPopup {
-					img	{
-						cursor: pointer;
-						border-radius: 50%;
+					img {
 						width: 30px;
 						height: 30px;
 						object-fit: cover;
+						border-radius: 50%;
+						cursor: pointer;
 					}
 				}
 
 				.likeMore {
-					font-size: 10px;
+					padding: 5px 10px;
 					color: var(--white);
+					font-size: 10px;
 					background: var(--grey-middle);
 					border-radius: 30px;
-					padding: 5px 10px;
 				}
 			}
 		}
 
 		.border {
 			position: absolute;
-			left: -20px;
 			bottom: 0;
-			border-top: 1px solid var(--border);
+			left: -20px;
 			width: 106%;
+			border-top: 1px solid var(--border);
 		}
 	}
 
@@ -114,8 +115,8 @@
 		.grid {
 			display: grid;
 			grid-template-columns: 34px 1fr;
-			column-gap: 10px;
 			align-items: flex-start;
+			column-gap: 10px;
 
 			&:last-child {
 				.body {
@@ -124,48 +125,47 @@
 			}
 
 			img {
-				height: 34px;
 				width: 34px;
+				height: 34px;
 				object-fit: cover;
 				border-radius: 50%;
 			}
 
 			.body {
-				padding-bottom: 30px;
+				position: relative;
 				display: flex;
 				flex-direction: column;
-				position: relative;
+				padding-bottom: 30px;
 				border-bottom: 1px solid var(--border);
-
 
 				.user {
 					color: var(--blue);
-					font-size: 13px;
 					font-weight: 500;
+					font-size: 13px;
 				}
 
 				.comment {
-					word-wrap: break-word;
 					font-size: 13px;
 					line-height: 1.36;
+					word-wrap: break-word;
 				}
 
 				.dateComment {
 					position: absolute;
 					bottom: 10px;
 					left: 0;
-					font-size: 12.5px;
 					color: var(--grey);
+					font-size: 12.5px;
 				}
 			}
 		}
 
 		.showAllComments {
-			font-size: 13px;
+			display: inline-block;
+			padding: 10px 0;
 			color: var(--blue);
 			font-weight: 500;
-			padding: 10px 0;
-			display: inline-block;
+			font-size: 13px;
 
 			span {
 				cursor: pointer;
@@ -202,10 +202,10 @@
 
 		button {
 			min-width: unset;
+			height: 37px;
 			padding: 5px;
 			background: none;
 			box-shadow: unset;
-			height: 37px;
 
 			.send {
 				width: 24px;

@@ -1,0 +1,48 @@
+.card {
+	display: flex;
+	align-items: center;
+	padding: 20px 0;
+	column-gap: 20px;
+	border-bottom: 1px solid var(--border);
+
+	&:last-child {
+		border-bottom: none;
+	}
+
+	a {
+		img {
+			width: 80px;
+			height: 80px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		color: var(--blue);
+		font-size: 13px;
+		row-gap: 10px;
+
+		span {
+			cursor: pointer;
+		}
+
+		.userName {
+			font-weight: 500;
+		}
+
+		.position {
+			color: var(--grey);
+		}
+
+		.sendMessage {
+			transition: all ease 0.2s;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

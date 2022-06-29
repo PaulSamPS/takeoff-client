@@ -1,11 +1,13 @@
 @import "./src/scss/index";
 
 .container {
-	background-color: var(--white);
-	width: 100%;
 	position: fixed;
 	top: 0;
 	z-index: 10;
+	right: 0;
+	left: 0;
+	width: 100%;
+	background-color: var(--white);
 	border-bottom: 1px solid var(--grey-light);
 
 	.wrapper {

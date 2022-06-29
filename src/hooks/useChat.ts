@@ -132,7 +132,7 @@ export const useChat = () => {
     });
   }, []);
 
-  const sendMessage = (message: string) => {
+  const sendMessage = (message: string | null) => {
     socket.emit('message:add', {
       userId: user.id,
       msgSendToUserId: _id,

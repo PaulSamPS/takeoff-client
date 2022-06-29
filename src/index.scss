@@ -4,9 +4,8 @@
 @import "scss/flex_mixins";
 
 body {
-	overflow-y: scroll;
 	overflow-x: hidden;
-
+	overflow-y: scroll;
 	font-family:
 		-apple-system,
 		BlinkMacSystemFont,
@@ -33,11 +32,11 @@ body {
 :root {
 	--borderColor: #D3D9DE;
 	--bg: #EDEEF0;
-	--bg-grey-light: #fafbfc;
-	--grey-super-light: #dce1e6;
-	--border: rgba(226, 226, 226, 0.7);
+	--bg-grey-light: #FAFBFC;
+	--grey-super-light: #DCE1E6;
+	--border: rgb(226 226 226 / 70%);
 	--grey: #626D7A;
-	--grey-middle: #818c99;
+	--grey-middle: #818C99;
 	--greyDark: #808080;
 	--grey300: #99A2AD;
 	--grey-light: #E2E2E2;
