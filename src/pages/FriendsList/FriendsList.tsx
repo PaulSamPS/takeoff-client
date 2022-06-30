@@ -3,9 +3,12 @@ import { Outlet } from 'react-router-dom';
 import styles from './Friendslist.module.scss';
 import { CustomLink } from '../../components/CustomLink/CustomLink';
 import { useScroll } from '../../hooks/usseScroll';
+import { Count } from '../../components/Count/Count';
+import { useRequest } from '../../hooks/useRequest';
 
 export const FriendsList = () => {
   const { scrollY } = useScroll();
+  const { request } = useRequest();
   console.log(scrollY);
   return (
     <div className={styles.wrapper}>
@@ -18,10 +21,11 @@ export const FriendsList = () => {
         }}
       >
         <CustomLink to={'/main/friends'} appearance='rightMenu'>
-          Друзья
+          Мои друзья
         </CustomLink>
         <CustomLink to={'/main/friends/requests'} appearance='rightMenu'>
-          Заявки в друзья
+          Заявки в друзья{' '}
+          {request.length > 0 && <Count className={styles.count}>{request.length}</Count>}
         </CustomLink>
       </div>
     </div>

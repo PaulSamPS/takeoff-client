@@ -22,7 +22,7 @@
 }
 
 .primary {
-	background: var(--blue);
+	background: var(--blue-alternative);
 
 	&:hover {
 		filter: brightness(1.1);
@@ -36,10 +36,10 @@
 .transparent {
 	color: var(--blue);
 	background: transparent;
+	box-shadow: none;
 
 	&:hover {
-		color: var(--white);
-		background: var(--blue);
+		background: var(--bg-grey-light);
 	}
 
 	&:active {

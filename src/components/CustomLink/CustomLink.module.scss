@@ -2,9 +2,10 @@
 
 .link {
 	display: grid;
+	padding: 0 5px;
 	grid-template-columns: 18px 1fr 25px;
 	align-items: center;
-	color: var(--grey);
+	color: var(--black);
 	font-weight: 500;
 	font-size: 13px;
 	line-height: 30px;
@@ -12,17 +13,14 @@
 	column-gap: 10px;
 	transition: color ease 0.2s;
 
+	&:hover {
+		background: rgba(174, 183, 194, 0.16);
+	}
+
 	svg {
 		max-width: 20px;
 		max-height: 20px;
-	}
-
-	&:hover {
-		color: var(--blue);
-
-		svg {
-			fill: var(--blue);
-		}
+		fill: var(--blue);
 	}
 
 	@include _tablet {
@@ -30,26 +28,19 @@
 	}
 }
 
-.active {
+.rightMenu {
+	border-left: 2px solid transparent;
+	padding: 5px 20px 5px 20px;
 	color: var(--blue);
 
-	svg {
-		fill: var(--blue);
-	}
-}
-
-.rightMenu {
-	display: block;
-	border-left: 2px solid transparent;
-	padding-left: 10px;
 	transition: all ease .2s;
-
-	&:hover {
-	background: var(--bg);
-	}
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .activeRightBar {
 	border-left: 2px solid var(--blue);
-	background: var(--bg);
+	background: rgba(174, 183, 194, 0.16);;
+	color: var(--black);
 }

@@ -11,7 +11,9 @@
     margin-left: 10px;
 
     a {
-      padding: 5px 5px 5px 20px;
+      .count {
+        background: var(--blue-alternative);
+      }
     }
   }
 }

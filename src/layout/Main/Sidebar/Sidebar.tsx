@@ -2,12 +2,13 @@ import React from 'react';
 import styles from './Sidebar.module.scss';
 import { CustomLink } from '../../../components/CustomLink/CustomLink';
 import { ReactComponent as MessagesIcon } from '../../../helpers/icons/chat.svg';
-import { ReactComponent as MyProfileIcon } from '../../../helpers/icons/myProfile.svg';
+import { ReactComponent as NewsIcon } from '../../../helpers/icons/news.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
 import { ReactComponent as PeopleSearchIcon } from '../../../helpers/icons/searchPeople.svg';
 import { SidebarProps } from './Sidebar.props';
 import cn from 'classnames';
 import { useChat } from '../../../hooks/useChat';
+import { Count } from '../../../components/Count/Count';
 
 export const Sidebar = ({ requests, className }: SidebarProps) => {
   const { chats } = useChat();
@@ -18,17 +19,14 @@ export const Sidebar = ({ requests, className }: SidebarProps) => {
   return (
     <div className={cn(styles.wrapper, className)}>
       <CustomLink to={'/main'}>
-        <MyProfileIcon /> Новости
+        <NewsIcon /> Новости
       </CustomLink>
       <CustomLink to={'conversations'}>
         <MessagesIcon /> Сообщения
-        {totalUnreadMessages > 0 && (
-          <div className={styles.unreadMessages}>{totalUnreadMessages}</div>
-        )}
+        {totalUnreadMessages > 0 && <Count>{totalUnreadMessages}</Count>}
       </CustomLink>
       <CustomLink to={'friends'}>
-        <FriendsIcon /> Друзья{' '}
-        {requests.length > 0 && <div className={styles.requestFriends}>{requests.length}</div>}
+        <FriendsIcon /> Друзья {requests.length > 0 && <Count>{requests.length}</Count>}
       </CustomLink>
       <CustomLink to={'people'}>
         <PeopleSearchIcon /> Люди
