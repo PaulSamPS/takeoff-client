@@ -3,6 +3,7 @@
 	grid-area: followers;
 	grid-template-columns: 1fr;
 	row-gap: 20px;
+	min-width: 550px;
 
 	.grid {
 		display: grid;

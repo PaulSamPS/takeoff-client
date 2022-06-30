@@ -37,3 +37,19 @@
 		fill: var(--blue);
 	}
 }
+
+.rightMenu {
+	display: block;
+	border-left: 2px solid transparent;
+	padding-left: 10px;
+	transition: all ease .2s;
+
+	&:hover {
+	background: var(--bg);
+	}
+}
+
+.activeRightBar {
+	border-left: 2px solid var(--blue);
+	background: var(--bg);
+}

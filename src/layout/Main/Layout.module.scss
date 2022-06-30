@@ -1,6 +1,4 @@
 .wrapper {
-	display: flex;
-	flex-direction: column;
 	min-height: 100vh;
 
 	.main {
@@ -19,9 +17,7 @@
 		}
 
 		.content {
-			width: 770px;
-			height: 700px;
-			margin-left: 180px;
+			margin-left: 170px;
 		}
 	}
 

@@ -1,74 +1,17 @@
 .wrapper {
-	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+  display: flex;
 
-	.top {
-		padding: 20px;
-		color: var(--grey-middle);
-		font-size: 13px;
-		background: var(--bg-grey-light);
-		border-bottom: 1px solid var(--border);
+  .rightMenu {
+    height: 90px;
+    padding: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+    background: var(--white);
+    width: 220px;
+    margin-left: 10px;
 
-		div {
-			position: relative;
-			display: inline-block;
-			padding: 0 15px 0 0;
-			cursor: pointer;
-
-			span {
-				padding-left: 5px;
-			}
-		}
-	}
-
-	.search {
-		position: relative;
-		top: 70px;
-		z-index: 11;
-		width: 770px;
-		background: var(--white);
-
-		.input {
-			width: 100%;
-			padding: 15px 10px 15px 50px;
-			overflow: hidden;
-			color: var(--grey);
-			font-size: 13px;
-			word-wrap: break-word;
-			border-bottom: 1px solid var(--border);
-			resize: none;
-
-			&:focus {
-				outline: none;
-			}
-
-			&[contenteditable="true"]:empty::before {
-				display: block;
-				color: var(--grey300);
-				content: attr(placeholder);
-			}
-		}
-
-		button {
-			position: absolute;
-			top: 13px;
-			left: 18px;
-			min-width: unset;
-			padding: 0;
-			background: none;
-			box-shadow: none;
-
-			svg {
-				width: 20px;
-				height: 20px;
-				fill: var(--blue);
-			}
-		}
-	}
-
-	.cardGrid {
-		width: 770px;
-		min-height: 500px;
-		padding: 0 20px;
-		background: var(--white);
-	}
+    a {
+      padding: 5px 5px 5px 20px;
+    }
+  }
 }

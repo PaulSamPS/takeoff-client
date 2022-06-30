@@ -15,6 +15,8 @@ import { Conversations } from './pages/Conversations/Conversations';
 import { UserInfo } from './pages/UserInfo/UserInfo';
 import { FriendsList } from './pages/FriendsList/FriendsList';
 import { People } from './pages/People/People';
+import { Requests } from './pages/Requests/Requests';
+import { Friends } from './pages/Friends/Friends';
 
 export const App = () => {
   return (
@@ -41,7 +43,10 @@ export const App = () => {
             <Route path='conversations' element={<Conversations />} />
             <Route path='people' element={<People />} />
             <Route path='people/:id' element={<UserInfo />} />
-            <Route path='friends' element={<FriendsList />} />
+            <Route path='friends' element={<FriendsList />}>
+              <Route index element={<Friends />} />
+              <Route path='requests' element={<Requests />} />
+            </Route>
           </Route>
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
