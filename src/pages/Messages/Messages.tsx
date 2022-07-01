@@ -9,7 +9,7 @@ import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner/Spinner';
-import { socket } from '../../helpers/socket';
+import { SocketContext } from '../../helpers/context';
 
 interface IMessage {
   senderName: string;
@@ -24,12 +24,12 @@ interface IMessage {
 export const Messages = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
-  const { sendMessage, messages, bannerData, users, loadingMessages } = useChat();
+  const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
-  const usersOnline = users.map((user: any) => user.userId);
   const { id } = useParams();
+  const socket = React.useContext(SocketContext);
 
   React.useEffect(() => {
     setSubmitDisabled(!text.trim());
@@ -49,9 +49,9 @@ export const Messages = (): JSX.Element => {
   }, [messages]);
 
   React.useEffect(() => {
-    socket.emit('message:read', { userId: user.id, msgSendToUserId: id });
-    socket.emit('chat:get', { userId: user.id });
-  }, []);
+    socket?.emit('message:read', { userId: user.id, msgSendToUserId: id });
+    setTimeout(() => socket?.emit('chat:get', { userId: user.id }), 1000);
+  }, [socket]);
 
   if (loadingMessages) {
     return <Spinner />;
@@ -65,7 +65,7 @@ export const Messages = (): JSX.Element => {
         <div className={styles.chatWithName}>
           <span className={styles.user}>{bannerData.name}</span>
           <span className={styles.lastVisit}>
-            {usersOnline.includes(id) ? (
+            {bannerData.isOnline !== false ? (
               'В сети'
             ) : (
               <span>Был {calculateTime(bannerData.lastVisit)}</span>
@@ -99,7 +99,7 @@ export const Messages = (): JSX.Element => {
                             }
                             alt={user.name}
                           />
-                          {usersOnline.includes(m.sender) && <div className={styles.online} />}
+                          {user.isOnline && <div className={styles.online} />}
                         </div>
                         <div className={styles.name}>
                           <span className={styles.userName}>{user.name}</span>
@@ -120,7 +120,7 @@ export const Messages = (): JSX.Element => {
                             }
                             alt={bannerData.name}
                           />
-                          {usersOnline.includes(m.sender) && <div className={styles.online} />}
+                          {bannerData.isOnline && <div className={styles.online} />}
                         </Link>
                         <div className={styles.name}>
                           <span className={styles.userName}>{bannerData.name}</span>

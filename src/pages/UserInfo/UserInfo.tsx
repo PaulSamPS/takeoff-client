@@ -2,7 +2,6 @@ import React, { ChangeEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useChat } from '../../hooks/useChat';
 import styles from './UserInfo.module.scss';
-import { socket } from '../../helpers/socket';
 import { calculateTime } from '../../helpers/calculateTime';
 import { IUser, IUserAll } from '../../interfaces/user.interface';
 import { API_URL } from '../../http/axios';
@@ -15,12 +14,14 @@ import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
 import { useFollow } from '../../hooks/useFollow';
 import { useRequest } from '../../hooks/useRequest';
+import { SocketContext } from '../../helpers/context';
 
 interface IUserInfo {
   user: IUserAll;
 }
 
 export const UserInfo = () => {
+  const socket = React.useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users, sendMessage } = useChat();
   const { id } = useParams();
@@ -31,7 +32,7 @@ export const UserInfo = () => {
   const [text, setText] = React.useState<string>('');
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
-  const { followings, handleFollow, handleUnfollow } = useFollow(id);
+  const { followings, handleFollow, handleUnfollow } = useFollow();
   const { friendsUserInfo, friends, request, addFriend } = useRequest();
   const friendsDone = friends.map((friend) => friend.id);
   const requestsDone = request.map((request) => request.id);
@@ -56,15 +57,15 @@ export const UserInfo = () => {
   }, [text]);
 
   React.useEffect(() => {
-    socket.emit('userInfo:get', { userId: id });
-    socket.on('userInfo:user', ({ user }: IUserInfo) => {
+    socket?.emit('userInfo:get', { userId: id });
+    socket?.on('userInfo:user', ({ user }: IUserInfo) => {
       setUser(user);
     });
 
     return () => {
-      socket.off('userInfo:user');
+      socket?.off('userInfo:user');
     };
-  }, [id]);
+  }, [id, socket]);
 
   return (
     <div className={styles.container}>

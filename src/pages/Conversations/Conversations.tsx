@@ -24,15 +24,6 @@ export const Conversations = () => {
   const usersOnline = users.map((user: any) => user.userId);
   const [search, setSearch] = React.useState<string>('');
 
-  const filteredChats = React.useMemo(() => {
-    if (search.length < 2) {
-      return chats;
-    }
-    return chats.filter((chat: IChats) => {
-      return chat.name.toLocaleLowerCase().search(search.toLocaleLowerCase()) !== -1;
-    });
-  }, [search, users]);
-
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);
     navigate(`${id}`);
@@ -45,8 +36,8 @@ export const Conversations = () => {
   return (
     <div className={styles.wrapper}>
       <Search setSearch={setSearch} search={search} />
-      {filteredChats &&
-        filteredChats.map((chat: IChats, index: number) => (
+      {chats &&
+        chats.map((chat: IChats, index: number) => (
           <div key={index} className={styles.conversation}>
             <div className={styles.avatar}>
               <img
@@ -73,7 +64,7 @@ export const Conversations = () => {
             </div>
           </div>
         ))}
-      {filteredChats.length <= 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
+      {chats.length <= 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
     </div>
   );
 };

@@ -9,7 +9,7 @@ import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { Button } from '../Button/Button';
 import { calculateTime } from '../../helpers/calculateTime';
 import { useAppSelector } from '../../hooks/redux';
-import { socket } from '../../helpers/socket';
+import { SocketContext } from '../../helpers/context';
 
 interface IUserPost {
   _id: string;
@@ -30,6 +30,7 @@ interface ICommentsPost {
 }
 
 export const Post = ({ post }: PostProps) => {
+  const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const [likes, setLikes] = React.useState<ILikes[]>(post.likes);
   const [comments, setComments] = React.useState<ICommentsPost[]>(post.comments);
@@ -39,8 +40,8 @@ export const Post = ({ post }: PostProps) => {
 
   const handleLike = () => {
     setLikesLoading(true);
-    socket.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });
-    socket.once('post:liked', ({ likeId }) => {
+    socket?.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });
+    socket?.once('post:liked', ({ likeId }) => {
       if (isLiked) {
         setLikes((prev: any) => prev.filter((like: ILikes) => like.user._id !== user.id));
         setLikesLoading(false);
@@ -60,8 +61,8 @@ export const Post = ({ post }: PostProps) => {
   };
 
   const handleComment = () => {
-    socket.emit('comment:post', { postId: post._id, userId: user.id, text: text });
-    socket.once('post:commented', ({ commentId }) => {
+    socket?.emit('comment:post', { postId: post._id, userId: user.id, text: text });
+    socket?.once('post:commented', ({ commentId }) => {
       const newComment = {
         _id: commentId,
         user,

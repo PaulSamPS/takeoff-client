@@ -14,9 +14,7 @@ export const Friends = () => {
   const [activeSort, setActiveSort] = React.useState<number>(0);
   console.log(text);
 
-  React.useEffect(() => {
-    document.getElementById('input')?.focus();
-  }, []);
+  document.getElementById('input')?.focus();
 
   return (
     <div className={styles.wrapper}>

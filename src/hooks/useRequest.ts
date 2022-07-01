@@ -1,7 +1,7 @@
 import { useAppSelector } from './redux';
 import React from 'react';
-import { socket } from '../helpers/socket';
 import { useParams } from 'react-router-dom';
+import { SocketContext } from '../helpers/context';
 
 interface IUser {
   id: string | undefined;
@@ -12,6 +12,7 @@ interface IUser {
   role: string;
   avatar: string;
   lastVisit: Date;
+  isOnline: boolean;
 }
 
 interface IRequest {
@@ -32,6 +33,7 @@ interface IReturn {
 }
 
 export const useRequest = (): IReturn => {
+  const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const [request, setRequest] = React.useState<IUser[]>([]);
   const [friends, setFriends] = React.useState<IUser[]>([]);
@@ -40,41 +42,45 @@ export const useRequest = (): IReturn => {
   const { id } = useParams();
 
   const addFriend = (addFriendUserId: string | undefined) => {
-    socket.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
+    socket?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
   };
 
   const rejectFriend = (rejectFriendUserId: string | undefined) => {
-    socket.emit('friends:reject', { userId: user.id, userToRejectId: rejectFriendUserId });
+    socket?.emit('friends:reject', { userId: user.id, userToRejectId: rejectFriendUserId });
   };
 
   React.useEffect(() => {
-    socket.emit('friendsRequest:get', {
+    socket?.emit('friendsRequest:get', {
       userId: user.id,
     });
-    socket.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
+    socket?.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
+      setRequest(followingsUser);
+    });
+    socket?.on('followings:done', ({ followingsUser, followersUser }) => {
       setRequest(followingsUser);
     });
 
     return () => {
-      socket.off('friendsRequest:sent');
+      socket?.off('friendsRequest:sent');
+      socket?.off('followings:done');
     };
-  }, []);
+  }, [socket]);
 
   React.useEffect(() => {
-    socket.emit('friends:get', { userId: user.id });
-    socket.on('friends:set', ({ friendsUser }: IFriends) => {
+    socket?.emit('friends:get', { userId: user.id });
+    socket?.on('friends:set', ({ friendsUser }: IFriends) => {
       setFriends(friendsUser);
       setLoadingFriends(false);
     });
-    socket.emit('friendsUserInfo:get', { userId: id });
-    socket.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
+    socket?.emit('friendsUserInfo:get', { userId: id });
+    socket?.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
       setFriendsUserInfo(friendsUser);
     });
     return () => {
-      socket.off('friends:set');
-      socket.off('friendsUserInfo:set');
+      socket?.off('friends:set');
+      socket?.off('friendsUserInfo:set');
     };
-  }, [id]);
+  }, [socket]);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };

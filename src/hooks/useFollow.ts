@@ -1,6 +1,7 @@
 import React from 'react';
-import { socket } from '../helpers/socket';
 import { useAppSelector } from './redux';
+import { useParams } from 'react-router-dom';
+import { SocketContext } from '../helpers/context';
 
 interface IUser {
   id: string | undefined;
@@ -24,43 +25,39 @@ interface IFollowReturn {
   handleUnfollow: () => void;
 }
 
-export const useFollow = (id?: string | undefined): IFollowReturn => {
+export const useFollow = (): IFollowReturn => {
+  const socket = React.useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [followings, setFollowings] = React.useState<IUser[]>([]);
   const [followers, setFollowers] = React.useState<IUser[]>([]);
+  const { id } = useParams();
 
   const handleFollow = () => {
-    socket.emit('follow', { userId: id, userToFollowId: loginUser.id });
-    socket.emit('friendsRequest:get', {
-      userId: loginUser.id,
-    });
+    socket?.emit('follow', { userId: id, userToFollowId: loginUser.id });
   };
 
   const handleUnfollow = () => {
-    socket.emit('unfollow', { userId: id, userToUnfollowId: loginUser.id });
-    socket.emit('friendsRequest:get', {
-      userId: loginUser.id,
-    });
+    socket?.emit('unfollow', { userId: id, userToUnfollowId: loginUser.id });
   };
 
   React.useEffect(() => {
-    socket.emit('followings:get', {
+    socket?.emit('followings:get', {
       userId: id,
     });
-    socket.on('followings:sent', ({ followingsUser, followersUser }: IFollow) => {
+    socket?.on('followings:sent', ({ followingsUser, followersUser }: IFollow) => {
       setFollowings(followingsUser);
       setFollowers(followersUser);
     });
-    socket.on('followings:done', ({ followingsUser, followersUser }: IFollow) => {
+    socket?.on('followings:done', ({ followingsUser, followersUser }: IFollow) => {
       setFollowings(followingsUser);
       setFollowers(followersUser);
     });
 
     return () => {
-      socket.off('followings:sent');
-      socket.off('followings:done');
+      socket?.off('followings:sent');
+      socket?.off('followings:done');
     };
-  }, [id]);
+  }, [socket]);
 
   return { followings, followers, handleFollow, handleUnfollow };
 };

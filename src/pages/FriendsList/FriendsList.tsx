@@ -9,7 +9,6 @@ import { useRequest } from '../../hooks/useRequest';
 export const FriendsList = () => {
   const { scrollY } = useScroll();
   const { request } = useRequest();
-  console.log(scrollY);
   return (
     <div className={styles.wrapper}>
       <Outlet />

@@ -2,12 +2,13 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from './redux';
 import { getChatUser } from '../redux/actions/chatAction';
 import { filteredChats } from '../helpers/filteChats';
-import { socket } from '../helpers/socket';
+import { SocketContext } from '../helpers/context';
 
 interface IBanner {
   name: string | undefined;
   avatar: string | undefined;
   lastVisit?: Date | number;
+  isOnline?: boolean;
 }
 
 // interface IMessagesWith {
@@ -69,6 +70,7 @@ interface IUsers {
 }
 
 export const useChat = () => {
+  const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const { conversation } = useAppSelector((state) => state.conversationReducer);
   const _id = localStorage.getItem('id');
@@ -79,61 +81,66 @@ export const useChat = () => {
     name: '',
     avatar: '',
     lastVisit: 0,
+    isOnline: false,
   });
+
   const openChatId = React.useRef<string | null>('');
   const [chats, setChats] = React.useState<any>(conversation);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
 
   React.useEffect(() => {
-    socket.emit('user:add', { userId: user.id });
-    socket.on('user_list:update', ({ users }: IUsers) => {
+    socket?.emit('user:add', { userId: user.id });
+    socket?.once('user_list:update', ({ users }: IUsers) => {
       setUsers(users);
     });
 
     return () => {
-      socket.off('connect');
-      socket.off('user_list:update');
-      socket.off('disconnect');
+      socket?.off('user_list:update');
     };
-  }, []);
+  }, [socket]);
 
   React.useEffect(() => {
-    socket.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
+    socket?.emit('chat:get', { userId: user.id });
+    socket?.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
       setChats(chatsToBeSent);
       setLoading(false);
     });
-    socket.emit('chat:get', { userId: user.id });
     return () => {
-      socket.off('chat:send');
+      socket?.off('chat:send');
     };
   }, [socket, window.location.pathname]);
 
   React.useEffect(() => {
-    socket.emit('messages:get', {
+    socket?.emit('messages:get', {
       userId: user.id,
       messagesWith: _id,
     });
 
-    socket.on('message_list:update', ({ chat }: any) => {
+    socket?.on('message_list:update', ({ chat }: any) => {
       setMessages(chat.messages.slice(-20));
       setBannerData({
         name: chat.messagesWith.name,
         avatar: chat.messagesWith.avatar,
         lastVisit: chat.messagesWith.lastVisit,
+        isOnline: chat.messagesWith.isOnline,
       });
       openChatId.current = chat.messagesWith._id;
       setLoadingMessages(false);
     });
 
-    socket.on('chat:notFound', () => {
+    socket?.on('chat:notFound', () => {
       setMessages([]);
       openChatId.current = _id;
     });
-  }, []);
+    return () => {
+      socket?.off('message_list:update');
+      socket?.off('chat:notFound');
+    };
+  }, [socket]);
 
   const sendMessage = (message: string | null) => {
-    socket.emit('message:add', {
+    socket?.emit('message:add', {
       userId: user.id,
       msgSendToUserId: _id,
       message,
@@ -141,7 +148,7 @@ export const useChat = () => {
   };
 
   React.useEffect(() => {
-    socket.on('messages:sent', ({ newMessage }: INewMessage) => {
+    socket?.on('messages:sent', ({ newMessage }: INewMessage) => {
       if (newMessage.receiver === _id) {
         setMessages((prev: any) => [...prev, newMessage]);
         setChats((prev: IChatToBoSent[]) => {
@@ -152,7 +159,7 @@ export const useChat = () => {
       }
     });
 
-    socket.on('message:received', async ({ newMessage }: INewMessage) => {
+    socket?.on('message:received', async ({ newMessage }: INewMessage) => {
       if (newMessage.sender === _id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev: IChatToBoSent[]) => {
@@ -190,16 +197,16 @@ export const useChat = () => {
         }
       }
     });
-  }, []);
+  }, [socket]);
 
   const deleteMessage = (messageId: string) => {
-    socket.emit('message:delete', {
+    socket?.emit('message:delete', {
       userId: user.id,
       messagesWith: _id,
       messageId,
     });
 
-    socket.on('message:deleted', () => {
+    socket?.on('message:deleted', () => {
       setMessages((prev) => prev.filter((message) => message._id !== messageId));
     });
   };

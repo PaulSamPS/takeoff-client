@@ -7,6 +7,7 @@ export interface IUser {
   role: string;
   avatar: string;
   lastVisit: Date;
+  isOnline: boolean;
 }
 
 export interface IResponseUser {
