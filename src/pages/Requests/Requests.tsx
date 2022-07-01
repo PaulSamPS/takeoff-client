@@ -43,7 +43,7 @@ export const Requests = () => {
             </div>
           ))
         ) : (
-          <h3>Пока нет запросов</h3>
+          <span className={styles.noRequests}>Пока нет запросов</span>
         )}
       </div>
     </div>

@@ -1,21 +1,43 @@
-@import "./src/scss/index";
-
-.search {
+.wrapper {
 	position: relative;
+	top: 70px;
 	width: 100%;
+	background: var(--white);
 
-	.input input {
+	.input {
 		width: 100%;
-		padding-right: 50px;
-		border: none !important;
+		padding: 15px 10px 15px 50px;
+		overflow: hidden;
+		color: var(--grey);
+		font-size: 13px;
+		word-wrap: break-word;
+		border-bottom: 1px solid var(--border);
+		resize: none;
+
+		&:focus {
+			outline: none;
+		}
+
+		&[contenteditable="true"]:empty::before {
+			display: block;
+			color: var(--grey300);
+			content: attr(placeholder);
+		}
 	}
 
-	.icon {
+	button {
 		position: absolute;
-		top: 8px;
-		right: 10px;
-		width: 20px;
-		height: 20px;
-		opacity: 0.5;
+		top: 13px;
+		left: 18px;
+		min-width: unset;
+		padding: 0;
+		background: none;
+		box-shadow: none;
+
+		svg {
+			width: 20px;
+			height: 20px;
+			fill: var(--blue);
+		}
 	}
 }

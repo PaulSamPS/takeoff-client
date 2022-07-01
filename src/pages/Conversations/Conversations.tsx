@@ -22,7 +22,8 @@ export const Conversations = () => {
   const { chats, users } = useChat();
   const navigate = useNavigate();
   const usersOnline = users.map((user: any) => user.userId);
-  const [search, setSearch] = React.useState<string>('');
+  const [search, setSearch] = React.useState<string | null>('');
+  console.log(search);
 
   const navigateToChat = (id: string) => {
     localStorage.setItem('id', id);
@@ -35,7 +36,7 @@ export const Conversations = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Search setSearch={setSearch} search={search} />
+      <Search setText={setSearch} />
       {chats &&
         chats.map((chat: IChats, index: number) => (
           <div key={index} className={styles.conversation}>

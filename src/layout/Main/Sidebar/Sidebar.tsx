@@ -37,7 +37,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         {total > 0 && <Count>{total}</Count>}
       </CustomLink>
       <CustomLink to={'friends'}>
-        <FriendsIcon /> Друзья {request.length > 0 && <Count>{request.length}</Count>}
+        <FriendsIcon /> Друзья {request && request.length > 0 && <Count>{request.length}</Count>}
       </CustomLink>
       <CustomLink to={'people'}>
         <PeopleSearchIcon /> Люди

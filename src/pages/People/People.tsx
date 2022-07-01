@@ -9,8 +9,9 @@ import styles from './People.module.scss';
 export const People = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const { users, isLoading } = useAppSelector((state) => state.usersReducer);
-  const [search, setSearch] = React.useState<string>('');
+  const [search, setSearch] = React.useState<string | null>('');
   const dispatch = useAppDispatch();
+  console.log(search);
 
   React.useEffect(() => {
     // dispatch(refreshToken()).then(() => {
@@ -33,7 +34,7 @@ export const People = () => {
   }
   return (
     <div className={styles.wrapper}>
-      <Search setSearch={setSearch} search={search} />
+      <Search setText={setSearch} />
       {users
         .filter((u) => u._id !== user.id)
         .map((user) => (

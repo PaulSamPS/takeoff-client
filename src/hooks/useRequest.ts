@@ -40,7 +40,7 @@ export const useRequest = (): IReturn => {
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
   const { id } = useParams();
-
+  console.log('req', request);
   const addFriend = (addFriendUserId: string | undefined) => {
     socket?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
   };
@@ -56,7 +56,7 @@ export const useRequest = (): IReturn => {
     socket?.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
     });
-    socket?.on('followings:done', ({ followingsUser, followersUser }) => {
+    socket?.on('followings:done', ({ followingsUser }) => {
       setRequest(followingsUser);
     });
 

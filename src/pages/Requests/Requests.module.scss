@@ -1,10 +1,11 @@
 .followersWrapper {
 	display: grid;
 	grid-template-columns: 1fr;
-	min-width: 550px;
-	border-radius: 5px;
+	width: 550px;
 	background: var(--white);
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+	height: calc(100vh - 160px);
+	border-radius: 5px;
 
 	.top {
 		padding: 20px;
@@ -70,8 +71,12 @@
 			}
 		}
 
-		h3 {
-			text-align: center;
+		.noRequests {
+			color: #939393;
+			font-size: 13px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 }
