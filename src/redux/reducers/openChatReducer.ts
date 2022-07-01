@@ -18,7 +18,9 @@ export const openChatReducer = createSlice({
   initialState,
   reducers: {
     setOpenChat(state, action: PayloadAction<IOpenChat>) {
-      state.openChat = state.openChat.concat(action.payload);
+      state.openChat = state.openChat
+        .filter((f) => f.name !== action.payload.name)
+        .concat(action.payload);
     },
   },
 });

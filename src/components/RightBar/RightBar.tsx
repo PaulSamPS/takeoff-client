@@ -27,7 +27,11 @@ export const RightBar = ({
       <CustomLink to={firstItemLink} appearance='rightMenu'>
         {firstItem}
       </CustomLink>
-      <CustomLink to={secondItemLink} appearance='rightMenu'>
+      <CustomLink
+        to={secondItemLink}
+        appearance='rightMenu'
+        style={{ borderBottom: openChat.length > 0 ? '1px solid var(--borderColor)' : 'none' }}
+      >
         {secondItem} {arr.length > 0 && <Count className={styles.count}>{arr.length}</Count>}
       </CustomLink>
       {openChat.length > 0 &&

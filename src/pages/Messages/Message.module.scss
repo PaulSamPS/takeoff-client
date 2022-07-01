@@ -16,7 +16,7 @@
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
 	align-items: center;
-	width: 770px;
+	width: 550px;
 	padding: 10px 20px;
 	background: var(--white);
 	border-radius: 5px 5px 0 0;
@@ -63,7 +63,7 @@
 }
 
 .wrapper {
-	width: 770px;
+	width: 550px;
 	padding: 70px 20px 120px;
 	background: var(--white);
 	border-bottom: 0 solid var(--bg);
@@ -178,7 +178,7 @@
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 	.bottom {
-		width: 770px;
+		width: 550px;
 		padding: 20px;
 		column-gap: 20px;
 		background: var(--bg-grey-light);
