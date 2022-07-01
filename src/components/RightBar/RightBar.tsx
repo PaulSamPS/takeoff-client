@@ -4,9 +4,17 @@ import { CustomLink } from '../CustomLink/CustomLink';
 import { Count } from '../Count/Count';
 import { RightBarProps } from './RightBar.props';
 import { useScroll } from '../../hooks/usseScroll';
+import { useAppSelector } from '../../hooks/redux';
 
-export const RightBar = ({ arr, firstItem, secondItem }: RightBarProps): JSX.Element => {
+export const RightBar = ({
+  arr,
+  firstItem,
+  secondItem,
+  firstItemLink,
+  secondItemLink,
+}: RightBarProps): JSX.Element => {
   const { scrollY } = useScroll();
+  const { openChat } = useAppSelector((state) => state.openChatReducer);
 
   return (
     <div
@@ -16,12 +24,18 @@ export const RightBar = ({ arr, firstItem, secondItem }: RightBarProps): JSX.Ele
         top: scrollY >= 20 ? '71px' : '0',
       }}
     >
-      <CustomLink to={'/main/friends'} appearance='rightMenu'>
+      <CustomLink to={firstItemLink} appearance='rightMenu'>
         {firstItem}
       </CustomLink>
-      <CustomLink to={'/main/friends/requests'} appearance='rightMenu'>
+      <CustomLink to={secondItemLink} appearance='rightMenu'>
         {secondItem} {arr.length > 0 && <Count className={styles.count}>{arr.length}</Count>}
       </CustomLink>
+      {openChat.length > 0 &&
+        openChat.map((c) => (
+          <CustomLink to={c.link} key={c.link} appearance='rightMenu'>
+            {c.name}
+          </CustomLink>
+        ))}
     </div>
   );
 };

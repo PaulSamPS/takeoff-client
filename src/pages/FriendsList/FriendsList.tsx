@@ -9,7 +9,13 @@ export const FriendsList = () => {
   return (
     <div className={styles.wrapper}>
       <Outlet />
-      <RightBar arr={request} firstItem={'Мои друзья'} secondItem={'Заявки в друзья'} />
+      <RightBar
+        arr={request}
+        firstItem={'Мои друзья'}
+        secondItem={'Заявки в друзья'}
+        firstItemLink={'/main/friends'}
+        secondItemLink={'/main/friends/requests'}
+      />
     </div>
   );
 };

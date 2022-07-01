@@ -17,6 +17,8 @@ import { FriendsList } from './pages/FriendsList/FriendsList';
 import { People } from './pages/People/People';
 import { Requests } from './pages/Requests/Requests';
 import { Friends } from './pages/Friends/Friends';
+import { ConversationsList } from './pages/ConversationsList/ConversationsList';
+import { ConversationsUnread } from './pages/ConversationsUnread/ConversationsUnread';
 
 export const App = () => {
   return (
@@ -39,9 +41,10 @@ export const App = () => {
             <Route index element={<Main />} />
             <Route path='profile' element={<Profile />} />
             <Route path='dialogs/:name' element={<Dialogs />} />
-            <Route path='conversations/:id' element={<Messages />} />
-            <Route path='conversations' element={<Conversations />}>
+            <Route path='conversations' element={<ConversationsList />}>
               <Route index element={<Conversations />} />
+              <Route path='unread' element={<ConversationsUnread />} />
+              <Route path=':id' element={<Messages />} />
             </Route>
             <Route path='people' element={<People />} />
             <Route path='people/:id' element={<UserInfo />} />

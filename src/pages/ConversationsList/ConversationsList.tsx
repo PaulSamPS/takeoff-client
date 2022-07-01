@@ -9,7 +9,13 @@ export const ConversationsList = () => {
   return (
     <div className={styles.wrapper}>
       <Outlet />
-      <RightBar arr={chats} firstItem={'Все чаты'} secondItem={'Непрочитанные'} />
+      <RightBar
+        arr={chats}
+        firstItem={'Все чаты'}
+        secondItem={'Непрочитанные'}
+        firstItemLink={'/main/conversations'}
+        secondItemLink={'/main/conversations/unread'}
+      />
     </div>
   );
 };

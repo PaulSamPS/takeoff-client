@@ -8,6 +8,7 @@ import loginReducer from './reducers/auth/loginReducer';
 import usersReducer from './reducers/usersReducer';
 import conversationReducer from './reducers/conversationReducer';
 import postsReducer from './reducers/postsReducer';
+import openChatReducer from './reducers/openChatReducer';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   usersReducer,
   conversationReducer,
   postsReducer,
+  openChatReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

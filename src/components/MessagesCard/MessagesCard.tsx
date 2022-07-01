@@ -5,10 +5,22 @@ import { Link } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import { useChat } from '../../hooks/useChat';
 import { MessagesCardProp } from './MessagesCard.prop';
+import { useAppDispatch } from '../../hooks/redux';
+import { setOpenChat } from '../../redux/reducers/openChatReducer';
 
 export const MessagesCard = ({ chat }: MessagesCardProp) => {
   const { users } = useChat();
   const usersOnline = users.map((user: any) => user.userId);
+  const dispatch = useAppDispatch();
+
+  const handleOpenChat = () => {
+    const openChat = {
+      name: chat.name,
+      link: `/main/conversations/${chat.messagesWith}`,
+    };
+    dispatch(setOpenChat(openChat));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.avatar}>
@@ -22,7 +34,7 @@ export const MessagesCard = ({ chat }: MessagesCardProp) => {
         />
         {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
       </div>
-      <Link to={`${chat.messagesWith}`} className={styles.body}>
+      <Link to={`${chat.messagesWith}`} className={styles.body} onClick={handleOpenChat}>
         <div className={styles.text}>
           <span className={styles.name}>{chat.name}</span>
           <span className={styles.message}>{chat.lastMessage.substring(0, 50)}...</span>
