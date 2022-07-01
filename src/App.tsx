@@ -40,7 +40,9 @@ export const App = () => {
             <Route path='profile' element={<Profile />} />
             <Route path='dialogs/:name' element={<Dialogs />} />
             <Route path='conversations/:id' element={<Messages />} />
-            <Route path='conversations' element={<Conversations />} />
+            <Route path='conversations' element={<Conversations />}>
+              <Route index element={<Conversations />} />
+            </Route>
             <Route path='people' element={<People />} />
             <Route path='people/:id' element={<UserInfo />} />
             <Route path='friends' element={<FriendsList />}>

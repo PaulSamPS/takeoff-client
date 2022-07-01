@@ -1,86 +1,14 @@
 @import "../../scss/index";
 
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	row-gap: 20px;
-	width: 100%;
+	width: 550px;
+	border-radius: 5px;
+	background: var(--white);
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+	height: calc(100vh - 160px);
 
 	.searchResult {
 		margin-top: 40px;
 		text-align: center;
-	}
-
-	.conversation {
-		display: grid;
-		grid-template-columns: 50px 1fr auto;
-		padding: 15px;
-		column-gap: 20px;
-		background: var(--white);
-		border-radius: 10px;
-
-		.avatar {
-			position: relative;
-
-			img {
-				width: 50px;
-				height: 50px;
-				object-fit: cover;
-				border-radius: 50%;
-			}
-
-			.online {
-				position: absolute;
-				right: 6px;
-				bottom: 5px;
-				width: 8px;
-				height: 8px;
-				background: var(--green);
-				border-radius: 50%;
-			}
-		}
-
-		.text {
-			display: grid;
-			grid-template-columns: 1fr;
-
-			.name {
-				font-weight: 500;
-				font-size: 13px;
-			}
-
-			.message {
-				color: var(--grey);
-				font-size: 13px;
-				cursor: pointer;
-			}
-		}
-
-		.right {
-			display: grid;
-			grid-template-areas: "date" "count";
-			grid-template-columns: 1fr;
-			justify-items: center;
-
-			.unreadMessages {
-				display: flex;
-				grid-area: count;
-				align-items: center;
-				justify-content: center;
-				width: 20px;
-				height: 20px;
-				color: var(--white);
-				font-size: 13px;
-				line-height: 0;
-				background: var(--grey300);
-				border-radius: 50%;
-			}
-
-			span {
-				grid-area: date;
-				color: var(--grey);
-				font-size: 13px;
-			}
-		}
 	}
 }
