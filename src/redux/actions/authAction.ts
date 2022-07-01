@@ -33,7 +33,7 @@ export const login = (formData: ILoginForm) => async (dispatch: AppDispatch) => 
     });
 };
 
-export const logout = () => async (dispatch: AppDispatch) => {
+export const logout = () => (dispatch: AppDispatch) => {
   dispatch(loginReducer.actions.setLoading());
   localStorage.clear();
   dispatch(loginReducer.actions.setSuccess({} as IUser));

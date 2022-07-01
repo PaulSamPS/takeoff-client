@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 import styles from './Layout.module.scss';
 import React from 'react';
@@ -21,17 +21,15 @@ export const Layout = () => {
     name: '',
     avatar: '',
   });
-  const location = useLocation();
-  console.log(location.pathname);
 
   React.useEffect(() => {
     socket?.on('message:received', async ({ newMessage }) => {
-      if (location.pathname !== `/main/conversations/${newMessage.sender}`) {
+      if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
         setBannerData({ name: user?.name, avatar: user?.avatar });
         socket?.emit('message:toUnread', {
-          userId: loginUser.id,
-          msgSendToUserId: newMessage.sender,
+          receiver: loginUser.id,
+          sender: newMessage.sender,
         });
         setTimeout(() => {
           socket?.emit('chat:get', { userId: loginUser.id });

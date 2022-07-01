@@ -141,8 +141,8 @@ export const useChat = () => {
 
   const sendMessage = (message: string | null) => {
     socket?.emit('message:add', {
-      userId: user.id,
-      msgSendToUserId: _id,
+      sender: user.id,
+      receiver: _id,
       message,
     });
   };
