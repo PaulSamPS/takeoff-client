@@ -17,6 +17,7 @@ export const MessagesCard = ({ chat }: MessagesCardProp) => {
     const openChat = {
       name: chat.name,
       link: `/main/conversations/${chat.messagesWith}`,
+      id: chat.messagesWith,
     };
     dispatch(setOpenChat(openChat));
   };

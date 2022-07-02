@@ -7,6 +7,7 @@ import { IRegistrationForm } from '../../interfaces/registrationForm.interface';
 import { loginReducer } from '../reducers/auth/loginReducer';
 import { IResponseUser, IUser } from '../../interfaces/user.interface';
 import { ILoginForm } from '../../interfaces/loginForm.interface';
+import { setResetOpenChat } from '../reducers/openChatReducer';
 
 export const registration = (formData: IRegistrationForm) => async (dispatch: AppDispatch) => {
   dispatch(registrationReducer.actions.setLoading());
@@ -36,6 +37,7 @@ export const login = (formData: ILoginForm) => async (dispatch: AppDispatch) => 
 export const logout = () => (dispatch: AppDispatch) => {
   dispatch(loginReducer.actions.setLoading());
   localStorage.clear();
+  dispatch(setResetOpenChat());
   dispatch(loginReducer.actions.setSuccess({} as IUser));
 };
 

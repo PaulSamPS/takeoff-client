@@ -4,7 +4,10 @@ import { CustomLink } from '../CustomLink/CustomLink';
 import { Count } from '../Count/Count';
 import { RightBarProps } from './RightBar.props';
 import { useScroll } from '../../hooks/usseScroll';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
+import { deleteChat } from '../../redux/reducers/openChatReducer';
+import { Link, useParams } from 'react-router-dom';
 
 export const RightBar = ({
   arr,
@@ -16,6 +19,12 @@ export const RightBar = ({
 }: RightBarProps): JSX.Element => {
   const { scrollY } = useScroll();
   const { openChat } = useAppSelector((state) => state.openChatReducer);
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
+
+  const handleDeleteChat = (chatId: string) => {
+    dispatch(deleteChat(chatId));
+  };
 
   return (
     <div
@@ -31,12 +40,21 @@ export const RightBar = ({
       <CustomLink to={secondItemLink} appearance='rightMenu'>
         {secondItem} {arr.length > 0 && <Count className={styles.count}>{arr.length}</Count>}
       </CustomLink>
-      {openChat.length > 0 && <hr />}
+      {openChat.length > 0 && isFixed && <hr />}
       {openChat.length > 0 &&
+        isFixed &&
         openChat.map((c) => (
-          <CustomLink to={c.link} key={c.link} appearance='rightMenu'>
-            {c.name}
-          </CustomLink>
+          <div key={c.id} className={styles.item}>
+            <CustomLink to={c.link} appearance='rightMenu' className={styles.chatLink}>
+              {c.name}
+            </CustomLink>
+            <Link
+              to={id === c.id ? '/main/conversations' : ''}
+              onClick={() => handleDeleteChat(c.id)}
+            >
+              <CloseIcon />
+            </Link>
+          </div>
         ))}
     </div>
   );
