@@ -25,7 +25,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         return sum + elem;
       }, 0);
     setTotal(totalUnreadMessages);
-  }, [socket, chats, window.location.pathname]);
+  }, [socket, chats]);
 
   return (
     <div className={cn(styles.wrapper, className)}>

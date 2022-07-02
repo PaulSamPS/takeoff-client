@@ -10,7 +10,7 @@ export const FriendsList = () => {
     <div className={styles.wrapper}>
       <Outlet />
       <RightBar
-        arr={request}
+        totalUnviewed={request.length}
         firstItem={'Мои друзья'}
         secondItem={'Заявки в друзья'}
         firstItemLink={'/main/friends'}

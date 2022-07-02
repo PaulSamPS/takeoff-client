@@ -61,6 +61,7 @@
     .right {
       display: grid;
       grid-template-areas: "date" "count";
+      row-gap: 10px;
       grid-template-columns: 1fr;
       justify-items: center;
 

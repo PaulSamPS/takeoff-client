@@ -10,7 +10,7 @@ import { deleteChat } from '../../redux/reducers/openChatReducer';
 import { Link, useParams } from 'react-router-dom';
 
 export const RightBar = ({
-  arr,
+  totalUnviewed,
   firstItem,
   secondItem,
   firstItemLink,
@@ -38,7 +38,7 @@ export const RightBar = ({
         {firstItem}
       </CustomLink>
       <CustomLink to={secondItemLink} appearance='rightMenu'>
-        {secondItem} {arr.length > 0 && <Count className={styles.count}>{arr.length}</Count>}
+        {secondItem} {totalUnviewed > 0 && <Count className={styles.count}>{totalUnviewed}</Count>}
       </CustomLink>
       {openChat.length > 0 && isFixed && <hr />}
       {openChat.length > 0 &&

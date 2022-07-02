@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
+import { ReactComponent as ArrowBack } from '../../helpers/icons/arrowBack.svg';
 import styles from './Message.module.scss';
 import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
@@ -61,7 +62,11 @@ export const Messages = (): JSX.Element => {
     <>
       <div className={styles.borderTop} />
       <div className={styles.chatWith}>
-        <div className={styles.back}>Назад</div>
+        <div className={styles.back}>
+          <Link to={'/main/conversations'}>
+            <ArrowBack /> Назад
+          </Link>
+        </div>
         <div className={styles.chatWithName}>
           <span className={styles.user}>{bannerData.name}</span>
           <span className={styles.lastVisit}>
