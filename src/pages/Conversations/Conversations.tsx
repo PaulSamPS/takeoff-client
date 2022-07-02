@@ -27,7 +27,7 @@ export const Conversations = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Search setText={setSearch} />
+      <Search setText={setSearch} className={styles.search} />
       {chats.map((chat: IChats) => (
         <MessagesCard key={chat.messagesWith} chat={chat} />
       ))}

@@ -14,7 +14,7 @@
 	transition: color ease 0.2s;
 
 	&:hover {
-		background: rgba(174, 183, 194, 0.16);
+		background: rgba(174, 183, 194, 0.10);
 	}
 
 	svg {
@@ -41,6 +41,6 @@
 
 .activeRightBar {
 	border-left: 2px solid var(--blue);
-	background: rgba(174, 183, 194, 0.16);;
+	background: rgba(174, 183, 194, 0.16);
 	color: var(--black);
 }

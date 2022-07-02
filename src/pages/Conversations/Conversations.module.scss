@@ -7,6 +7,10 @@
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 	height: calc(100vh - 160px);
 
+	.search {
+		border-radius: 5px 5px 0 0;
+	}
+
 	.searchResult {
 		margin-top: 40px;
 		text-align: center;

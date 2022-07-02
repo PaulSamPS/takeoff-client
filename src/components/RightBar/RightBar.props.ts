@@ -12,5 +12,5 @@ export interface RightBarProps
   secondItem: string;
   firstItemLink: string;
   secondItemLink: string;
-  openChat?: IOpenChat;
+  isFixed?: boolean;
 }

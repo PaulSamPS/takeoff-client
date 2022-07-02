@@ -12,6 +12,7 @@ export const RightBar = ({
   secondItem,
   firstItemLink,
   secondItemLink,
+  isFixed,
 }: RightBarProps): JSX.Element => {
   const { scrollY } = useScroll();
   const { openChat } = useAppSelector((state) => state.openChatReducer);
@@ -20,20 +21,17 @@ export const RightBar = ({
     <div
       className={styles.wrapper}
       style={{
-        position: scrollY >= 20 ? 'sticky' : 'relative',
-        top: scrollY >= 20 ? '71px' : '0',
+        position: !isFixed ? (scrollY >= 20 ? 'sticky' : 'relative') : 'sticky',
+        top: !isFixed ? (scrollY >= 20 ? '71px' : '0') : '91px',
       }}
     >
       <CustomLink to={firstItemLink} appearance='rightMenu'>
         {firstItem}
       </CustomLink>
-      <CustomLink
-        to={secondItemLink}
-        appearance='rightMenu'
-        style={{ borderBottom: openChat.length > 0 ? '1px solid var(--borderColor)' : 'none' }}
-      >
+      <CustomLink to={secondItemLink} appearance='rightMenu'>
         {secondItem} {arr.length > 0 && <Count className={styles.count}>{arr.length}</Count>}
       </CustomLink>
+      {openChat.length > 0 && <hr />}
       {openChat.length > 0 &&
         openChat.map((c) => (
           <CustomLink to={c.link} key={c.link} appearance='rightMenu'>

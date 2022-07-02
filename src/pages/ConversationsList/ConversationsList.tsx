@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../FriendsList/Friendslist.module.scss';
+import styles from './ConversationList.module.scss';
 import { Outlet } from 'react-router-dom';
 import { RightBar } from '../../components/RightBar/RightBar';
 import { useChat } from '../../hooks/useChat';
@@ -15,6 +15,7 @@ export const ConversationsList = () => {
         secondItem={'Непрочитанные'}
         firstItemLink={'/main/conversations'}
         secondItemLink={'/main/conversations/unread'}
+        isFixed={true}
       />
     </div>
   );

@@ -13,7 +13,7 @@ import openChatReducer from './reducers/openChatReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['loginReducer'],
+  whitelist: ['loginReducer', 'openChatReducer'],
 };
 
 const rootReducer = combineReducers({

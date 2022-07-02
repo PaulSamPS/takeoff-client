@@ -6,10 +6,20 @@
   background: var(--white);
   width: 220px;
   margin-left: 10px;
+  z-index: 10;
 
   a {
     .count {
       background: var(--blue-alternative);
     }
+  }
+
+  hr {
+    display: block;
+    height: 1px;
+    width: 178px;
+    background: var(--border);
+    margin: 5px 0 5px 20px;
+    opacity: 0.3;
   }
 }
