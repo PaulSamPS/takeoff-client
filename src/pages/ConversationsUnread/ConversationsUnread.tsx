@@ -26,7 +26,13 @@ export const ConversationsUnread = () => {
   }
 
   return (
-    <div className={styles.wrapper} style={{ display: chats.length <= 0 ? 'grid' : 'block' }}>
+    <div
+      className={styles.wrapper}
+      style={{
+        display:
+          chats.filter((chat: IChats) => chat.countUnreadMessages).length <= 0 ? 'grid' : 'block',
+      }}
+    >
       {chats.filter((chat: IChats) => chat.countUnreadMessages).length > 0 && (
         <Search setText={setSearch} className={styles.search} />
       )}
