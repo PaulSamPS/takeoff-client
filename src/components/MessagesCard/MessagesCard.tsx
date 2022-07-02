@@ -35,7 +35,11 @@ export const MessagesCard = ({ chat }: MessagesCardProp) => {
         />
         {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
       </div>
-      <Link to={`${chat.messagesWith}`} className={styles.body} onClick={handleOpenChat}>
+      <Link
+        to={`/main/conversations/${chat.messagesWith}`}
+        className={styles.body}
+        onClick={handleOpenChat}
+      >
         <div className={styles.text}>
           <span className={styles.name}>{chat.name}</span>
           <span className={styles.message}>{chat.lastMessage.substring(0, 50)}...</span>

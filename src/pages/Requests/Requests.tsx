@@ -9,7 +9,10 @@ export const Requests = () => {
   const { request, addFriend, rejectFriend } = useRequest();
 
   return (
-    <div className={styles.followersWrapper}>
+    <div
+      className={styles.followersWrapper}
+      style={{ display: request.length <= 0 ? 'grid' : 'block' }}
+    >
       {request.length > 0 && <div className={styles.top}>Заявки в друзья</div>}
       <div className={styles.grid}>
         {request.length > 0 ? (

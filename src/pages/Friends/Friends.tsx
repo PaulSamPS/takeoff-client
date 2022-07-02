@@ -14,7 +14,7 @@ export const Friends = () => {
   document.getElementById('input')?.focus();
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={{ display: friends.length <= 0 ? 'grid' : 'block' }}>
       {friends.length > 0 && (
         <div className={styles.top}>
           <div

@@ -26,12 +26,12 @@ export const Conversations = () => {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <Search setText={setSearch} className={styles.search} />
+    <div className={styles.wrapper} style={{ display: chats.length <= 0 ? 'grid' : 'block' }}>
+      {chats.length > 0 && <Search setText={setSearch} className={styles.search} />}
       {chats.map((chat: IChats) => (
         <MessagesCard key={chat.messagesWith} chat={chat} />
       ))}
-      {chats.length <= 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
+      {chats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
     </div>
   );
 };

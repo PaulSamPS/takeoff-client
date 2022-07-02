@@ -11,8 +11,11 @@
 		border-radius: 5px 5px 0 0;
 	}
 
-	.searchResult {
-		margin-top: 40px;
-		text-align: center;
+	.noMessages {
+		color: #939393;
+		font-size: 13px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }
