@@ -19,43 +19,48 @@ import { Requests } from './pages/Requests/Requests';
 import { Friends } from './pages/Friends/Friends';
 import { ConversationsList } from './pages/ConversationsList/ConversationsList';
 import { ConversationsUnread } from './pages/ConversationsUnread/ConversationsUnread';
+import { context, SocketContext } from './helpers/context';
 
 export const App = () => {
+  const { socket } = context();
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<AuthLayout />}>
-            <Route index element={<Login />} />
-            <Route path='/registration' element={<Registration />} />
-            <Route path='/registration/success' element={<RegistrationSuccess />} />
-          </Route>
-          <Route
-            path='/main'
-            element={
-              <PrivateAuth>
-                <Layout />
-              </PrivateAuth>
-            }
-          >
-            <Route index element={<Main />} />
-            <Route path='profile' element={<Profile />} />
-            <Route path='dialogs/:name' element={<Dialogs />} />
-            <Route path='conversations' element={<ConversationsList />}>
-              <Route index element={<Conversations />} />
-              <Route path='unread' element={<ConversationsUnread />} />
-              <Route path=':id' element={<Messages />} />
+      <SocketContext.Provider value={socket}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<AuthLayout />}>
+              <Route index element={<Login />} />
+              <Route path='/registration' element={<Registration />} />
+              <Route path='/registration/success' element={<RegistrationSuccess />} />
             </Route>
-            <Route path='people' element={<People />} />
-            <Route path='people/:id' element={<UserInfo />} />
-            <Route path='friends' element={<FriendsList />}>
-              <Route index element={<Friends />} />
-              <Route path='requests' element={<Requests />} />
+            <Route
+              path='/main'
+              element={
+                <PrivateAuth>
+                  <Layout />
+                </PrivateAuth>
+              }
+            >
+              <Route index element={<Main />} />
+              <Route path='profile' element={<Profile />} />
+              <Route path='dialogs/:name' element={<Dialogs />} />
+              <Route path='conversations' element={<ConversationsList />}>
+                <Route index element={<Conversations />} />
+                <Route path='unread' element={<ConversationsUnread />} />
+                <Route path=':id' element={<Messages />} />
+              </Route>
+              <Route path='people' element={<People />} />
+              <Route path='people/:id' element={<UserInfo />} />
+              <Route path='friends' element={<FriendsList />}>
+                <Route index element={<Friends />} />
+                <Route path='requests' element={<Requests />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path='*' element={<Navigate to='/' replace />} />
-        </Routes>
-      </BrowserRouter>
+            <Route path='*' element={<Navigate to='/' replace />} />
+          </Routes>
+        </BrowserRouter>
+      </SocketContext.Provider>
     </>
   );
 };

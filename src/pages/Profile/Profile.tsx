@@ -8,7 +8,6 @@ import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
 import { motion } from 'framer-motion';
 import styles from './Profile.module.scss';
-import { useChat } from '../../hooks/useChat';
 import { Info } from '../../components/Info/Info';
 import { calculateTime } from '../../helpers/calculateTime';
 
@@ -16,7 +15,7 @@ export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
-  const { users } = useChat();
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const usersOnline = users.map((user: any) => user.userId);
 
   return (

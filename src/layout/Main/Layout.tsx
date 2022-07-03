@@ -1,16 +1,27 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 import styles from './Layout.module.scss';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Sidebar } from './Sidebar/Sidebar';
 import { getChatUser } from '../../redux/actions/chatAction';
 import { Toast } from '../../components/Toast/Toast';
-import { context, SocketContext } from '../../helpers/context';
 import { useChat } from '../../hooks/useChat';
 import { useRequest } from '../../hooks/useRequest';
+import { SocketContext } from '../../helpers/context';
+import { setSocketUsers } from '../../redux/reducers/socketUsersReducer';
+
+interface IOnlineUsers {
+  userId: string | undefined;
+  socketId: string;
+}
+
+interface IUsers {
+  users: IOnlineUsers[];
+}
+
 export const Layout = () => {
-  const { socket } = context();
+  const socket = useContext(SocketContext);
   const { chats } = useChat();
   const { request } = useRequest();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -22,7 +33,22 @@ export const Layout = () => {
     avatar: '',
   });
 
+  const { user } = useAppSelector((state) => state.loginReducer);
+
   React.useEffect(() => {
+    socket?.emit('user:add', { userId: user.id });
+    socket?.on('user_list:update', ({ users }: IUsers) => {
+      dispatch(setSocketUsers(users));
+      console.log('u', users);
+    });
+
+    return () => {
+      socket?.off('user_list:update');
+    };
+  }, [socket]);
+
+  React.useEffect(() => {
+    socket?.emit('user:add', { userId: loginUser.id });
     socket?.on('message:received', async ({ newMessage }) => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
@@ -50,23 +76,21 @@ export const Layout = () => {
 
   return (
     <>
-      <SocketContext.Provider value={socket}>
-        <div className={styles.wrapper}>
-          <Header />
-          <div className={styles.main}>
-            <Sidebar className={styles.sidebar} chats={chats} requests={request} />
-            <div className={styles.content}>
-              <Outlet />
-            </div>
+      <div className={styles.wrapper}>
+        <Header />
+        <div className={styles.main}>
+          <Sidebar className={styles.sidebar} chats={chats} requests={request} />
+          <div className={styles.content}>
+            <Outlet />
           </div>
         </div>
-        <Toast
-          setModal={setShowNewMessageModal}
-          modal={showNewMessageModal}
-          bannerData={bannerData}
-          newMessageReceived={newMessageReceived}
-        />
-      </SocketContext.Provider>
+      </div>
+      <Toast
+        setModal={setShowNewMessageModal}
+        modal={showNewMessageModal}
+        bannerData={bannerData}
+        newMessageReceived={newMessageReceived}
+      />
     </>
   );
 };

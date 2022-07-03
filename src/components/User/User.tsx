@@ -13,7 +13,6 @@ import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAv
 import { ChangeAvatar } from '../ChangeAvatar/ChangeAvatar';
 import { Modal } from '../Modal/Modal';
 import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
-import { useChat } from '../../hooks/useChat';
 import { useNavigate } from 'react-router-dom';
 import { Info } from '../Info/Info';
 
@@ -23,7 +22,8 @@ export const User = React.memo(({ user }: UserProps): JSX.Element => {
   const [modal, setModal] = React.useState<boolean>(false);
   const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const [deleteUser, setDeleteUser] = React.useState<boolean>(false);
-  const { users } = useChat();
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+
   const statusOnline = users.map((user: any) => user.userId);
   const navigate = useNavigate();
 

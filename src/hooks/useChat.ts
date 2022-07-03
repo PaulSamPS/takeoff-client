@@ -61,22 +61,12 @@ interface IChatToBoSent {
   };
 }
 
-interface IOnlineUsers {
-  userId: string;
-  socketId: string;
-}
-
-interface IUsers {
-  users: IOnlineUsers[];
-}
-
 export const useChat = () => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const { conversation } = useAppSelector((state) => state.conversationReducer);
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const [users, setUsers] = React.useState<IOnlineUsers[]>([]);
   const [messages, setMessages] = React.useState<any[]>([]);
   const [bannerData, setBannerData] = React.useState<IBanner>({
     name: '',
@@ -89,17 +79,6 @@ export const useChat = () => {
   const [chats, setChats] = React.useState<any>(conversation);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
-
-  React.useEffect(() => {
-    socket?.emit('user:add', { userId: user.id });
-    socket?.once('user_list:update', ({ users }: IUsers) => {
-      setUsers(users);
-    });
-
-    return () => {
-      socket?.off('user_list:update');
-    };
-  }, [socket]);
 
   React.useEffect(() => {
     socket?.emit('chat:get', { userId: user.id });
@@ -212,7 +191,6 @@ export const useChat = () => {
   };
 
   return {
-    users,
     user,
     messages,
     bannerData,

@@ -23,7 +23,8 @@ interface IUserInfo {
 export const UserInfo = () => {
   const socket = React.useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const { users, sendMessage } = useChat();
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+  const { sendMessage } = useChat();
   const { id } = useParams();
   const [user, setUser] = React.useState<IUserAll | IUser>();
   const usersOnline = users.map((user: any) => user.userId);

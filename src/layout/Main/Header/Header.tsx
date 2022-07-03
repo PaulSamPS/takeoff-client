@@ -4,7 +4,6 @@ import { logout } from '../../../redux/actions/authAction';
 import styles from './Header.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
-import { useChat } from '../../../hooks/useChat';
 import { SocketContext } from '../../../helpers/context';
 
 export const Header = () => {
@@ -12,7 +11,7 @@ export const Header = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { users } = useChat();
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const online = users.map((user: any) => user.userId);
 
   const handleLogout = () => {

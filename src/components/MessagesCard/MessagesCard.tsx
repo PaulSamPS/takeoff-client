@@ -3,13 +3,12 @@ import styles from './MessagesCard.module.scss';
 import { API_URL } from '../../http/axios';
 import { Link } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
-import { useChat } from '../../hooks/useChat';
 import { MessagesCardProp } from './MessagesCard.prop';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setOpenChat } from '../../redux/reducers/openChatReducer';
 
 export const MessagesCard = ({ chat }: MessagesCardProp) => {
-  const { users } = useChat();
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const usersOnline = users.map((user: any) => user.userId);
   const dispatch = useAppDispatch();
 

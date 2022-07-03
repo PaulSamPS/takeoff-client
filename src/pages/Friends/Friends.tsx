@@ -4,12 +4,17 @@ import { FriendCard } from '../../components/FriendCard/FriendCard';
 import { useRequest } from '../../hooks/useRequest';
 import cn from 'classnames';
 import { Search } from '../../components/Search/Search';
+import { useAppSelector } from '../../hooks/redux';
 
 export const Friends = () => {
   const { friends } = useRequest();
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const [text, setText] = React.useState<string | null>('');
   const [activeSort, setActiveSort] = React.useState<number>(0);
-  console.log(text);
+  const onlineUsers = users.map((user) => user.userId);
+  const onlineFriends = friends.map((f) => f.id).toString();
+  const countOnlineFriends = users.filter((user) => user.userId === onlineFriends).length;
+  console.log(text, users);
 
   document.getElementById('input')?.focus();
 
@@ -31,17 +36,32 @@ export const Friends = () => {
             })}
             onClick={() => setActiveSort(1)}
           >
-            Друзья онлайн <span>2</span>
+            Друзья онлайн <span>{countOnlineFriends}</span>
           </div>
         </div>
       )}
       {friends.length > 0 && <Search setText={setText} />}
       <div className={styles.cardGrid}>
-        {friends.length > 0 ? (
-          friends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
-        ) : (
-          <span className={styles.noFriends}>Друзей пока нет</span>
-        )}
+        <>
+          {activeSort === 0 && (
+            <>
+              {friends.length > 0 ? (
+                friends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
+              ) : (
+                <span className={styles.noFriends}>Друзей пока нет</span>
+              )}
+            </>
+          )}
+          {activeSort === 1 && (
+            <>
+              {onlineUsers.includes(onlineFriends) ? (
+                friends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
+              ) : (
+                <span className={styles.noFriends}>Друзей онлайн нет</span>
+              )}
+            </>
+          )}
+        </>
       </div>
     </div>
   );
