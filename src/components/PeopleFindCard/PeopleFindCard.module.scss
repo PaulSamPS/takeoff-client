@@ -1,0 +1,40 @@
+.wrapper {
+  width: 160px;
+
+  .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    border-radius: 5px;
+
+    img {
+      box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    
+    a {
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--blue);
+    }
+    
+    svg {
+      cursor: pointer;
+    }
+  }
+}

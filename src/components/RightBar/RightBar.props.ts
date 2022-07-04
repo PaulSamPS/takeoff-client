@@ -5,7 +5,9 @@ export interface RightBarProps
   totalUnviewed: number;
   firstItem: string;
   secondItem: string;
+  thirdItem?: string;
   firstItemLink: string;
   secondItemLink: string;
+  thirdItemLink?: string;
   isFixed?: boolean;
 }

@@ -4,7 +4,6 @@ import { CustomLink } from '../../../components/CustomLink/CustomLink';
 import { ReactComponent as MessagesIcon } from '../../../helpers/icons/chat.svg';
 import { ReactComponent as NewsIcon } from '../../../helpers/icons/news.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
-import { ReactComponent as PeopleSearchIcon } from '../../../helpers/icons/searchPeople.svg';
 import { SidebarProps } from './Sidebar.props';
 import cn from 'classnames';
 import { Count } from '../../../components/Count/Count';
@@ -38,9 +37,6 @@ export const Sidebar = ({ className }: SidebarProps) => {
       </CustomLink>
       <CustomLink to={'friends'}>
         <FriendsIcon /> Друзья {request && request.length > 0 && <Count>{request.length}</Count>}
-      </CustomLink>
-      <CustomLink to={'people'}>
-        <PeopleSearchIcon /> Люди
       </CustomLink>
     </div>
   );

@@ -15,6 +15,8 @@ export const RightBar = ({
   secondItem,
   firstItemLink,
   secondItemLink,
+  thirdItemLink,
+  thirdItem,
   isFixed,
 }: RightBarProps): JSX.Element => {
   const { scrollY } = useScroll();
@@ -40,6 +42,11 @@ export const RightBar = ({
       <CustomLink to={secondItemLink} appearance='rightMenu'>
         {secondItem} {totalUnviewed > 0 && <Count className={styles.count}>{totalUnviewed}</Count>}
       </CustomLink>
+      {thirdItemLink && (
+        <CustomLink to={thirdItemLink} appearance='rightMenu'>
+          {thirdItem}
+        </CustomLink>
+      )}
       {openChat.length > 0 && isFixed && <hr />}
       {openChat.length > 0 &&
         isFixed &&

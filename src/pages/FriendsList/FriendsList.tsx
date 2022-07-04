@@ -15,6 +15,8 @@ export const FriendsList = () => {
         secondItem={'Заявки в друзья'}
         firstItemLink={'/main/friends'}
         secondItemLink={'/main/friends/requests'}
+        thirdItemLink={'/main/friends/find'}
+        thirdItem={'Поиск друзей'}
       />
     </div>
   );
