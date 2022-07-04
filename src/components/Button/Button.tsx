@@ -9,6 +9,7 @@ export const Button = ({ appearance, children, className, ...props }: ButtonProp
       className={cn(styles.button, className, {
         [styles.primary]: appearance == 'primary',
         [styles.transparent]: appearance == 'transparent',
+        [styles.secondary]: appearance == 'secondary',
       })}
       {...props}
     >

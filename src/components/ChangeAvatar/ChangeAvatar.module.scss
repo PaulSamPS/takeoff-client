@@ -1,40 +1,29 @@
 @import "../../scss/index";
 
 .append {
-	.previewBlock {
-		width: 100%;
+	background: var(--white);
+	width: 638px;
+	border-radius: 4px;
 
-		.previewAvatar {
-			img {
-				width: 36px;
-				height: 36px;
-				object-fit: cover;
-				border-radius: 50%;
-				box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
-			}
-		}
-
-		.previewImage {
-			@include flexCenterCenter;
-
-			margin-bottom: 20px;
-
-			img {
-				width: 150px;
-				height: 150px;
-				object-fit: cover;
-				border-radius: 11px;
-				box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
-			}
-		}
+	.top {
+		background: var(--bg-grey-light);
+		padding: 20px;
+		border-bottom: 1px solid var(--border);
+		border-radius: 4px 4px 0 0;
+		font-size: 13px;
 	}
 
-	.inputFile {
-		position: relative;
-
-		@include _tablet {
-			width: 100%;
-		}
+	.body {
+		font-size: 14px;
+		margin-bottom: 15px;
+		padding: 20px 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		line-height: 150%;
+		text-align: center;
+		row-gap: 35px;
 
 		.file {
 			position: absolute;
@@ -45,13 +34,11 @@
 		.inputBtn {
 			display: inline-block;
 			box-sizing: border-box;
-			width: 300px;
-			padding: 10px 30px;
+			padding: 5px 20px;
 			color: var(--white);
-			font-weight: 700;
-			font-size: 14px;
-			text-align: center;
-			background: var(--blue);
+			font-weight: 400;
+			font-size: 13px;
+			background: var(--blue-alternative);
 			border: none;
 			border-radius: 5px;
 			cursor: pointer;
@@ -63,13 +50,51 @@
 			}
 		}
 
+	}
+
+	.previewBlock {
+		width: 100%;
+		padding: 40px;
+
+		.previewImage {
+			@include flexCenterCenter;
+
+			img {
+				width: 300px;
+				height: 300px;
+				object-fit: cover;
+				border-radius: 2px;
+			}
+		}
+	}
+
+	.inputFile {
+		position: relative;
+
+		@include _tablet {
+			width: 100%;
+		}
+
 		.fileSuccess {
 			background: var(--green);
 		}
 	}
 
-	.btn {
-		width: 100%;
-		margin-top: 20px;
+	.bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 20px 40px;
+		border-top: 1px solid var(--border);
+
+		.btn {
+			font-weight: 400;
+			font-size: 13px;
+			padding: 5px 20px;
+			background: var(--blue-alternative);
+		}
+		span {
+			font-size: 12px;
+		}
 	}
 }

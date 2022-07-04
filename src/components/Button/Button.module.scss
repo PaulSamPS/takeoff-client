@@ -9,7 +9,6 @@
 	line-height: 17px;
 	border: none;
 	border-radius: 5px;
-	box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
 	cursor: pointer;
 	transition: all ease 0.2s;
 
@@ -36,7 +35,6 @@
 .transparent {
 	color: var(--blue);
 	background: transparent;
-	box-shadow: none;
 
 	&:hover {
 		background: rgba(174, 183, 194, 0.20);
@@ -44,5 +42,17 @@
 
 	&:active {
 		transform: translateY(2px);
+	}
+}
+
+.secondary {
+	color: #55677d;
+	background: #e5ebf1;
+	padding: 10px 15px;
+	border-radius: 4px;
+	font-weight: 400;
+
+	&:hover {
+		background: #d5dbe1;
 	}
 }

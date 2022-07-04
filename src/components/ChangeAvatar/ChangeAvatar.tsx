@@ -12,6 +12,23 @@ export const ChangeAvatar = ({ setModal, userId }: ChangeAvatarProps): JSX.Eleme
 
   return (
     <form className={styles.append} onSubmit={onSubmit}>
+      <div className={styles.top}>Загрузка фотографии</div>
+      {previewAvatar.length <= 0 && (
+        <div className={styles.body}>
+          Друзьям будет проще узнать вас, если вы загрузите свою настоящую фотографию. Вы можете
+          загрузить изображение в формате JPG, GIF или PNG.
+          <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
+          <label htmlFor='avatar'>
+            <span
+              className={cn(styles.inputBtn, {
+                [styles.fileSuccess]: previewAvatar.length > 0,
+              })}
+            >
+              {previewAvatar.length <= 0 ? 'Выберите аватар' : 'Аватар выбран'}
+            </span>
+          </label>
+        </div>
+      )}
       <div className={styles.inputFile}>
         {previewAvatar.length > 0 && (
           <div className={styles.previewBlock} id='previewNews'>
@@ -24,22 +41,19 @@ export const ChangeAvatar = ({ setModal, userId }: ChangeAvatarProps): JSX.Eleme
             )}
           </div>
         )}
-        <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
-        <label htmlFor='avatar'>
-          <span
-            className={cn(styles.inputBtn, {
-              [styles.fileSuccess]: previewAvatar.length > 0,
-            })}
-          >
-            {previewAvatar.length <= 0 ? 'Выберите аватар' : 'Аватар выбран'}
-          </span>
-        </label>
       </div>
-      {previewAvatar.length > 0 && (
-        <Button appearance='primary' type='submit' className={styles.btn}>
-          Загрузить
-        </Button>
-      )}
+      <div className={styles.bottom}>
+        {previewAvatar.length > 0 ? (
+          <Button appearance='primary' type='submit' className={styles.btn}>
+            Загрузить
+          </Button>
+        ) : (
+          <span>
+            Если у вас возникают проблемы с загрузкой, попробуйте выбрать фотографию меньшего
+            размера.
+          </span>
+        )}
+      </div>
     </form>
   );
 };

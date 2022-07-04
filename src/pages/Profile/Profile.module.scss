@@ -2,70 +2,82 @@
 
 .container {
 	.wrapper {
-		display: grid;
-		grid-template-columns: 300px 1fr;
-		padding: 20px;
-		column-gap: 40px;
-		background: var(--white);
-		border-radius: 11px;
-		row-gap: 20px;
-
+		display: flex;
+		column-gap: 20px;
 		.avatar {
+			background: var(--white);
+			padding: 15px;
 			position: relative;
-			width: 300px;
-			height: 300px;
+			width: 230px;
+			border-radius: 4px;
+			display: flex;
+			row-gap: 15px;
+			flex-direction: column;
 
-			&:hover {
-				.uploadAvatar {
-					display: flex;
+
+			.img {
+				position: relative;
+				border-radius: 2px;
+
+				img {
+					box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+					width: 200px;
+					height: 200px;
+					object-fit: cover;
+					border-radius: 2px;
 				}
-			}
 
-			img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				border-radius: 11px;
-				//box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%);
-			}
+				.uploadAvatar {
+					animation: opacity .2s linear;
+					position: absolute;
+					display: flex;
+					user-select: none;
+					align-items: center;
+					justify-content: center;
+					bottom: 3px;
+					height: 20%;
+					width: 100%;
+					background: rgba(0, 0, 0, 0.7);
+					border-radius: 0 0 2px 2px;
+					color: var(--white);
+					cursor: pointer;
+					font-size: 13px;
 
-			.uploadAvatar {
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				display: none;
-				align-items: center;
-				justify-content: center;
-				color: var(--white);
-				background: rgb(0 0 0 / 50%);
-				border-radius: 11px;
-				cursor: pointer;
+					svg {
+						height: 15px;
+						width: 15px;
+						margin-right: 5px;
+					}
+				}
 			}
 		}
 
 		.bio {
-			display: flex;
-			flex-direction: column;
-			row-gap: 20px;
+			width: 530px;
+			padding: 20px;
+			background: var(--white);
+			border-radius: 4px;
 
-			.online {
-				position: relative;
-
-				.green {
-					position: absolute;
-					top: 5px;
-					left: 55px;
-					width: 10px;
-					height: 10px;
-					background: var(--green);
-					border-radius: 50%;
+			.top {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding-bottom: 20px;
+				border-bottom: 1px solid var(--grey-super-light);
+				h1 {
+					font-size: 19px;
+					font-weight: 400;
+				}
+				.online {
+					position: relative;
+					color: var(--grey-middle);
+					font-size: 12px;
 				}
 			}
 
 			.lastVisit {
-				color: var(--grey);
+				color: var(--grey-middle);
+				font-size: 12px;
 			}
 		}
 	}

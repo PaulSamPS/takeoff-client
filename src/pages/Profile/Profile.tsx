@@ -1,69 +1,75 @@
 import React from 'react';
 import { useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
-import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
-import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
+import styles from './Profile.module.scss';
+import { calculateTime } from '../../helpers/calculateTime';
+import { Button } from '../../components/Button/Button';
+import { motion } from 'framer-motion';
+import { ReactComponent as AddAvatar } from '../../helpers/icons/addAvatar.svg';
 import { Modal } from '../../components/Modal/Modal';
 import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
-import { RemoveAvatar } from '../../components/RemoveAvatar/RemoveAvatar';
-import { motion } from 'framer-motion';
-import styles from './Profile.module.scss';
-import { Info } from '../../components/Info/Info';
-import { calculateTime } from '../../helpers/calculateTime';
 
 export const Profile = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
-  const [modal, setModal] = React.useState<boolean>(false);
-  const [removeAvatarModal, setRemoveAvatarModal] = React.useState<boolean>(false);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+  const [avatarModal, setAvatarModal] = React.useState<boolean>(false);
   const usersOnline = users.map((user: any) => user.userId);
+  const [hover, setHover] = React.useState<boolean>(false);
+
+  const variantsModal = {
+    open: { opacity: 1, height: '20%' },
+    closed: { opacity: 0, height: 0 },
+  };
 
   return (
-    <motion.div
-      className={styles.container}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-    >
+    <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.avatar}>
-          <img
-            src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-            alt={user?.name}
-          />
-          {user.avatar == null ? (
-            <div className={styles.uploadAvatar} onClick={() => setModal(true)}>
-              <AddAvatarIcon />
-            </div>
-          ) : (
-            <div className={styles.uploadAvatar} onClick={() => setRemoveAvatarModal(true)}>
-              <DeleteAvatarIcon />
-            </div>
-          )}
+          <div
+            className={styles.img}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          >
+            <img
+              src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+              alt={user?.name}
+            />
+            <motion.div
+              animate={hover ? 'open' : 'closed'}
+              variants={variantsModal}
+              initial={'closed'}
+              exit={'closed'}
+              transition={{
+                duration: 0.5,
+                type: 'spring',
+              }}
+              className={styles.uploadAvatar}
+              onClick={() => setAvatarModal(true)}
+            >
+              <AddAvatar />
+              Загрузить аватар
+            </motion.div>
+          </div>
+          <Button appearance='secondary'>Редактировать</Button>
         </div>
         <div className={styles.bio}>
-          {usersOnline.includes(user.id) ? (
-            <div className={styles.online}>
-              Online <div className={styles.green} />
-            </div>
-          ) : (
-            <div className={styles.lastVisit}>
-              Был в сети {user && calculateTime(user.lastVisit)}
-            </div>
-          )}
-          <h1>{user?.name}</h1>
-          <Info user={user} />
+          <div className={styles.top}>
+            <h1>{user?.name}</h1>
+            {usersOnline.includes(user.id) ? (
+              <div className={styles.online}>
+                online <div className={styles.green} />
+              </div>
+            ) : (
+              <div className={styles.lastVisit}>
+                был в сети {user && calculateTime(user.lastVisit)}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <Modal setModal={setModal} modal={modal}>
-        <ChangeAvatar setModal={setModal} userId={user.id} />
+      <Modal setModal={setAvatarModal} modal={avatarModal}>
+        <ChangeAvatar setModal={setAvatarModal} userId={user.id} />
       </Modal>
-      <RemoveAvatar
-        avatar={user.avatar}
-        modal={removeAvatarModal}
-        setModal={setRemoveAvatarModal}
-        userId={user.id}
-      />
-    </motion.div>
+    </div>
   );
 };
