@@ -36,7 +36,9 @@ export const Layout = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
 
   React.useEffect(() => {
-    socket?.emit('user:add', { userId: user.id });
+    setInterval(() => {
+      socket?.emit('user:add', { userId: user.id });
+    }, 3000);
     socket?.on('user_list:update', ({ usersOnline }: IUsers) => {
       dispatch(setSocketUsers(usersOnline));
       console.log('u', usersOnline);
@@ -44,11 +46,11 @@ export const Layout = () => {
 
     return () => {
       socket?.off('user_list:update');
+      socket?.disconnect();
     };
   }, [socket]);
 
   React.useEffect(() => {
-    socket?.emit('user:add', { userId: loginUser.id });
     socket?.on('message:received', async ({ newMessage }) => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));

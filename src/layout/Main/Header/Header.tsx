@@ -17,7 +17,7 @@ export const Header = () => {
   const handleLogout = () => {
     socket?.emit('logout');
     dispatch(logout());
-    socket?.close();
+    socket?.disconnect();
     navigate('/');
   };
 

@@ -18,9 +18,7 @@ export const socketUsersReducer = createSlice({
   initialState,
   reducers: {
     setSocketUsers(state, action: PayloadAction<IOnlineUsers[]>) {
-      state.users =
-        state.users.filter((user) => user.userId !== action.payload.find((a) => a.userId)) &&
-        state.users.concat(action.payload);
+      state.users = action.payload;
     },
   },
 });

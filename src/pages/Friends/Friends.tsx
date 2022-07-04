@@ -6,13 +6,31 @@ import { useAppSelector } from '../../hooks/redux';
 import { FriendsAll } from '../FriendsAll/FriendsAll';
 import { FriendsOnline } from '../FriendsOnline/FriendsOnline';
 
+interface IUser {
+  id: string | undefined;
+  name: string;
+  email: string;
+  position: string;
+  level: string;
+  role: string;
+  avatar: string;
+  lastVisit: Date;
+  isOnline: boolean;
+}
+
 export const Friends = () => {
   const { friends } = useRequest();
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const [activeSort, setActiveSort] = React.useState<number>(0);
-  const onlineFriends = friends.map((f) => f.id).toString();
-  const countOnlineFriends = users.filter((user) => user.userId === onlineFriends).length;
+  const friendsOnline: IUser[] = [];
 
+  friends.filter((friend) => {
+    return users.forEach((user) => {
+      if (friend.id == user.userId) {
+        friendsOnline.push(friend);
+      }
+    });
+  });
   document.getElementById('input')?.focus();
 
   return (
@@ -32,10 +50,10 @@ export const Friends = () => {
           })}
           onClick={() => setActiveSort(1)}
         >
-          Друзья онлайн <span>{countOnlineFriends}</span>
+          Друзья онлайн <span>{friendsOnline.length}</span>
         </div>
       </div>
-      {activeSort === 0 ? <FriendsAll /> : <FriendsOnline />}
+      {activeSort === 0 ? <FriendsAll /> : <FriendsOnline friendsOnline={friendsOnline} />}
     </div>
   );
 };

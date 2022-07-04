@@ -8,6 +8,7 @@ export const context = () => {
   const URL = 'http://localhost:4000';
   React.useEffect(() => {
     const newSocket = io(URL, { transports: ['websocket'] });
+    newSocket.connect();
     setSocket(newSocket);
     return () => {
       newSocket.close();
