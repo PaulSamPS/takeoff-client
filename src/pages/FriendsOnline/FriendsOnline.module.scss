@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
   width: 100%;
   background: var(--white);
   border-radius: 5px;

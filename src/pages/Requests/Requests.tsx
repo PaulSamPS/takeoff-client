@@ -11,7 +11,7 @@ export const Requests = () => {
   return (
     <div
       className={styles.wrapper}
-      style={{ height: request.length > 0 ? 'fit-content' : 'calc(100vh - 160px)' }}
+      style={{ height: request.length > 0 ? 'fit-content' : 'calc(100vh - 216px)' }}
     >
       <div className={styles.top}>Заявки в друзья</div>
       <div

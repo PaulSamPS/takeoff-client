@@ -26,7 +26,9 @@ export const Search = ({ setText, className, ...props }: SearchProps): JSX.Eleme
         placeholder='Поиск друзей...'
         role='textbox'
         aria-multiline='true'
-        onInput={(e: FormEvent<HTMLDivElement>) => setText(e.currentTarget.textContent)}
+        onInput={(e: FormEvent<HTMLDivElement>) =>
+          e.currentTarget.textContent !== null && setText(e.currentTarget.textContent.toString())
+        }
       ></div>
       <Button appearance='primary' disabled={true}>
         <SearchIcon />

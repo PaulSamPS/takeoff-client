@@ -8,7 +8,7 @@ import { useAppSelector } from '../../hooks/redux';
 export const FriendsOnline = () => {
   const { friends } = useRequest();
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
-  const [text, setText] = React.useState<string | null>('');
+  const [text, setText] = React.useState<string>('');
   const onlineUsers = users.map((user) => user.userId);
   const onlineFriends = friends.map((f) => f.id).toString();
   console.log(text);
@@ -19,10 +19,10 @@ export const FriendsOnline = () => {
     <div
       className={styles.wrapper}
       style={{
-        height: onlineUsers.includes(onlineFriends) ? 'fit-content' : '',
+        height: onlineUsers.includes(onlineFriends) ? 'fit-content' : 'calc(100vh - 216px)',
       }}
     >
-      {onlineUsers.includes(onlineFriends) && <Search setText={setText} />}
+      <Search setText={setText} />
       <div
         className={styles.grid}
         style={{

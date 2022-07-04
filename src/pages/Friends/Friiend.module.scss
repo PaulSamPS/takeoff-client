@@ -5,7 +5,7 @@
   box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
   display: grid;
   grid-template-rows: auto 1fr;
-  height: calc(100vh - 160px);
+  height: fit-content;
 
   .top {
     height: fit-content;

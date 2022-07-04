@@ -6,12 +6,19 @@ import { Search } from '../../components/Search/Search';
 
 export const FriendsAll = () => {
   const { friends } = useRequest();
-  const [text, setText] = React.useState<string | null>('');
+  const [text, setText] = React.useState<string>('');
   console.log(text);
 
+  const filteredFriends = friends.filter((friend) =>
+    friend.name.toLowerCase().includes(text?.toLowerCase())
+  );
+
   return (
-    <div className={styles.wrapper} style={{ height: friends.length > 0 ? 'fit-content' : '' }}>
-      {friends.length > 0 && <Search setText={setText} />}
+    <div
+      className={styles.wrapper}
+      style={{ height: friends.length > 0 ? 'fit-content' : 'calc(100vh - 216px)' }}
+    >
+      <Search setText={setText} />
       <div
         className={styles.grid}
         style={{
@@ -19,8 +26,8 @@ export const FriendsAll = () => {
           justifyContent: friends.length > 0 ? '' : 'center',
         }}
       >
-        {friends.length > 0 ? (
-          friends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
+        {filteredFriends.length > 0 ? (
+          filteredFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
         ) : (
           <span className={styles.noFriends}>Друзей пока нет</span>
         )}
