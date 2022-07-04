@@ -17,7 +17,7 @@ export const Search = ({ setText, placeholder, className, ...props }: SearchProp
       style={{
         position: scrollY >= 75 ? 'sticky' : 'relative',
         top: scrollY >= 75 ? '71px' : '0',
-        zIndex: scrollY >= 75 ? '11px' : '0',
+        zIndex: scrollY >= 75 ? '11' : '0',
       }}
       {...props}
     >

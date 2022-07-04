@@ -17,7 +17,7 @@ interface IOnlineUsers {
 }
 
 interface IUsers {
-  users: IOnlineUsers[];
+  usersOnline: IOnlineUsers[];
 }
 
 export const Layout = () => {
@@ -37,9 +37,9 @@ export const Layout = () => {
 
   React.useEffect(() => {
     socket?.emit('user:add', { userId: user.id });
-    socket?.on('user_list:update', ({ users }: IUsers) => {
-      dispatch(setSocketUsers(users));
-      console.log('u', users);
+    socket?.on('user_list:update', ({ usersOnline }: IUsers) => {
+      dispatch(setSocketUsers(usersOnline));
+      console.log('u', usersOnline);
     });
 
     return () => {

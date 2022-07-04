@@ -17,24 +17,27 @@ export const Conversations = () => {
   );
 
   return (
-    <div
-      className={styles.wrapper}
-      style={{
-        display: filteredChats.length <= 0 ? 'grid' : 'block',
-        height: filteredChats.length > 0 ? 'fit-content' : 'calc(100vh - 160px)',
-      }}
-    >
-      {!isLoading ? (
-        <>
-          <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
-          {filteredChats.map((chat) => (
-            <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
-          ))}
-          {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
-        </>
-      ) : (
-        <Spinner />
-      )}
-    </div>
+    <>
+      <div className={styles.borderTop} />
+      <div
+        className={styles.wrapper}
+        style={{
+          display: filteredChats.length <= 0 ? 'grid' : 'block',
+          height: filteredChats.length > 0 ? 'fit-content' : 'calc(100vh - 160px)',
+        }}
+      >
+        {!isLoading ? (
+          <>
+            <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
+            {filteredChats.map((chat) => (
+              <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
+            ))}
+            {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
+          </>
+        ) : (
+          <Spinner />
+        )}
+      </div>
+    </>
   );
 };
