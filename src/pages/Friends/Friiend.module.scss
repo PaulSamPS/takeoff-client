@@ -3,9 +3,12 @@
   border-radius: 5px;
   background: var(--white);
   box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+  display: grid;
+  grid-template-rows: auto 1fr;
   height: calc(100vh - 160px);
 
   .top {
+    height: fit-content;
     padding: 20px 20px 0;
     color: var(--grey-middle);
     font-size: 13px;
@@ -33,25 +36,6 @@
       span {
         color: var(--grey-middle);
       }
-    }
-  }
-
-
-
-  .cardGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-    padding: 0 20px;
-    background: var(--white);
-    border-radius: 5px;
-
-    .noFriends {
-      color: #939393;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
   }
 }

@@ -1,0 +1,19 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  background: var(--white);
+  border-radius: 5px;
+
+  .grid {
+    padding: 20px 0;
+  }
+
+  .noOnlineFriends {
+    color: #939393;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

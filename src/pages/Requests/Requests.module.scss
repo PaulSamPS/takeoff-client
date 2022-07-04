@@ -1,9 +1,10 @@
-.followersWrapper {
+.wrapper {
 	width: 550px;
+	border-radius: 5px;
 	background: var(--white);
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-	height: calc(100vh - 160px);
-	border-radius: 5px;
+	display: grid;
+	grid-template-rows: auto 1fr;
 
 	.top {
 		padding: 20px;

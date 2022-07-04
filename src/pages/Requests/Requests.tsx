@@ -10,11 +10,17 @@ export const Requests = () => {
 
   return (
     <div
-      className={styles.followersWrapper}
-      style={{ display: request.length <= 0 ? 'grid' : 'block' }}
+      className={styles.wrapper}
+      style={{ height: request.length > 0 ? 'fit-content' : 'calc(100vh - 160px)' }}
     >
-      {request.length > 0 && <div className={styles.top}>Заявки в друзья</div>}
-      <div className={styles.grid}>
+      <div className={styles.top}>Заявки в друзья</div>
+      <div
+        className={styles.grid}
+        style={{
+          display: request.length > 0 ? 'block' : 'flex',
+          justifyContent: request.length > 0 ? '' : 'center',
+        }}
+      >
         {request.length > 0 ? (
           request.map((f) => (
             <div className={styles.request} key={f.id}>
