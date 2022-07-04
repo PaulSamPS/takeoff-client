@@ -72,6 +72,7 @@ export const useChat = () => {
     lastVisit: 0,
     isOnline: false,
   });
+  const receiverUserId = localStorage.getItem('receiverUserId');
 
   const openChatId = React.useRef<string | null>('');
   const [chats, setChats] = React.useState<IChats[]>(conversation);
@@ -87,7 +88,7 @@ export const useChat = () => {
     return () => {
       socket?.off('chat:send');
     };
-  }, [socket, window.location.pathname]);
+  }, [socket, id]);
 
   React.useEffect(() => {
     socket?.emit('messages:get', {
@@ -114,12 +115,13 @@ export const useChat = () => {
       socket?.off('message_list:update');
       socket?.off('chat:notFound');
     };
-  }, [socket, window.location.pathname]);
+  }, [socket, id]);
 
   const sendMessage = (message: string | null) => {
+    console.log('msg', message);
     socket?.emit('message:add', {
       sender: user.id,
-      receiver: id,
+      receiver: receiverUserId,
       message,
     });
   };

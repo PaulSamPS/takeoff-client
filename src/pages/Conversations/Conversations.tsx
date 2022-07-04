@@ -10,7 +10,6 @@ export const Conversations = () => {
   const { isLoading } = useAppSelector((state) => state.conversationReducer);
   const [search, setSearch] = React.useState<string>('');
   const { chats } = useChat();
-  console.log(search);
 
   const filteredChats = chats.filter((chat) =>
     chat.name.toLowerCase().includes(search?.toLowerCase())

@@ -5,7 +5,7 @@
 	margin-bottom: 20px;
 	padding: 20px;
 	background: var(--white);
-	border-radius: 5px;
+	border-radius: 4px;
 	row-gap: 20px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
@@ -75,7 +75,7 @@
 				font-size: 12px;
 				column-gap: 5px;
 				background: var(--white);
-				border-radius: 5px;
+				border-radius: 4px;
 				box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 				.likedPopup {
@@ -186,7 +186,7 @@
 			font-size: 13px;
 			word-wrap: break-word;
 			border: 1px solid var(--borderColor);
-			border-radius: 5px;
+			border-radius: 4px;
 			resize: none;
 
 			&:focus {

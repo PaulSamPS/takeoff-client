@@ -16,20 +16,20 @@ export const FriendsAll = () => {
   return (
     <div
       className={styles.wrapper}
-      style={{ height: friends.length > 0 ? 'fit-content' : 'calc(100vh - 216px)' }}
+      style={{ height: filteredFriends.length > 0 ? 'fit-content' : 'calc(100vh - 216px)' }}
     >
       <Search setText={setText} placeholder={'Поиск друзей'} />
       <div
         className={styles.grid}
         style={{
-          display: friends.length > 0 ? 'block' : 'flex',
-          justifyContent: friends.length > 0 ? '' : 'center',
+          display: filteredFriends.length > 0 ? 'block' : 'flex',
+          justifyContent: filteredFriends.length > 0 ? '' : 'center',
         }}
       >
         {filteredFriends.length > 0 ? (
           filteredFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
         ) : (
-          <span className={styles.noFriends}>Друзей пока нет</span>
+          <span className={styles.noFriends}>Друзей нет</span>
         )}
       </div>
     </div>

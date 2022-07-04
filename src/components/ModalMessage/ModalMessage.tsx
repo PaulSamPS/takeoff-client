@@ -12,6 +12,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
   const { sendMessage } = useChat();
 
   const handleSendMessage = () => {
+    localStorage.setItem('receiverUserId', friend.id!.toString());
     sendMessage(text);
     setModal(false);
   };

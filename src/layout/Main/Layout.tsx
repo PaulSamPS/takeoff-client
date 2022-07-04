@@ -59,7 +59,7 @@ export const Layout = () => {
         });
         setTimeout(() => {
           socket?.emit('chat:get', { userId: loginUser.id });
-        }, 1000);
+        }, 500);
         setNewMessageReceived({
           ...newMessage,
           name: user?.name,
