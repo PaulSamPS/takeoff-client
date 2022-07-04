@@ -6,8 +6,10 @@ import { Button } from '../Button/Button';
 import { useScroll } from '../../hooks/usseScroll';
 import cn from 'classnames';
 
-export const Search = ({ setText, className, ...props }: SearchProps): JSX.Element => {
+export const Search = ({ setText, placeholder, className, ...props }: SearchProps): JSX.Element => {
   const { scrollY } = useScroll();
+
+  document.getElementById('input')?.focus();
 
   return (
     <div
@@ -23,7 +25,7 @@ export const Search = ({ setText, className, ...props }: SearchProps): JSX.Eleme
         className={styles.input}
         id='input'
         contentEditable='true'
-        placeholder='Поиск друзей...'
+        placeholder={placeholder}
         role='textbox'
         aria-multiline='true'
         onInput={(e: FormEvent<HTMLDivElement>) =>

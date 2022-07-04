@@ -18,7 +18,7 @@ export const FriendsAll = () => {
       className={styles.wrapper}
       style={{ height: friends.length > 0 ? 'fit-content' : 'calc(100vh - 216px)' }}
     >
-      <Search setText={setText} />
+      <Search setText={setText} placeholder={'Поиск друзей'} />
       <div
         className={styles.grid}
         style={{

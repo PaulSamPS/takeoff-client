@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IConversation {
-  avtar: string | null;
+  avatar: string | null;
   date: Date;
   lastMessage: string;
   messagesWith: string;

@@ -31,11 +31,13 @@ export const ConversationsUnread = () => {
       style={{
         display:
           chats.filter((chat: IChats) => chat.countUnreadMessages).length <= 0 ? 'grid' : 'block',
+        height:
+          chats.filter((chat: IChats) => chat.countUnreadMessages).length > 0
+            ? 'fit-content'
+            : 'calc(100vh - 160px)',
       }}
     >
-      {chats.filter((chat: IChats) => chat.countUnreadMessages).length > 0 && (
-        <Search setText={setSearch} className={styles.search} />
-      )}
+      <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
       {chats.map(
         (chat: IChats) =>
           chat.countUnreadMessages > 0 && <MessagesCard key={chat.messagesWith} chat={chat} />

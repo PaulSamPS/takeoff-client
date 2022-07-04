@@ -13,8 +13,6 @@ export const FriendsOnline = () => {
   const onlineFriends = friends.map((f) => f.id).toString();
   console.log(text);
 
-  document.getElementById('input')?.focus();
-
   return (
     <div
       className={styles.wrapper}
@@ -22,7 +20,7 @@ export const FriendsOnline = () => {
         height: onlineUsers.includes(onlineFriends) ? 'fit-content' : 'calc(100vh - 216px)',
       }}
     >
-      <Search setText={setText} />
+      <Search setText={setText} placeholder={'Поиск друзей'} />
       <div
         className={styles.grid}
         style={{

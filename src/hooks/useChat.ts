@@ -50,15 +50,13 @@ interface INewMessage {
   };
 }
 
-interface IChatToBoSent {
-  chatsToBeSent: {
-    messagesWith: string;
-    name: string;
-    avatar: string;
-    lastMessage: string;
-    date: string;
-    countUnreadMessages: number;
-  };
+interface IChats {
+  avatar: string | null;
+  date: Date;
+  lastMessage: string;
+  messagesWith: string;
+  name: string;
+  countUnreadMessages: number;
 }
 
 export const useChat = () => {
@@ -76,13 +74,13 @@ export const useChat = () => {
   });
 
   const openChatId = React.useRef<string | null>('');
-  const [chats, setChats] = React.useState<any>(conversation);
+  const [chats, setChats] = React.useState<IChats[]>(conversation);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     socket?.emit('chat:get', { userId: user.id });
-    socket?.on('chat:send', ({ chatsToBeSent }: IChatToBoSent) => {
+    socket?.on('chat:send', ({ chatsToBeSent }) => {
       setChats(chatsToBeSent);
       setLoading(false);
     });
@@ -130,7 +128,7 @@ export const useChat = () => {
     socket?.on('messages:sent', ({ newMessage }: INewMessage) => {
       if (newMessage.receiver === id) {
         setMessages((prev: any) => [...prev, newMessage]);
-        setChats((prev: IChatToBoSent[]) => {
+        setChats((prev) => {
           const receiver = newMessage.receiver;
           filteredChats(prev, newMessage, receiver);
           return [...prev];
@@ -141,7 +139,7 @@ export const useChat = () => {
     socket?.on('message:received', async ({ newMessage }: INewMessage) => {
       if (newMessage.sender === id) {
         setMessages((prev) => [...prev, newMessage]);
-        setChats((prev: IChatToBoSent[]) => {
+        setChats((prev) => {
           filteredChats(prev, newMessage);
           return [...prev];
         });
@@ -150,7 +148,7 @@ export const useChat = () => {
           chats.filter((chat: any) => chat.messagesWith === newMessage.sender).length > 0;
 
         if (ifPreviouslyMessaged) {
-          setChats((prev: IChatToBoSent[]) => {
+          setChats((prev) => {
             const { previousChat } = filteredChats(prev, newMessage);
             console.log(previousChat);
             return [
