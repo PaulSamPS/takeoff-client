@@ -54,10 +54,6 @@ export const Messages = (): JSX.Element => {
     setTimeout(() => socket?.emit('chat:get', { userId: user.id }), 1000);
   }, [socket]);
 
-  if (loadingMessages) {
-    return <Spinner />;
-  }
-
   return (
     <>
       <div className={styles.borderTop} />
@@ -89,55 +85,59 @@ export const Messages = (): JSX.Element => {
       <div className={styles.wrapper}>
         <div className={styles.container}>
           <div className={styles.grid}>
-            <div className={styles.chat}>
-              {messages.map((m: IMessage, index) => (
-                <div key={index} className={styles.messages}>
-                  {user.id == m.sender ? (
-                    <>
-                      <div className={styles.messageBlock}>
-                        <div className={styles.avatar}>
-                          <img
-                            src={
-                              user.avatar === null
-                                ? `/photo.png`
-                                : `${API_URL}/avatar/${user.avatar}`
-                            }
-                            alt={user.name}
-                          />
-                          {user.isOnline && <div className={styles.online} />}
+            {!loadingMessages ? (
+              <div className={styles.chat}>
+                {messages.map((m: IMessage, index) => (
+                  <div key={index} className={styles.messages}>
+                    {user.id == m.sender ? (
+                      <>
+                        <div className={styles.messageBlock}>
+                          <div className={styles.avatar}>
+                            <img
+                              src={
+                                user.avatar === null
+                                  ? `/photo.png`
+                                  : `${API_URL}/avatar/${user.avatar}`
+                              }
+                              alt={user.name}
+                            />
+                            {user.isOnline && <div className={styles.online} />}
+                          </div>
+                          <div className={styles.name}>
+                            <span className={styles.userName}>{user.name}</span>
+                            <span className={styles.time}>{calculateTime(m.date)}</span>
+                          </div>
+                          <p className={styles.text}>{m.message}</p>
                         </div>
-                        <div className={styles.name}>
-                          <span className={styles.userName}>{user.name}</span>
-                          <span className={styles.time}>{calculateTime(m.date)}</span>
+                      </>
+                    ) : (
+                      <>
+                        <div className={styles.messageBlock}>
+                          <Link to={`/main/user-info/${m.receiver}`} className={styles.avatar}>
+                            <img
+                              src={
+                                bannerData.avatar === null
+                                  ? `/photo.png`
+                                  : `${API_URL}/avatar/${bannerData.avatar}`
+                              }
+                              alt={bannerData.name}
+                            />
+                            {bannerData.isOnline && <div className={styles.online} />}
+                          </Link>
+                          <div className={styles.name}>
+                            <span className={styles.userName}>{bannerData.name}</span>
+                            <span className={styles.time}>{calculateTime(m.date)}</span>
+                          </div>
+                          <p className={styles.text}>{m.message}</p>
                         </div>
-                        <p className={styles.text}>{m.message}</p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className={styles.messageBlock}>
-                        <Link to={`/main/user-info/${m.receiver}`} className={styles.avatar}>
-                          <img
-                            src={
-                              bannerData.avatar === null
-                                ? `/photo.png`
-                                : `${API_URL}/avatar/${bannerData.avatar}`
-                            }
-                            alt={bannerData.name}
-                          />
-                          {bannerData.isOnline && <div className={styles.online} />}
-                        </Link>
-                        <div className={styles.name}>
-                          <span className={styles.userName}>{bannerData.name}</span>
-                          <span className={styles.time}>{calculateTime(m.date)}</span>
-                        </div>
-                        <p className={styles.text}>{m.message}</p>
-                      </div>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Spinner />
+            )}
           </div>
         </div>
       </div>

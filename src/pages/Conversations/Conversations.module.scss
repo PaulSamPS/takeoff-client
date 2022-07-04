@@ -11,6 +11,16 @@
 		border-radius: 5px 5px 0 0;
 	}
 
+	.card {
+		&:last-child {
+			border-radius: 0 0 5px 5px;
+
+			a {
+				border-bottom: none;
+			}
+		}
+	}
+
 	.noMessages {
 		color: #939393;
 		font-size: 13px;

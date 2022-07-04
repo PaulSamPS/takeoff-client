@@ -16,10 +16,6 @@ export const Conversations = () => {
     chat.name.toLowerCase().includes(search?.toLowerCase())
   );
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <div
       className={styles.wrapper}
@@ -28,11 +24,17 @@ export const Conversations = () => {
         height: filteredChats.length > 0 ? 'fit-content' : 'calc(100vh - 160px)',
       }}
     >
-      <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
-      {filteredChats.map((chat) => (
-        <MessagesCard key={chat.messagesWith} chat={chat} />
-      ))}
-      {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
+      {!isLoading ? (
+        <>
+          <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
+          {filteredChats.map((chat) => (
+            <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
+          ))}
+          {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
+        </>
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 };

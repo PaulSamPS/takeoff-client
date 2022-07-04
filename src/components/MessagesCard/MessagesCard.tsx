@@ -6,8 +6,9 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { MessagesCardProp } from './MessagesCard.prop';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setOpenChat } from '../../redux/reducers/openChatReducer';
+import cn from 'classnames';
 
-export const MessagesCard = ({ chat }: MessagesCardProp) => {
+export const MessagesCard = ({ chat, className }: MessagesCardProp) => {
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const usersOnline = users.map((user: any) => user.userId);
   const dispatch = useAppDispatch();
@@ -22,7 +23,7 @@ export const MessagesCard = ({ chat }: MessagesCardProp) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cn(styles.wrapper, className)}>
       <div className={styles.avatar}>
         <img
           src={
