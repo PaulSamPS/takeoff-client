@@ -19,28 +19,17 @@ export const People = () => {
     // });
   }, []);
 
-  // const filteredUsers = React.useMemo(() => {
-  //   if (search.length < 2) {
-  //     return users;
-  //   } else {
-  //     return users.filter((chat) => {
-  //       return chat.name.toLocaleLowerCase().search(search.toLocaleLowerCase()) !== -1;
-  //     });
-  //   }
-  // }, [search]);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
   return (
     <div className={styles.wrapper}>
       <Search setText={setSearch} placeholder={'Введите запрос'} className={styles.search} />
-      <div className={styles.grid}>
-        {users
-          .filter((u) => u._id !== user.id)
-          .map((user) => (
-            <PeopleFindCard key={user._id} user={user} />
-          ))}
+      <div className={styles.grid} style={{ display: isLoading ? 'block' : 'grid' }}>
+        {!isLoading ? (
+          users
+            .filter((u) => u._id !== user.id)
+            .map((user) => <PeopleFindCard key={user._id} user={user} />)
+        ) : (
+          <Spinner />
+        )}
       </div>
       {users.length <= 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
     </div>

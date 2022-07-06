@@ -21,6 +21,29 @@ body {
 	background: #EDEEF0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+}
+.emoji-mart-preview,.emoji-mart-search {
+	display: none;
+}
+
+.emoji-mart {
+	position: absolute;
+	top: -200px;
+	height: 200px;
+	overflow: hidden;
+}
+
+.emoji-mart-anchor-icon {
+	svg {
+		height: 13px;
+		width: 13px;
+		cursor: pointer;
+	}
+}
+
+.emoji-mart-category-list span {
+	cursor: pointer!important;
 }
 
 * {

@@ -198,7 +198,26 @@
 		border-radius: 0 0 5px 5px;
 
 		@include flex;
+		.input {
+			width: 100%;
+			padding: 15px 10px 15px 50px;
+			overflow: hidden;
+			color: var(--grey);
+			font-size: 13px;
+			word-wrap: break-word;
+			border-bottom: 1px solid var(--border);
+			resize: none;
 
+			&:focus {
+				outline: none;
+			}
+
+			&[contenteditable="true"]:empty::before {
+				display: block;
+				color: var(--grey300);
+				content: attr(placeholder);
+			}
+		}
 		button {
 			min-width: unset;
 			background: unset;

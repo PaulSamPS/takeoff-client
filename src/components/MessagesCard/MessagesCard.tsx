@@ -8,6 +8,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { setOpenChat } from '../../redux/reducers/openChatReducer';
 import cn from 'classnames';
 import { Count } from '../Count/Count';
+import reactStringReplace from 'react-string-replace';
+import { Emoji } from 'emoji-mart';
 
 export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
@@ -44,7 +46,12 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
       >
         <div className={styles.text}>
           <span className={styles.name}>{chat.name}</span>
-          <span className={styles.message}>{chat.lastMessage.substring(0, 50)}...</span>
+          <span className={styles.message}>
+            {' '}
+            {reactStringReplace(chat.lastMessage.substring(0, 50), /:(.+?):/g, (match, i) => (
+              <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
+            ))}
+          </span>
         </div>
         <div className={styles.right}>
           <span>{calculateTime(chat.date)}</span>

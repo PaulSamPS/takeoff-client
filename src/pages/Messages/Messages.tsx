@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { ReactComponent as ArrowBack } from '../../helpers/icons/arrowBack.svg';
+import { ReactComponent as SmileIcon } from '../../helpers/icons/smile.svg';
 import styles from './Message.module.scss';
-import { Input } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
 import { useChat } from '../../hooks/useChat';
 import { useAppSelector } from '../../hooks/redux';
@@ -11,6 +11,11 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { SocketContext } from '../../helpers/context';
+import { Emoji, Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
+import reactStringReplace from 'react-string-replace';
+import { BaseEmoji } from 'emoji-mart/dist-es/utils/emoji-index/nimble-emoji-index';
+import { Input } from '../../components/Input/Input';
 
 interface IMessage {
   senderName: string;
@@ -27,13 +32,18 @@ export const Messages = (): JSX.Element => {
   const [text, setText] = React.useState<string>('');
   const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
+  const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const { id } = useParams();
   const socket = React.useContext(SocketContext);
 
+  const addEmoji = (e: BaseEmoji) => {
+    setText(text + '' + e.colons);
+  };
+
   React.useEffect(() => {
-    setSubmitDisabled(!text.trim());
+    setSubmitDisabled(!text?.trim());
   }, [text]);
 
   const onSubmit = async (e: { preventDefault: () => void }) => {
@@ -107,7 +117,11 @@ export const Messages = (): JSX.Element => {
                             <span className={styles.userName}>{user.name}</span>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>
-                          <p className={styles.text}>{m.message}</p>
+                          <p className={styles.text}>
+                            {reactStringReplace(m.message, /:(.+?):/g, (match, i) => (
+                              <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
+                            ))}
+                          </p>
                         </div>
                       </>
                     ) : (
@@ -128,12 +142,17 @@ export const Messages = (): JSX.Element => {
                             <span className={styles.userName}>{bannerData.name}</span>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>
-                          <p className={styles.text}>{m.message}</p>
+                          <p className={styles.text}>
+                            {reactStringReplace(m.message, /:(.+?):/g, (match, i) => (
+                              <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
+                            ))}
+                          </p>
                         </div>
                       </>
                     )}
                   </div>
                 ))}
+                <p ref={bottomRef} />
               </div>
             ) : (
               <Spinner />
@@ -150,6 +169,21 @@ export const Messages = (): JSX.Element => {
             value={text}
             ref={inputRef}
           />
+          {showEmoji && (
+            <div>
+              <Picker
+                onSelect={addEmoji}
+                skin={2}
+                theme={'light'}
+                perLine={6}
+                set={'apple'}
+                emojiSize={16}
+                i18n={{ categories: { people: 'смайлы', recent: 'недавние' } }}
+              />
+            </div>
+          )}
+          <SmileIcon onClick={() => setShowEmoji(!showEmoji)} />
+          <div id='picker'></div>
           <Button appearance='primary' disabled={submitDisabled}>
             <SendIcon className={styles.send} />
           </Button>

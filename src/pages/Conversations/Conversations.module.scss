@@ -1,12 +1,22 @@
 @import "../../scss/index";
 .borderTop {
 	position: fixed;
-	top: 70px;
+	top: 71px;
 	z-index: 9;
+	width: 550px;
+	border-bottom: 0 solid var(--bg);
+	border-bottom-width: 24px;
+}
+.borderTopSidebar {
+	position: fixed;
+	top: 71px;
+	right: 0;
+	z-index: 11;
 	width: 100%;
 	border-bottom: 0 solid var(--bg);
-	border-bottom-width: 25px;
+	border-bottom-width: 19px;
 }
+
 .wrapper {
 	padding-top: 45px;
 	width: 550px;

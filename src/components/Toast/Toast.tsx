@@ -4,6 +4,8 @@ import styles from './Toast.module.scss';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { ToastProps } from './Toast.props';
 import { API_URL } from '../../http/axios';
+import reactStringReplace from 'react-string-replace';
+import { Emoji } from 'emoji-mart';
 
 export const Toast = ({
   setModal,
@@ -53,7 +55,15 @@ export const Toast = ({
           </div>
           <div className={styles.body}>
             <h4>{newMessageReceived?.name}</h4>
-            <p>{newMessageReceived?.message}</p>
+            <p>
+              {reactStringReplace(
+                newMessageReceived?.message.substring(0, 50),
+                /:(.+?):/g,
+                (match, i) => (
+                  <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
+                )
+              )}
+            </p>
           </div>
         </motion.div>
       )}
