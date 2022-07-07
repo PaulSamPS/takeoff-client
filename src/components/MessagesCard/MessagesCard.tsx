@@ -48,7 +48,7 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
           <span className={styles.name}>{chat.name}</span>
           <span className={styles.message}>
             {' '}
-            {reactStringReplace(chat.lastMessage.substring(0, 50), /:(.+?):/g, (match, i) => (
+            {reactStringReplace(chat.lastMessage, /:(.+?):/g, (match, i) => (
               <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
             ))}
           </span>

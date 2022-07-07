@@ -56,13 +56,9 @@ export const Toast = ({
           <div className={styles.body}>
             <h4>{newMessageReceived?.name}</h4>
             <p>
-              {reactStringReplace(
-                newMessageReceived?.message.substring(0, 50),
-                /:(.+?):/g,
-                (match, i) => (
-                  <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
-                )
-              )}
+              {reactStringReplace(newMessageReceived?.message, /:(.+?):/g, (match, i) => (
+                <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
+              ))}
             </p>
           </div>
         </motion.div>
