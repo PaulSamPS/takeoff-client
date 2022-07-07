@@ -29,6 +29,7 @@ interface IMessage {
 
 export const Messages = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
+  const [textSend, setTextSend] = React.useState<any>('');
   const [text, setText] = React.useState<string>('');
   const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
@@ -37,9 +38,33 @@ export const Messages = (): JSX.Element => {
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const { id } = useParams();
   const socket = React.useContext(SocketContext);
+  console.log('send', textSend);
+  console.log(text);
 
   const addEmoji = (e: BaseEmoji) => {
-    setText(text + '' + e.colons);
+    const sym = e.unified.split('-');
+    const codesArray: any[] = [];
+    sym.forEach((el) => codesArray.push('0x' + el));
+    const emoji = String.fromCodePoint(...codesArray);
+    setTextSend(
+      text.replace(
+        /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+        e.colons
+      ) +
+        '' +
+        e.colons
+    );
+    setText(text + '' + emoji);
+  };
+
+  const handleSetText = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+    setTextSend(
+      e.target.value.replace(
+        /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+        ''
+      )
+    );
   };
 
   React.useEffect(() => {
@@ -49,8 +74,9 @@ export const Messages = (): JSX.Element => {
   const onSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (submitDisabled) return;
-    sendMessage(text);
+    sendMessage(textSend);
     setText('');
+    setTextSend('');
   };
 
   React.useEffect(() => {
@@ -165,7 +191,7 @@ export const Messages = (): JSX.Element => {
           <Input
             placeholder='Введите сообщение...'
             autoFocus
-            onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleSetText(e)}
             value={text}
             ref={inputRef}
           />
