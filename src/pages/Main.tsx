@@ -9,6 +9,10 @@ import { Input } from '../components/Input/Input';
 import { createPost, getPosts } from '../redux/actions/postAction';
 import { Post } from '../components/Post/Post';
 import { Spinner } from '../components/Spinner/Spinner';
+import { Picker } from 'emoji-mart';
+import { ReactComponent as SmileIcon } from '../helpers/icons/smile.svg';
+import { BaseEmoji } from 'emoji-mart/dist-es/utils/emoji-index/nimble-emoji-index';
+import 'emoji-mart/css/emoji-mart.css';
 
 export const Main = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -18,6 +22,7 @@ export const Main = (): JSX.Element => {
   const [placeholder, setPlaceholder] = React.useState<string>('Что у вас нового?');
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
+  const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +31,10 @@ export const Main = (): JSX.Element => {
     setPreviewAvatar(avatar);
     setFilesAvatar(e.target.files);
     setActive(true);
+  };
+
+  const addEmoji = (e: BaseEmoji) => {
+    setText(text + '' + e.colons);
   };
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -97,9 +106,26 @@ export const Main = (): JSX.Element => {
             )
           )}
         {active && (
-          <Button appearance='primary' type='submit'>
-            Опубликовать
-          </Button>
+          <>
+            <div className={styles.picker}>
+              {showEmoji && (
+                <Picker
+                  onSelect={addEmoji}
+                  skin={2}
+                  theme={'light'}
+                  perLine={8}
+                  set={'apple'}
+                  emojiSize={25}
+                  i18n={{ categories: { people: 'смайлы', recent: 'недавние' } }}
+                  style={{ top: 'unset', right: 'unset', bottom: '-256px', left: '-21px' }}
+                />
+              )}
+              <SmileIcon className={styles.emoji} onClick={() => setShowEmoji(!showEmoji)} />
+            </div>
+            <Button appearance='primary' type='submit' className={styles.publish}>
+              Опубликовать
+            </Button>
+          </>
         )}
       </form>
       <div className={styles.posts}>

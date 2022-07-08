@@ -29,21 +29,37 @@ body {
 
 .emoji-mart {
 	position: absolute;
-	top: -200px;
-	height: 200px;
+	top: -230px;
+	height: 230px;
 	overflow: hidden;
+	width: 250px;
+	right: 0;
+}
+.emoji-mart-emoji {
+	font-size: unset;
+	margin: unset;
+	padding: unset;
+
+	span {
+		height: 20px!important;
+		width: 20px!important;
+
+			display: block!important;
+	}
 }
 
 .emoji-mart-anchor-icon {
 	svg {
-		height: 13px;
-		width: 13px;
+		height: 20px;
+		width: 20px;
 		cursor: pointer;
 	}
 }
 
 .emoji-mart-category-list span {
 	cursor: pointer!important;
+	height: 20px;
+	width: 20px;
 }
 
 * {

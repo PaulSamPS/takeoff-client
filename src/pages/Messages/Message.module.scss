@@ -129,6 +129,7 @@
 						grid-template-columns: 36px 1fr auto;
 						max-width: 100%;
 						word-wrap: break-word;
+						row-gap: 5px;
 						column-gap: 10px;
 					}
 
@@ -174,9 +175,14 @@
 					}
 
 					.text {
+						word-break: break-all;
 						grid-area: message;
 						font-size: 13px;
-						line-height: 18px;
+						line-height: 25px;
+						span {
+							transform: translateY(2px);
+							span {display: block;}
+						}
 					}
 				}
 			}
@@ -193,41 +199,32 @@
 	.bottom {
 		width: 550px;
 		padding: 20px;
-		column-gap: 20px;
 		background: var(--bg-grey-light);
 		border-radius: 0 0 5px 5px;
+		display: grid;
+		grid-template-columns: 1fr 55px auto;
+		align-items: center;
 
-		@include flex;
 		.input {
 			width: 100%;
-			padding: 15px 10px 15px 50px;
-			overflow: hidden;
-			color: var(--grey);
-			font-size: 13px;
-			word-wrap: break-word;
-			border-bottom: 1px solid var(--border);
-			resize: none;
-
-			&:focus {
-				outline: none;
-			}
-
-			&[contenteditable="true"]:empty::before {
-				display: block;
-				color: var(--grey300);
-				content: attr(placeholder);
-			}
+		}
+		.emoji {
+			height: 35px;
+			width: 35px;
+			justify-self: flex-end;
+			cursor: pointer;
+			opacity: 0.6;
 		}
 		button {
 			min-width: unset;
 			background: unset;
 			box-shadow: unset;
-		}
 
-		.send {
-			width: 30px;
-			height: 30px;
-			fill: var(--greyDark);
+			.send {
+				width: 30px;
+				height: 30px;
+				fill: var(--greyDark);
+			}
 		}
 	}
 }

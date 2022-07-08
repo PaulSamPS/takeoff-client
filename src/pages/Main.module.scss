@@ -7,7 +7,7 @@
 
 	.createPost {
 		display: grid;
-		grid-template-areas: "avatar text icon" "image image image" ". . button";
+		grid-template-areas: "avatar text icon" "image image image" "emoji . button";
 		grid-template-columns: 30px 1fr auto;
 		align-items: flex-start;
 		padding: 20px;
@@ -72,6 +72,14 @@
 			}
 		}
 
+		.picker {
+				grid-area: emoji;
+				margin-top: 45px;
+			position: relative;
+			.emoji {
+			}
+		}
+
 		.postImage {
 			display: flex;
 			grid-area: image;
@@ -86,7 +94,7 @@
 			}
 		}
 
-		button {
+		.publish {
 			grid-area: button;
 			margin-top: 40px;
 		}

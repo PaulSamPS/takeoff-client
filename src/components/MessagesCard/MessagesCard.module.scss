@@ -36,6 +36,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     row-gap: 10px;
+    column-gap: 10px;
     border-bottom: 1px solid var(--border);
     padding-bottom: 25px;
     text-decoration: none;
@@ -53,9 +54,14 @@
       }
 
       .message {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         color: var(--grey);
         font-size: 13px;
         height: 20px;
+        display: flex;
+        align-items: center;
       }
     }
 

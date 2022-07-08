@@ -29,7 +29,6 @@ interface IMessage {
 
 export const Messages = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
-  const [textSend, setTextSend] = React.useState<any>('');
   const [text, setText] = React.useState<string>('');
   const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
@@ -38,33 +37,13 @@ export const Messages = (): JSX.Element => {
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const { id } = useParams();
   const socket = React.useContext(SocketContext);
-  console.log('send', textSend);
-  console.log(text);
 
   const addEmoji = (e: BaseEmoji) => {
-    const sym = e.unified.split('-');
-    const codesArray: any[] = [];
-    sym.forEach((el) => codesArray.push('0x' + el));
-    const emoji = String.fromCodePoint(...codesArray);
-    setTextSend(
-      text.replace(
-        /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
-        e.colons
-      ) +
-        '' +
-        e.colons
-    );
-    setText(text + '' + emoji);
+    setText(text + '' + e.colons);
   };
 
   const handleSetText = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
-    setTextSend(
-      e.target.value.replace(
-        /([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
-        ''
-      )
-    );
   };
 
   React.useEffect(() => {
@@ -74,9 +53,8 @@ export const Messages = (): JSX.Element => {
   const onSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (submitDisabled) return;
-    sendMessage(textSend);
+    sendMessage(text);
     setText('');
-    setTextSend('');
   };
 
   React.useEffect(() => {
@@ -143,11 +121,11 @@ export const Messages = (): JSX.Element => {
                             <span className={styles.userName}>{user.name}</span>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>
-                          <p className={styles.text}>
+                          <span className={styles.text}>
                             {reactStringReplace(m.message, /:(.+?):/g, (match, i) => (
                               <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
                             ))}
-                          </p>
+                          </span>
                         </div>
                       </>
                     ) : (
@@ -168,11 +146,11 @@ export const Messages = (): JSX.Element => {
                             <span className={styles.userName}>{bannerData.name}</span>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>
-                          <p className={styles.text}>
+                          <span className={styles.text}>
                             {reactStringReplace(m.message, /:(.+?):/g, (match, i) => (
                               <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
                             ))}
-                          </p>
+                          </span>
                         </div>
                       </>
                     )}
@@ -189,6 +167,7 @@ export const Messages = (): JSX.Element => {
       <form onSubmit={onSubmit} className={styles.bottomContainer}>
         <div className={styles.bottom}>
           <Input
+            className={styles.input}
             placeholder='Введите сообщение...'
             autoFocus
             onChange={(e: ChangeEvent<HTMLInputElement>) => handleSetText(e)}
@@ -196,20 +175,17 @@ export const Messages = (): JSX.Element => {
             ref={inputRef}
           />
           {showEmoji && (
-            <div>
-              <Picker
-                onSelect={addEmoji}
-                skin={2}
-                theme={'light'}
-                perLine={6}
-                set={'apple'}
-                emojiSize={16}
-                i18n={{ categories: { people: 'смайлы', recent: 'недавние' } }}
-              />
-            </div>
+            <Picker
+              onSelect={addEmoji}
+              skin={2}
+              theme={'light'}
+              perLine={8}
+              set={'apple'}
+              emojiSize={25}
+              i18n={{ categories: { people: 'смайлы', recent: 'недавние' } }}
+            />
           )}
-          <SmileIcon onClick={() => setShowEmoji(!showEmoji)} />
-          <div id='picker'></div>
+          <SmileIcon className={styles.emoji} onClick={() => setShowEmoji(!showEmoji)} />
           <Button appearance='primary' disabled={submitDisabled}>
             <SendIcon className={styles.send} />
           </Button>
