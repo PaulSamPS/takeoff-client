@@ -31,7 +31,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
       <CustomLink to={'/?posts=all'}>
         <NewsIcon /> Новости
       </CustomLink>
-      <CustomLink to={'/conversations'}>
+      <CustomLink to={'/conversations?all=messages'}>
         <MessagesIcon /> Сообщения
         {total > 0 && <Count>{total}</Count>}
       </CustomLink>

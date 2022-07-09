@@ -51,10 +51,7 @@ export const RightBar = ({
         appearance='rightMenu'
         className={cn({ [styles.activeRightBar]: querySecond })}
       >
-        {secondItem}{' '}
-        {totalUnviewed && totalUnviewed > 0 && (
-          <Count className={styles.count}>{totalUnviewed}</Count>
-        )}
+        {secondItem} {totalUnviewed! > 0 && <Count className={styles.count}>{totalUnviewed}</Count>}
       </CustomLink>
       {thirdItemLink && (
         <CustomLink to={thirdItemLink} appearance='rightMenu'>
