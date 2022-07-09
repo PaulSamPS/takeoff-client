@@ -31,7 +31,10 @@ export const Friends = () => {
       }
     });
   });
-  document.getElementById('input')?.focus();
+
+  React.useEffect(() => {
+    document.getElementById('input')?.focus();
+  }, []);
 
   return (
     <div className={styles.wrapper}>

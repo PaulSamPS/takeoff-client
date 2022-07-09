@@ -7,7 +7,7 @@ export const AuthLayout = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem('AccessToken')) {
-      navigate('/posts?all');
+      navigate({ pathname: '/posts', search: '?posts=all' });
     }
   }, []);
 

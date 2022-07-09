@@ -15,6 +15,10 @@ export const Conversations = () => {
     chat.name.toLowerCase().includes(search?.toLowerCase())
   );
 
+  React.useEffect(() => {
+    document.getElementById('input')?.focus();
+  }, []);
+
   return (
     <>
       <div className={styles.borderTop} />

@@ -29,13 +29,13 @@ export const App = () => {
       <SocketContext.Provider value={socket}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<AuthLayout />}>
+            <Route path='/auth' element={<AuthLayout />}>
               <Route index element={<Login />} />
-              <Route path='/registration' element={<Registration />} />
-              <Route path='/registration/success' element={<RegistrationSuccess />} />
+              <Route path='registration' element={<Registration />} />
+              <Route path='registration/success' element={<RegistrationSuccess />} />
             </Route>
             <Route
-              path='/posts'
+              path='/'
               element={
                 <PrivateAuth>
                   <Layout />
