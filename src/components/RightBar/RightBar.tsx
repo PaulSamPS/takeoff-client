@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { deleteChat } from '../../redux/reducers/openChatReducer';
 import { Link, useParams } from 'react-router-dom';
+import cn from 'classnames';
 
 export const RightBar = ({
   totalUnviewed,
@@ -18,6 +19,8 @@ export const RightBar = ({
   thirdItemLink,
   thirdItem,
   isFixed,
+  queryFirst,
+  querySecond,
 }: RightBarProps): JSX.Element => {
   const { scrollY } = useScroll();
   const { openChat } = useAppSelector((state) => state.openChatReducer);
@@ -36,11 +39,22 @@ export const RightBar = ({
         top: !isFixed ? (scrollY >= 20 ? '71px' : '0') : '91px',
       }}
     >
-      <CustomLink to={firstItemLink} appearance='rightMenu'>
+      <CustomLink
+        to={firstItemLink}
+        appearance='rightMenu'
+        className={cn({ [styles.activeRightBar]: queryFirst })}
+      >
         {firstItem}
       </CustomLink>
-      <CustomLink to={secondItemLink} appearance='rightMenu'>
-        {secondItem} {totalUnviewed > 0 && <Count className={styles.count}>{totalUnviewed}</Count>}
+      <CustomLink
+        to={secondItemLink}
+        appearance='rightMenu'
+        className={cn({ [styles.activeRightBar]: querySecond })}
+      >
+        {secondItem}{' '}
+        {totalUnviewed && totalUnviewed > 0 && (
+          <Count className={styles.count}>{totalUnviewed}</Count>
+        )}
       </CustomLink>
       {thirdItemLink && (
         <CustomLink to={thirdItemLink} appearance='rightMenu'>

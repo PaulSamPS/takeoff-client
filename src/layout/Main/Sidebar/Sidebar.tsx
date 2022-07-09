@@ -28,7 +28,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <CustomLink to={'/main'}>
+      <CustomLink to={'/posts?posts=all'}>
         <NewsIcon /> Новости
       </CustomLink>
       <CustomLink to={'conversations'}>

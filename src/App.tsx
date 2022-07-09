@@ -35,7 +35,7 @@ export const App = () => {
               <Route path='/registration/success' element={<RegistrationSuccess />} />
             </Route>
             <Route
-              path='/main'
+              path='/posts'
               element={
                 <PrivateAuth>
                   <Layout />

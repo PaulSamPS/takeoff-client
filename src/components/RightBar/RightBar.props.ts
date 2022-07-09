@@ -2,7 +2,7 @@ import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface RightBarProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  totalUnviewed: number;
+  totalUnviewed?: number;
   firstItem: string;
   secondItem: string;
   thirdItem?: string;
@@ -10,4 +10,6 @@ export interface RightBarProps
   secondItemLink: string;
   thirdItemLink?: string;
   isFixed?: boolean;
+  queryFirst?: string | null;
+  querySecond?: string | null;
 }

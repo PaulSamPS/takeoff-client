@@ -44,6 +44,12 @@
 	}
 
 	.text {
+		font-size: 13px;
+		word-break: break-word;
+		span {
+			transform: translateY(2px);
+			span {display: block;}
+		}
 	}
 
 	img {

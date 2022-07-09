@@ -10,6 +10,8 @@ import { Button } from '../Button/Button';
 import { calculateTime } from '../../helpers/calculateTime';
 import { useAppSelector } from '../../hooks/redux';
 import { SocketContext } from '../../helpers/context';
+import reactStringReplace from 'react-string-replace';
+import { Emoji } from 'emoji-mart';
 
 interface IUserPost {
   _id: string;
@@ -86,7 +88,11 @@ export const Post = ({ post }: PostProps) => {
           <span className={styles.date}>{calculateTime(post.createdAt)}</span>
         </div>
       </div>
-      <span className={styles.text}>{post.text}</span>
+      <span className={styles.text}>
+        {reactStringReplace(post.text, /:(.+?):/g, (match, i) => (
+          <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
+        ))}
+      </span>
       {post.image && <img src={`${API_URL}/post/${post.image}`} alt={post.text} />}
       <div
         className={styles.icons}

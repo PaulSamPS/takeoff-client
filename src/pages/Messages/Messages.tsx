@@ -14,7 +14,7 @@ import { SocketContext } from '../../helpers/context';
 import { Emoji, Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import reactStringReplace from 'react-string-replace';
-import { BaseEmoji } from 'emoji-mart/dist-es/utils/emoji-index/nimble-emoji-index';
+import { BaseEmoji } from 'emoji-mart';
 import { Input } from '../../components/Input/Input';
 
 interface IMessage {

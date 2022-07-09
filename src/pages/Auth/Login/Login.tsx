@@ -28,7 +28,7 @@ export const Login = (): JSX.Element => {
   const onSubmit = async (formData: ILoginForm) => {
     dispatch(login(formData)).then(() => {
       if (localStorage.getItem('AccessToken')) {
-        navigate('/main');
+        navigate('/posts?posts=all');
       }
     });
     reset();

@@ -7,7 +7,7 @@ export const AuthLayout = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem('AccessToken')) {
-      navigate('/main');
+      navigate('/posts?all');
     }
   }, []);
 
