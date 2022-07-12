@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { ReactComponent as ArrowBack } from '../../helpers/icons/arrowBack.svg';
 import { ReactComponent as SmileIcon } from '../../helpers/icons/smile.svg';
-import styles from './Message.module.scss';
+import styles from './Chat.module.scss';
 import { Button } from '../../components/Button/Button';
 import { useChat } from '../../hooks/useChat';
 import { useAppSelector } from '../../hooks/redux';
@@ -27,7 +27,7 @@ interface IMessage {
   _id: string;
 }
 
-export const Messages = (): JSX.Element => {
+export const Chat = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
   const { sendMessage, messages, bannerData, loadingMessages } = useChat();

@@ -18,7 +18,7 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
   return (
     <>
       <div className={styles.card}>
-        <Link to={`/main/people/${friend.id}`} replace className={styles.followers}>
+        <Link to={`/user-profile?user=${friend.id}`} replace className={styles.followers}>
           <img
             src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
             alt={friend.name}

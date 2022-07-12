@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { logout } from '../../../redux/actions/authAction';
 import styles from './Header.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
 import { SocketContext } from '../../../helpers/context';
 
@@ -36,13 +36,13 @@ export const Header = () => {
           <h2 onClick={navigateTeoMain}>TakeOff</h2>
         </div>
         <div className={styles.profile} onClick={navigateToProfile}>
-          <div className={styles.avatar}>
+          <Link to={{ pathname: '/profile', search: `?user=${user.id}` }} className={styles.avatar}>
             <img
               src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
               alt={user.name}
             />
             {online.includes(user.id) && <div className={styles.online} />}
-          </div>
+          </Link>
           <span>{user.name}</span>
         </div>
         <div className={styles.logout} onClick={handleLogout}>

@@ -12,6 +12,7 @@ import { useAppSelector } from '../../hooks/redux';
 import { SocketContext } from '../../helpers/context';
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
+import { Link } from 'react-router-dom';
 
 interface IUserPost {
   _id: string;
@@ -79,10 +80,12 @@ export const Post = ({ post }: PostProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.user}>
-        <img
-          src={post.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${post.user.avatar}`}
-          alt={post.user.name}
-        />
+        <Link to={`/user-profile?user=${post.user._id}`}>
+          <img
+            src={post.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${post.user.avatar}`}
+            alt={post.user.name}
+          />
+        </Link>
         <div className={styles.userPost}>
           <span className={styles.userName}>{post.user.name}</span>
           <span className={styles.date}>{calculateTime(post.createdAt)}</span>

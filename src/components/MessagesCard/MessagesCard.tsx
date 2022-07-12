@@ -28,7 +28,7 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <div className={styles.avatar}>
+      <Link to={`/user-profile?user=${chat.messagesWith}`} className={styles.avatar}>
         <img
           src={
             chat.avatar === '' || chat.avatar === null
@@ -38,7 +38,7 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
           alt={chat.name}
         />
         {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
-      </div>
+      </Link>
       <Link
         to={{ pathname: '/conversations', search: `?with=${chat.messagesWith}` }}
         className={styles.body}

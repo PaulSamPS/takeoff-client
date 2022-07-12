@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useChat } from '../../hooks/useChat';
 import styles from './UserInfo.module.scss';
 import { calculateTime } from '../../helpers/calculateTime';
@@ -22,10 +22,11 @@ interface IUserInfo {
 
 export const UserInfo = () => {
   const socket = React.useContext(SocketContext);
+  const queryParams = new URLSearchParams(location.search);
+  const userProfile = queryParams.get('user');
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const { sendMessage } = useChat();
-  const { id } = useParams();
   const [user, setUser] = React.useState<IUserAll | IUser>();
   const usersOnline = users.map((user: any) => user.userId);
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
@@ -40,9 +41,6 @@ export const UserInfo = () => {
   const followingDone = followings.map((following) => following.id);
 
   const sendMessageModal = () => {
-    if (typeof id === 'string') {
-      localStorage.setItem('id', id);
-    }
     setConversationModal(true);
   };
 
@@ -58,7 +56,7 @@ export const UserInfo = () => {
   }, [text]);
 
   React.useEffect(() => {
-    socket?.emit('userInfo:get', { userId: id });
+    socket?.emit('userInfo:get', { userId: userProfile });
     socket?.on('userInfo:user', ({ user }: IUserInfo) => {
       setUser(user);
     });
@@ -66,7 +64,7 @@ export const UserInfo = () => {
     return () => {
       socket?.off('userInfo:user');
     };
-  }, [id, socket]);
+  }, [userProfile, socket]);
 
   return (
     <div className={styles.container}>
@@ -78,7 +76,7 @@ export const UserInfo = () => {
           />
         </div>
         <div className={styles.bio}>
-          {usersOnline.includes(id) ? (
+          {usersOnline.includes(userProfile) ? (
             <div className={styles.online}>
               Online <div className={styles.green} />
             </div>
@@ -90,7 +88,7 @@ export const UserInfo = () => {
           <h1>{user?.name}</h1>
           <Info user={user} />
         </div>
-        {loginUser.id !== id && (
+        {loginUser.id !== userProfile && (
           <Button
             appearance='primary'
             className={styles.message}
@@ -99,10 +97,10 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {!friendsDone.includes(id) ? (
+        {!friendsDone.includes(userProfile!) ? (
           <div className={styles.follow}>
-            {!followingDone.includes(id) && requestsDone.includes(id) ? (
-              <Button appearance='primary' onClick={() => addFriend(id)}>
+            {!followingDone.includes(userProfile!) && requestsDone.includes(userProfile!) ? (
+              <Button appearance='primary' onClick={() => addFriend(userProfile!)}>
                 Добавить в друзья
               </Button>
             ) : followings.find((i) => i.id === loginUser.id) ? (

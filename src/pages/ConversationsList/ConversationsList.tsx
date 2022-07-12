@@ -6,7 +6,7 @@ import { useChat } from '../../hooks/useChat';
 import { SocketContext } from '../../helpers/context';
 import { Conversations } from './Conversations/Conversations';
 import { ConversationsUnread } from './ConversationsUnread/ConversationsUnread';
-import { Messages } from '../Messages/Messages';
+import { Chat } from '../Chat/Chat';
 
 export const ConversationsList = () => {
   const socket = useContext(SocketContext);
@@ -37,7 +37,7 @@ export const ConversationsList = () => {
     <div className={styles.wrapper}>
       {allConversations && <Conversations />}
       {unreadConversations && <ConversationsUnread />}
-      {chatWith && <Messages />}
+      {chatWith && <Chat />}
       <RightBar
         totalUnviewed={total}
         queryFirst={allConversations}

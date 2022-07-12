@@ -8,6 +8,8 @@ import { PrivateAuth } from './helpers/PrivateAuth';
 import { FriendsList } from './pages/FriendsList/FriendsList';
 import { ConversationsList } from './pages/ConversationsList/ConversationsList';
 import { context, SocketContext } from './helpers/context';
+import { Profile } from './pages/Profile/Profile';
+import { UserInfo } from './pages/UserInfo/UserInfo';
 
 export const App = () => {
   const { socket } = context();
@@ -29,6 +31,8 @@ export const App = () => {
               <Route index element={<News />} />
               <Route path='conversations' element={<ConversationsList />} />
               <Route path='friends' element={<FriendsList />} />
+              <Route path='profile' element={<Profile />} />
+              <Route path='user-profile' element={<UserInfo />} />
             </Route>
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
