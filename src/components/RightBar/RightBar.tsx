@@ -21,6 +21,7 @@ export const RightBar = ({
   isFixed,
   queryFirst,
   querySecond,
+  queryThird,
 }: RightBarProps): JSX.Element => {
   const { scrollY } = useScroll();
   const { openChat } = useAppSelector((state) => state.openChatReducer);
@@ -55,7 +56,11 @@ export const RightBar = ({
         {secondItem} {totalUnviewed! > 0 && <Count className={styles.count}>{totalUnviewed}</Count>}
       </CustomLink>
       {thirdItemLink && (
-        <CustomLink to={thirdItemLink} appearance='rightMenu'>
+        <CustomLink
+          to={thirdItemLink}
+          appearance='rightMenu'
+          className={cn({ [styles.activeRightBar]: queryThird })}
+        >
           {thirdItem}
         </CustomLink>
       )}

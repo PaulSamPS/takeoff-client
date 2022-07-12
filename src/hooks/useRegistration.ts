@@ -25,7 +25,7 @@ export const useRegistration = ({
   const navigate = useNavigate();
 
   const handleSwitchMethod = () => {
-    navigate('/');
+    navigate({ pathname: '/auth', search: '?auth=login' });
   };
 
   const onSubmit = async (formData: IRegistrationForm) => {

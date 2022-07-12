@@ -25,7 +25,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
     <div className={styles.modalMessage}>
       <div className={styles.topModal}>
         <span>Новое сообщение</span>
-        <Link to={`/main/conversations/${friend.id}`}>Перейтик диалогу c {friend.name}</Link>
+        <Link to={`/conversations?with=${friend.id}`}>Перейтик диалогу c {friend.name}</Link>
       </div>
       <div className={styles.user}>
         <Link to={`/main/people/${friend.id}`} replace className={styles.followers}>

@@ -18,7 +18,7 @@ export const Header = () => {
     socket?.emit('logout');
     dispatch(logout());
     socket?.disconnect();
-    navigate('/');
+    navigate({ pathname: '/auth', search: '?auth=login' });
   };
 
   const navigateToProfile = () => {

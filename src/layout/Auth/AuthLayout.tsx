@@ -1,13 +1,19 @@
 import React from 'react';
 import styles from './AuthLayout.module.scss';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Login } from '../../pages/Auth/Login/Login';
+import { Registration } from '../../pages/Auth/Registration/Registration';
 
 export const AuthLayout = () => {
   const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const auth = queryParams.get('auth');
 
   React.useEffect(() => {
     if (localStorage.getItem('AccessToken')) {
-      navigate({ pathname: '/posts', search: '?posts=all' });
+      navigate({ pathname: '/', search: '?posts=all' });
+    } else {
+      navigate({ pathname: '/auth', search: '?auth=login' });
     }
   }, []);
 
@@ -17,7 +23,8 @@ export const AuthLayout = () => {
         <h1>Takeoff</h1>
       </div>
       <div className={styles.bottom}>
-        <Outlet />
+        {auth === 'login' && <Login />}
+        {auth === 'registration' && <Registration />}
       </div>
     </div>
   );

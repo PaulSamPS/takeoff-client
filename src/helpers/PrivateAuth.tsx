@@ -9,7 +9,7 @@ export const PrivateAuth = ({ children }: PrivateAuthProps) => {
   const isAuth = localStorage.getItem('AccessToken');
 
   if (!isAuth) {
-    return <Navigate to='/' replace />;
+    return <Navigate to='/auth' replace />;
   }
 
   return children;

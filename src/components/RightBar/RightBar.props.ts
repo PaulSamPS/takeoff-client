@@ -12,4 +12,5 @@ export interface RightBarProps
   isFixed?: boolean;
   queryFirst?: string | null;
   querySecond?: string | null;
+  queryThird?: string | null;
 }

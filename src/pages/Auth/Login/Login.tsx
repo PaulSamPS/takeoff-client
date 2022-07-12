@@ -22,7 +22,7 @@ export const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const handleSwitchMethod = () => {
-    navigate('/registration');
+    navigate({ pathname: '/auth', search: '?auth=registration' });
   };
 
   const onSubmit = async (formData: ILoginForm) => {

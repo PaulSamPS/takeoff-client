@@ -8,6 +8,12 @@ import { ModalMessage } from '../ModalMessage/ModalMessage';
 
 export const FriendCard = ({ friend }: FriendCardProps) => {
   const [modal, setModal] = React.useState<boolean>(false);
+  const queryParams = new URLSearchParams(location.search);
+
+  const handleSendMessage = () => {
+    setModal(true);
+    queryParams.set('with', `${friend.id}`);
+  };
 
   return (
     <>
@@ -21,7 +27,7 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
         <div className={styles.body}>
           <span className={styles.userName}>{friend.name}</span>
           <span className={styles.position}>{friend.position}</span>
-          <span className={styles.sendMessage} onClick={() => setModal(true)}>
+          <span className={styles.sendMessage} onClick={handleSendMessage}>
             Написать сообщение
           </span>
         </div>
