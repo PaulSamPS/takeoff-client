@@ -7,7 +7,7 @@ import { useScroll } from '../../hooks/usseScroll';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { deleteChat } from '../../redux/reducers/openChatReducer';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 export const RightBar = ({
@@ -25,7 +25,8 @@ export const RightBar = ({
   const { scrollY } = useScroll();
   const { openChat } = useAppSelector((state) => state.openChatReducer);
   const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const queryParams = new URLSearchParams(location.search);
+  const chatWith = queryParams.get('with');
 
   const handleDeleteChat = (chatId: string) => {
     dispatch(deleteChat(chatId));
@@ -63,11 +64,15 @@ export const RightBar = ({
         isFixed &&
         openChat.map((c) => (
           <div key={c.id} className={styles.item}>
-            <CustomLink to={c.link} appearance='rightMenu' className={styles.chatLink}>
+            <CustomLink
+              to={c.link}
+              appearance='rightMenu'
+              className={cn(styles.chatLink, { [styles.activeRightBar]: chatWith === c.id })}
+            >
               {c.name}
             </CustomLink>
             <Link
-              to={id === c.id ? '/main/conversations' : ''}
+              to={{ pathname: '', search: chatWith === c.id ? '?all=messages' : '' }}
               onClick={() => handleDeleteChat(c.id)}
             >
               <CloseIcon />

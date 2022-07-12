@@ -20,7 +20,7 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
     localStorage.setItem('receiverUserId', chat.messagesWith);
     const openChat = {
       name: chat.name,
-      link: `/main/conversations/${chat.messagesWith}`,
+      link: `?with=${chat.messagesWith}`,
       id: chat.messagesWith,
     };
     dispatch(setOpenChat(openChat));
@@ -40,7 +40,7 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
         {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
       </div>
       <Link
-        to={`/main/conversations/${chat.messagesWith}`}
+        to={{ pathname: '/conversations', search: `?with=${chat.messagesWith}` }}
         className={styles.body}
         onClick={handleOpenChat}
       >

@@ -49,7 +49,7 @@ export const App = () => {
               <Route path='conversations' element={<ConversationsList />}>
                 <Route index element={<Conversations />} />
                 <Route path='unread' element={<ConversationsUnread />} />
-                <Route path=':id' element={<Messages />} />
+                <Route path='chat' element={<Messages />} />
               </Route>
               <Route path='friends' element={<FriendsList />}>
                 <Route index element={<Friends />} />

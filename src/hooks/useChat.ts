@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from './redux';
 import { getChatUser } from '../redux/actions/chatAction';
 import { filteredChats } from '../helpers/filteChats';
 import { SocketContext } from '../helpers/context';
-import { useParams } from 'react-router-dom';
 
 interface IBanner {
   name: string | undefined;
@@ -63,7 +62,8 @@ export const useChat = () => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const { conversation } = useAppSelector((state) => state.conversationReducer);
-  const { id } = useParams();
+  const queryParams = new URLSearchParams(location.search);
+  const chatWith = queryParams.get('with');
   const dispatch = useAppDispatch();
   const [messages, setMessages] = React.useState<any[]>([]);
   const [bannerData, setBannerData] = React.useState<IBanner>({
@@ -88,12 +88,12 @@ export const useChat = () => {
     return () => {
       socket?.off('chat:send');
     };
-  }, [socket, id]);
+  }, [socket, chatWith]);
 
   React.useEffect(() => {
     socket?.emit('messages:get', {
       userId: user.id,
-      messagesWith: id,
+      messagesWith: chatWith,
     });
 
     socket?.on('message_list:update', ({ chat }: any) => {
@@ -115,7 +115,7 @@ export const useChat = () => {
       socket?.off('message_list:update');
       socket?.off('chat:notFound');
     };
-  }, [socket, id]);
+  }, [socket, chatWith]);
 
   const sendMessage = (message: string | null) => {
     console.log('msg', message);
@@ -128,7 +128,7 @@ export const useChat = () => {
 
   React.useEffect(() => {
     socket?.on('messages:sent', ({ newMessage }: INewMessage) => {
-      if (newMessage.receiver === id) {
+      if (newMessage.receiver === chatWith) {
         setMessages((prev: any) => [...prev, newMessage]);
         setChats((prev) => {
           const receiver = newMessage.receiver;
@@ -139,7 +139,7 @@ export const useChat = () => {
     });
 
     socket?.on('message:received', async ({ newMessage }: INewMessage) => {
-      if (newMessage.sender === id) {
+      if (newMessage.sender === chatWith) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev) => {
           filteredChats(prev, newMessage);
@@ -181,7 +181,7 @@ export const useChat = () => {
   const deleteMessage = (messageId: string) => {
     socket?.emit('message:delete', {
       userId: user.id,
-      messagesWith: id,
+      messagesWith: chatWith,
       messageId,
     });
 

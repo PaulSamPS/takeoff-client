@@ -6,6 +6,7 @@ import { useChat } from '../../hooks/useChat';
 import { SocketContext } from '../../helpers/context';
 import { Conversations } from '../Conversations/Conversations';
 import { ConversationsUnread } from '../ConversationsUnread/ConversationsUnread';
+import { Messages } from '../Messages/Messages';
 
 export const ConversationsList = () => {
   const socket = useContext(SocketContext);
@@ -15,6 +16,7 @@ export const ConversationsList = () => {
   const queryParams = new URLSearchParams(location.search);
   const allConversations = queryParams.get('all');
   const unreadConversations = queryParams.get('unread');
+  const chatWith = queryParams.get('with');
 
   React.useEffect(() => {
     if (location.pathname === '/conversations') {
@@ -35,6 +37,7 @@ export const ConversationsList = () => {
     <div className={styles.wrapper}>
       {allConversations && <Conversations />}
       {unreadConversations && <ConversationsUnread />}
+      {chatWith && <Messages />}
       <RightBar
         totalUnviewed={total}
         queryFirst={allConversations}
