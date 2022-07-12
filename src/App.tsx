@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from './layout/Main/Layout';
-import { Main } from './pages/Main';
+import { News } from './pages/News/News';
 import { AuthLayout } from './layout/Auth/AuthLayout';
 import { PrivateAuth } from './helpers/PrivateAuth';
 import { FriendsList } from './pages/FriendsList/FriendsList';
@@ -26,7 +26,7 @@ export const App = () => {
                 </PrivateAuth>
               }
             >
-              <Route index element={<Main />} />
+              <Route index element={<News />} />
               <Route path='conversations' element={<ConversationsList />} />
               <Route path='friends' element={<FriendsList />} />
             </Route>

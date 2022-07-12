@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { RightBar } from '../../components/RightBar/RightBar';
 import { useChat } from '../../hooks/useChat';
 import { SocketContext } from '../../helpers/context';
-import { Conversations } from '../Conversations/Conversations';
-import { ConversationsUnread } from '../ConversationsUnread/ConversationsUnread';
+import { Conversations } from './Conversations/Conversations';
+import { ConversationsUnread } from './ConversationsUnread/ConversationsUnread';
 import { Messages } from '../Messages/Messages';
 
 export const ConversationsList = () => {

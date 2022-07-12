@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './Friiend.module.scss';
-import { useRequest } from '../../hooks/useRequest';
+import { useRequest } from '../../../hooks/useRequest';
 import cn from 'classnames';
-import { useAppSelector } from '../../hooks/redux';
-import { FriendsAll } from '../FriendsAll/FriendsAll';
-import { FriendsOnline } from '../FriendsOnline/FriendsOnline';
+import { useAppSelector } from '../../../hooks/redux';
+import { FriendsAll } from './FriendsAll/FriendsAll';
+import { FriendsOnline } from './FriendsOnline/FriendsOnline';
 
 interface IUser {
   id: string | undefined;

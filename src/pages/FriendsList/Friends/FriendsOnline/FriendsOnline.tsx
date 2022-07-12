@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './FriendsOnline.module.scss';
-import { FriendCard } from '../../components/FriendCard/FriendCard';
-import { Search } from '../../components/Search/Search';
+import { FriendCard } from '../../../../components/FriendCard/FriendCard';
+import { Search } from '../../../../components/Search/Search';
 import { FriendOnlineProps } from './FriendOnline.props';
 
 export const FriendsOnline = ({ friendsOnline }: FriendOnlineProps) => {

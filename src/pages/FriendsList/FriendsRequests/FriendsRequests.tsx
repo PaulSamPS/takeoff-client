@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './Requests.module.scss';
+import styles from './FriendsRequests.module.scss';
 import { Link } from 'react-router-dom';
-import { API_URL } from '../../http/axios';
-import { Button } from '../../components/Button/Button';
-import { useRequest } from '../../hooks/useRequest';
+import { API_URL } from '../../../http/axios';
+import { Button } from '../../../components/Button/Button';
+import { useRequest } from '../../../hooks/useRequest';
 
-export const Requests = () => {
+export const FriendsRequests = () => {
   const { request, addFriend, rejectFriend } = useRequest();
 
   return (

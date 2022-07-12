@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './Friendslist.module.scss';
 import { useRequest } from '../../hooks/useRequest';
 import { RightBar } from '../../components/RightBar/RightBar';
-import { Friends } from '../Friends/Friends';
-import { Requests } from '../Requests/Requests';
-import { People } from '../People/People';
+import { Friends } from './Friends/Friends';
+import { FriendsRequests } from './FriendsRequests/FriendsRequests';
+import { FriendsFind } from './FriendsFind/FriendsFind';
 import { useNavigate } from 'react-router-dom';
 
 export const FriendsList = () => {
@@ -24,8 +24,8 @@ export const FriendsList = () => {
   return (
     <div className={styles.wrapper}>
       {friendsAll && <Friends />}
-      {requestsFriends && <Requests />}
-      {findPeople && <People />}
+      {requestsFriends && <FriendsRequests />}
+      {findPeople && <FriendsFind />}
       <RightBar
         totalUnviewed={request.length}
         firstItem={'Мои друзья'}

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Search } from '../../components/Search/Search';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getUsers } from '../../redux/actions/usersAction';
-import { Spinner } from '../../components/Spinner/Spinner';
-import styles from './People.module.scss';
-import { PeopleFindCard } from '../../components/PeopleFindCard/PeopleFindCard';
+import { Search } from '../../../components/Search/Search';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { getUsers } from '../../../redux/actions/usersAction';
+import { Spinner } from '../../../components/Spinner/Spinner';
+import styles from './FriendsFind.module.scss';
+import { PeopleFindCard } from '../../../components/PeopleFindCard/PeopleFindCard';
 
-export const People = () => {
+export const FriendsFind = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const { users, isLoading } = useAppSelector((state) => state.usersReducer);
   const [search, setSearch] = React.useState<string | null>('');

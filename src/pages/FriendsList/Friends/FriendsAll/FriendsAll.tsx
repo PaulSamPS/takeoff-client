@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './FriendsAll.module.scss';
-import { FriendCard } from '../../components/FriendCard/FriendCard';
-import { useRequest } from '../../hooks/useRequest';
-import { Search } from '../../components/Search/Search';
+import { FriendCard } from '../../../../components/FriendCard/FriendCard';
+import { useRequest } from '../../../../hooks/useRequest';
+import { Search } from '../../../../components/Search/Search';
 
 export const FriendsAll = () => {
   const { friends } = useRequest();

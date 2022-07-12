@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from './Main.module.scss';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { getPosts } from '../redux/actions/postAction';
-import { Post } from '../components/Post/Post';
-import { Spinner } from '../components/Spinner/Spinner';
-import { CreatePost } from '../components/CreatePost/CreatePost';
-import { RightBar } from '../components/RightBar/RightBar';
+import styles from './News.module.scss';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getPosts } from '../../redux/actions/postAction';
+import { Post } from '../../components/Post/Post';
+import { Spinner } from '../../components/Spinner/Spinner';
+import { CreatePost } from '../../components/CreatePost/CreatePost';
+import { RightBar } from '../../components/RightBar/RightBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const Main = (): JSX.Element => {
+export const News = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const { posts, isLoading } = useAppSelector((state) => state.postsReducer);
   const dispatch = useAppDispatch();

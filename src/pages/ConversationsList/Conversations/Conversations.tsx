@@ -1,10 +1,10 @@
 import React from 'react';
-import { useChat } from '../../hooks/useChat';
+import { useChat } from '../../../hooks/useChat';
 import styles from './Conversations.module.scss';
-import { Search } from '../../components/Search/Search';
-import { useAppSelector } from '../../hooks/redux';
-import { Spinner } from '../../components/Spinner/Spinner';
-import { MessagesCard } from '../../components/MessagesCard/MessagesCard';
+import { Search } from '../../../components/Search/Search';
+import { useAppSelector } from '../../../hooks/redux';
+import { Spinner } from '../../../components/Spinner/Spinner';
+import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
 
 export const Conversations = () => {
   const { isLoading } = useAppSelector((state) => state.conversationReducer);

@@ -75,7 +75,7 @@ export const Messages = (): JSX.Element => {
       <div className={styles.borderTop} />
       <div className={styles.chatWith}>
         <div className={styles.back}>
-          <Link to={'/main/conversations'}>
+          <Link to={'/conversations?all=messages'}>
             <ArrowBack /> Назад
           </Link>
         </div>
