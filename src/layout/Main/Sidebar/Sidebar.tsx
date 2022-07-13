@@ -35,7 +35,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         <MessagesIcon /> Сообщения
         {total > 0 && <Count>{total}</Count>}
       </CustomLink>
-      <CustomLink to={'/friends?get=all'}>
+      <CustomLink to={'/friends?all=get'}>
         <FriendsIcon /> Друзья {request && request.length > 0 && <Count>{request.length}</Count>}
       </CustomLink>
     </div>

@@ -26,7 +26,7 @@ export const Friends = () => {
 
   friends.filter((friend) => {
     return users.forEach((user) => {
-      if (friend.id == user.userId) {
+      if (friend.id === user.userId) {
         friendsOnline.push(friend);
       }
     });

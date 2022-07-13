@@ -16,6 +16,7 @@ import 'emoji-mart/css/emoji-mart.css';
 import reactStringReplace from 'react-string-replace';
 import { BaseEmoji } from 'emoji-mart';
 import { Input } from '../../components/Input/Input';
+// import { useScroll } from '../../hooks/usseScroll';
 
 interface IMessage {
   senderName: string;
@@ -38,7 +39,7 @@ export const Chat = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const queryParams = new URLSearchParams(location.search);
   const chatWith = queryParams.get('with');
-  console.log(chatWith);
+  // const { scrollY } = useScroll();
 
   const addEmoji = (e: BaseEmoji) => {
     setText(text + '' + e.colons);
@@ -158,7 +159,7 @@ export const Chat = (): JSX.Element => {
                     )}
                   </div>
                 ))}
-                <p ref={bottomRef} />
+                {/* {scrollY < window.innerHeight && <p ref={bottomRef} />}*/}
               </div>
             ) : (
               <Spinner />

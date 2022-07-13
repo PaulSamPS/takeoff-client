@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from './redux';
 import { getChatUser } from '../redux/actions/chatAction';
 import { filteredChats } from '../helpers/filteChats';
 import { SocketContext } from '../helpers/context';
+import { useScroll } from './usseScroll';
 
 interface IBanner {
   name: string | undefined;
@@ -78,6 +79,40 @@ export const useChat = () => {
   const [chats, setChats] = React.useState<IChats[]>(conversation);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
+  const [totalMessages, setTotalMessages] = React.useState<number>(0);
+  const [currentCountMessages, setCurrentCountMessages] = React.useState<number>(20);
+  const [isFetching, setIsFetching] = React.useState<boolean>(false);
+  const { scrollY } = useScroll();
+  console.log(isFetching);
+
+  React.useEffect(() => {
+    if (scrollY <= 0 && messages.length < totalMessages) {
+      setCurrentCountMessages((prevState) => prevState + 20);
+      setIsFetching(true);
+    }
+  }, [scrollY]);
+
+  React.useEffect(() => {
+    if (isFetching) {
+      socket?.emit('messages:get', {
+        userId: user.id,
+        messagesWith: chatWith,
+      });
+
+      socket?.on('message_list:update', ({ chat }: any) => {
+        setMessages(chat.messages.slice(-currentCountMessages));
+        setLoadingMessages(false);
+        setIsFetching(false);
+        window.scrollTo({
+          top: 700,
+          behavior: 'smooth',
+        });
+      });
+      return () => {
+        socket?.off('message_list:update');
+      };
+    }
+  }, [isFetching]);
 
   React.useEffect(() => {
     socket?.emit('chat:get', { userId: user.id });
@@ -96,8 +131,8 @@ export const useChat = () => {
       messagesWith: chatWith,
     });
 
-    socket?.on('message_list:update', ({ chat }: any) => {
-      setMessages(chat.messages.slice(-20));
+    socket?.on('message_list:update', ({ chat, totalCount }: any) => {
+      setMessages(chat.messages.slice(-currentCountMessages));
       setBannerData({
         name: chat.messagesWith.name,
         avatar: chat.messagesWith.avatar,
@@ -105,6 +140,7 @@ export const useChat = () => {
         isOnline: chat.messagesWith.isOnline,
       });
       openChatId.current = chat.messagesWith._id;
+      setTotalMessages(totalCount);
       setLoadingMessages(false);
     });
 
@@ -200,5 +236,6 @@ export const useChat = () => {
     deleteMessage,
     loading,
     loadingMessages,
+    totalMessages,
   };
 };
