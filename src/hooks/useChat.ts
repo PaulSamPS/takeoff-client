@@ -4,6 +4,7 @@ import { getChatUser } from '../redux/actions/chatAction';
 import { filteredChats } from '../helpers/filteChats';
 import { SocketContext } from '../helpers/context';
 import { useScroll } from './usseScroll';
+import { useParams } from 'react-router-dom';
 
 interface IBanner {
   name: string | undefined;
@@ -63,8 +64,7 @@ export const useChat = () => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const { conversation } = useAppSelector((state) => state.conversationReducer);
-  const queryParams = new URLSearchParams(location.search);
-  const chatWith = queryParams.get('with');
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const [messages, setMessages] = React.useState<any[]>([]);
   const [bannerData, setBannerData] = React.useState<IBanner>({
@@ -83,7 +83,6 @@ export const useChat = () => {
   const [currentCountMessages, setCurrentCountMessages] = React.useState<number>(20);
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
   const { scrollY } = useScroll();
-  console.log(isFetching);
 
   React.useEffect(() => {
     if (scrollY <= 0 && messages.length < totalMessages) {
@@ -96,7 +95,7 @@ export const useChat = () => {
     if (isFetching) {
       socket?.emit('messages:get', {
         userId: user.id,
-        messagesWith: chatWith,
+        messagesWith: id,
       });
 
       socket?.on('message_list:update', ({ chat }: any) => {
@@ -123,12 +122,12 @@ export const useChat = () => {
     return () => {
       socket?.off('chat:send');
     };
-  }, [socket, chatWith]);
+  }, [socket, id]);
 
   React.useEffect(() => {
     socket?.emit('messages:get', {
       userId: user.id,
-      messagesWith: chatWith,
+      messagesWith: id,
     });
 
     socket?.on('message_list:update', ({ chat }: any) => {
@@ -151,10 +150,9 @@ export const useChat = () => {
       socket?.off('message_list:update');
       socket?.off('chat:notFound');
     };
-  }, [socket, chatWith]);
+  }, [socket, id]);
 
   const sendMessage = (message: string | null) => {
-    console.log('msg', message);
     socket?.emit('message:add', {
       sender: user.id,
       receiver: receiverUserId,
@@ -164,7 +162,7 @@ export const useChat = () => {
 
   React.useEffect(() => {
     socket?.on('messages:sent', ({ newMessage }: INewMessage) => {
-      if (newMessage.receiver === chatWith) {
+      if (newMessage.receiver === id) {
         setMessages((prev: any) => [...prev, newMessage]);
         setChats((prev) => {
           const receiver = newMessage.receiver;
@@ -175,7 +173,7 @@ export const useChat = () => {
     });
 
     socket?.on('message:received', async ({ newMessage }: INewMessage) => {
-      if (newMessage.sender === chatWith) {
+      if (newMessage.sender === id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev) => {
           filteredChats(prev, newMessage);
@@ -217,7 +215,7 @@ export const useChat = () => {
   const deleteMessage = (messageId: string) => {
     socket?.emit('message:delete', {
       userId: user.id,
-      messagesWith: chatWith,
+      messagesWith: id,
       messageId,
     });
 

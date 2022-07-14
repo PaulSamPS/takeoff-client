@@ -6,24 +6,16 @@ import { Post } from '../../components/Post/Post';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { CreatePost } from '../../components/CreatePost/CreatePost';
 import { RightBar } from '../../components/RightBar/RightBar';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 export const News = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const { posts, isLoading } = useAppSelector((state) => state.postsReducer);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const allPosts = queryParams.get('posts');
-  const myPosts = queryParams.get('my-posts');
+  const allPosts = window.location.pathname === '/main/news';
+  const myPosts = window.location.pathname === `/main/news/${user.id}`;
 
   React.useEffect(() => {
-    queryParams.append('posts', 'all');
     dispatch(getPosts(user.id));
-    if (location.pathname === '/') {
-      navigate({ search: '?posts=all' });
-    }
   }, []);
 
   if (isLoading) {
@@ -37,18 +29,16 @@ export const News = (): JSX.Element => {
         <div className={styles.posts}>
           {myPosts &&
             posts
-              .filter((f) => f.user._id === myPosts)
+              .filter((f) => f.user._id === user.id)
               .map((post) => <Post key={post._id} post={post} />)}
           {allPosts && posts.map((post) => <Post key={post._id} post={post} />)}
         </div>
       </div>
       <RightBar
-        queryFirst={allPosts}
-        querySecond={myPosts}
         firstItem={'Все посты'}
         secondItem={'Мои посты'}
-        firstItemLink={'?posts=all'}
-        secondItemLink={`?my-posts=${user.id}`}
+        firstItemLink={'/main/news'}
+        secondItemLink={`/main/news/${user.id}`}
       />
     </div>
   );

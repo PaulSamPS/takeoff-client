@@ -7,8 +7,7 @@ import { useScroll } from '../../hooks/usseScroll';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { deleteChat } from '../../redux/reducers/openChatReducer';
-import { Link } from 'react-router-dom';
-import cn from 'classnames';
+import { Link, useParams } from 'react-router-dom';
 
 export const RightBar = ({
   totalUnviewed,
@@ -19,15 +18,11 @@ export const RightBar = ({
   thirdItemLink,
   thirdItem,
   isFixed,
-  queryFirst,
-  querySecond,
-  queryThird,
 }: RightBarProps): JSX.Element => {
   const { scrollY } = useScroll();
   const { openChat } = useAppSelector((state) => state.openChatReducer);
   const dispatch = useAppDispatch();
-  const queryParams = new URLSearchParams(location.search);
-  const chatWith = queryParams.get('with');
+  const { id } = useParams();
 
   const handleDeleteChat = (chatId: string) => {
     dispatch(deleteChat(chatId));
@@ -41,26 +36,14 @@ export const RightBar = ({
         top: !isFixed ? (scrollY >= 20 ? '71px' : '0') : '91px',
       }}
     >
-      <CustomLink
-        to={firstItemLink}
-        appearance='rightMenu'
-        className={cn({ [styles.activeRightBar]: queryFirst })}
-      >
+      <CustomLink to={firstItemLink} appearance='rightMenu'>
         {firstItem}
       </CustomLink>
-      <CustomLink
-        to={secondItemLink}
-        appearance='rightMenu'
-        className={cn({ [styles.activeRightBar]: querySecond })}
-      >
+      <CustomLink to={secondItemLink} appearance='rightMenu'>
         {secondItem} {totalUnviewed! > 0 && <Count className={styles.count}>{totalUnviewed}</Count>}
       </CustomLink>
       {thirdItemLink && (
-        <CustomLink
-          to={thirdItemLink}
-          appearance='rightMenu'
-          className={cn({ [styles.activeRightBar]: queryThird })}
-        >
+        <CustomLink to={thirdItemLink} appearance='rightMenu'>
           {thirdItem}
         </CustomLink>
       )}
@@ -69,15 +52,11 @@ export const RightBar = ({
         isFixed &&
         openChat.map((c) => (
           <div key={c.id} className={styles.item}>
-            <CustomLink
-              to={c.link}
-              appearance='rightMenu'
-              className={cn(styles.chatLink, { [styles.activeRightBar]: chatWith === c.id })}
-            >
+            <CustomLink to={c.link} appearance='rightMenu' className={styles.chatLink}>
               {c.name}
             </CustomLink>
             <Link
-              to={{ pathname: '', search: chatWith === c.id ? '?all=messages' : '' }}
+              to={id === c.id ? '/main/conversations' : ''}
               onClick={() => handleDeleteChat(c.id)}
             >
               <CloseIcon />

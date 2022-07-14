@@ -17,10 +17,14 @@ export const CustomLink = ({
   return (
     <Link
       to={to}
-      className={cn(styles.link, className, {
-        [styles.active]: match,
-        [styles.rightMenu]: appearance === 'rightMenu',
-      })}
+      className={cn(
+        appearance === 'rightMenu' && match ? styles.activeRightBar : styles.link,
+        className,
+        {
+          [styles.active]: match,
+          [styles.rightMenu]: appearance === 'rightMenu',
+        }
+      )}
       {...props}
     >
       {children}

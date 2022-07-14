@@ -8,17 +8,15 @@ import { ModalMessage } from '../ModalMessage/ModalMessage';
 
 export const FriendCard = ({ friend }: FriendCardProps) => {
   const [modal, setModal] = React.useState<boolean>(false);
-  const queryParams = new URLSearchParams(location.search);
 
   const handleSendMessage = () => {
     setModal(true);
-    queryParams.set('with', `${friend.id}`);
   };
 
   return (
     <>
       <div className={styles.card}>
-        <Link to={`/user-profile?user=${friend.id}`} replace className={styles.followers}>
+        <Link to={`/main/profile/${friend.id}`} replace className={styles.followers}>
           <img
             src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
             alt={friend.name}

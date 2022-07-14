@@ -8,7 +8,7 @@ import { useChat } from '../../hooks/useChat';
 import { useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { SocketContext } from '../../helpers/context';
 import { Emoji, Picker } from 'emoji-mart';
@@ -37,10 +37,8 @@ export const Chat = (): JSX.Element => {
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const socket = React.useContext(SocketContext);
-  const queryParams = new URLSearchParams(location.search);
-  const chatWith = queryParams.get('with');
-  console.log('with', chatWith);
   const { scrollY } = useScroll();
+  const { id } = useParams();
 
   const addEmoji = (e: BaseEmoji) => {
     setText(text + '' + e.colons);
@@ -68,7 +66,7 @@ export const Chat = (): JSX.Element => {
   }, [messages]);
 
   React.useEffect(() => {
-    socket?.emit('message:read', { userId: user.id, msgSendToUserId: chatWith });
+    socket?.emit('message:read', { userId: user.id, msgSendToUserId: id });
     setTimeout(() => socket?.emit('chat:get', { userId: user.id }), 1000);
   }, [socket]);
 

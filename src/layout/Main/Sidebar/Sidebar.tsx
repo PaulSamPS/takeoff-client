@@ -28,14 +28,14 @@ export const Sidebar = ({ className }: SidebarProps) => {
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <CustomLink to={'/?posts=all'}>
+      <CustomLink to={'/main/news'}>
         <NewsIcon /> Новости
       </CustomLink>
-      <CustomLink to={'/conversations?all=messages'}>
+      <CustomLink to={'/main/conversations'}>
         <MessagesIcon /> Сообщения
         {total > 0 && <Count>{total}</Count>}
       </CustomLink>
-      <CustomLink to={'/friends?all=get'}>
+      <CustomLink to={'/main/friends'}>
         <FriendsIcon /> Друзья {request && request.length > 0 && <Count>{request.length}</Count>}
       </CustomLink>
     </div>

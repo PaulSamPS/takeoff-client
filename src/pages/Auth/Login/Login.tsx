@@ -22,13 +22,13 @@ export const Login = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const handleSwitchMethod = () => {
-    navigate({ pathname: '/auth', search: '?auth=registration' });
+    navigate('registration');
   };
 
   const onSubmit = async (formData: ILoginForm) => {
     dispatch(login(formData)).then(() => {
       if (localStorage.getItem('AccessToken')) {
-        navigate({ pathname: '/', search: '?posts=all' });
+        navigate('main/news');
       }
     });
     reset();

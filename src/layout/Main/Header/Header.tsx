@@ -36,7 +36,7 @@ export const Header = () => {
           <h2 onClick={navigateTeoMain}>TakeOff</h2>
         </div>
         <div className={styles.profile} onClick={navigateToProfile}>
-          <Link to={{ pathname: '/profile', search: `?user=${user.id}` }} className={styles.avatar}>
+          <Link to={'profile'} className={styles.avatar}>
             <img
               src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
               alt={user.name}

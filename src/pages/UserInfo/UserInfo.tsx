@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useChat } from '../../hooks/useChat';
 import styles from './UserInfo.module.scss';
 import { calculateTime } from '../../helpers/calculateTime';
@@ -22,8 +22,7 @@ interface IUserInfo {
 
 export const UserInfo = () => {
   const socket = React.useContext(SocketContext);
-  const queryParams = new URLSearchParams(location.search);
-  const userProfile = queryParams.get('user');
+  const { id } = useParams();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const { sendMessage } = useChat();
@@ -56,7 +55,7 @@ export const UserInfo = () => {
   }, [text]);
 
   React.useEffect(() => {
-    socket?.emit('userInfo:get', { userId: userProfile });
+    socket?.emit('userInfo:get', { userId: id });
     socket?.on('userInfo:user', ({ user }: IUserInfo) => {
       setUser(user);
     });
@@ -64,7 +63,7 @@ export const UserInfo = () => {
     return () => {
       socket?.off('userInfo:user');
     };
-  }, [userProfile, socket]);
+  }, [id, socket]);
 
   return (
     <div className={styles.container}>
@@ -76,7 +75,7 @@ export const UserInfo = () => {
           />
         </div>
         <div className={styles.bio}>
-          {usersOnline.includes(userProfile) ? (
+          {usersOnline.includes(id) ? (
             <div className={styles.online}>
               Online <div className={styles.green} />
             </div>
@@ -88,7 +87,7 @@ export const UserInfo = () => {
           <h1>{user?.name}</h1>
           <Info user={user} />
         </div>
-        {loginUser.id !== userProfile && (
+        {loginUser.id !== id && (
           <Button
             appearance='primary'
             className={styles.message}
@@ -97,10 +96,10 @@ export const UserInfo = () => {
             Написать
           </Button>
         )}
-        {!friendsDone.includes(userProfile!) ? (
+        {!friendsDone.includes(id!) ? (
           <div className={styles.follow}>
-            {!followingDone.includes(userProfile!) && requestsDone.includes(userProfile!) ? (
-              <Button appearance='primary' onClick={() => addFriend(userProfile!)}>
+            {!followingDone.includes(id!) && requestsDone.includes(id!) ? (
+              <Button appearance='primary' onClick={() => addFriend(id!)}>
                 Добавить в друзья
               </Button>
             ) : followings.find((i) => i.id === loginUser.id) ? (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppSelector } from './redux';
 import { SocketContext } from '../helpers/context';
+import { useParams } from 'react-router-dom';
 
 interface IUser {
   id: string | undefined;
@@ -29,20 +30,19 @@ export const useFollow = (): IFollowReturn => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [followings, setFollowings] = React.useState<IUser[]>([]);
   const [followers, setFollowers] = React.useState<IUser[]>([]);
-  const queryParams = new URLSearchParams(location.search);
-  const userId = queryParams.get('user');
+  const { id } = useParams();
 
   const handleFollow = () => {
-    socket?.emit('follow', { userId: userId, userToFollowId: loginUser.id });
+    socket?.emit('follow', { userId: id, userToFollowId: loginUser.id });
   };
 
   const handleUnfollow = () => {
-    socket?.emit('unfollow', { userId: userId, userToUnfollowId: loginUser.id });
+    socket?.emit('unfollow', { userId: id, userToUnfollowId: loginUser.id });
   };
 
   React.useEffect(() => {
     socket?.emit('followings:get', {
-      userId: userId,
+      userId: id,
     });
     socket?.on('followings:sent', ({ followingsUser, followersUser }: IFollow) => {
       setFollowings(followingsUser);
