@@ -55,8 +55,9 @@
     row-gap: 20px;
     flex-direction: column;
     padding: 0 20px 20px;
+    position: relative;
 
-    .input {
+    .textarea {
       min-height: 120px;
       width: 100%;
       padding: 10px;
@@ -79,10 +80,18 @@
       }
     }
 
-    .button {
-      align-self: flex-end;
+    .bottom {
+display: flex;
+      align-items: center;
+      justify-content: space-between;
+      svg {
+        position: unset;
+      }
+      .button {
+        align-self: flex-end;
         box-shadow: unset;
         display: inline-block !important;
+      }
     }
   }
 
