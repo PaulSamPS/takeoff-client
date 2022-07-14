@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './FriendsAll.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
-import { useRequest } from '../../../../hooks/useRequest';
 import { Search } from '../../../../components/Search/Search';
+import { useRequest } from '../../../../hooks/useRequest';
 
 export const FriendsAll = () => {
   const { friends } = useRequest();
   const [text, setText] = React.useState<string>('');
-  console.log(text);
 
   const filteredFriends = friends.filter((friend) =>
     friend.name.toLowerCase().includes(text?.toLowerCase())

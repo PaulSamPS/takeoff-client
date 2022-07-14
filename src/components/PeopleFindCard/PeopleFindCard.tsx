@@ -8,14 +8,14 @@ import { ReactComponent as AddFriend } from '../../helpers/icons/addFriend.svg';
 export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.Element => {
   return (
     <div className={styles.wrapper}>
-      <Link to={`/main/profile/${user._id}`} className={styles.avatar}>
+      <Link to={`/user-profile?user=${user._id}`} className={styles.avatar}>
         <img
           src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
           alt={user.name}
         />
       </Link>
       <div className={styles.info}>
-        <Link to={`/main/profile/${user._id}`}>{user.name}</Link>
+        <Link to={`/user-profile?user=${user._id}`}>{user.name}</Link>
         <AddFriend />
       </div>
     </div>

@@ -23,7 +23,7 @@ export const FriendsList = () => {
 
   return (
     <div className={styles.wrapper}>
-      {friendsAll && <Friends />}
+      {friendsAll === 'get' && <Friends />}
       {requestsFriends && <FriendsRequests />}
       {findPeople && <FriendsFind />}
       <RightBar

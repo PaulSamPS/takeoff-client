@@ -131,7 +131,7 @@ export const useChat = () => {
       messagesWith: chatWith,
     });
 
-    socket?.on('message_list:update', ({ chat, totalCount }: any) => {
+    socket?.on('message_list:update', ({ chat }: any) => {
       setMessages(chat.messages.slice(-currentCountMessages));
       setBannerData({
         name: chat.messagesWith.name,
@@ -140,7 +140,7 @@ export const useChat = () => {
         isOnline: chat.messagesWith.isOnline,
       });
       openChatId.current = chat.messagesWith._id;
-      setTotalMessages(totalCount);
+      setTotalMessages(chat.messages.length);
       setLoadingMessages(false);
     });
 

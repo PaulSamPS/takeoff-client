@@ -40,7 +40,8 @@ export const useRequest = (): IReturn => {
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
   const queryParams = new URLSearchParams(location.search);
   const userId = queryParams.get('user');
-  console.log('req', request);
+  console.log(window.location.pathname);
+
   const addFriend = (addFriendUserId: string | undefined) => {
     socket?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
   };
@@ -64,7 +65,7 @@ export const useRequest = (): IReturn => {
       socket?.off('friendsRequest:sent');
       socket?.off('followings:done');
     };
-  }, [socket, window.location.pathname]);
+  }, [socket]);
 
   React.useEffect(() => {
     socket?.emit('friends:get', { userId: user.id });
@@ -80,7 +81,7 @@ export const useRequest = (): IReturn => {
       socket?.off('friends:set');
       socket?.off('friendsUserInfo:set');
     };
-  }, [socket, window.location.pathname]);
+  }, [socket]);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };
