@@ -18,11 +18,8 @@ export const Header = () => {
     socket?.emit('logout');
     dispatch(logout());
     socket?.disconnect();
-    navigate({ pathname: '/auth', search: '?auth=login' });
-  };
-
-  const navigateToProfile = () => {
-    navigate(`profile`);
+    navigate('/');
+    window.location.reload();
   };
 
   const navigateTeoMain = () => {
@@ -35,8 +32,8 @@ export const Header = () => {
         <div className={styles.logo}>
           <h2 onClick={navigateTeoMain}>TakeOff</h2>
         </div>
-        <div className={styles.profile} onClick={navigateToProfile}>
-          <Link to={'profile'} className={styles.avatar}>
+        <div className={styles.profile}>
+          <Link to={`profile/${user.id}`} className={styles.avatar}>
             <img
               src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
               alt={user.name}

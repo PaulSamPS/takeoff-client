@@ -9,7 +9,6 @@ import { FriendsList } from './pages/FriendsList/FriendsList';
 import { ConversationsList } from './pages/ConversationsList/ConversationsList';
 import { context, SocketContext } from './helpers/context';
 import { Profile } from './pages/Profile/Profile';
-import { UserInfo } from './pages/UserInfo/UserInfo';
 import { Chat } from './pages/Chat/Chat';
 import { ConversationsUnread } from './pages/ConversationsList/ConversationsUnread/ConversationsUnread';
 import { Conversations } from './pages/ConversationsList/Conversations/Conversations';
@@ -43,8 +42,7 @@ export const App = () => {
             >
               <Route path='news' element={<News />} />
               <Route path='news/:id' element={<News />} />
-              <Route path='profile' element={<Profile />} />
-              <Route path='profile/:id' element={<UserInfo />} />
+              <Route path='profile/:id' element={<Profile />} />
               <Route path='conversations' element={<ConversationsList />}>
                 <Route index element={<Conversations />} />
                 <Route path='unread' element={<ConversationsUnread />} />

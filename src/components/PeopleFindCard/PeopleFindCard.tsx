@@ -13,14 +13,14 @@ export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.El
 
   return (
     <div className={styles.wrapper}>
-      <Link to={`/user-profile?user=${user._id}`} className={styles.avatar}>
+      <Link to={`/main/profile/${user._id}`} className={styles.avatar}>
         <img
           src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
           alt={user.name}
         />
       </Link>
       <div className={styles.info}>
-        <Link to={`/user-profile?user=${user._id}`}>{user.name}</Link>
+        <Link to={`/main/profile/${user._id}`}>{user.name}</Link>
         {friend.includes(user._id) ? (
           <AllReadyFriendsIcon className={styles.allReadyFriends} />
         ) : (
