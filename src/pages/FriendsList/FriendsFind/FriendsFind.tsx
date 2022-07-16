@@ -14,9 +14,7 @@ export const FriendsFind = () => {
   console.log(search);
 
   React.useEffect(() => {
-    // dispatch(refreshToken()).then(() => {
     dispatch(getUsers());
-    // });
   }, []);
 
   return (

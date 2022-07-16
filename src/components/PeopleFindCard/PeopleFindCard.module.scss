@@ -36,5 +36,11 @@
     svg {
       cursor: pointer;
     }
+
+    .allReadyFriends {
+      height: 25px;
+      width: 25px;
+      fill: var(--grey-middle);
+    }
   }
 }

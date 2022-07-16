@@ -79,7 +79,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
               >
                 <Picker
                   onSelect={addEmoji}
-                  skin={2}
+                  skin={1}
                   theme={'light'}
                   perLine={8}
                   set={'apple'}

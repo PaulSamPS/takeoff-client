@@ -3,9 +3,14 @@ import { API_URL } from '../../http/axios';
 import styles from './PeopleFindCard.module.scss';
 import { Link } from 'react-router-dom';
 import { PeopleFindCardProps } from './PeopleFindCard.props';
-import { ReactComponent as AddFriend } from '../../helpers/icons/addFriend.svg';
+import { ReactComponent as AddFriendIcon } from '../../helpers/icons/addFriend.svg';
+import { ReactComponent as AllReadyFriendsIcon } from '../../helpers/icons/done.svg';
+import { useRequest } from '../../hooks/useRequest';
 
 export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.Element => {
+  const { friends } = useRequest();
+  const friend = friends.map((f) => f.id);
+
   return (
     <div className={styles.wrapper}>
       <Link to={`/user-profile?user=${user._id}`} className={styles.avatar}>
@@ -16,7 +21,11 @@ export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.El
       </Link>
       <div className={styles.info}>
         <Link to={`/user-profile?user=${user._id}`}>{user.name}</Link>
-        <AddFriend />
+        {friend.includes(user._id) ? (
+          <AllReadyFriendsIcon className={styles.allReadyFriends} />
+        ) : (
+          <AddFriendIcon />
+        )}
       </div>
     </div>
   );
