@@ -51,34 +51,5 @@
 				}
 			}
 		}
-
-		.bio {
-			width: 530px;
-			padding: 20px;
-			background: var(--white);
-			border-radius: 4px;
-
-			.top {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding-bottom: 20px;
-				border-bottom: 1px solid var(--grey-super-light);
-				h1 {
-					font-size: 19px;
-					font-weight: 400;
-				}
-				.online {
-					position: relative;
-					color: var(--grey-middle);
-					font-size: 12px;
-				}
-			}
-
-			.lastVisit {
-				color: var(--grey-middle);
-				font-size: 12px;
-			}
-		}
 	}
 }

@@ -1,0 +1,76 @@
+.bio {
+  width: 530px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 4px;
+  height: fit-content;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--grey-super-light);
+    h1 {
+      font-size: 19px;
+      font-weight: 400;
+    }
+    .online {
+      position: relative;
+      color: var(--grey-middle);
+      font-size: 12px;
+    }
+  }
+
+  .lastVisit {
+    color: var(--grey-middle);
+    font-size: 12px;
+  }
+
+  .middle {
+    font-weight: 400;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--grey-super-light);
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    .block {
+      font-size: 13px;
+
+      .item {
+        color: var(--grey-middle);
+        display: inline-block;
+        font-weight: 400;
+        width: 165px;
+      }
+      .itemName {
+        color: var(--blue);
+      }
+    }
+  }
+
+  .bottom {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    padding: 20px 0 0;
+    column-gap: 4%;
+
+    .friends {
+      color: var(--grey);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: fit-content;
+      cursor: pointer;
+      justify-self: center;
+
+      .count {
+        font-weight: 500;
+        font-size: 19px;
+        line-height: 21px;
+      }
+    }
+  }
+}

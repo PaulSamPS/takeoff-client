@@ -2,7 +2,6 @@ import React from 'react';
 import { useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
 import styles from './Profile.module.scss';
-import { calculateTime } from '../../helpers/calculateTime';
 import { Button } from '../../components/Button/Button';
 import { motion } from 'framer-motion';
 import { ReactComponent as AddAvatar } from '../../helpers/icons/addAvatar.svg';
@@ -11,6 +10,7 @@ import { ChangeAvatar } from '../../components/ChangeAvatar/ChangeAvatar';
 import { IUser, IUserAll } from '../../interfaces/user.interface';
 import { SocketContext } from '../../helpers/context';
 import { useParams } from 'react-router-dom';
+import { ProfileBio } from './ProfileBio/ProfileBio';
 
 interface IUserInfo {
   user: IUserAll;
@@ -20,9 +20,7 @@ export const Profile = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const { id } = useParams();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const [avatarModal, setAvatarModal] = React.useState<boolean>(false);
-  const usersOnline = users.map((user: any) => user.userId);
   const [hover, setHover] = React.useState<boolean>(false);
   const [user, setUser] = React.useState<IUserAll | IUser>();
 
@@ -75,20 +73,7 @@ export const Profile = (): JSX.Element => {
           </div>
           <Button appearance='secondary'>Редактировать</Button>
         </div>
-        <div className={styles.bio}>
-          <div className={styles.top}>
-            <h1>{user?.name}</h1>
-            {usersOnline.includes(id) ? (
-              <div className={styles.online}>
-                online <div className={styles.green} />
-              </div>
-            ) : (
-              <div className={styles.lastVisit}>
-                был в сети {user && calculateTime(user.lastVisit)}
-              </div>
-            )}
-          </div>
-        </div>
+        <ProfileBio user={user} />
       </div>
       {loginUser.id === id && (
         <Modal setModal={setAvatarModal} modal={avatarModal}>
