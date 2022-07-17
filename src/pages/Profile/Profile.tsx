@@ -93,7 +93,7 @@ export const Profile = (): JSX.Element => {
           )}
           {loginUser.id !== id && (
             <>
-              {!friendsDone.includes(loginUser.id) ? (
+              {!friendsDone.includes(id) ? (
                 <div className={styles.follow}>
                   {!followingDone.includes(id) && requestsDone.includes(id) ? (
                     <Button appearance='primary' onClick={() => addFriend(id!)}>
