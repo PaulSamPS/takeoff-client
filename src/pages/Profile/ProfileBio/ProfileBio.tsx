@@ -9,6 +9,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
 import cn from 'classnames';
+import { Button } from '../../../components/Button/Button';
 
 export const ProfileBio = ({ user }: ProfileBioProps) => {
   const { friendsUserInfo } = useRequest();
@@ -40,9 +41,13 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
           <h3 className={styles.item}>Город:</h3>
           <span className={styles.itemName}>Оренбург</span>
         </div>
-        <span className={styles.visibleInfo} onClick={() => setVisibleInfo(!visibleInfo)}>
+        <Button
+          appearance='primary'
+          className={styles.visibleInfo}
+          onClick={() => setVisibleInfo(!visibleInfo)}
+        >
           {!visibleInfo ? 'Показать подробную информацию' : 'Скрыть подробную информацию'}
-        </span>
+        </Button>
         {visibleInfo && (
           <div className={styles.mainInfo}>
             <div className={cn(styles.block, styles.blockFlex)}>
@@ -61,6 +66,10 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
             <div className={styles.block}>
               <h3 className={styles.item}>Пол:</h3>
               <span className={styles.itemName}>Мужчина</span>
+            </div>
+            <div className={styles.block}>
+              <h3 className={styles.item}>Семейное положение:</h3>
+              <span className={styles.itemName}>Холост</span>
             </div>
           </div>
         )}

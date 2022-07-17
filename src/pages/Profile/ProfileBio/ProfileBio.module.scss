@@ -4,6 +4,7 @@
 	padding: 20px;
 	background: var(--white);
 	border-radius: 4px;
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 	.top {
 		display: flex;
@@ -88,6 +89,7 @@
 				width: 165px;
 				color: var(--grey-middle);
 				font-weight: 400;
+				font-size: 13px;
 			}
 
 			.itemName {
@@ -96,14 +98,17 @@
 		}
 
 		.visibleInfo {
+			background: transparent;
 			color: var(--blue);
 			font-size: 13px;
-			text-align: center;
+			padding-left: 165px;
+			justify-content: unset;
+			width: 100%;
 			cursor: pointer;
 			transition: all ease 0.2s;
 
 			&:hover {
-				text-decoration: underline;
+				background: rgb(174 183 194 / 10%);
 			}
 		}
 	}

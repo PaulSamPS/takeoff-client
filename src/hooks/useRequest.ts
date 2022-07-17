@@ -86,7 +86,7 @@ export const useRequest = (): IReturn => {
       socket?.off('friends:set');
       socket?.off('friendsUserInfo:set');
     };
-  }, [socket]);
+  }, [socket, id]);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };

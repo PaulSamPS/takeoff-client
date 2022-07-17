@@ -1,0 +1,78 @@
+.avatar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  height: fit-content;
+  padding: 15px;
+  background: var(--white);
+  border-radius: 4px;
+  row-gap: 15px;
+  box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+
+  .img {
+    position: relative;
+    border-radius: 2px;
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 2px;
+      box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+    }
+
+    .uploadAvatar {
+      position: absolute;
+      bottom: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 20%;
+      color: var(--white);
+      font-size: 13px;
+      background: rgb(0 0 0 / 50%);
+      border-radius: 0 0 2px 2px;
+      cursor: pointer;
+      animation: opacity 0.2s linear;
+      user-select: none;
+
+      svg {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .message {
+    font-weight: 400;
+    background: var(--blue-alternative);
+  }
+
+  .follow {
+    button {
+      width: 100% !important;
+      font-weight: 400;
+      background: var(--blue-alternative);
+    }
+
+    .allReadyFriends {
+      background: transparent;
+      color: var(--blue-alternative);
+      padding-left: 0;
+      justify-content: unset;
+      transform: unset;
+      font-weight: 400;
+
+      .allReadyIcon {
+        margin-right: 10px;
+      }
+
+      .arrowDown {
+        margin-left: 5px;
+      }
+    }
+  }
+}
