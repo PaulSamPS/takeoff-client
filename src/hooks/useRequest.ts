@@ -47,12 +47,18 @@ export const useRequest = (): IReturn => {
 
   const rejectFriend = (rejectFriendUserId: string | undefined) => {
     socket?.emit('friends:reject', { userId: user.id, userToRejectId: rejectFriendUserId });
+    setTimeout(() => {
+      socket?.emit('friendsRequest:get', {
+        userId: user.id,
+      });
+    }, 500);
   };
 
   React.useEffect(() => {
     socket?.emit('friendsRequest:get', {
       userId: user.id,
     });
+    console.log('reject');
     socket?.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
     });
@@ -64,7 +70,7 @@ export const useRequest = (): IReturn => {
       socket?.off('friendsRequest:sent');
       socket?.off('followings:done');
     };
-  }, [socket]);
+  }, [socket, window.location.pathname]);
 
   React.useEffect(() => {
     socket?.emit('friends:get', { userId: user.id });

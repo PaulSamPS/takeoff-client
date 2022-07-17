@@ -50,6 +50,13 @@
 					}
 				}
 			}
+			.follow {
+				button {
+					background: var(--blue-alternative);
+					width: 100% !important;
+					font-weight: 400;
+				}
+			}
 		}
 	}
 }

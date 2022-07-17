@@ -11,6 +11,8 @@ import { IUser, IUserAll } from '../../interfaces/user.interface';
 import { SocketContext } from '../../helpers/context';
 import { useParams } from 'react-router-dom';
 import { ProfileBio } from './ProfileBio/ProfileBio';
+import { useRequest } from '../../hooks/useRequest';
+import { useFollow } from '../../hooks/useFollow';
 
 interface IUserInfo {
   user: IUserAll;
@@ -23,6 +25,11 @@ export const Profile = (): JSX.Element => {
   const [avatarModal, setAvatarModal] = React.useState<boolean>(false);
   const [hover, setHover] = React.useState<boolean>(false);
   const [user, setUser] = React.useState<IUserAll | IUser>();
+  const { friends, request, addFriend } = useRequest();
+  const { followings, handleFollow, handleUnfollow } = useFollow();
+  const friendsDone = friends.map((friend) => friend.id);
+  const requestsDone = request.map((request) => request.id);
+  const followingDone = followings !== null ? followings.map((following) => following.id) : [];
 
   const variantsModal = {
     open: { opacity: 1, height: '20%' },
@@ -71,7 +78,32 @@ export const Profile = (): JSX.Element => {
               </motion.div>
             )}
           </div>
-          <Button appearance='secondary'>Редактировать</Button>
+          {loginUser.id === id && <Button appearance='secondary'>Редактировать</Button>}
+          {loginUser.id !== id && (
+            <>
+              {!friendsDone.includes(id!) ? (
+                <div className={styles.follow}>
+                  {!followingDone.includes(id!) && requestsDone.includes(id!) ? (
+                    <Button appearance='primary' onClick={() => addFriend(id!)}>
+                      Добавить в друзья
+                    </Button>
+                  ) : followings.find((i) => i.id === loginUser.id) ? (
+                    <Button appearance='primary' onClick={handleUnfollow}>
+                      Отписаться
+                    </Button>
+                  ) : (
+                    <Button appearance='primary' onClick={handleFollow}>
+                      Подписаться
+                    </Button>
+                  )}
+                </div>
+              ) : (
+                <div className={styles.follow}>
+                  <Button appearance='primary'>Удалить из друзей</Button>
+                </div>
+              )}
+            </>
+          )}
         </div>
         <ProfileBio user={user} />
       </div>

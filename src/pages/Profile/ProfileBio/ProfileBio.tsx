@@ -7,9 +7,11 @@ import { calculateFollowersCount } from '../../../helpers/calculateFollowersCoun
 import { ProfileBioProps } from './ProfileBio.props';
 import { useAppSelector } from '../../../hooks/redux';
 import { useRequest } from '../../../hooks/useRequest';
+import { useFollow } from '../../../hooks/useFollow';
 
 export const ProfileBio = ({ user }: ProfileBioProps) => {
   const { friendsUserInfo } = useRequest();
+  const { followings } = useFollow();
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const usersOnline = users.map((user: any) => user.userId);
   const { id } = useParams();
@@ -42,8 +44,8 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
           {calculateFriendsCount(friendsUserInfo.length)}
         </Link>
         <Link to={'#'} className={styles.friends}>
-          <span className={styles.count}>5</span>
-          {calculateFollowersCount(5)}
+          <span className={styles.count}>{followings && followings.length}</span>
+          {calculateFollowersCount(followings && followings.length)}
         </Link>
       </div>
     </div>

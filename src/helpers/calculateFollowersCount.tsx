@@ -1,6 +1,6 @@
 export const calculateFollowersCount = (count: number) => {
   if (count === 0) {
-    return <span style={{ color: 'var(--grey)', fontSize: '13px' }}>подаисчиков</span>;
+    return <span style={{ color: 'var(--grey)', fontSize: '13px' }}>подписчиков</span>;
   }
   if (count === 1) {
     return <span style={{ color: 'var(--grey)', fontSize: '13px' }}>подписчик</span>;
