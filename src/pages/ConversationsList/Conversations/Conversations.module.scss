@@ -1,4 +1,5 @@
 @import "../../../scss/index";
+
 .borderTop {
 	position: fixed;
 	top: 71px;
@@ -7,6 +8,7 @@
 	border-bottom: 0 solid var(--bg);
 	border-bottom-width: 24px;
 }
+
 .borderTopSidebar {
 	position: fixed;
 	top: 71px;
@@ -18,12 +20,12 @@
 }
 
 .wrapper {
-	padding-top: 45px;
-	width: 550px;
-	border-radius: 5px;
-	background: var(--white);
-	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 	grid-template-rows: 1fr;
+	width: 550px;
+	padding-top: 45px;
+	background: var(--white);
+	border-radius: 5px;
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 	.search {
 		position: fixed !important;
@@ -44,10 +46,10 @@
 	}
 
 	.noMessages {
-		color: #939393;
-		font-size: 13px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		color: #939393;
+		font-size: 13px;
 	}
 }

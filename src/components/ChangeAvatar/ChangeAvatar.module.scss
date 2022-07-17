@@ -1,26 +1,26 @@
 @import "../../scss/index";
 
 .append {
-	background: var(--white);
 	width: 638px;
+	background: var(--white);
 	border-radius: 4px;
 
 	.top {
-		background: var(--bg-grey-light);
 		padding: 20px;
+		font-size: 13px;
+		background: var(--bg-grey-light);
 		border-bottom: 1px solid var(--border);
 		border-radius: 4px 4px 0 0;
-		font-size: 13px;
 	}
 
 	.body {
-		font-size: 14px;
-		margin-bottom: 15px;
-		padding: 20px 40px;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		flex-direction: column;
+		margin-bottom: 15px;
+		padding: 20px 40px;
+		font-size: 14px;
 		line-height: 150%;
 		text-align: center;
 		row-gap: 35px;
@@ -49,7 +49,6 @@
 				transform: translateY(2px);
 			}
 		}
-
 	}
 
 	.previewBlock {
@@ -88,11 +87,12 @@
 		border-top: 1px solid var(--border);
 
 		.btn {
+			padding: 5px 20px;
 			font-weight: 400;
 			font-size: 13px;
-			padding: 5px 20px;
 			background: var(--blue-alternative);
 		}
+
 		span {
 			font-size: 12px;
 		}

@@ -1,56 +1,59 @@
 .wrapper {
-  height: fit-content;
-  padding: 5px 0;
-  border-radius: 5px;
-  box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-  background: var(--white);
-  width: 220px;
-  margin-left: 10px;
-  z-index: 10;
+	z-index: 10;
+	width: 220px;
+	height: fit-content;
+	margin-left: 10px;
+	padding: 5px 0;
+	background: var(--white);
+	border-radius: 5px;
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
-  .activeRightBar {
-    border-left: 2px solid var(--blue);
-    background: rgba(174, 183, 194, 0.16);
-    color: var(--black);
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 30px;
-    text-decoration: none;
-    transition: color ease 0.2s;
-  }
+	.activeRightBar {
+		color: var(--black);
+		font-weight: 500;
+		font-size: 13px;
+		line-height: 30px;
+		text-decoration: none;
+		background: rgb(174 183 194 / 16%);
+		border-left: 2px solid var(--blue);
+		transition: color ease 0.2s;
+	}
 
-  a {
-    .count {
-      background: var(--blue-alternative);
-    }
-  }
+	a {
+		.count {
+			background: var(--blue-alternative);
+		}
+	}
 
-  .item {
-    position: relative;
-    &:hover {
-    svg {
-      display: block;
-    }
-  }
-    .chatLink {
+	.item {
+		position: relative;
 
-    }
-    svg {
-      cursor: pointer;
-      position: absolute;
-      right: 20px;
-      top: 8px;
-      display: none;
-      transition: all ease .2s;
-    }
-  }
+		&:hover {
+			svg {
+				display: block;
+			}
+		}
 
-  hr {
-    display: block;
-    height: 1px;
-    width: 178px;
-    background: var(--border);
-    margin: 5px 0 5px 20px;
-    opacity: 0.3;
-  }
+		.chatLink {
+
+		}
+
+		svg {
+			position: absolute;
+			top: 8px;
+			right: 20px;
+			display: none;
+			cursor: pointer;
+			transition: all ease 0.2s;
+		}
+	}
+
+	hr {
+		display: block;
+		width: 178px;
+		height: 1px;
+		margin: 5px 0 5px 20px;
+		background: var(--border);
+		opacity: 0.3;
+	}
 }

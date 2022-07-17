@@ -1,19 +1,19 @@
 .wrapper {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  width: 100%;
-  background: var(--white);
-  border-radius: 5px;
+	display: grid;
+	grid-template-rows: auto 1fr;
+	width: 100%;
+	background: var(--white);
+	border-radius: 5px;
 
-  .grid {
-    padding: 0 20px;
-  }
+	.grid {
+		padding: 0 20px;
+	}
 
-  .noOnlineFriends {
-    color: #939393;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+	.noOnlineFriends {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #939393;
+		font-size: 13px;
+	}
 }

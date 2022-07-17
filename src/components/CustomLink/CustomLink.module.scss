@@ -2,9 +2,9 @@
 
 .link {
 	display: grid;
-	padding: 0 5px;
 	grid-template-columns: 18px 1fr 25px;
 	align-items: center;
+	padding: 0 5px;
 	color: var(--black);
 	font-weight: 500;
 	font-size: 13px;
@@ -14,7 +14,7 @@
 	transition: color ease 0.2s;
 
 	&:hover {
-		background: rgba(174, 183, 194, 0.10);
+		background: rgb(174 183 194 / 10%);
 	}
 
 	svg {
@@ -28,23 +28,22 @@
 }
 
 .rightMenu {
-	border-left: 2px solid transparent;
-	padding: 5px 20px 5px 20px;
-	color: var(--blue);
-
-	transition: all ease .2s;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: 5px 20px;
+	color: var(--blue);
+	border-left: 2px solid transparent;
+	transition: all ease 0.2s;
 }
 
 .activeRightBar {
-	border-left: 2px solid var(--blue);
-	background: rgba(174, 183, 194, 0.16);
 	color: var(--black);
 	font-weight: 500;
 	font-size: 13px;
 	line-height: 30px;
 	text-decoration: none;
+	background: rgb(174 183 194 / 16%);
+	border-left: 2px solid var(--blue);
 	transition: color ease 0.2s;
 }

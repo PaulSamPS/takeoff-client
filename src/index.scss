@@ -21,45 +21,46 @@ body {
 	background: #EDEEF0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
 }
-.emoji-mart-preview,.emoji-mart-search {
+
+.emoji-mart-preview,
+.emoji-mart-search {
 	display: none;
 }
 
 .emoji-mart {
 	position: absolute;
 	top: -230px;
+	right: 0;
+	width: 250px;
 	height: 230px;
 	overflow: hidden;
-	width: 250px;
-	right: 0;
 }
+
 .emoji-mart-emoji {
-	font-size: unset;
 	margin: unset;
 	padding: unset;
+	font-size: unset;
 
 	span {
-		height: 20px!important;
-		width: 20px!important;
-
-			display: block!important;
+		display: block !important;
+		width: 20px !important;
+		height: 20px !important;
 	}
 }
 
 .emoji-mart-anchor-icon {
 	svg {
-		height: 20px;
 		width: 20px;
+		height: 20px;
 		cursor: pointer;
 	}
 }
 
 .emoji-mart-category-list span {
-	cursor: pointer!important;
-	height: 20px;
 	width: 20px;
+	height: 20px;
+	cursor: pointer !important;
 }
 
 * {
@@ -80,7 +81,7 @@ body {
 	--grey300: #99A2AD;
 	--grey-light: #E2E2E2;
 	--modal: #E5E5E5;
-	--blue: #2a5885;
+	--blue: #2A5885;
 	--blue-alternative: #5181B8;
 	--black: #120101;
 	--green: #00A800;

@@ -1,98 +1,99 @@
 .createPost {
-  display: grid;
-  grid-template-areas: "avatar text icon" "image image image" "emoji . button";
-  grid-template-columns: 30px 1fr auto;
-  align-items: flex-start;
-  padding: 20px;
-  column-gap: 10px;
-  background: var(--white);
-  border-radius: 4px;
-  box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-  margin-bottom: 20px;
+	display: grid;
+	grid-template-areas: "avatar text icon" "image image image" "emoji . button";
+	grid-template-columns: 30px 1fr auto;
+	align-items: flex-start;
+	margin-bottom: 20px;
+	padding: 20px;
+	column-gap: 10px;
+	background: var(--white);
+	border-radius: 4px;
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
-  .avatar {
-    grid-area: avatar;
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
+	.avatar {
+		grid-area: avatar;
+		width: 30px;
+		height: 30px;
+		object-fit: cover;
+		border-radius: 50%;
+	}
 
-  .textarea {
-    grid-area: text;
-    width: 100%;
-    max-height: 400px;
-    padding: 7px;
-    overflow: hidden;
-    color: var(--grey);
-    font-size: 13px;
-    word-wrap: break-word;
-    resize: none;
-    border: none;
+	.textarea {
+		grid-area: text;
+		width: 100%;
+		max-height: 400px;
+		padding: 7px;
+		overflow: hidden;
+		color: var(--grey);
+		font-size: 13px;
+		word-wrap: break-word;
+		border: none;
+		resize: none;
 
-    &:focus {
-      outline: none;
-    }
+		&:focus {
+			outline: none;
+		}
 
-    &[contenteditable="true"]:empty::before {
-      display: block;
-      color: var(--grey);
-      content: attr(placeholder);
-    }
-  }
+		&[contenteditable="true"]:empty::before {
+			display: block;
+			color: var(--grey);
+			content: attr(placeholder);
+		}
+	}
 
-  .icons {
-    grid-area: icon;
-    justify-self: flex-end;
-    padding-top: 4px;
+	.icons {
+		grid-area: icon;
+		justify-self: flex-end;
+		padding-top: 4px;
 
-    .file {
-      position: absolute;
-      visibility: hidden;
-      opacity: 0;
-    }
+		.file {
+			position: absolute;
+			visibility: hidden;
+			opacity: 0;
+		}
 
-    svg {
-      cursor: pointer;
-      transition: all ease 0.2s;
+		svg {
+			cursor: pointer;
+			transition: all ease 0.2s;
 
-      path {
-        fill: var(--grey);
-      }
+			path {
+				fill: var(--grey);
+			}
 
-      &:hover {
-        path {
-          fill: var(--blue);
-        }
-      }
-    }
-  }
+			&:hover {
+				path {
+					fill: var(--blue);
+				}
+			}
+		}
+	}
 
-  .picker {
-    grid-area: emoji;
-    margin-top: 45px;
-    position: relative;
-    .emoji {
-      cursor: pointer;
-    }
-  }
+	.picker {
+		position: relative;
+		grid-area: emoji;
+		margin-top: 45px;
 
-  .postImage {
-    display: flex;
-    grid-area: image;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 40px;
+		.emoji {
+			cursor: pointer;
+		}
+	}
 
-    img {
-      width: 100%;
-      object-fit: cover;
-    }
-  }
+	.postImage {
+		display: flex;
+		grid-area: image;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		margin-top: 40px;
 
-  .publish {
-    grid-area: button;
-    margin-top: 40px;
-  }
+		img {
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.publish {
+		grid-area: button;
+		margin-top: 40px;
+	}
 }

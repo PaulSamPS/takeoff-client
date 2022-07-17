@@ -9,6 +9,10 @@
 	border-bottom-width: 25px;
 }
 
+a {
+	text-decoration: none;
+}
+
 .chatWith {
 	position: fixed;
 	top: 90px;
@@ -24,15 +28,15 @@
 
 	.back {
 		a {
-			text-decoration: none;
 			position: relative;
-			cursor: pointer;
+			padding-left: 30px;
 			color: var(--grey-middle);
 			font-size: 14px;
-			padding-left: 30px;
+			text-decoration: none;
+			cursor: pointer;
 		}
 
-		svg{
+		svg {
 			position: absolute;
 			bottom: -3px;
 			left: 0;
@@ -175,13 +179,14 @@
 					}
 
 					.text {
-						word-break: break-all;
 						grid-area: message;
 						font-size: 13px;
 						line-height: 25px;
+						word-break: break-all;
+
 						span {
 							transform: translateY(2px);
-							span {display: block;}
+							span { display: block; }
 						}
 					}
 				}
@@ -197,24 +202,26 @@
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 	.bottom {
+		display: grid;
+		grid-template-columns: 1fr 55px auto;
+		align-items: center;
 		width: 550px;
 		padding: 20px;
 		background: var(--bg-grey-light);
 		border-radius: 0 0 5px 5px;
-		display: grid;
-		grid-template-columns: 1fr 55px auto;
-		align-items: center;
 
 		.input {
 			width: 100%;
 		}
+
 		.emoji {
-			height: 35px;
-			width: 35px;
 			justify-self: flex-end;
+			width: 35px;
+			height: 35px;
 			cursor: pointer;
 			opacity: 0.6;
 		}
+
 		button {
 			min-width: unset;
 			background: unset;

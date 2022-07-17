@@ -75,7 +75,7 @@ export const Chat = (): JSX.Element => {
       <div className={styles.borderTop} />
       <div className={styles.chatWith}>
         <div className={styles.back}>
-          <Link to={'/conversations?all=messages'}>
+          <Link to={'/main/conversations'}>
             <ArrowBack /> Назад
           </Link>
         </div>
@@ -89,14 +89,14 @@ export const Chat = (): JSX.Element => {
             )}
           </span>
         </div>
-        <div className={styles.avatar}>
+        <Link to={`/main/profile/${id}`} className={styles.avatar}>
           <img
             src={
               bannerData.avatar == null ? `/photo.png` : `${API_URL}/avatar/${bannerData.avatar}`
             }
             alt={bannerData.name}
           />
-        </div>
+        </Link>
       </div>
       <div className={styles.wrapper}>
         <div className={styles.container}>
@@ -108,7 +108,7 @@ export const Chat = (): JSX.Element => {
                     {user.id == m.sender ? (
                       <>
                         <div className={styles.messageBlock}>
-                          <div className={styles.avatar}>
+                          <Link to={`/main/profile/${user.id}`} className={styles.avatar}>
                             <img
                               src={
                                 user.avatar === null
@@ -118,9 +118,11 @@ export const Chat = (): JSX.Element => {
                               alt={user.name}
                             />
                             {user.isOnline && <div className={styles.online} />}
-                          </div>
+                          </Link>
                           <div className={styles.name}>
-                            <span className={styles.userName}>{user.name}</span>
+                            <Link to={`/main/profile/${user.id}`} className={styles.userName}>
+                              {user.name}
+                            </Link>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>
                           <span className={styles.text}>
@@ -133,7 +135,7 @@ export const Chat = (): JSX.Element => {
                     ) : (
                       <>
                         <div className={styles.messageBlock}>
-                          <Link to={`/main/user-info/${m.receiver}`} className={styles.avatar}>
+                          <Link to={`/main/profile/${id}`} className={styles.avatar}>
                             <img
                               src={
                                 bannerData.avatar === null
@@ -145,7 +147,9 @@ export const Chat = (): JSX.Element => {
                             {bannerData.isOnline && <div className={styles.online} />}
                           </Link>
                           <div className={styles.name}>
-                            <span className={styles.userName}>{bannerData.name}</span>
+                            <Link to={`/main/profile/${id}`} className={styles.userName}>
+                              {bannerData.name}
+                            </Link>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>
                           <span className={styles.text}>

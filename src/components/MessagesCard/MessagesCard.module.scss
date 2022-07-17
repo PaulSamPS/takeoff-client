@@ -1,82 +1,82 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: 50px 1fr;
-  padding: 20px 20px 0;
-  column-gap: 20px;
-  width: 550px;
-  background: var(--white);
-  transition: all ease .2s;
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	width: 550px;
+	padding: 20px 20px 0;
+	column-gap: 20px;
+	background: var(--white);
+	transition: all ease 0.2s;
 
-  &:hover {
-    background: rgba(174, 183, 194, 0.10);
-  }
+	&:hover {
+		background: rgb(174 183 194 / 10%);
+	}
 
-  .avatar {
-    position: relative;
+	.avatar {
+		position: relative;
 
-    img {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
+		img {
+			width: 50px;
+			height: 50px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
 
-    .online {
-      position: absolute;
-      right: 6px;
-      bottom: 25px;
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-    }
-  }
+		.online {
+			position: absolute;
+			right: 6px;
+			bottom: 25px;
+			width: 8px;
+			height: 8px;
+			background: var(--green);
+			border-radius: 50%;
+		}
+	}
 
-  .body {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    row-gap: 10px;
-    column-gap: 10px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 25px;
-    text-decoration: none;
-    cursor: pointer;
+	.body {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		padding-bottom: 25px;
+		text-decoration: none;
+		column-gap: 10px;
+		border-bottom: 1px solid var(--border);
+		cursor: pointer;
+		row-gap: 10px;
 
-    .text {
-      display: grid;
-      grid-template-columns: 1fr;
-      row-gap: 10px;
+		.text {
+			display: grid;
+			grid-template-columns: 1fr;
+			row-gap: 10px;
 
-      .name {
-        color: var(--black);
-        font-weight: 500;
-        font-size: 13px;
-      }
+			.name {
+				color: var(--black);
+				font-weight: 500;
+				font-size: 13px;
+			}
 
-      .message {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: var(--grey);
-        font-size: 13px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-      }
-    }
+			.message {
+				display: flex;
+				align-items: center;
+				height: 20px;
+				overflow: hidden;
+				color: var(--grey);
+				font-size: 13px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
 
-    .right {
-      display: grid;
-      grid-template-areas: "date" "count";
-      row-gap: 10px;
-      grid-template-columns: 1fr;
-      justify-items: center;
+		.right {
+			display: grid;
+			grid-template-areas: "date" "count";
+			grid-template-columns: 1fr;
+			justify-items: center;
+			row-gap: 10px;
 
-      span {
-        grid-area: date;
-        color: var(--grey);
-        font-size: 13px;
-      }
-    }
-  }
+			span {
+				grid-area: date;
+				color: var(--grey);
+				font-size: 13px;
+			}
+		}
+	}
 }
