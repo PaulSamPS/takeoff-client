@@ -40,7 +40,9 @@ export const ConversationsUnread = () => {
       <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
       {chats.map(
         (chat: IChats) =>
-          chat.countUnreadMessages > 0 && <MessagesCard key={chat.messagesWith} chat={chat} />
+          chat.countUnreadMessages > 0 && (
+            <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
+          )
       )}
       {chats.filter((chat: IChats) => chat.countUnreadMessages).length <= 0 && (
         <span className={styles.noMessages}>Нет сообщений</span>

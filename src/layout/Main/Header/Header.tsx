@@ -40,7 +40,6 @@ export const Header = () => {
             />
             {online.includes(user.id) && <div className={styles.online} />}
           </Link>
-          <span>{user.name}</span>
         </div>
         <div className={styles.logout} onClick={handleLogout}>
           Выйти
