@@ -1,4 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { IUserAll } from '../../interfaces/user.interface';
 
 interface IUser {
   id: string | undefined;
@@ -13,7 +14,7 @@ interface IUser {
 
 export interface ModalMessageProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  friend: IUser;
+  friend: IUserAll | IUser | undefined;
   setModal: (close: boolean) => void;
   isModal: boolean;
 }

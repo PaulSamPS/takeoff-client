@@ -28,7 +28,7 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <Link to={`/user-profile?user=${chat.messagesWith}`} className={styles.avatar}>
+      <Link to={`/main/profile/${chat.messagesWith}`} className={styles.avatar}>
         <img
           src={
             chat.avatar === '' || chat.avatar === null

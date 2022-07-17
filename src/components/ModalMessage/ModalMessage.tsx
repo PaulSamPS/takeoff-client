@@ -14,6 +14,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
   const [text, setText] = React.useState<string>('');
   const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
   const { sendMessage } = useChat();
+  const userId = localStorage.getItem('receiverUserId');
 
   const addEmoji = (e: BaseEmoji) => {
     setText(text + '' + e.colons);
@@ -25,7 +26,6 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
   };
 
   const handleSendMessage = () => {
-    localStorage.setItem('receiverUserId', friend.id!.toString());
     sendMessage(text);
     setModal(false);
   };
@@ -38,20 +38,20 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
     <div className={styles.modalMessage}>
       <div className={styles.topModal}>
         <span>Новое сообщение</span>
-        <Link to={`/conversations?with=${friend.id}`}>Перейтик диалогу c {friend.name}</Link>
+        <Link to={`/main/conversations?with=${userId}`}>Перейтик диалогу c {friend!.name}</Link>
       </div>
       <div className={styles.user}>
-        <Link to={`/main/people/${friend.id}`} replace className={styles.followers}>
+        <Link to={`/main/profile/${userId}`} replace className={styles.followers}>
           <img
-            src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
-            alt={friend.name}
+            src={friend!.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend!.avatar}`}
+            alt={friend!.name}
           />
         </Link>
         <div className={styles.userInfo}>
-          <Link to={`/main/people/${friend.id}`} className={styles.name}>
-            {friend.name}
+          <Link to={`/main/profile/${userId}`} className={styles.name}>
+            {friend!.name}
           </Link>
-          <span>{calculateTime(friend.lastVisit)}</span>
+          <span>{calculateTime(friend!.lastVisit)}</span>
         </div>
       </div>
       <div className={styles.message}>

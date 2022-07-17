@@ -10,6 +10,7 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
   const [modal, setModal] = React.useState<boolean>(false);
 
   const handleSendMessage = () => {
+    localStorage.setItem('receiverUserId', friend.id!);
     setModal(true);
   };
 

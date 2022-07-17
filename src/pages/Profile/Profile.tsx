@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 import { ProfileBio } from './ProfileBio/ProfileBio';
 import { useRequest } from '../../hooks/useRequest';
 import { useFollow } from '../../hooks/useFollow';
+import { ModalMessage } from '../../components/ModalMessage/ModalMessage';
 
 interface IUserInfo {
   user: IUserAll;
@@ -25,6 +26,7 @@ export const Profile = (): JSX.Element => {
   const [avatarModal, setAvatarModal] = React.useState<boolean>(false);
   const [hover, setHover] = React.useState<boolean>(false);
   const [user, setUser] = React.useState<IUserAll | IUser>();
+  const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const { friends, request, addFriend } = useRequest();
   const { followings, handleFollow, handleUnfollow } = useFollow();
   const friendsDone = friends.map((friend) => friend.id);
@@ -34,6 +36,11 @@ export const Profile = (): JSX.Element => {
   const variantsModal = {
     open: { opacity: 1, height: '20%' },
     closed: { opacity: 0, height: 0 },
+  };
+
+  const handleSendMessage = () => {
+    localStorage.setItem('receiverUserId', id!);
+    setConversationModal(true);
   };
 
   React.useEffect(() => {
@@ -80,14 +87,19 @@ export const Profile = (): JSX.Element => {
           </div>
           {loginUser.id === id && <Button appearance='secondary'>Редактировать</Button>}
           {loginUser.id !== id && (
+            <Button appearance='primary' className={styles.message} onClick={handleSendMessage}>
+              Написать
+            </Button>
+          )}
+          {loginUser.id !== id && (
             <>
-              {!friendsDone.includes(id!) ? (
+              {!friendsDone.includes(loginUser.id) ? (
                 <div className={styles.follow}>
-                  {!followingDone.includes(id!) && requestsDone.includes(id!) ? (
+                  {!followingDone.includes(id) && requestsDone.includes(id) ? (
                     <Button appearance='primary' onClick={() => addFriend(id!)}>
                       Добавить в друзья
                     </Button>
-                  ) : followings.find((i) => i.id === loginUser.id) ? (
+                  ) : followingDone.includes(loginUser.id) ? (
                     <Button appearance='primary' onClick={handleUnfollow}>
                       Отписаться
                     </Button>
@@ -112,6 +124,9 @@ export const Profile = (): JSX.Element => {
           <ChangeAvatar setModal={setAvatarModal} userId={id!} />
         </Modal>
       )}
+      <Modal setModal={setConversationModal} modal={conversationModal}>
+        <ModalMessage friend={user} setModal={setConversationModal} isModal={conversationModal} />
+      </Modal>
     </div>
   );
 };

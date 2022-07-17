@@ -10,12 +10,12 @@ import { useFollow } from '../../hooks/useFollow';
 import { useAppSelector } from '../../hooks/redux';
 
 export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.Element => {
-  const { friends } = useRequest();
+  const { friends, request } = useRequest();
   const { handleFollow, followings } = useFollow();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const friend = friends.map((f) => f.id);
-  const followers = followings !== null ? followings.map((f) => f.id) : [];
-  console.log(followers.includes(loginUser.id));
+  const followeings = followings !== null ? followings.map((f) => f.id) : [];
+  const requestsDone = request.map((request) => request.id);
 
   const handleClickFollow = () => {
     localStorage.setItem('followId', user._id);
@@ -32,10 +32,12 @@ export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.El
       </Link>
       <div className={styles.info}>
         <Link to={`/main/profile/${user._id}`}>{user.name}</Link>
-        {friend.includes(user._id) || followers.includes(loginUser.id) ? (
+        {friend.includes(user._id) ||
+        followeings.includes(loginUser.id) ||
+        requestsDone.includes(user._id) ? (
           <AllReadyFriendsIcon className={styles.allReadyFriends} />
         ) : (
-          <AddFriendIcon onClick={handleClickFollow} />
+          <AddFriendIcon className={styles.addFriend} onClick={handleClickFollow} />
         )}
       </div>
     </div>
