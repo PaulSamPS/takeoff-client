@@ -35,16 +35,52 @@
 		padding: 20px 0;
 		font-weight: 400;
 		border-bottom: 1px solid var(--grey-super-light);
-		row-gap: 15px;
+		row-gap: 10px;
+
+		.mainInfo {
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+
+			&:hover {
+				.edit {
+					display: inline-block;
+				}
+			}
+		}
+
+		.blockFlex {
+			display: flex;
+			align-items: center;
+			column-gap: 10px;
+
+			.edit {
+				display: none;
+				color: var(--grey-middle);
+				font-size: 13px;
+				text-decoration: none;
+				transition: all ease .2s;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
 
 		.block {
 			font-size: 13px;
 
 			.title {
 				display: inline-block;
-				min-width: 165px;
 				font-weight: 400;
 				font-size: 13px;
+				white-space: nowrap;
+			}
+
+			.border {
+				width: 100%;
+				height: 1px;
+				background: var(--grey-super-light);
 			}
 
 			.item {
