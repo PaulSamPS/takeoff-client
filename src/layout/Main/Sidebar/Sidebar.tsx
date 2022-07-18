@@ -4,15 +4,18 @@ import { CustomLink } from '../../../components/CustomLink/CustomLink';
 import { ReactComponent as MessagesIcon } from '../../../helpers/icons/chat.svg';
 import { ReactComponent as NewsIcon } from '../../../helpers/icons/news.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
+import { ReactComponent as MyProfileIcon } from '../../../helpers/icons/profile.svg';
 import { SidebarProps } from './Sidebar.props';
 import cn from 'classnames';
 import { Count } from '../../../components/Count/Count';
 import { SocketContext } from '../../../helpers/context';
 import { useChat } from '../../../hooks/useChat';
 import { useRequest } from '../../../hooks/useRequest';
+import { useAppSelector } from '../../../hooks/redux';
 
 export const Sidebar = ({ className }: SidebarProps) => {
   const socket = React.useContext(SocketContext);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [total, setTotal] = React.useState<number>(0);
   const { chats } = useChat();
   const { request } = useRequest();
@@ -28,6 +31,9 @@ export const Sidebar = ({ className }: SidebarProps) => {
 
   return (
     <div className={cn(styles.wrapper, className)}>
+      <CustomLink to={`/main/profile/${loginUser.id}`}>
+        <MyProfileIcon /> Моя страница
+      </CustomLink>
       <CustomLink to={'/main/news'}>
         <NewsIcon /> Новости
       </CustomLink>
