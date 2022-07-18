@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { ProfileBio } from './ProfileBio/ProfileBio';
 import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
 import { ProfileFriends } from './ProfileFriends/ProfileFriends';
+import { ProfilePost } from './ProfilePost/ProfilePost';
 
 interface IUserInfo {
   user: IUserAll;
@@ -35,6 +36,7 @@ export const Profile = (): JSX.Element => {
       </div>
       <div className={styles.right}>
         <ProfileBio user={user} />
+        <ProfilePost />
       </div>
     </div>
   );
