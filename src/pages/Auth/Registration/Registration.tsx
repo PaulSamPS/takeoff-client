@@ -12,6 +12,7 @@ import './select.scss';
 import { useGender } from '../../../hooks/usePosition';
 import { useCity } from '../../../hooks/useCity';
 import { useRegistration } from '../../../hooks/useRegistration';
+import { useLanguage } from '../../../hooks/useLanguage';
 
 export const Registration = (): JSX.Element => {
   const {
@@ -25,6 +26,7 @@ export const Registration = (): JSX.Element => {
   const { handleSwitchMethod, onSubmit } = useRegistration({ reset, error });
   const optionsGender = useGender();
   const optionsCity = useCity();
+  const optionsLanguage = useLanguage();
 
   if (isLoading) {
     return <Spinner />;
@@ -40,14 +42,24 @@ export const Registration = (): JSX.Element => {
     >
       {error && <span className={styles.err}>{error}</span>}
       <Input
-        {...register('name', {
+        {...register('firstName', {
           required: { value: true, message: 'Введите имя' },
           minLength: { value: 3, message: 'Не короче  3 символов' },
-          maxLength: { value: 15, message: 'Имя не должно превышать 15 символов' },
+          maxLength: { value: 15, message: 'Имя не должно превышать 20 символов' },
         })}
-        placeholder='Логин'
+        placeholder='Имя'
         type='text'
-        error={errors.name}
+        error={errors.firstName}
+      />
+      <Input
+        {...register('lastName', {
+          required: { value: true, message: 'Введите имя' },
+          minLength: { value: 3, message: 'Не короче  3 символов' },
+          maxLength: { value: 15, message: 'Имя не должно превышать 20 символов' },
+        })}
+        placeholder='Фамилия'
+        type='text'
+        error={errors.lastName}
       />
       <Input
         {...register('password', {
@@ -69,7 +81,21 @@ export const Registration = (): JSX.Element => {
         error={errors.email}
       />
       <Controller
-        name='position'
+        name='city'
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <Select
+            {...field}
+            className={styles.selectContainer}
+            classNamePrefix='select'
+            options={optionsCity}
+            placeholder='Выберите город'
+          />
+        )}
+      />
+      <Controller
+        name='gender'
         control={control}
         rules={{ required: true }}
         render={({ field }) => (
@@ -83,7 +109,7 @@ export const Registration = (): JSX.Element => {
         )}
       />
       <Controller
-        name='level'
+        name='language'
         control={control}
         rules={{ required: true }}
         render={({ field }) => (
@@ -91,10 +117,18 @@ export const Registration = (): JSX.Element => {
             {...field}
             className={styles.selectContainer}
             classNamePrefix='select'
-            options={optionsCity}
-            placeholder='Выберите город'
+            options={optionsLanguage}
+            placeholder='Выберите язык'
           />
         )}
+      />
+      <Input
+        {...register('birthday', {
+          required: { value: true, message: 'Введите дату рождения' },
+        })}
+        placeholder='Дата рождения'
+        type='date'
+        error={errors.birthday}
       />
       <div className={styles.submit}>
         <Button appearance='primary' type='submit' disabled={!isValid}>

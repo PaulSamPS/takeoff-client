@@ -11,6 +11,7 @@ import { useFollow } from '../../../hooks/useFollow';
 import cn from 'classnames';
 import { Button } from '../../../components/UI/Button/Button';
 import { motion } from 'framer-motion';
+import moment from 'moment';
 
 export const ProfileBio = ({ user }: ProfileBioProps) => {
   const { friendsUserInfo } = useRequest();
@@ -48,7 +49,7 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
       <div className={styles.middle}>
         <div className={styles.block}>
           <h3 className={styles.item}>День рождения:</h3>
-          <span className={styles.itemName}>{user?.bio.birthday}</span>
+          <span className={styles.itemName}>{moment(user?.bio.birthday).format('D MMMM')}</span>
         </div>
         <div className={styles.block}>
           <h3 className={styles.item}>Город:</h3>
@@ -92,10 +93,12 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
               <h3 className={styles.item}>Пол:</h3>
               <span className={styles.itemName}>{user?.bio.gender}</span>
             </div>
-            <div className={styles.block}>
-              <h3 className={styles.item}>Семейное положение:</h3>
-              <span className={styles.itemName}>{user?.bio.familyStatus}</span>
-            </div>
+            {user?.bio.familyStatus && (
+              <div className={styles.block}>
+                <h3 className={styles.item}>Семейное положение:</h3>
+                <span className={styles.itemName}>{user?.bio.familyStatus}</span>
+              </div>
+            )}
           </motion.div>
         )}
       </div>

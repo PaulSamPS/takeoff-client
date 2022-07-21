@@ -1,14 +1,22 @@
 export interface IRegistrationForm {
-  name: string;
+  firstName: string;
+  lastName: string;
   password: string;
   email: string;
-  position:
+  gender:
     | {
         value: string;
         label: string;
       }
     | string;
-  level:
+  city:
+    | {
+        value: string;
+        label: string;
+      }
+    | string;
+  birthday: string;
+  language:
     | {
         value: string;
         label: string;

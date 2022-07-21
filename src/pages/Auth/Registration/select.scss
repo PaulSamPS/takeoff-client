@@ -1,14 +1,15 @@
 .select {
 	&__control {
-		padding: 5px 20px;
+		padding: 0 20px;
 		color: var(--black);
-		font-size: 16px;
-		border: 1px solid rgb(0 0 0 / 50%) !important;
-		border-radius: 10px !important;
+		font-size: 13px;
+		border: none !important;
+		border-radius: 4px !important;
+		box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 		&--is-focused {
-			border: 1px solid rgb(0 0 0 / 50%) !important;
-			box-shadow: none !important;
+			border: none !important;
+			box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC !important;
 		}
 
 		&--minu-is-open {
@@ -34,6 +35,7 @@
 
 		&-list {
 			padding: 10px 0 !important;
+			font-size: 13px;
 		}
 	}
 
@@ -42,7 +44,7 @@
 
 		&--is-focused {
 			color: var(--white) !important;
-			background-color: var(--blue) !important;
+			background-color: var(--blue-alternative) !important;
 		}
 
 		&--is-selected {

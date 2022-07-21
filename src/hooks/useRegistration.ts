@@ -29,11 +29,14 @@ export const useRegistration = ({
   };
 
   const onSubmit = async (formData: IRegistrationForm) => {
-    if (typeof formData.position !== 'string') {
-      formData.position = formData.position.value;
+    if (typeof formData.gender !== 'string') {
+      formData.gender = formData.gender.value;
     }
-    if (typeof formData.level !== 'string') {
-      formData.level = formData.level.value;
+    if (typeof formData.city !== 'string') {
+      formData.city = formData.city.value;
+    }
+    if (typeof formData.language !== 'string') {
+      formData.language = formData.language.value;
     }
     await dispatch(registration(formData)).then(() => {
       if (error == '') {

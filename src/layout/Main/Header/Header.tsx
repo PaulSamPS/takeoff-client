@@ -5,14 +5,13 @@ import styles from './Header.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
 import { SocketContext } from '../../../helpers/context';
+import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDown.svg';
 
 export const Header = () => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
-  const online = users.map((user: any) => user.userId);
 
   const handleLogout = () => {
     socket?.emit('logout');
@@ -34,8 +33,8 @@ export const Header = () => {
               src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
               alt={user.firstName + ' ' + user.lastName}
             />
-            {online.includes(user.id) && <div className={styles.online} />}
           </Link>
+          <ArrowDownIcon />
         </div>
         <div className={styles.logout} onClick={handleLogout}>
           Выйти
