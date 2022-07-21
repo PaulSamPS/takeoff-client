@@ -1,12 +1,14 @@
 .createPost {
 	display: grid;
-	grid-template-areas: "avatar text icon" "image image image" "emoji . button";
+	grid-template-areas: "avatar text icon" "image image image" "bottom bottom bottom";
 	grid-template-columns: 30px 1fr auto;
 	align-items: flex-start;
 	margin-bottom: 20px;
 	padding: 20px;
 	column-gap: 10px;
 	background: var(--white);
+	width: 100%;
+	min-width: 530px;
 	border-radius: 4px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
@@ -68,23 +70,12 @@
 		}
 	}
 
-	.picker {
-		position: relative;
-		grid-area: emoji;
-		margin-top: 45px;
-
-		.emoji {
-			cursor: pointer;
-		}
-	}
-
 	.postImage {
 		display: flex;
 		grid-area: image;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		margin-top: 40px;
 
 		img {
 			width: 100%;
@@ -92,8 +83,23 @@
 		}
 	}
 
-	.publish {
-		grid-area: button;
+	.openBlock {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		grid-area: bottom;
 		margin-top: 40px;
+
+		.picker {
+			position: relative;
+
+			.emoji {
+				cursor: pointer;
+			}
+		}
+
+		.publish {
+			grid-area: button;
+		}
 	}
 }

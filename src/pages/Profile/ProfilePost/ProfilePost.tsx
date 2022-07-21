@@ -9,6 +9,7 @@ import { Post } from '../../../components/Post/Post';
 export const ProfilePost = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { posts } = useAppSelector((state) => state.postsReducer);
 
   React.useEffect(() => {
@@ -17,9 +18,8 @@ export const ProfilePost = () => {
 
   return (
     <div className={styles.wrapper}>
-      {' '}
       <div className={styles.wrapper}>
-        <CreatePost />
+        {loginUser.id === id && <CreatePost />}
         {posts.length > 0 && (
           <div className={styles.posts}>
             {posts

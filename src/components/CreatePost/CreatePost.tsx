@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 import styles from './CreatePost.module.scss';
 import { API_URL } from '../../http/axios';
 import { Input } from '../Input/Input';
@@ -10,6 +10,8 @@ import { ReactComponent as SmileIcon } from '../../helpers/icons/smile.svg';
 import { Button } from '../Button/Button';
 import { createPost, getPosts } from '../../redux/actions/postAction';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useParams } from 'react-router-dom';
+import { useOnClickOutside } from '../../hooks/useOnclickOutside';
 
 export const CreatePost = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -18,10 +20,25 @@ export const CreatePost = () => {
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
+  const [submitDisabled, setSubmitDisabled] = React.useState<boolean>(true);
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const ref = useRef<HTMLFormElement>(null);
+  useOnClickOutside(ref, () => setActive(false));
+
+  console.log(filesAvatar, submitDisabled);
+
+  React.useEffect(() => {
+    setSubmitDisabled(!text?.trim());
+  }, [text]);
 
   const variantsModal = {
     open: { opacity: 1, height: '20%' },
+    closed: { opacity: 0, height: 0 },
+  };
+
+  const variantsOpen = {
+    open: { opacity: 1, height: 'auto' },
     closed: { opacity: 0, height: 0 },
   };
 
@@ -64,8 +81,12 @@ export const CreatePost = () => {
     });
   };
 
+  React.useEffect(() => {
+    setActive(false);
+  }, [id]);
+
   return (
-    <form className={styles.createPost} onSubmit={onSubmit}>
+    <form className={styles.createPost} onSubmit={onSubmit} ref={ref}>
       <img
         className={styles.avatar}
         src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
@@ -93,7 +114,19 @@ export const CreatePost = () => {
           )
         )}
       {active && (
-        <>
+        <motion.div
+          className={styles.openBlock}
+          animate={active ? 'open' : 'closed'}
+          initial={'closed'}
+          exit={'closed'}
+          variants={variantsOpen}
+          transition={{
+            damping: 20,
+            type: 'spring',
+            stiffness: 260,
+            duration: 0.2,
+          }}
+        >
           <div className={styles.picker}>
             {showEmoji && (
               <motion.div
@@ -127,10 +160,15 @@ export const CreatePost = () => {
             )}
             <SmileIcon className={styles.emoji} onClick={() => setShowEmoji(!showEmoji)} />
           </div>
-          <Button appearance='primary' type='submit' className={styles.publish}>
+          <Button
+            appearance='primary'
+            type='submit'
+            className={styles.publish}
+            disabled={previewAvatar.length <= 0 && submitDisabled}
+          >
             Опубликовать
           </Button>
-        </>
+        </motion.div>
       )}
     </form>
   );

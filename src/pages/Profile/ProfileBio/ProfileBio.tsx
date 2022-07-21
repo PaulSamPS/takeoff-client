@@ -10,6 +10,7 @@ import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
 import cn from 'classnames';
 import { Button } from '../../../components/Button/Button';
+import { motion } from 'framer-motion';
 
 export const ProfileBio = ({ user }: ProfileBioProps) => {
   const { friendsUserInfo } = useRequest();
@@ -19,6 +20,15 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
   const usersOnline = users.map((user: any) => user.userId);
   const [visibleInfo, setVisibleInfo] = React.useState<boolean>(false);
   const { id } = useParams();
+
+  const variants = {
+    open: { opacity: 1, height: 'auto' },
+    closed: { opacity: 0, height: 0 },
+  };
+
+  React.useEffect(() => {
+    setVisibleInfo(false);
+  }, [id]);
 
   return (
     <div className={styles.bio}>
@@ -49,7 +59,19 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
           {!visibleInfo ? 'Показать подробную информацию' : 'Скрыть подробную информацию'}
         </Button>
         {visibleInfo && (
-          <div className={styles.mainInfo}>
+          <motion.div
+            className={styles.mainInfo}
+            animate={visibleInfo ? 'open' : 'closed'}
+            initial={'closed'}
+            exit={'closed'}
+            variants={variants}
+            transition={{
+              damping: 20,
+              type: 'spring',
+              stiffness: 260,
+              duration: 0.2,
+            }}
+          >
             <div className={cn(styles.block, styles.blockFlex)}>
               <h3 className={styles.title}>Основная информация</h3>
               <div className={styles.border} />
@@ -71,7 +93,7 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
               <h3 className={styles.item}>Семейное положение:</h3>
               <span className={styles.itemName}>Холост</span>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
       <div className={styles.bottom}>
