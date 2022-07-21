@@ -111,7 +111,6 @@ export const Chat = (): JSX.Element => {
                               }
                               alt={user.name}
                             />
-                            {user.isOnline && <div className={styles.online} />}
                           </Link>
                           <div className={styles.name}>
                             <Link to={`/main/profile/${user.id}`} className={styles.userName}>

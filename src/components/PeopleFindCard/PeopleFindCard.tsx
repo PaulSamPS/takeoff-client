@@ -18,23 +18,23 @@ export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.El
   const requestsDone = request.map((request) => request.id);
 
   const handleClickFollow = () => {
-    localStorage.setItem('followId', user._id);
+    localStorage.setItem('followId', user.id);
     handleFollow();
   };
 
   return (
     <div className={styles.wrapper}>
-      <Link to={`/main/profile/${user._id}`} className={styles.avatar}>
+      <Link to={`/main/profile/${user.id}`} className={styles.avatar}>
         <img
           src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
           alt={user.name}
         />
       </Link>
       <div className={styles.info}>
-        <Link to={`/main/profile/${user._id}`}>{user.name}</Link>
-        {friend.includes(user._id) ||
+        <Link to={`/main/profile/${user.id}`}>{user.name}</Link>
+        {friend.includes(user.id) ||
         followeings.includes(loginUser.id) ||
-        requestsDone.includes(user._id) ? (
+        requestsDone.includes(user.id) ? (
           <AllReadyFriendsIcon className={styles.allReadyFriends} />
         ) : (
           <AddFriendIcon className={styles.addFriend} onClick={handleClickFollow} />

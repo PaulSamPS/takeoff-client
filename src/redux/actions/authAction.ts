@@ -12,7 +12,7 @@ import { setResetOpenChat } from '../reducers/openChatReducer';
 export const registration = (formData: IRegistrationForm) => async (dispatch: AppDispatch) => {
   dispatch(registrationReducer.actions.setLoading());
   await $api
-    .post(`api/user/registration`, formData)
+    .post(`api/auth/registration`, formData)
     .then((res: AxiosResponse) => {
       dispatch(registrationReducer.actions.setSuccess(res.status));
     })
@@ -24,7 +24,7 @@ export const registration = (formData: IRegistrationForm) => async (dispatch: Ap
 export const login = (formData: ILoginForm) => async (dispatch: AppDispatch) => {
   dispatch(loginReducer.actions.setLoading());
   await $api
-    .post(`api/user/login`, formData)
+    .post(`api/auth/login`, formData)
     .then((res: AxiosResponse<IResponseUser>) => {
       dispatch(loginReducer.actions.setSuccess(res.data.user));
       localStorage.setItem('AccessToken', 'Bearer ' + res.data.accessToken);
@@ -44,7 +44,7 @@ export const logout = () => (dispatch: AppDispatch) => {
 export const refreshToken = () => async (dispatch: AppDispatch) => {
   localStorage.removeItem('AccessToken');
   await axios
-    .get(`${API_URL}/api/user/refresh`, { withCredentials: true })
+    .get(`${API_URL}/api/auth/refresh`, { withCredentials: true })
     .then((res: AxiosResponse<IResponseUser>) => {
       localStorage.setItem('AccessToken', 'Bearer ' + res.data.accessToken);
       dispatch(loginReducer.actions.setSuccess(res.data.user));

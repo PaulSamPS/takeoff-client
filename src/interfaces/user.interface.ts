@@ -2,27 +2,20 @@ export interface IUser {
   id: string;
   name: string;
   email: string;
-  position: string;
-  level: string;
   role: string;
   avatar: string;
   lastVisit: Date;
-  isOnline: boolean;
+  notification: boolean;
+  bio: {
+    birthday: string;
+    city: string;
+    language: string;
+    gender: string;
+    familyStatus: string;
+  };
 }
 
 export interface IResponseUser {
   accessToken: string;
   user: IUser;
-}
-
-export interface IUserAll {
-  _id: string;
-  name: string;
-  email: string;
-  position: string;
-  level: string;
-  role: string;
-  avatar: string;
-  lastVisit: Date;
-  isOnline: boolean;
 }

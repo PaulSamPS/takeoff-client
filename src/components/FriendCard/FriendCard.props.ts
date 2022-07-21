@@ -1,15 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-
-interface IUser {
-  id: string | undefined;
-  name: string;
-  email: string;
-  position: string;
-  level: string;
-  role: string;
-  avatar: string;
-  lastVisit: Date;
-}
+import { IUser } from '../../interfaces/user.interface';
 
 export interface FriendCardProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

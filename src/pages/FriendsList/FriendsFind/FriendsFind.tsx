@@ -23,8 +23,8 @@ export const FriendsFind = () => {
       <div className={styles.grid} style={{ display: isLoading ? 'block' : 'grid' }}>
         {!isLoading ? (
           users
-            .filter((u) => u._id !== user.id)
-            .map((user) => <PeopleFindCard key={user._id} user={user} />)
+            .filter((u) => u.id !== user.id)
+            .map((user) => <PeopleFindCard key={user.id} user={user} />)
         ) : (
           <Spinner />
         )}

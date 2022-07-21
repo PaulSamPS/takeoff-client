@@ -1,7 +1,7 @@
 import { AppDispatch } from '../store';
 import { $apiAuth } from '../../http/axios';
 import { AxiosError, AxiosResponse } from 'axios';
-import { IResponseUser, IUserAll } from '../../interfaces/user.interface';
+import { IResponseUser, IUser } from '../../interfaces/user.interface';
 import { IErrorResponse } from '../../interfaces/axiosResponse.interface';
 import { usersReducer } from '../reducers/usersReducer';
 import { loginReducer } from '../reducers/auth/loginReducer';
@@ -11,7 +11,7 @@ export const getUsers = () => async (dispatch: AppDispatch) => {
   dispatch(usersReducer.actions.setLoading());
   await $apiAuth
     .get(`api/user`)
-    .then((res: AxiosResponse<IUserAll[]>) => {
+    .then((res: AxiosResponse<IUser[]>) => {
       dispatch(usersReducer.actions.setSuccess(res.data));
     })
     .catch((e: AxiosError<IErrorResponse>) => {
@@ -38,7 +38,7 @@ export const removeAvatar = (id: string, avatar: string) => async (dispatch: App
 };
 
 export const removeUser = (id: string, avatar: string) => async (dispatch: AppDispatch) => {
-  await $apiAuth.post(`api/user/${id}/remove/${avatar}`).then((res: AxiosResponse<IUserAll[]>) => {
+  await $apiAuth.post(`api/user/${id}/remove/${avatar}`).then((res: AxiosResponse<IUser[]>) => {
     dispatch(usersReducer.actions.setSuccess(res.data));
   });
 };

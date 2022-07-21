@@ -24,8 +24,6 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
           />
         </Link>
         <div className={styles.body}>
-          <span className={styles.userName}>{friend.name}</span>
-          <span className={styles.position}>{friend.position}</span>
           <span className={styles.sendMessage} onClick={handleSendMessage}>
             Написать сообщение
           </span>

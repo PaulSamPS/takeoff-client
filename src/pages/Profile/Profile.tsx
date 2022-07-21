@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Profile.module.scss';
-import { IUser, IUserAll } from '../../interfaces/user.interface';
+import { IUser } from '../../interfaces/user.interface';
 import { SocketContext } from '../../helpers/context';
 import { useParams } from 'react-router-dom';
 import { ProfileBio } from './ProfileBio/ProfileBio';
@@ -9,13 +9,13 @@ import { ProfileFriends } from './ProfileFriends/ProfileFriends';
 import { ProfilePost } from './ProfilePost/ProfilePost';
 
 interface IUserInfo {
-  user: IUserAll;
+  user: IUser;
 }
 
 export const Profile = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const { id } = useParams();
-  const [user, setUser] = React.useState<IUserAll | IUser>();
+  const [user, setUser] = React.useState<IUser>();
 
   React.useEffect(() => {
     socket?.emit('userInfo:get', { userId: id });

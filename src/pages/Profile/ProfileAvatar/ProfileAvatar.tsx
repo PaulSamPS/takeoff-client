@@ -74,9 +74,9 @@ export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
       )}
       {loginUser.id !== id && (
         <>
-          {!friendsDone.includes(id) ? (
+          {!friendsDone.includes(id!) ? (
             <div className={styles.follow}>
-              {!followingDone.includes(id) && requestsDone.includes(id) ? (
+              {!followingDone.includes(id) && requestsDone.includes(id!) ? (
                 <Button appearance='primary' onClick={() => addFriend(id!)}>
                   Добавить в друзья
                 </Button>

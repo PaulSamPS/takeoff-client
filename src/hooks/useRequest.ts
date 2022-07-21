@@ -2,18 +2,7 @@ import { useAppSelector } from './redux';
 import React from 'react';
 import { SocketContext } from '../helpers/context';
 import { useParams } from 'react-router-dom';
-
-interface IUser {
-  id: string | undefined;
-  name: string;
-  email: string;
-  position: string;
-  level: string;
-  role: string;
-  avatar: string;
-  lastVisit: Date;
-  isOnline: boolean;
-}
+import { IUser } from '../interfaces/user.interface';
 
 interface IRequest {
   followingsUser: IUser[];

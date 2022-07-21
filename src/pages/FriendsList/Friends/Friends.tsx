@@ -5,18 +5,7 @@ import cn from 'classnames';
 import { useAppSelector } from '../../../hooks/redux';
 import { FriendsAll } from './FriendsAll/FriendsAll';
 import { FriendsOnline } from './FriendsOnline/FriendsOnline';
-
-interface IUser {
-  id: string | undefined;
-  name: string;
-  email: string;
-  position: string;
-  level: string;
-  role: string;
-  avatar: string;
-  lastVisit: Date;
-  isOnline: boolean;
-}
+import { IUser } from '../../../interfaces/user.interface';
 
 export const Friends = () => {
   const { friends } = useRequest();

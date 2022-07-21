@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserAll } from '../../interfaces/user.interface';
+import { IUser } from '../../interfaces/user.interface';
 
 interface IRegistration {
   error: string | undefined;
   isLoading: boolean;
-  users: IUserAll[];
+  users: IUser[];
 }
 
 const initialState: IRegistration = {
@@ -20,7 +20,7 @@ export const usersReducer = createSlice({
     setLoading(state) {
       state.isLoading = true;
     },
-    setSuccess(state, action: PayloadAction<IUserAll[]>) {
+    setSuccess(state, action: PayloadAction<IUser[]>) {
       state.isLoading = false;
       state.error = '';
       state.users = action.payload;
