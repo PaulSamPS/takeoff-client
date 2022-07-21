@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from '../Conversations/Conversations.module.scss';
-import { Search } from '../../../components/Search/Search';
+import { Search } from '../../../components/UI/Search/Search';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
 import { useAppSelector } from '../../../hooks/redux';
 import { useChat } from '../../../hooks/useChat';
-import { Spinner } from '../../../components/Spinner/Spinner';
+import { Spinner } from '../../../components/UI/Spinner/Spinner';
 
 interface IChats {
   avatar: string | null;

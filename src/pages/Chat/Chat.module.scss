@@ -203,7 +203,7 @@ a {
 
 	.bottom {
 		display: grid;
-		grid-template-columns: 1fr 55px auto;
+		grid-template-columns: 1fr 45px auto;
 		align-items: center;
 		width: 550px;
 		padding: 20px;
@@ -216,10 +216,6 @@ a {
 
 		.emoji {
 			justify-self: flex-end;
-			width: 35px;
-			height: 35px;
-			cursor: pointer;
-			opacity: 0.6;
 		}
 
 		button {

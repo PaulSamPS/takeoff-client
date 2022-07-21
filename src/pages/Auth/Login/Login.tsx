@@ -1,12 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Input } from '../../../components/Input/Input';
+import { Input } from '../../../components/UI/Input/Input';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ILoginForm } from '../../../interfaces/loginForm.interface';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { Spinner } from '../../../components/Spinner/Spinner';
-import { Button } from '../../../components/Button/Button';
+import { Spinner } from '../../../components/UI/Spinner/Spinner';
+import { Button } from '../../../components/UI/Button/Button';
 import styles from '../Auth.module.scss';
 import { login } from '../../../redux/actions/authAction';
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '../Button/Button';
-import { Modal } from '../Modal/Modal';
+import { Button } from '../UI/Button/Button';
+import { Modal } from '../UI/Modal/Modal';
 import { RemoveAvatarProps } from './RemoveAvatar.props';
 import styles from './RemoveAvatar.module.scss';
 import { useRemoveAvatar } from '../../hooks/useRemoveAvatar';

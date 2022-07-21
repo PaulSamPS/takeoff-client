@@ -1,22 +1,21 @@
 import React, { ChangeEvent } from 'react';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { ReactComponent as ArrowBack } from '../../helpers/icons/arrowBack.svg';
-import { ReactComponent as SmileIcon } from '../../helpers/icons/smile.svg';
 import styles from './Chat.module.scss';
-import { Button } from '../../components/Button/Button';
+import { Button } from '../../components/UI/Button/Button';
 import { useChat } from '../../hooks/useChat';
 import { useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
-import { Spinner } from '../../components/Spinner/Spinner';
+import { Spinner } from '../../components/UI/Spinner/Spinner';
 import { SocketContext } from '../../helpers/context';
-import { Emoji, Picker } from 'emoji-mart';
+import { Emoji } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import reactStringReplace from 'react-string-replace';
-import { BaseEmoji } from 'emoji-mart';
-import { Input } from '../../components/Input/Input';
+import { Input } from '../../components/UI/Input/Input';
 import { useScroll } from '../../hooks/usseScroll';
+import { EmojiPicker } from '../../components/UI/EmojiPicker/EmojiPicker';
 
 interface IMessage {
   senderName: string;
@@ -33,16 +32,11 @@ export const Chat = (): JSX.Element => {
   const [text, setText] = React.useState<string>('');
   const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
-  const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
   const socket = React.useContext(SocketContext);
   const { scrollY } = useScroll();
   const { id } = useParams();
-
-  const addEmoji = (e: BaseEmoji) => {
-    setText(text + '' + e.colons);
-  };
 
   const handleSetText = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -180,18 +174,13 @@ export const Chat = (): JSX.Element => {
             value={text}
             ref={inputRef}
           />
-          {showEmoji && (
-            <Picker
-              onSelect={addEmoji}
-              skin={2}
-              theme={'light'}
-              perLine={8}
-              set={'apple'}
-              emojiSize={25}
-              i18n={{ categories: { people: 'смайлы', recent: 'недавние' } }}
-            />
-          )}
-          <SmileIcon className={styles.emoji} onClick={() => setShowEmoji(!showEmoji)} />
+          <EmojiPicker
+            className={styles.emoji}
+            setText={setText}
+            text={text}
+            bottom={60}
+            left={-140}
+          />
           <Button appearance='primary' disabled={submitDisabled}>
             <SendIcon className={styles.send} />
           </Button>

@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Sidebar } from './Sidebar/Sidebar';
 import { getChatUser } from '../../redux/actions/chatAction';
-import { Toast } from '../../components/Toast/Toast';
+import { Toast } from '../../components/UI/Toast/Toast';
 import { useChat } from '../../hooks/useChat';
 import { useRequest } from '../../hooks/useRequest';
 import { SocketContext } from '../../helpers/context';

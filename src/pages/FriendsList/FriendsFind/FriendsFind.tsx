@@ -1,8 +1,8 @@
 import React from 'react';
-import { Search } from '../../../components/Search/Search';
+import { Search } from '../../../components/UI/Search/Search';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { getUsers } from '../../../redux/actions/usersAction';
-import { Spinner } from '../../../components/Spinner/Spinner';
+import { Spinner } from '../../../components/UI/Spinner/Spinner';
 import styles from './FriendsFind.module.scss';
 import { PeopleFindCard } from '../../../components/PeopleFindCard/PeopleFindCard';
 

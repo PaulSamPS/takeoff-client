@@ -3,7 +3,7 @@ import styles from './News.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getPosts } from '../../redux/actions/postAction';
 import { Post } from '../../components/Post/Post';
-import { Spinner } from '../../components/Spinner/Spinner';
+import { Spinner } from '../../components/UI/Spinner/Spinner';
 import { CreatePost } from '../../components/CreatePost/CreatePost';
 import { RightBar } from '../../components/RightBar/RightBar';
 

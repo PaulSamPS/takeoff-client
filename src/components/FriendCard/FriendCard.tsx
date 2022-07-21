@@ -3,7 +3,7 @@ import styles from './FriendCard.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../http/axios';
 import { FriendCardProps } from './FriendCard.props';
-import { Modal } from '../Modal/Modal';
+import { Modal } from '../UI/Modal/Modal';
 import { ModalMessage } from '../ModalMessage/ModalMessage';
 
 export const FriendCard = ({ friend }: FriendCardProps) => {

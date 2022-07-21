@@ -6,7 +6,7 @@ import { ReactComponent as CommentIcon } from '../../helpers/icons/comment.svg';
 import { ReactComponent as LikesIcon } from '../../helpers/icons/like.svg';
 import cn from 'classnames';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
-import { Button } from '../Button/Button';
+import { Button } from '../UI/Button/Button';
 import { calculateTime } from '../../helpers/calculateTime';
 import { useAppSelector } from '../../hooks/redux';
 import { SocketContext } from '../../helpers/context';

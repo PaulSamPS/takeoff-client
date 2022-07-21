@@ -22,16 +22,12 @@ export const Header = () => {
     window.location.reload();
   };
 
-  const navigateTeoMain = () => {
-    navigate('main');
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.logo}>
-          <h2 onClick={navigateTeoMain}>TakeOff</h2>
-        </div>
+        <Link to={'/main/news'} className={styles.logo}>
+          <h2>TakeOff</h2>
+        </Link>
         <div className={styles.profile}>
           <Link to={`profile/${user.id}`} className={styles.avatar}>
             <img

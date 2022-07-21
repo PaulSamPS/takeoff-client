@@ -4,26 +4,14 @@ import { Link } from 'react-router-dom';
 import { ModalMessageProps } from './ModalMessage.prop';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
-import { Button } from '../Button/Button';
+import { Button } from '../UI/Button/Button';
 import { useChat } from '../../hooks/useChat';
-import { motion } from 'framer-motion';
-import { BaseEmoji, Picker } from 'emoji-mart';
-import { ReactComponent as SmileIcon } from '../../helpers/icons/smile.svg';
+import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
 
 export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) => {
   const [text, setText] = React.useState<string>('');
-  const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
   const { sendMessage } = useChat();
   const userId = localStorage.getItem('receiverUserId');
-
-  const addEmoji = (e: BaseEmoji) => {
-    setText(text + '' + e.colons);
-  };
-
-  const variantsModal = {
-    open: { opacity: 1, height: '20%' },
-    closed: { opacity: 0, height: 0 },
-  };
 
   const handleSendMessage = () => {
     sendMessage(text);
@@ -65,39 +53,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
         />
         <div className={styles.bottom}>
           <div className={styles.picker}>
-            {showEmoji && (
-              <motion.div
-                className={styles.pickerModal}
-                animate={showEmoji ? 'open' : 'closed'}
-                variants={variantsModal}
-                initial={'closed'}
-                exit={'closed'}
-                transition={{
-                  duration: 0.5,
-                  type: 'spring',
-                }}
-              >
-                <Picker
-                  onSelect={addEmoji}
-                  skin={1}
-                  theme={'light'}
-                  perLine={8}
-                  set={'apple'}
-                  emojiSize={25}
-                  i18n={{ categories: { people: 'смайлы', recent: 'недавние' } }}
-                  style={{
-                    top: 'unset',
-                    right: 'unset',
-                    bottom: '77px',
-                    left: '-0',
-                    zIndex: '8',
-                  }}
-                />
-              </motion.div>
-            )}
-            <div>
-              <SmileIcon className={styles.emoji} onClick={() => setShowEmoji(!showEmoji)} />
-            </div>
+            <EmojiPicker setText={setText} text={text} bottom={52} left={-20} />
           </div>
           <div className={styles.button}>
             <Button

@@ -1,9 +1,9 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Toast.module.scss';
-import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
+import { ReactComponent as CloseIcon } from '../../../helpers/icons/close.svg';
 import { ToastProps } from './Toast.props';
-import { API_URL } from '../../http/axios';
+import { API_URL } from '../../../http/axios';
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 

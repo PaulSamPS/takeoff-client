@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './FriendsAll.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
-import { Search } from '../../../../components/Search/Search';
+import { Search } from '../../../../components/UI/Search/Search';
 import { useRequest } from '../../../../hooks/useRequest';
 
 export const FriendsAll = () => {

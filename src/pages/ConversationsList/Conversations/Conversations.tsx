@@ -1,9 +1,9 @@
 import React from 'react';
 import { useChat } from '../../../hooks/useChat';
 import styles from './Conversations.module.scss';
-import { Search } from '../../../components/Search/Search';
+import { Search } from '../../../components/UI/Search/Search';
 import { useAppSelector } from '../../../hooks/redux';
-import { Spinner } from '../../../components/Spinner/Spinner';
+import { Spinner } from '../../../components/UI/Spinner/Spinner';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
 
 export const Conversations = () => {

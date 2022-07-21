@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { EditProfileProps } from './EditProfile.props';
-import { Input } from '../Input/Input';
+import { Input } from '../UI/Input/Input';
 import { Controller, useForm } from 'react-hook-form';
 import { IEditProfileForm } from '../../interfaces/editProfile.interface';
-import { Button } from '../Button/Button';
+import { Button } from '../UI/Button/Button';
 import '../../pages/Auth/Registration/select.scss';
 import { useLevel } from '../../hooks/useLevel';
 import { usePosition } from '../../hooks/usePosition';

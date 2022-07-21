@@ -1,12 +1,12 @@
 import React from 'react';
 import Select from 'react-select';
-import { Input } from '../../../components/Input/Input';
+import { Input } from '../../../components/UI/Input/Input';
 import { useForm, Controller } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { useAppSelector } from '../../../hooks/redux';
 import { IRegistrationForm } from '../../../interfaces/registrationForm.interface';
-import { Spinner } from '../../../components/Spinner/Spinner';
-import { Button } from '../../../components/Button/Button';
+import { Spinner } from '../../../components/UI/Spinner/Spinner';
+import { Button } from '../../../components/UI/Button/Button';
 import styles from '../Auth.module.scss';
 import './select.scss';
 import { usePosition } from '../../../hooks/usePosition';

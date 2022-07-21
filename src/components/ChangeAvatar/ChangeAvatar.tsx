@@ -1,9 +1,9 @@
 import React from 'react';
-import { Input } from '../Input/Input';
+import { Input } from '../UI/Input/Input';
 import styles from './ChangeAvatar.module.scss';
 import cn from 'classnames';
 import { IAppendAvatarInterface } from '../../interfaces/AppendNews.interface';
-import { Button } from '../Button/Button';
+import { Button } from '../UI/Button/Button';
 import { ChangeAvatarProps } from './ChangeAvatar.props';
 import { useChangeAvatar } from '../../hooks/useChangeAvatar';
 

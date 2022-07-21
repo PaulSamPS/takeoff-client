@@ -11,7 +11,7 @@ import { EditProfile } from '../EditProfile/EditProfile';
 import { ReactComponent as AddAvatarIcon } from '../../helpers/icons/addAvatar.svg';
 import { ReactComponent as DeleteAvatarIcon } from '../../helpers/icons/deleteAvatar.svg';
 import { ChangeAvatar } from '../ChangeAvatar/ChangeAvatar';
-import { Modal } from '../Modal/Modal';
+import { Modal } from '../UI/Modal/Modal';
 import { RemoveAvatar } from '../RemoveAvatar/RemoveAvatar';
 import { useNavigate } from 'react-router-dom';
 import { Info } from '../Info/Info';

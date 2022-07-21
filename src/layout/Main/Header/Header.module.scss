@@ -21,6 +21,8 @@
 		column-gap: 20px;
 
 		.logo {
+			text-decoration: none;
+			color: var(--greyDark);
 			h2 {
 				display: inline-block;
 				cursor: pointer;

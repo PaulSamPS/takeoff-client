@@ -9,7 +9,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
 import cn from 'classnames';
-import { Button } from '../../../components/Button/Button';
+import { Button } from '../../../components/UI/Button/Button';
 import { motion } from 'framer-motion';
 
 export const ProfileBio = ({ user }: ProfileBioProps) => {

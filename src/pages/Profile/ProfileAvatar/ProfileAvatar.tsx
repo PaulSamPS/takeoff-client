@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 import { ReactComponent as AddAvatar } from '../../../helpers/icons/addAvatar.svg';
 import { ReactComponent as AllReadyFriendsIcon } from '../../../helpers/icons/allreadyFriens.svg';
 import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDown.svg';
-import { Button } from '../../../components/Button/Button';
+import { Button } from '../../../components/UI/Button/Button';
 import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
 import { ProfileAvatarProps } from './ProfileAvatar.props';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
-import { Modal } from '../../../components/Modal/Modal';
+import { Modal } from '../../../components/UI/Modal/Modal';
 import { ChangeAvatar } from '../../../components/ChangeAvatar/ChangeAvatar';
 import { ModalMessage } from '../../../components/ModalMessage/ModalMessage';
 
