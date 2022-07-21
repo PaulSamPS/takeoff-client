@@ -46,7 +46,7 @@ export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
       >
         <img
           src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-          alt={user?.name}
+          alt={user?.firstName + '' + user?.lastName}
         />
         {loginUser.id === id && (
           <motion.div

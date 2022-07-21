@@ -9,7 +9,9 @@ export const FriendsAll = () => {
   const [text, setText] = React.useState<string>('');
 
   const filteredFriends = friends.filter((friend) =>
-    friend.name.toLowerCase().includes(text?.toLowerCase())
+    (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
+      text?.toLowerCase()
+    )
   );
 
   return (

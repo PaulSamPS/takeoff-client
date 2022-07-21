@@ -9,8 +9,8 @@ import { Spinner } from '../../../components/UI/Spinner/Spinner';
 import { Button } from '../../../components/UI/Button/Button';
 import styles from '../Auth.module.scss';
 import './select.scss';
-import { usePosition } from '../../../hooks/usePosition';
-import { useLevel } from '../../../hooks/useLevel';
+import { useGender } from '../../../hooks/usePosition';
+import { useCity } from '../../../hooks/useCity';
 import { useRegistration } from '../../../hooks/useRegistration';
 
 export const Registration = (): JSX.Element => {
@@ -23,8 +23,8 @@ export const Registration = (): JSX.Element => {
   } = useForm<IRegistrationForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
   const { isLoading, error } = useAppSelector((state) => state.registrationReducer);
   const { handleSwitchMethod, onSubmit } = useRegistration({ reset, error });
-  const optionsPosition = usePosition();
-  const optionsLevel = useLevel();
+  const optionsGender = useGender();
+  const optionsCity = useCity();
 
   if (isLoading) {
     return <Spinner />;
@@ -77,8 +77,8 @@ export const Registration = (): JSX.Element => {
             {...field}
             className={styles.selectContainer}
             classNamePrefix='select'
-            options={optionsPosition}
-            placeholder='Выберите позицию'
+            options={optionsGender}
+            placeholder='Выберите пол'
           />
         )}
       />
@@ -91,8 +91,8 @@ export const Registration = (): JSX.Element => {
             {...field}
             className={styles.selectContainer}
             classNamePrefix='select'
-            options={optionsLevel}
-            placeholder='Выберите уровень'
+            options={optionsCity}
+            placeholder='Выберите город'
           />
         )}
       />

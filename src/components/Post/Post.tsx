@@ -16,7 +16,8 @@ import { Link } from 'react-router-dom';
 
 interface IUserPost {
   _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   avatar: string | null;
 }
 
@@ -54,7 +55,8 @@ export const Post = ({ post }: PostProps) => {
           user: {
             _id: user.id,
             avatar: user.avatar,
-            name: user.name,
+            firsName: user.firstName,
+            lastName: user.lastName,
           },
         };
         setLikes((prev: any) => [...prev, newLike]);
@@ -83,11 +85,11 @@ export const Post = ({ post }: PostProps) => {
         <Link to={`/user-profile?user=${post.user._id}`}>
           <img
             src={post.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${post.user.avatar}`}
-            alt={post.user.name}
+            alt={post.user.firstName + ' ' + post.user.lastName}
           />
         </Link>
         <div className={styles.userPost}>
-          <span className={styles.userName}>{post.user.name}</span>
+          <span className={styles.userName}>{post.user.firstName + ' ' + post.user.lastName}</span>
           <span className={styles.date}>{calculateTime(post.createdAt)}</span>
         </div>
       </div>
@@ -113,7 +115,7 @@ export const Post = ({ post }: PostProps) => {
                         ? `/photo.png`
                         : `${API_URL}/avatar/${like.user.avatar}`
                     }
-                    alt={like.user.name}
+                    alt={like.user.firstName + ' ' + like.user.lastName}
                   />
                 </div>
               ))}
@@ -156,10 +158,12 @@ export const Post = ({ post }: PostProps) => {
                     ? `/photo.png`
                     : `${API_URL}/avatar/${comment.user.avatar}`
                 }
-                alt={comment.user.name}
+                alt={comment.user.firstName + ' ' + comment.user.lastName}
               />
               <div className={styles.body}>
-                <span className={styles.user}>{comment.user.name}</span>
+                <span className={styles.user}>
+                  {comment.user.firstName + ' ' + comment.user.lastName}
+                </span>
                 <span className={styles.comment}>{comment.text}</span>
                 <span className={styles.dateComment}>{calculateTime(comment.date)}</span>
               </div>

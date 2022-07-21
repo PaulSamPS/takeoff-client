@@ -1,19 +1,13 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from './redux';
-import { getPosition } from '../redux/actions/positionAction';
 import { optionsCreator } from '../helpers/optionsCrearot';
 import { ISelectOption } from '../interfaces/select.interface';
 
-export const usePosition = (): ISelectOption[] => {
-  const { position } = useAppSelector((state) => state.positionReducer);
-  const dispatch = useAppDispatch();
+export const useGender = (): ISelectOption[] => {
+  const gender = [
+    { _id: 0, city: 'Мужской' },
+    { _id: 1, city: 'Женский' },
+  ];
+  const optionsGender: ISelectOption[] = [];
+  optionsCreator(gender, optionsGender);
 
-  const optionsPosition: ISelectOption[] = [];
-  optionsCreator(position, optionsPosition);
-
-  React.useEffect(() => {
-    dispatch(getPosition());
-  }, []);
-
-  return optionsPosition;
+  return optionsGender;
 };

@@ -10,7 +10,7 @@ interface IBanner {
   name: string | undefined;
   avatar: string | undefined;
   lastVisit?: Date | number;
-  isOnline?: boolean;
+  bio: { gender: string | undefined };
 }
 
 // interface IMessagesWith {
@@ -60,6 +60,13 @@ interface IChats {
   countUnreadMessages: number;
 }
 
+const initialStateBannerData = {
+  name: '',
+  avatar: '',
+  lastVisit: 0,
+  bio: { gender: '' },
+};
+
 export const useChat = () => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -67,12 +74,7 @@ export const useChat = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const [messages, setMessages] = React.useState<any[]>([]);
-  const [bannerData, setBannerData] = React.useState<IBanner>({
-    name: '',
-    avatar: '',
-    lastVisit: 0,
-    isOnline: false,
-  });
+  const [bannerData, setBannerData] = React.useState<IBanner>(initialStateBannerData);
   const receiverUserId = localStorage.getItem('receiverUserId');
 
   const openChatId = React.useRef<string | null>('');
@@ -133,10 +135,10 @@ export const useChat = () => {
     socket?.on('message_list:update', ({ chat }: any) => {
       setMessages(chat.messages.slice(-currentCountMessages));
       setBannerData({
-        name: chat.messagesWith.name,
+        name: chat.messagesWith.firstName + ' ' + chat.messagesWith.lastName,
         avatar: chat.messagesWith.avatar,
         lastVisit: chat.messagesWith.lastVisit,
-        isOnline: chat.messagesWith.isOnline,
+        bio: chat.messagesWith.bio.gender,
       });
       openChatId.current = chat.messagesWith._id;
       setTotalMessages(chat.messages.length);
@@ -194,11 +196,15 @@ export const useChat = () => {
           });
         } else {
           const user = await dispatch(getChatUser(newMessage.sender));
-          setBannerData({ name: user?.name, avatar: user?.avatar });
+          setBannerData({
+            name: user?.firstName + ' ' + user?.lastName,
+            avatar: user?.avatar,
+            bio: { gender: user?.bio.gender },
+          });
 
           const newChat = {
             messagesWith: newMessage.sender,
-            name: user?.name,
+            name: user?.firstName + ' ' + user?.lastName,
             avatar: user?.avatar,
             lastMessage: newMessage.message,
             date: newMessage.date,

@@ -3,8 +3,8 @@ import { positionReducer } from '../reducers/positionReducer';
 import { AxiosError, AxiosResponse } from 'axios';
 import { $api } from '../../http/axios';
 import { IPositionInterface } from '../../interfaces/position.interface';
-import { levelReducer } from '../reducers/levelReducer';
-import { ILevelInterface } from '../../interfaces/level.interface';
+import { cityReducer } from '../reducers/cityReducer';
+import { ICityInterface } from '../../interfaces/city.interface';
 
 export const getPosition = () => async (dispatch: AppDispatch) => {
   await $api
@@ -17,11 +17,11 @@ export const getPosition = () => async (dispatch: AppDispatch) => {
     });
 };
 
-export const getLevel = () => async (dispatch: AppDispatch) => {
+export const getCity = () => async (dispatch: AppDispatch) => {
   await $api
-    .get(`api/level`)
-    .then((res: AxiosResponse<ILevelInterface[]>) => {
-      dispatch(levelReducer.actions.setLevelSuccess(res.data));
+    .get(`api/auth/cities`)
+    .then((res: AxiosResponse<ICityInterface[]>) => {
+      dispatch(cityReducer.actions.setLevelSuccess(res.data));
     })
     .catch((e: AxiosError) => {
       console.log(e);

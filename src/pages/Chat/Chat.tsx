@@ -28,13 +28,15 @@ interface IMessage {
 }
 
 export const Chat = (): JSX.Element => {
+  const socket = React.useContext(SocketContext);
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const { user } = useAppSelector((state) => state.loginReducer);
   const [text, setText] = React.useState<string>('');
   const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
-  const socket = React.useContext(SocketContext);
+  const onlineUser = users.map((u) => u.userId);
   const { scrollY } = useScroll();
   const { id } = useParams();
 
@@ -76,10 +78,13 @@ export const Chat = (): JSX.Element => {
         <div className={styles.chatWithName}>
           <span className={styles.user}>{bannerData.name}</span>
           <span className={styles.lastVisit}>
-            {bannerData.isOnline !== false ? (
+            {onlineUser.includes(id) ? (
               'В сети'
             ) : (
-              <span>Был {calculateTime(bannerData.lastVisit)}</span>
+              <span>
+                {bannerData.bio.gender === 'Мужской' ? 'был' : 'была'}{' '}
+                {calculateTime(bannerData.lastVisit)}
+              </span>
             )}
           </span>
         </div>
@@ -109,12 +114,12 @@ export const Chat = (): JSX.Element => {
                                   ? `/photo.png`
                                   : `${API_URL}/avatar/${user.avatar}`
                               }
-                              alt={user.name}
+                              alt={user.firstName + ' ' + user.lastName}
                             />
                           </Link>
                           <div className={styles.name}>
                             <Link to={`/main/profile/${user.id}`} className={styles.userName}>
-                              {user.name}
+                              {user.firstName + ' ' + user.lastName}
                             </Link>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>
@@ -137,7 +142,6 @@ export const Chat = (): JSX.Element => {
                               }
                               alt={bannerData.name}
                             />
-                            {bannerData.isOnline && <div className={styles.online} />}
                           </Link>
                           <div className={styles.name}>
                             <Link to={`/main/profile/${id}`} className={styles.userName}>

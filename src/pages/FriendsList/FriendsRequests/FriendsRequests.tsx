@@ -28,10 +28,10 @@ export const FriendsRequests = () => {
                 <Link to={`/main/people/${f.id}`} replace className={styles.followers}>
                   <img
                     src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
-                    alt={f.name}
+                    alt={f.firstName + ' ' + f.lastName}
                   />
                 </Link>
-                <span className={styles.userName}>{f.name}</span>
+                <span className={styles.userName}>{f.firstName + ' ' + f.lastName}</span>
                 <div className={styles.action}>
                   <Button
                     appearance='primary'

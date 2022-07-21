@@ -20,10 +20,14 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
         <Link to={`/main/profile/${friend.id}`} replace className={styles.followers}>
           <img
             src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
-            alt={friend.name}
+            alt={friend.firstName + ' ' + friend.lastName}
           />
         </Link>
         <div className={styles.body}>
+          <Link to={`/main/profile/${friend.id}`} className={styles.userName}>
+            {friend.firstName + ' ' + friend.lastName}
+          </Link>
+          <span className={styles.city}>{friend.bio.city}</span>
           <span className={styles.sendMessage} onClick={handleSendMessage}>
             Написать сообщение
           </span>

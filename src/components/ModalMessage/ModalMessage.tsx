@@ -26,18 +26,20 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
     <div className={styles.modalMessage}>
       <div className={styles.topModal}>
         <span>Новое сообщение</span>
-        <Link to={`/main/conversations?with=${userId}`}>Перейтик диалогу c {friend!.name}</Link>
+        <Link to={`/main/conversations?with=${userId}`}>
+          Перейтик диалогу c {friend!.firstName + ' ' + friend!.lastName}
+        </Link>
       </div>
       <div className={styles.user}>
         <Link to={`/main/profile/${userId}`} replace className={styles.followers}>
           <img
             src={friend!.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend!.avatar}`}
-            alt={friend!.name}
+            alt={friend!.firstName + ' ' + friend!.lastName}
           />
         </Link>
         <div className={styles.userInfo}>
           <Link to={`/main/profile/${userId}`} className={styles.name}>
-            {friend!.name}
+            {friend!.firstName + ' ' + friend!.lastName}
           </Link>
           <span>{calculateTime(friend!.lastVisit)}</span>
         </div>

@@ -33,23 +33,26 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
   return (
     <div className={styles.bio}>
       <div className={styles.top}>
-        <h1>{user?.name}</h1>
+        <h1>{user?.firstName + ' ' + user?.lastName}</h1>
         {usersOnline.includes(id) ? (
           <div className={styles.online}>
             online <div className={styles.green} />
           </div>
         ) : (
-          <div className={styles.lastVisit}>был в сети {user && calculateTime(user.lastVisit)}</div>
+          <div className={styles.lastVisit}>
+            {user?.bio.gender === 'Мужской' ? 'был' : 'была'} в сети{' '}
+            {user && calculateTime(user.lastVisit)}
+          </div>
         )}
       </div>
       <div className={styles.middle}>
         <div className={styles.block}>
           <h3 className={styles.item}>День рождения:</h3>
-          <span className={styles.itemName}>19 июля</span>
+          <span className={styles.itemName}>{user?.bio.birthday}</span>
         </div>
         <div className={styles.block}>
           <h3 className={styles.item}>Город:</h3>
-          <span className={styles.itemName}>Оренбург</span>
+          <span className={styles.itemName}>{user?.bio.city}</span>
         </div>
         <Button
           appearance='primary'
@@ -83,15 +86,15 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
             </div>
             <div className={styles.block}>
               <h3 className={styles.item}>Язык:</h3>
-              <span className={styles.itemName}>Русский</span>
+              <span className={styles.itemName}>{user?.bio.language}</span>
             </div>
             <div className={styles.block}>
               <h3 className={styles.item}>Пол:</h3>
-              <span className={styles.itemName}>Мужчина</span>
+              <span className={styles.itemName}>{user?.bio.gender}</span>
             </div>
             <div className={styles.block}>
               <h3 className={styles.item}>Семейное положение:</h3>
-              <span className={styles.itemName}>Холост</span>
+              <span className={styles.itemName}>{user?.bio.familyStatus}</span>
             </div>
           </motion.div>
         )}

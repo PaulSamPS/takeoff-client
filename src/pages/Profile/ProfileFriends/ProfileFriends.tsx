@@ -31,11 +31,11 @@ export const ProfileFriends = () => {
             <Link to={`/main/profile/${friend.id}`} className={styles.avatar}>
               <img
                 src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
-                alt={friend.name}
+                alt={friend.firstName + '' + friend.lastName}
               />
             </Link>
             <Link className={styles.name} to={`/main/profile/${friend.id}`}>
-              {friend.name}
+              {friend.firstName}
             </Link>
           </div>
         ))}
@@ -55,11 +55,11 @@ export const ProfileFriends = () => {
                         ? `/photo.png`
                         : `${API_URL}/avatar/${onlineFriend.avatar}`
                     }
-                    alt={onlineFriend.name}
+                    alt={onlineFriend.firstName + '' + onlineFriend.lastName}
                   />
                 </Link>
                 <Link className={styles.name} to={`/main/profile/${onlineFriend.id}`}>
-                  {onlineFriend.name}
+                  {onlineFriend.firstName}
                 </Link>
               </div>
             ))}

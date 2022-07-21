@@ -32,7 +32,7 @@ export const Header = () => {
           <Link to={`profile/${user.id}`} className={styles.avatar}>
             <img
               src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-              alt={user.name}
+              alt={user.firstName + ' ' + user.lastName}
             />
             {online.includes(user.id) && <div className={styles.online} />}
           </Link>

@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IUserPost {
   _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   avatar: string | null;
 }
 

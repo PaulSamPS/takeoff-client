@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import positionReducer from './reducers/positionReducer';
-import levelReducer from './reducers/levelReducer';
+import cityReducer from './reducers/cityReducer';
 import registrationReducer from './reducers/auth/registrationReducer';
 import loginReducer from './reducers/auth/loginReducer';
 import usersReducer from './reducers/usersReducer';
@@ -19,7 +19,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   positionReducer,
-  levelReducer,
+  cityReducer,
   registrationReducer,
   loginReducer,
   usersReducer,

@@ -54,7 +54,7 @@ export const Layout = () => {
     socket?.on('message:received', async ({ newMessage }) => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
-        setBannerData({ name: user?.name, avatar: user?.avatar });
+        setBannerData({ name: user?.firstName + ' ' + user?.lastName, avatar: user?.avatar });
         socket?.emit('message:toUnread', {
           receiver: loginUser.id,
           sender: newMessage.sender,
@@ -64,11 +64,11 @@ export const Layout = () => {
         }, 500);
         setNewMessageReceived({
           ...newMessage,
-          name: user?.name,
+          name: user?.firstName + ' ' + user?.lastName,
           avatar: user?.avatar,
         });
         setShowNewMessageModal(true);
-        document.title = `Новое сообщение от ${user?.name}`;
+        document.title = `Новое сообщение от ${user?.firstName + ' ' + user?.lastName}`;
       }
     });
     return () => {

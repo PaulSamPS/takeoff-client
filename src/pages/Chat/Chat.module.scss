@@ -138,7 +138,6 @@ a {
 					}
 
 					.avatar {
-						position: relative;
 						display: flex;
 						grid-area: avatar;
 						max-height: 36px;
@@ -148,16 +147,6 @@ a {
 							width: 36px;
 							height: 36px;
 							object-fit: cover;
-							border-radius: 50%;
-						}
-
-						.online {
-							position: absolute;
-							right: 3px;
-							bottom: 3px;
-							width: 5px;
-							height: 5px;
-							background: var(--green);
 							border-radius: 50%;
 						}
 					}

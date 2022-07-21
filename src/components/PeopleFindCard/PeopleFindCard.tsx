@@ -27,11 +27,11 @@ export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.El
       <Link to={`/main/profile/${user.id}`} className={styles.avatar}>
         <img
           src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-          alt={user.name}
+          alt={user.firstName + ' ' + user.lastName}
         />
       </Link>
       <div className={styles.info}>
-        <Link to={`/main/profile/${user.id}`}>{user.name}</Link>
+        <Link to={`/main/profile/${user.id}`}>{user.firstName + ' ' + user.lastName}</Link>
         {friend.includes(user.id) ||
         followeings.includes(loginUser.id) ||
         requestsDone.includes(user.id) ? (
