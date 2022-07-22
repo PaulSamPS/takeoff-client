@@ -4,6 +4,8 @@
 @import "scss/flex_mixins";
 
 body {
+	-webkit-font-smoothing: subpixel-antialiased;
+
 	overflow-x: hidden;
 	overflow-y: scroll;
 	font-family:
@@ -19,7 +21,6 @@ body {
 		"Helvetica Neue",
 		sans-serif;
 	background: #EDEEF0;
-	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 

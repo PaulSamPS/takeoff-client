@@ -9,7 +9,7 @@ import { Button } from '../../../components/UI/Button/Button';
 import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
 import { ProfileAvatarProps } from './ProfileAvatar.props';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
 import { Modal } from '../../../components/UI/Modal/Modal';
 import { ChangeAvatar } from '../../../components/ChangeAvatar/ChangeAvatar';
@@ -66,7 +66,11 @@ export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
           </motion.div>
         )}
       </div>
-      {loginUser.id === id && <Button appearance='secondary'>Редактировать</Button>}
+      {loginUser.id === id && (
+        <Link to={'/main/edit'} className={styles.edit}>
+          <Button appearance='secondary'>Редактировать</Button>
+        </Link>
+      )}
       {loginUser.id !== id && (
         <Button appearance='primary' className={styles.message} onClick={handleSendMessage}>
           Написать сообщение

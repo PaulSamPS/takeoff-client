@@ -18,6 +18,9 @@ import { FriendsRequests } from './pages/FriendsList/FriendsRequests/FriendsRequ
 import { Login } from './pages/Auth/Login/Login';
 import { Registration } from './pages/Auth/Registration/Registration';
 import { RegistrationSuccess } from './pages/Auth/RegistrationSuccess/RegistrationSuccess';
+import { Edit } from './pages/Edit/Edit';
+import { EditBasic } from './pages/Edit/EditBasic/EditBasic';
+import { EditContacts } from './pages/Edit/EditContacts/EditContacts';
 
 export const App = () => {
   const { socket } = context();
@@ -43,6 +46,10 @@ export const App = () => {
               <Route path='news' element={<News />} />
               <Route path='news/:id' element={<News />} />
               <Route path='profile/:id' element={<Profile />} />
+              <Route path='edit' element={<Edit />}>
+                <Route index element={<EditBasic />} />
+                <Route path='contacts' element={<EditContacts />} />
+              </Route>
               <Route path='conversations' element={<ConversationsList />}>
                 <Route index element={<Conversations />} />
                 <Route path='unread' element={<ConversationsUnread />} />

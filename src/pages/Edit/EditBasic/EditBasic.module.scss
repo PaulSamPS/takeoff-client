@@ -1,0 +1,36 @@
+.wrapper {
+  background: var(--white);
+  width: 550px;
+  border-radius: 4px;
+
+  .top {
+    padding: 20px;
+    background: var(--bg-grey-light);
+    border-bottom: 1px solid var(--border);
+    border-radius: 4px 4px 0 0;
+  }
+
+  .main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    .item {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+
+      label {
+        text-align: right;
+        width: 40%;
+        color: var(--grey);
+        font-size: 13px;
+      }
+
+      input {
+        padding: 10px 7px;
+      }
+    }
+  }
+}
