@@ -1,19 +1,16 @@
 import React from 'react';
 import styles from './EditBasic.module.scss';
 import { Input } from '../../../components/UI/Input/Input';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { IRegistrationForm } from '../../../interfaces/registrationForm.interface';
-import Select from 'react-select';
-import { useFamilyStatus } from '../../../hooks/useFamilyStatus';
 import { useAppSelector } from '../../../hooks/redux';
+import { DatePicker } from '../../../components/DatePicker/DatePicker';
 
 export const EditBasic = () => {
   const {
     register,
     formState: { errors },
-    control,
   } = useForm<IRegistrationForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
-  const optionsFamilyStatus = useFamilyStatus();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
 
   return (
@@ -49,21 +46,8 @@ export const EditBasic = () => {
           />
         </div>
         <div className={styles.item}>
-          <label>Город:</label>
-          <Controller
-            name='city'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <Select
-                {...field}
-                className={styles.selectContainer}
-                classNamePrefix='select'
-                options={optionsFamilyStatus}
-                placeholder='Выберите город'
-              />
-            )}
-          />
+          <label>Дата рождения:</label>
+          <DatePicker />
         </div>
       </div>
     </div>
