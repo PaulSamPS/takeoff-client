@@ -5,7 +5,7 @@ import { IResponseUser, IUser } from '../../interfaces/user.interface';
 import { IErrorResponse } from '../../interfaces/axiosResponse.interface';
 import { usersReducer } from '../reducers/usersReducer';
 import { loginReducer } from '../reducers/auth/loginReducer';
-import { IEditProfileForm } from '../../interfaces/editProfile.interface';
+import { IEditProfile } from '../../interfaces/editProfile.interface';
 
 export const getUsers = () => async (dispatch: AppDispatch) => {
   dispatch(usersReducer.actions.setLoading());
@@ -43,22 +43,14 @@ export const removeUser = (id: string, avatar: string) => async (dispatch: AppDi
   });
 };
 
-export const updateUser =
-  (id: string, formData: IEditProfileForm) => async (dispatch: AppDispatch) => {
-    await $apiAuth
-      .post(`api/user/${id}/update`, formData)
-      .then((res: AxiosResponse<IResponseUser>) => {
-        dispatch(loginReducer.actions.setSuccess(res.data.user));
-        dispatch(getUsers());
-      });
-  };
-
-export const adminUpdateUser =
-  (id: string | undefined, formData: IEditProfileForm) => async (dispatch: AppDispatch) => {
-    await $apiAuth.post(`api/user/${id}/update`, formData).then(() => {
+export const updateUser = (id: string, formData: IEditProfile) => async (dispatch: AppDispatch) => {
+  await $apiAuth
+    .post(`api/user/update/${id}`, formData)
+    .then((res: AxiosResponse<IResponseUser>) => {
+      dispatch(loginReducer.actions.setSuccess(res.data.user));
       dispatch(getUsers());
     });
-  };
+};
 
 export const adminUploadAvatar =
   (id: string, formData: FormData) => async (dispatch: AppDispatch) => {

@@ -11,7 +11,6 @@ import { useFollow } from '../../../hooks/useFollow';
 import cn from 'classnames';
 import { Button } from '../../../components/UI/Button/Button';
 import { motion } from 'framer-motion';
-import moment from 'moment';
 
 export const ProfileBio = ({ user }: ProfileBioProps) => {
   const { friendsUserInfo } = useRequest();
@@ -47,14 +46,20 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
         )}
       </div>
       <div className={styles.middle}>
-        <div className={styles.block}>
-          <h3 className={styles.item}>День рождения:</h3>
-          <span className={styles.itemName}>{moment(user?.bio.birthday).format('D MMMM')}</span>
-        </div>
-        <div className={styles.block}>
-          <h3 className={styles.item}>Город:</h3>
-          <span className={styles.itemName}>{user?.bio.city}</span>
-        </div>
+        {user?.bio.birthday && (
+          <div className={styles.block}>
+            <h3 className={styles.item}>День рождения:</h3>
+            <span className={styles.itemName}>
+              {user.bio.birthday.day + ' ' + user.bio.birthday.month}
+            </span>
+          </div>
+        )}
+        {user?.bio.city && (
+          <div className={styles.block}>
+            <h3 className={styles.item}>Город:</h3>
+            <span className={styles.itemName}>{user.bio.city}</span>
+          </div>
+        )}
         <Button
           appearance='primary'
           className={styles.visibleInfo}
@@ -85,14 +90,18 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
                 </Link>
               )}
             </div>
-            <div className={styles.block}>
-              <h3 className={styles.item}>Язык:</h3>
-              <span className={styles.itemName}>{user?.bio.language}</span>
-            </div>
-            <div className={styles.block}>
-              <h3 className={styles.item}>Пол:</h3>
-              <span className={styles.itemName}>{user?.bio.gender}</span>
-            </div>
+            {user?.bio.language && (
+              <div className={styles.block}>
+                <h3 className={styles.item}>Язык:</h3>
+                <span className={styles.itemName}>{user.bio.language}</span>
+              </div>
+            )}
+            {user?.bio.gender && (
+              <div className={styles.block}>
+                <h3 className={styles.item}>Пол:</h3>
+                <span className={styles.itemName}>{user.bio.gender}</span>
+              </div>
+            )}
             {user?.bio.familyStatus && (
               <div className={styles.block}>
                 <h3 className={styles.item}>Семейное положение:</h3>

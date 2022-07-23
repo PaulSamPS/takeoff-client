@@ -8,7 +8,11 @@ export interface IUser {
   lastVisit: Date;
   notification: boolean;
   bio: {
-    birthday: string;
+    birthday: {
+      day: string;
+      month: string;
+      year: string;
+    };
     city: string;
     language: string;
     gender: string;

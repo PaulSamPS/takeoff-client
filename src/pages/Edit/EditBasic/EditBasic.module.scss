@@ -23,7 +23,7 @@
 
       label {
         text-align: right;
-        width: 180px;
+        min-width: 100px;
         color: var(--grey);
         font-size: 13px;
       }
@@ -31,6 +31,12 @@
       input {
         padding: 10px 7px;
       }
+    }
+
+    button {
+      margin-top: 20px;
+      align-self: center;
+      width: fit-content;
     }
   }
 }

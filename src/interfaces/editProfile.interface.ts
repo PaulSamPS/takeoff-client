@@ -1,14 +1,39 @@
-export interface IEditProfileForm {
-  name: string;
+export interface IEditProfile {
+  firstName: string;
+  lastName: string;
+  password: string;
   email: string;
-  role: string;
-  position:
+  gender:
     | {
         value: string;
         label: string;
       }
     | string;
-  level:
+  city:
+    | {
+        value: string;
+        label: string;
+      }
+    | string;
+  day:
+    | {
+        value: string;
+        label: string;
+      }
+    | string;
+  month:
+    | {
+        value: string;
+        label: string;
+      }
+    | string;
+  year:
+    | {
+        value: string;
+        label: string;
+      }
+    | string;
+  language:
     | {
         value: string;
         label: string;

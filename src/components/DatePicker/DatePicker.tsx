@@ -94,7 +94,6 @@ export const DatePicker = () => {
   const [dayOpen, setDayOpen] = React.useState<boolean>(false);
   const [monthOpen, setMonthOpen] = React.useState<boolean>(false);
   const [yearOpen, setYearOpen] = React.useState<boolean>(false);
-  const formData = new FormData();
   const refDay = useRef<HTMLDivElement>(null);
   const refMonth = useRef<HTMLDivElement>(null);
   const refYear = useRef<HTMLDivElement>(null);
@@ -105,20 +104,19 @@ export const DatePicker = () => {
   const handleSelectDay = (selectDay: string) => {
     setDay(selectDay);
     setDayOpen(false);
-    formData.set('day', day);
   };
 
   const handleSelectMonth = (selectMonth: string) => {
     setMonth(selectMonth);
     setMonthOpen(false);
-    formData.set('month', month);
   };
 
   const handleSelectYear = (selectYear: string) => {
     setYear(selectYear);
     setYearOpen(false);
-    formData.set('year', year);
   };
+
+  console.log(day + ' ' + month + year);
 
   return (
     <div className={styles.wrapper}>

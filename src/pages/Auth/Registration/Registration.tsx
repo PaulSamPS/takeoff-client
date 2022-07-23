@@ -9,10 +9,8 @@ import { Spinner } from '../../../components/UI/Spinner/Spinner';
 import { Button } from '../../../components/UI/Button/Button';
 import styles from '../Auth.module.scss';
 import './select.scss';
-import { useGender } from '../../../hooks/usePosition';
-import { useCity } from '../../../hooks/useCity';
+import { gender } from '../../../helpers/optionsSelect/gender';
 import { useRegistration } from '../../../hooks/useRegistration';
-import { useLanguage } from '../../../hooks/useLanguage';
 
 export const Registration = (): JSX.Element => {
   const {
@@ -24,9 +22,7 @@ export const Registration = (): JSX.Element => {
   } = useForm<IRegistrationForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
   const { isLoading, error } = useAppSelector((state) => state.registrationReducer);
   const { handleSwitchMethod, onSubmit } = useRegistration({ reset, error });
-  const optionsGender = useGender();
-  const optionsCity = useCity();
-  const optionsLanguage = useLanguage();
+  const optionsGender = gender();
 
   if (isLoading) {
     return <Spinner />;
@@ -81,20 +77,6 @@ export const Registration = (): JSX.Element => {
         error={errors.email}
       />
       <Controller
-        name='city'
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Select
-            {...field}
-            className={styles.selectContainer}
-            classNamePrefix='select'
-            options={optionsCity}
-            placeholder='Выберите город'
-          />
-        )}
-      />
-      <Controller
         name='gender'
         control={control}
         rules={{ required: true }}
@@ -107,28 +89,6 @@ export const Registration = (): JSX.Element => {
             placeholder='Выберите пол'
           />
         )}
-      />
-      <Controller
-        name='language'
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Select
-            {...field}
-            className={styles.selectContainer}
-            classNamePrefix='select'
-            options={optionsLanguage}
-            placeholder='Выберите язык'
-          />
-        )}
-      />
-      <Input
-        {...register('birthday', {
-          required: { value: true, message: 'Введите дату рождения' },
-        })}
-        placeholder='Дата рождения'
-        type='date'
-        error={errors.birthday}
       />
       <div className={styles.submit}>
         <Button appearance='primary' type='submit' disabled={!isValid}>

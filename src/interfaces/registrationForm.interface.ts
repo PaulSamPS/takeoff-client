@@ -9,17 +9,4 @@ export interface IRegistrationForm {
         label: string;
       }
     | string;
-  city:
-    | {
-        value: string;
-        label: string;
-      }
-    | string;
-  birthday: string;
-  language:
-    | {
-        value: string;
-        label: string;
-      }
-    | string;
 }
