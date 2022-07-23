@@ -1,5 +1,5 @@
-import { optionsCreator } from '../helpers/optionsCrearot';
-import { ISelectOption } from '../interfaces/select.interface';
+import { optionsCreator } from '../optionsCrearot';
+import { ISelectOption } from '../../interfaces/select.interface';
 
 export const useLanguage = (): ISelectOption[] => {
   const language = [

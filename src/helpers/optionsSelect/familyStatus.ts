@@ -1,6 +1,6 @@
-import { ISelectOption } from '../interfaces/select.interface';
-import { optionsCreator } from '../helpers/optionsCrearot';
-import { useAppSelector } from './redux';
+import { ISelectOption } from '../../interfaces/select.interface';
+import { optionsCreator } from '../optionsCrearot';
+import { useAppSelector } from '../../hooks/redux';
 
 const familyStatus = [
   { _id: 0, value: 'Не женат' },

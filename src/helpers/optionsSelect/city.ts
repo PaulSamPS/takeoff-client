@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from './redux';
-import { ISelectOption } from '../interfaces/select.interface';
-import { optionsCreator } from '../helpers/optionsCrearot';
-import { getCity } from '../redux/actions/positionAction';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { ISelectOption } from '../../interfaces/select.interface';
+import { optionsCreator } from '../optionsCrearot';
+import { getCity } from '../../redux/actions/positionAction';
 
 export const useCity = (): ISelectOption[] => {
   const { city } = useAppSelector((state) => state.cityReducer);
