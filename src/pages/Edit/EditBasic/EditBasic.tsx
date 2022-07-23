@@ -8,6 +8,8 @@ import { Button } from '../../../components/UI/Button/Button';
 import Select from 'react-select';
 import { day, month, year } from '../../../helpers/optionsSelect/birthday';
 import { IEditProfile } from '../../../interfaces/editProfile.interface';
+import { gender } from '../../../helpers/optionsSelect/gender';
+import { familyStatus } from '../../../helpers/optionsSelect/familyStatus';
 
 export const EditBasic = () => {
   const {
@@ -21,8 +23,16 @@ export const EditBasic = () => {
   const optionsDay = day();
   const optionsMonth = month();
   const optionsYear = year();
+  const genderOptions = gender();
+  const familyStatusOptions = familyStatus();
 
   const onSubmit = async (formData: IEditProfile) => {
+    if (formData.gender && typeof formData.gender !== 'string') {
+      formData.gender = formData.gender.value;
+    }
+    if (formData.familyStatus && typeof formData.familyStatus !== 'string') {
+      formData.familyStatus = formData.familyStatus.value;
+    }
     if (formData.day && typeof formData.day !== 'string') {
       formData.day = formData.day.value;
     }
@@ -63,6 +73,38 @@ export const EditBasic = () => {
             placeholder={loginUser.lastName}
             type='text'
             error={errors.lastName}
+          />
+        </div>
+        <div className={styles.item}>
+          <label>Пол</label>
+          <Controller
+            name='gender'
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                className={styles.selectContainer}
+                classNamePrefix='select'
+                options={genderOptions}
+                placeholder={loginUser.bio.gender ? loginUser.bio.gender : 'Выберите пол'}
+              />
+            )}
+          />
+        </div>
+        <div className={styles.item}>
+          <label>Семейное положение:</label>
+          <Controller
+            name='familyStatus'
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                className={styles.selectContainer}
+                classNamePrefix='select'
+                options={familyStatusOptions}
+                placeholder={loginUser.bio.familyStatus ? loginUser.bio.familyStatus : 'Не выбрано'}
+              />
+            )}
           />
         </div>
         <div className={styles.item}>
@@ -107,9 +149,11 @@ export const EditBasic = () => {
             )}
           />
         </div>
-        <Button appearance='primary' type='submit'>
-          Сохранить
-        </Button>
+        <div className={styles.bottom}>
+          <Button appearance='primary' type='submit'>
+            Сохранить
+          </Button>
+        </div>
       </form>
     </div>
   );

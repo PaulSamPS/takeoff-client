@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/redux';
 
 const familyStatusArr = [
   { _id: 0, value: 'Не женат' },
-  { _id: 1, value: 'Женнат' },
+  { _id: 1, value: 'Женат' },
   { _id: 2, value: 'Влюблен' },
   { _id: 3, value: 'В активном поиске' },
   { _id: 4, value: 'Замужем' },

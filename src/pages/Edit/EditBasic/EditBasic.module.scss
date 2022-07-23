@@ -23,7 +23,7 @@
 
       label {
         text-align: right;
-        min-width: 100px;
+        min-width: 135px;
         color: var(--grey);
         font-size: 13px;
       }
@@ -33,10 +33,15 @@
       }
     }
 
-    button {
-      margin-top: 20px;
-      align-self: center;
-      width: fit-content;
+    .bottom {
+      border-top: 1px solid var(--border);
+      width: 100%;
+      padding-top: 20px;
+
+      button {
+        margin-left: 145px;
+        width: fit-content;
+      }
     }
   }
 }

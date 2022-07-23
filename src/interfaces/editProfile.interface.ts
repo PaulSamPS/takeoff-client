@@ -9,6 +9,12 @@ export interface IEditProfile {
         label: string;
       }
     | string;
+  familyStatus:
+    | {
+        value: string;
+        label: string;
+      }
+    | string;
   city:
     | {
         value: string;

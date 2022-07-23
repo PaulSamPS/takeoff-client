@@ -85,7 +85,7 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
               <h3 className={styles.title}>Основная информация</h3>
               <div className={styles.border} />
               {loginUser.id === id && (
-                <Link className={styles.edit} to={'#'}>
+                <Link className={styles.edit} to={'/main/edit'}>
                   Редактировать
                 </Link>
               )}
