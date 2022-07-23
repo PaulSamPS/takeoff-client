@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './DatePicker.module.scss';
 import { ReactComponent as ArrowDownIcon } from '../../helpers/icons/arrowDown.svg';
 import cn from 'classnames';
+import { useOnClickOutside } from '../../hooks/useOnclickOutside';
 
 const months = [
   { _id: 0, value: 'Января' },
@@ -94,6 +95,12 @@ export const DatePicker = () => {
   const [monthOpen, setMonthOpen] = React.useState<boolean>(false);
   const [yearOpen, setYearOpen] = React.useState<boolean>(false);
   const formData = new FormData();
+  const refDay = useRef<HTMLDivElement>(null);
+  const refMonth = useRef<HTMLDivElement>(null);
+  const refYear = useRef<HTMLDivElement>(null);
+  useOnClickOutside(refDay, () => setDayOpen(false));
+  useOnClickOutside(refMonth, () => setMonthOpen(false));
+  useOnClickOutside(refYear, () => setYearOpen(false));
 
   const handleSelectDay = (selectDay: string) => {
     setDay(selectDay);
@@ -120,7 +127,7 @@ export const DatePicker = () => {
           <span>{day}</span>
           <ArrowDownIcon />
           {dayOpen && (
-            <div className={cn(styles.items, styles.day)}>
+            <div className={cn(styles.items, styles.day)} ref={refDay}>
               {days.map((day) => (
                 <span
                   className={styles.item}
@@ -139,7 +146,7 @@ export const DatePicker = () => {
           <span>{month}</span>
           <ArrowDownIcon />
           {monthOpen && (
-            <div className={cn(styles.items, styles.month)}>
+            <div className={cn(styles.items, styles.month)} ref={refMonth}>
               {months.map((month) => (
                 <span
                   className={styles.item}
@@ -158,7 +165,7 @@ export const DatePicker = () => {
           <span>{year}</span>
           <ArrowDownIcon />
           {yearOpen && (
-            <div className={cn(styles.items, styles.year)}>
+            <div className={cn(styles.items, styles.year)} ref={refYear}>
               {years.map((year) => (
                 <span
                   className={styles.item}
