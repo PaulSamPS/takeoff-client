@@ -5,7 +5,7 @@
 	top: 0;
 	right: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 12;
 	width: 100%;
 	background-color: var(--white);
 	border-bottom: 1px solid var(--grey-light);
@@ -18,7 +18,6 @@
 		margin: 0 auto;
 		padding: 20px;
 		color: var(--greyDark);
-		column-gap: 20px;
 
 		.logo {
 			text-decoration: none;
@@ -30,20 +29,12 @@
 		}
 
 		.profile {
-			padding-right: 20px;
 			column-gap: 5px;
-			border-right: 1px solid rgb(128 128 128 / 30%);
 			cursor: pointer;
+			position: relative;
 
 			@include flex;
 
-			.avatar {
-				position: relative;
-				display: flex;
-				align-items: unset;
-				justify-content: center;
-				width: 30px;
-				height: 30px;
 
 				img {
 					width: 30px;
@@ -51,7 +42,6 @@
 					object-fit: cover;
 					border-radius: 50%;
 				}
-			}
 		}
 
 		.logout {

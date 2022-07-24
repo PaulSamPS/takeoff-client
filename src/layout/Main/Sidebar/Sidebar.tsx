@@ -31,17 +31,17 @@ export const Sidebar = ({ className }: SidebarProps) => {
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <CustomLink to={`/main/profile/${loginUser.id}`}>
+      <CustomLink to={`/main/profile/${loginUser.id}`} style={{ padding: '0' }}>
         <MyProfileIcon /> Моя страница
       </CustomLink>
-      <CustomLink to={'/main/news'}>
+      <CustomLink to={'/main/news'} style={{ padding: '0' }}>
         <NewsIcon /> Новости
       </CustomLink>
-      <CustomLink to={'/main/conversations'}>
+      <CustomLink to={'/main/conversations'} style={{ padding: '0' }}>
         <MessagesIcon /> Сообщения
         {total > 0 && <Count>{total}</Count>}
       </CustomLink>
-      <CustomLink to={'/main/friends'}>
+      <CustomLink to={'/main/friends'} style={{ padding: '0' }}>
         <FriendsIcon /> Друзья {request && request.length > 0 && <Count>{request.length}</Count>}
       </CustomLink>
     </div>
