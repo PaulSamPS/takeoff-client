@@ -28,6 +28,22 @@
 			}
 		}
 
+		.notification {
+			position: relative;
+			height: 24px;
+			width: 24px;
+			margin-right: 20px;
+			cursor: pointer;
+
+			.count {
+				position: absolute;
+				background: #ff3347;
+				font-size: 12px;
+				top: -6px;
+				right: -6px;
+			}
+		}
+
 		.profile {
 			column-gap: 5px;
 			cursor: pointer;

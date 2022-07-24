@@ -4,7 +4,9 @@ import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
 import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDown.svg';
+import { ReactComponent as NotificationIcon } from '../../../helpers/icons/notification.svg';
 import { ProfileMenu } from '../../../components/ProfileMenu/ProfileMenu';
+import { Count } from '../../../components/Count/Count';
 
 export const Header = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -16,6 +18,10 @@ export const Header = () => {
         <Link to={'/main/news'} className={styles.logo}>
           <h2>TakeOff</h2>
         </Link>
+        <div className={styles.notification}>
+          <NotificationIcon />
+          <Count className={styles.count}>9</Count>
+        </div>
         <div className={styles.profile} onClick={() => setVisibleMenu(true)}>
           <img
             src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}

@@ -50,7 +50,7 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
           <div className={styles.block}>
             <h3 className={styles.item}>День рождения:</h3>
             <span className={styles.itemName}>
-              {user.bio.birthday.day + ' ' + user.bio.birthday.month}
+              {user.bio.birthday.day + ' ' + user.bio.birthday.month + ' ' + user.bio.birthday.year}
             </span>
           </div>
         )}
