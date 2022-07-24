@@ -1,8 +1,9 @@
 import React, { ChangeEvent, SyntheticEvent } from 'react';
 import { IAppendAvatarInterface } from '../interfaces/AppendNews.interface';
 import { useAppDispatch } from './redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { adminUploadAvatar, uploadAvatar } from '../redux/actions/usersAction';
+import { SocketContext } from '../helpers/context';
 
 interface IUseChangeAvatarProps {
   setModal: (click: boolean) => void;
@@ -17,10 +18,12 @@ interface IUseChangeAvatar {
 }
 
 export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IUseChangeAvatar => {
+  const socket = React.useContext(SocketContext);
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const { id } = useParams();
 
   const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
@@ -43,6 +46,7 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
       });
     } else {
       dispatch(uploadAvatar(userId, formData)).then(() => {
+        socket?.emit('userInfo:get', { userId: id });
         setModal(false);
         setFilesAvatar(null);
         setPreviewAvatar([]);
