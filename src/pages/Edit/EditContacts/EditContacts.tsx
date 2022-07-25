@@ -14,6 +14,7 @@ export const EditContacts = () => {
     reValidateMode: 'onBlur',
   });
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+  const [saved, setSaved] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const optionsCity = city();
 
@@ -21,8 +22,14 @@ export const EditContacts = () => {
     if (formData.city && typeof formData.city !== 'string') {
       formData.city = formData.city.value;
     }
-    await dispatch(updateUser(loginUser.id, formData));
+    await dispatch(updateUser(loginUser.id, formData)).then(() => {
+      setSaved(true);
+    });
   };
+
+  React.useEffect(() => {
+    setSaved && setTimeout(() => setSaved(false), 3000);
+  }, [saved]);
 
   return (
     <div className={styles.wrapper}>
@@ -50,6 +57,7 @@ export const EditContacts = () => {
           <Button appearance='primary' type='submit'>
             Сохранить
           </Button>
+          {saved && <span>Сохранено</span>}
         </div>
       </form>
     </div>

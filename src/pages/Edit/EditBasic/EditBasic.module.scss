@@ -37,10 +37,18 @@
       border-top: 1px solid var(--border);
       width: 100%;
       padding-top: 20px;
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
 
       button {
         margin-left: 145px;
         width: fit-content;
+      }
+
+      span {
+        font-size: 13px;
+        color: var(--grey-middle);
       }
     }
   }

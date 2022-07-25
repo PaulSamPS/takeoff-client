@@ -19,6 +19,7 @@ export const EditBasic = () => {
     handleSubmit,
   } = useForm<IEditProfile>({ mode: 'onChange', reValidateMode: 'onBlur' });
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+  const [saved, setSaved] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const optionsDay = day();
   const optionsMonth = month();
@@ -42,8 +43,14 @@ export const EditBasic = () => {
     if (formData.year && typeof formData.year !== 'string') {
       formData.year = formData.year.value;
     }
-    await dispatch(updateUser(loginUser.id, formData));
+    await dispatch(updateUser(loginUser.id, formData)).then(() => {
+      setSaved(true);
+    });
   };
+
+  React.useEffect(() => {
+    setSaved && setTimeout(() => setSaved(false), 3000);
+  }, [saved]);
 
   return (
     <div className={styles.wrapper}>
@@ -153,6 +160,7 @@ export const EditBasic = () => {
           <Button appearance='primary' type='submit'>
             Сохранить
           </Button>
+          {saved && <span>Сохранено</span>}
         </div>
       </form>
     </div>
