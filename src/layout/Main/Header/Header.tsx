@@ -7,10 +7,12 @@ import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDow
 import { ReactComponent as NotificationIcon } from '../../../helpers/icons/notification.svg';
 import { ProfileMenu } from '../../../components/ProfileMenu/ProfileMenu';
 import { Count } from '../../../components/Count/Count';
+import { Notification } from '../../../components/Notification/Notification';
 
 export const Header = () => {
   const { user } = useAppSelector((state) => state.loginReducer);
   const [visibleMenu, setVisibleMenu] = React.useState<boolean>(false);
+  const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
 
   return (
     <div className={styles.container}>
@@ -18,9 +20,10 @@ export const Header = () => {
         <Link to={'/main/news'} className={styles.logo}>
           <h2>TakeOff</h2>
         </Link>
-        <div className={styles.notification}>
+        <div className={styles.notification} onClick={() => setVisibleNotification(true)}>
           <NotificationIcon />
           <Count className={styles.count}>9</Count>
+          {visibleNotification && <Notification setVisibleNotification={setVisibleNotification} />}
         </div>
         <div className={styles.profile} onClick={() => setVisibleMenu(true)}>
           <img
