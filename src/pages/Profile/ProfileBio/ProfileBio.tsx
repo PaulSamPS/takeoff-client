@@ -35,9 +35,7 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
       <div className={styles.top}>
         <h1>{user?.firstName + ' ' + user?.lastName}</h1>
         {usersOnline.includes(id) ? (
-          <div className={styles.online}>
-            online <div className={styles.green} />
-          </div>
+          <div className={styles.online}>online</div>
         ) : (
           <div className={styles.lastVisit}>
             {user?.bio.gender === 'Мужской' ? 'был' : 'была'} в сети{' '}

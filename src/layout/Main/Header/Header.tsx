@@ -31,7 +31,7 @@ export const Header = () => {
           <div className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}>
             <NotificationIcon />
           </div>
-          <Count className={styles.count}>9</Count>
+          <Count className={styles.count}>1</Count>
           {visibleNotification && <Notification setVisibleNotification={setVisibleNotification} />}
         </div>
         <div
