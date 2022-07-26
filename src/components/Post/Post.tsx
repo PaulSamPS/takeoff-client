@@ -44,7 +44,12 @@ export const Post = ({ post }: PostProps) => {
 
   const handleLike = () => {
     setLikesLoading(true);
-    socket?.emit('like:post', { postId: post._id, userId: user.id, like: isLiked ? false : true });
+    socket?.emit('like:post', {
+      postId: post._id,
+      userId: user.id,
+      userToNotifyId: post.user._id,
+      like: isLiked ? false : true,
+    });
     socket?.once('post:liked', ({ likeId }) => {
       if (isLiked) {
         setLikes((prev: any) => prev.filter((like: ILikes) => like.user._id !== user.id));
