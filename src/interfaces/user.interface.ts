@@ -1,3 +1,17 @@
+import { IPost } from '../redux/reducers/postsReducer';
+
+interface INotifications {
+  type: {
+    type: string;
+    enum: 'newLike' | 'newComment' | 'newFollower';
+  };
+  user: IUser;
+  post: IPost;
+  commentId: string;
+  text: string;
+  date: Date;
+}
+
 export interface IUser {
   id: string;
   firstName: string;
@@ -6,7 +20,7 @@ export interface IUser {
   role: string;
   avatar: string;
   lastVisit: Date;
-  notification: boolean;
+  notifications: INotifications[];
   bio: {
     birthday: {
       day: string;
