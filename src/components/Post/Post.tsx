@@ -113,7 +113,7 @@ export const Post = ({ post }: PostProps) => {
             <div className={styles.peopleLikedPopup}>
               <span>Нравится</span>
               {likes.slice(-3).map((like) => (
-                <div className={styles.likedPopup} key={like._id}>
+                <div key={like._id} className={styles.likedPopup}>
                   <img
                     src={
                       like.user.avatar === null

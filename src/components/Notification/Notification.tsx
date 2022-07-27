@@ -8,6 +8,9 @@ import { API_URL } from '../../http/axios';
 import { useAppSelector } from '../../hooks/redux';
 import { Button } from '../UI/Button/Button';
 import { calculateTime } from '../../helpers/calculateTime';
+import { useNotifications } from '../../hooks/useNotifications';
+import { ModalMessage } from '../ModalMessage/ModalMessage';
+import { Modal } from '../UI/Modal/Modal';
 
 export const Notification = ({ setVisibleNotification }: NotificationProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -15,6 +18,13 @@ export const Notification = ({ setVisibleNotification }: NotificationProps) => {
   useOnClickOutside(ref, () => setVisibleNotification(false));
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const usersOnline = users.map((user: any) => user.userId);
+  const [conversationModal, setConversationModal] = React.useState<boolean>(false);
+  const { notifications } = useNotifications();
+
+  const handleSendMessage = (id: string) => {
+    localStorage.setItem('receiverUserId', id);
+    setConversationModal(true);
+  };
 
   return (
     <div className={styles.wrapper} ref={ref}>
@@ -22,52 +32,85 @@ export const Notification = ({ setVisibleNotification }: NotificationProps) => {
         <span>Ваша страница</span>
         <Link to={'#'}>Настройки</Link>
       </div>
-      <div className={styles.notification}>
-        <img
-          src={loginUser.avatar == null ? `/photo.png` : `${API_URL}/avatar/${loginUser.avatar}`}
-          alt={loginUser.firstName + '' + loginUser.lastName}
-        />
-        <div className={styles.info}>
-          <span className={styles.infoText}>
-            <div className={styles.user}>
-              <Link to={'#'}>{loginUser.firstName + ' ' + loginUser.lastName}</Link>
-              <div className={styles.hoverUser}>
-                <img
-                  src={
-                    loginUser.avatar == null
-                      ? `/photo.png`
-                      : `${API_URL}/avatar/${loginUser.avatar}`
-                  }
-                  alt={loginUser.firstName + '' + loginUser.lastName}
-                />
-                <div className={styles.infoHoverUser}>
-                  <Link to={'#'}>{loginUser.firstName + ' ' + loginUser.lastName}</Link>
-                  {usersOnline.includes(loginUser.id) ? (
-                    <div className={styles.online}>online</div>
-                  ) : (
-                    <div className={styles.lastVisit}>
-                      {loginUser.bio.gender === 'Мужской' ? 'заходил ' : 'заходила '}
-                      {calculateTime(loginUser.lastVisit)}
+      {notifications.notifications.length > 0 &&
+        notifications.notifications.map((notification) => (
+          <div className={styles.notification} key={notification._id}>
+            <img
+              src={
+                notification.user.avatar == null
+                  ? `/photo.png`
+                  : `${API_URL}/avatar/${notification.user.avatar}`
+              }
+              alt={notification.user.firstName + '' + notification.user.lastName}
+            />
+            <div className={styles.info}>
+              <span className={styles.infoText}>
+                <div className={styles.user}>
+                  <Link to={'#'}>
+                    {notification.user.firstName + ' ' + notification.user.lastName}
+                  </Link>
+                  <div className={styles.hoverUser}>
+                    <div className={styles.hoverUserTop}>
+                      <img
+                        src={
+                          notification.user.avatar == null
+                            ? `/photo.png`
+                            : `${API_URL}/avatar/${notification.user.avatar}`
+                        }
+                        alt={notification.user.firstName + '' + notification.user.lastName}
+                      />
+                      <div className={styles.infoHoverUser}>
+                        <Link to={'#'}>
+                          {notification.user.firstName + ' ' + notification.user.lastName}
+                        </Link>
+                        {usersOnline.includes(notification.user._id) ? (
+                          <div className={styles.online}>online</div>
+                        ) : (
+                          <div className={styles.lastVisit}>
+                            {notification.user.bio.gender === 'Мужской' ? 'заходил ' : 'заходила '}
+                            {calculateTime(notification.user.lastVisit)}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  )}
+                    <div className={styles.infoHoverBottom}>
+                      <Button
+                        appearance='primary'
+                        className={styles.message}
+                        onClick={() => handleSendMessage(notification.user._id)}
+                      >
+                        Написать сообщение
+                      </Button>
+                    </div>
+                    <Modal setModal={setConversationModal} modal={conversationModal}>
+                      <ModalMessage
+                        friend={notification.user}
+                        setModal={setConversationModal}
+                        isModal={conversationModal}
+                      />
+                    </Modal>
+                  </div>
                 </div>
-              </div>
+                <span>оценил ваш пост от</span>
+                <Link to={'#'}>{calculateTime(notification.post.createdAt)}</Link>
+              </span>
+              <span>{calculateTime(notification.date)}</span>
             </div>
-            <span>оценил вашу запись от</span>
-            <Link to={'#'}>26 июля в 20:20</Link>
-          </span>
-          <span>сегодня в 20:00</span>
-        </div>
-        <div className={styles.postImage}>
-          <img
-            src={loginUser.avatar == null ? `/photo.png` : `${API_URL}/avatar/${loginUser.avatar}`}
-            alt={loginUser.firstName + '' + loginUser.lastName}
-          />
-          <Button appearance='transparent'>
-            <ArrowDownIcon />
-          </Button>
-        </div>
-      </div>
+            <div className={styles.postImage}>
+              <img
+                src={
+                  notification.post.image == null
+                    ? `/photo.png`
+                    : `${API_URL}/post/${notification.post.image}`
+                }
+                alt={loginUser.firstName + '' + loginUser.lastName}
+              />
+              <Button appearance='transparent'>
+                <ArrowDownIcon />
+              </Button>
+            </div>
+          </div>
+        ))}
     </div>
   );
 };

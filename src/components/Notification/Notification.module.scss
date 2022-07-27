@@ -75,42 +75,55 @@
 
           .hoverUser {
             display: none;
+            flex-direction: column;
             width: 340px;
-            padding: 15px;
             background: var(--white);
             position: absolute;
             top: 27px;
             left: 14px;
-            color: var(--red);
             box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-            column-gap: 12px;
 
-            img {
-              width: 80px;
-              height: 80px;
-              object-fit: unset;
+            .hoverUserTop {
+              display: flex;
+              column-gap: 12px;
+              padding: 12px 14px;
+
+              img {
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+              }
+
+              .infoHoverUser {
+                display: flex;
+                flex-direction: column;
+                row-gap: 10px;
+
+                a {
+                  font-size: 14px;
+                  color: var(--blue);
+                  font-weight: 500;
+                }
+
+                .online {
+                  position: relative;
+                  color: var(--grey-middle);
+                  font-size: 12px;
+                }
+
+                .lastVisit {
+                  color: var(--grey-middle);
+                  font-size: 12px;
+                }
+              }
             }
 
-            .infoHoverUser {
-              display: flex;
-              flex-direction: column;
-              row-gap: 10px;
+            .infoHoverBottom {
+              border-top: 1px solid var(--grey-super-light);
+              padding: 12px 14px;
 
-              a {
-                font-size: 14px;
-                color: var(--blue);
-                font-weight: 500;
-              }
-
-              .online {
-                position: relative;
-                color: var(--grey-middle);
-                font-size: 12px;
-              }
-
-              .lastVisit {
-                color: var(--grey-middle);
-                font-size: 12px;
+              button {
+                width: 100%;
               }
             }
           }

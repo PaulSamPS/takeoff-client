@@ -11,11 +11,13 @@ import { Count } from '../../../components/Count/Count';
 import { Notification } from '../../../components/Notification/Notification';
 import { Input } from '../../../components/UI/Input/Input';
 import cn from 'classnames';
+import { useNotifications } from '../../../hooks/useNotifications';
 
 export const Header = () => {
-  const { user } = useAppSelector((state) => state.loginReducer);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [visibleMenu, setVisibleMenu] = React.useState<boolean>(false);
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
+  const { notifications } = useNotifications();
 
   return (
     <div className={styles.container}>
@@ -31,7 +33,9 @@ export const Header = () => {
           <div className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}>
             <NotificationIcon />
           </div>
-          <Count className={styles.count}>1</Count>
+          {notifications.notifications.length > 0 && (
+            <Count className={styles.count}>{notifications.notifications.length}</Count>
+          )}
           {visibleNotification && <Notification setVisibleNotification={setVisibleNotification} />}
         </div>
         <div
@@ -39,8 +43,8 @@ export const Header = () => {
           onClick={() => setVisibleMenu(true)}
         >
           <img
-            src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-            alt={user.firstName + ' ' + user.lastName}
+            src={loginUser.avatar == null ? `/photo.png` : `${API_URL}/avatar/${loginUser.avatar}`}
+            alt={loginUser.firstName + ' ' + loginUser.lastName}
           />
           <ArrowDownIcon />
           {visibleMenu && (
