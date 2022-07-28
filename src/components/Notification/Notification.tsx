@@ -46,7 +46,7 @@ export const Notification = ({ setVisibleNotification }: NotificationProps) => {
             <div className={styles.info}>
               <span className={styles.infoText}>
                 <div className={styles.user}>
-                  <Link to={'#'}>
+                  <Link to={`/main/profile/${notification.user._id}`}>
                     {notification.user.firstName + ' ' + notification.user.lastName}
                   </Link>
                   <div className={styles.hoverUser}>
@@ -60,7 +60,7 @@ export const Notification = ({ setVisibleNotification }: NotificationProps) => {
                         alt={notification.user.firstName + '' + notification.user.lastName}
                       />
                       <div className={styles.infoHoverUser}>
-                        <Link to={'#'}>
+                        <Link to={`/main/profile/${notification.user._id}`}>
                           {notification.user.firstName + ' ' + notification.user.lastName}
                         </Link>
                         {usersOnline.includes(notification.user._id) ? (
