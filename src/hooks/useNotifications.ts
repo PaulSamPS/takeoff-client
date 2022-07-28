@@ -6,10 +6,7 @@ import { useAppSelector } from './redux';
 
 interface INotification {
   _id: string;
-  type: {
-    type: string;
-    enum: 'newLike' | 'newComment' | 'newFollower';
-  };
+  type: 'newLike' | 'newComment' | 'newFollower';
   user: IUserNotifications;
   post: IPost;
   commentId: string;

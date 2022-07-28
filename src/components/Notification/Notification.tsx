@@ -37,14 +37,19 @@ export const Notification = ({ setVisibleNotification }: NotificationProps) => {
           .filter((n) => n.user._id !== loginUser.id)
           .map((notification) => (
             <div className={styles.notification} key={notification._id}>
-              <img
-                src={
-                  notification.user.avatar == null
-                    ? `/photo.png`
-                    : `${API_URL}/avatar/${notification.user.avatar}`
-                }
-                alt={notification.user.firstName + '' + notification.user.lastName}
-              />
+              <div className={styles.avatar}>
+                <img
+                  src={
+                    notification.user.avatar == null
+                      ? `/photo.png`
+                      : `${API_URL}/avatar/${notification.user.avatar}`
+                  }
+                  alt={notification.user.firstName + '' + notification.user.lastName}
+                />
+                {notification.type === 'newLike' && (
+                  <img className={styles.icon} src={'/like.png'} alt={'like'} />
+                )}
+              </div>
               <div className={styles.info}>
                 <span className={styles.infoText}>
                   <div className={styles.user}>
@@ -95,7 +100,8 @@ export const Notification = ({ setVisibleNotification }: NotificationProps) => {
                       </Modal>
                     </div>
                   </div>
-                  <span>оценил ваш пост от</span>
+                  {notification.type === 'newLike' && <span>оценил ваш пост от</span>}
+                  {notification.type === 'newComment' && <span>прокомментировал ваш пост от</span>}
                   <Link to={'#'}>{calculateTime(notification.post.createdAt)}</Link>
                 </span>
                 <span>{calculateTime(notification.date)}</span>

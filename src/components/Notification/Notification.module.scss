@@ -42,12 +42,24 @@
       background: rgba(174, 183, 194, 0.16);
     }
 
-    img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
+   .avatar {
+     position: relative;
+
+     img {
+       width: 40px;
+       height: 40px;
+       object-fit: cover;
+       border-radius: 50%;
+     }
+
+     .icon {
+       position: absolute;
+       bottom: 15px;
+       right: -5px;
+         width: 20px;
+         height: 20px;
+     }
+   }
 
     .info {
       font-size: 13px;
