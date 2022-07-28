@@ -33,84 +33,88 @@ export const Notification = ({ setVisibleNotification }: NotificationProps) => {
         <Link to={'#'}>Настройки</Link>
       </div>
       {notifications.notifications.length > 0 &&
-        notifications.notifications.map((notification) => (
-          <div className={styles.notification} key={notification._id}>
-            <img
-              src={
-                notification.user.avatar == null
-                  ? `/photo.png`
-                  : `${API_URL}/avatar/${notification.user.avatar}`
-              }
-              alt={notification.user.firstName + '' + notification.user.lastName}
-            />
-            <div className={styles.info}>
-              <span className={styles.infoText}>
-                <div className={styles.user}>
-                  <Link to={`/main/profile/${notification.user._id}`}>
-                    {notification.user.firstName + ' ' + notification.user.lastName}
-                  </Link>
-                  <div className={styles.hoverUser}>
-                    <div className={styles.hoverUserTop}>
-                      <img
-                        src={
-                          notification.user.avatar == null
-                            ? `/photo.png`
-                            : `${API_URL}/avatar/${notification.user.avatar}`
-                        }
-                        alt={notification.user.firstName + '' + notification.user.lastName}
-                      />
-                      <div className={styles.infoHoverUser}>
-                        <Link to={`/main/profile/${notification.user._id}`}>
-                          {notification.user.firstName + ' ' + notification.user.lastName}
-                        </Link>
-                        {usersOnline.includes(notification.user._id) ? (
-                          <div className={styles.online}>online</div>
-                        ) : (
-                          <div className={styles.lastVisit}>
-                            {notification.user.bio.gender === 'Мужской' ? 'заходил ' : 'заходила '}
-                            {calculateTime(notification.user.lastVisit)}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className={styles.infoHoverBottom}>
-                      <Button
-                        appearance='primary'
-                        className={styles.message}
-                        onClick={() => handleSendMessage(notification.user._id)}
-                      >
-                        Написать сообщение
-                      </Button>
-                    </div>
-                    <Modal setModal={setConversationModal} modal={conversationModal}>
-                      <ModalMessage
-                        friend={notification.user}
-                        setModal={setConversationModal}
-                        isModal={conversationModal}
-                      />
-                    </Modal>
-                  </div>
-                </div>
-                <span>оценил ваш пост от</span>
-                <Link to={'#'}>{calculateTime(notification.post.createdAt)}</Link>
-              </span>
-              <span>{calculateTime(notification.date)}</span>
-            </div>
-            <div className={styles.postImage}>
+        notifications.notifications
+          .filter((n) => n.user._id !== loginUser.id)
+          .map((notification) => (
+            <div className={styles.notification} key={notification._id}>
               <img
                 src={
-                  notification.post.image == null
+                  notification.user.avatar == null
                     ? `/photo.png`
-                    : `${API_URL}/post/${notification.post.image}`
+                    : `${API_URL}/avatar/${notification.user.avatar}`
                 }
-                alt={loginUser.firstName + '' + loginUser.lastName}
+                alt={notification.user.firstName + '' + notification.user.lastName}
               />
-              <Button appearance='transparent'>
-                <ArrowDownIcon />
-              </Button>
+              <div className={styles.info}>
+                <span className={styles.infoText}>
+                  <div className={styles.user}>
+                    <Link to={`/main/profile/${notification.user._id}`}>
+                      {notification.user.firstName + ' ' + notification.user.lastName}
+                    </Link>
+                    <div className={styles.hoverUser}>
+                      <div className={styles.hoverUserTop}>
+                        <img
+                          src={
+                            notification.user.avatar == null
+                              ? `/photo.png`
+                              : `${API_URL}/avatar/${notification.user.avatar}`
+                          }
+                          alt={notification.user.firstName + '' + notification.user.lastName}
+                        />
+                        <div className={styles.infoHoverUser}>
+                          <Link to={`/main/profile/${notification.user._id}`}>
+                            {notification.user.firstName + ' ' + notification.user.lastName}
+                          </Link>
+                          {usersOnline.includes(notification.user._id) ? (
+                            <div className={styles.online}>online</div>
+                          ) : (
+                            <div className={styles.lastVisit}>
+                              {notification.user.bio.gender === 'Мужской'
+                                ? 'заходил '
+                                : 'заходила '}
+                              {calculateTime(notification.user.lastVisit)}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className={styles.infoHoverBottom}>
+                        <Button
+                          appearance='primary'
+                          className={styles.message}
+                          onClick={() => handleSendMessage(notification.user._id)}
+                        >
+                          Написать сообщение
+                        </Button>
+                      </div>
+                      <Modal setModal={setConversationModal} modal={conversationModal}>
+                        <ModalMessage
+                          friend={notification.user}
+                          setModal={setConversationModal}
+                          isModal={conversationModal}
+                        />
+                      </Modal>
+                    </div>
+                  </div>
+                  <span>оценил ваш пост от</span>
+                  <Link to={'#'}>{calculateTime(notification.post.createdAt)}</Link>
+                </span>
+                <span>{calculateTime(notification.date)}</span>
+              </div>
+              <div className={styles.postImage}>
+                <img
+                  src={
+                    notification.post.image == null
+                      ? `/photo.png`
+                      : `${API_URL}/post/${notification.post.image}`
+                  }
+                  alt={loginUser.firstName + '' + loginUser.lastName}
+                />
+                <Button appearance='transparent'>
+                  <ArrowDownIcon />
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
     </div>
   );
 };

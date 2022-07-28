@@ -19,6 +19,10 @@ export const Header = () => {
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
   const { notifications } = useNotifications();
 
+  const totalNotifications = notifications.notifications
+    .filter((n) => n.user._id !== loginUser.id)
+    .map((notification) => notification);
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -33,8 +37,8 @@ export const Header = () => {
           <div className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}>
             <NotificationIcon />
           </div>
-          {notifications.notifications.length > 0 && (
-            <Count className={styles.count}>{notifications.notifications.length}</Count>
+          {totalNotifications.length > 0 && (
+            <Count className={styles.count}>{totalNotifications.length}</Count>
           )}
           {visibleNotification && <Notification setVisibleNotification={setVisibleNotification} />}
         </div>
