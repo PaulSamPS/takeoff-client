@@ -7,9 +7,11 @@ import { Button } from '../UI/Button/Button';
 import { Modal } from '../UI/Modal/Modal';
 import { ModalMessage } from '../ModalMessage/ModalMessage';
 import { ReactComponent as ArrowDownIcon } from '../../helpers/icons/arrowDown.svg';
+import { ReactComponent as NotificationCommentIcon } from '../../helpers/icons/notificationComment.svg';
 import { NotificationProps } from './Notification.props';
 import { useAppSelector } from '../../hooks/redux';
 import { ButtonsFriend } from '../UI/ButtonsFriend/ButtonsFriend';
+import cn from 'classnames';
 
 export const Notification = ({ notification, ...props }: NotificationProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -35,6 +37,11 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
         />
         {notification.type === 'newLike' && (
           <img className={styles.icon} src={'/like.png'} alt={'like'} />
+        )}
+        {notification.type === 'newComment' && (
+          <div className={cn(styles.icon, styles.notificationComment)}>
+            <NotificationCommentIcon />
+          </div>
         )}
       </div>
       <div className={styles.info}>

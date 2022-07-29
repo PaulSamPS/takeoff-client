@@ -27,6 +27,19 @@
       width: 20px;
       height: 20px;
     }
+
+    .notificationComment {
+      background: var(--green-alternative);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+
+      svg {
+        height: 12px;
+        width: 12px;
+      }
+    }
   }
 
   .info {
@@ -106,6 +119,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            button {
+              padding: 10px 0 !important;
+            }
+
+            .message {
+              background: var(--blue-alternative);
+            }
           }
         }
       }
