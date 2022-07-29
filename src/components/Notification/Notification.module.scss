@@ -103,11 +103,9 @@
           .infoHoverBottom {
             border-top: 1px solid var(--grey-super-light);
             padding: 12px 14px;
-
-            button {
-              width: 100%;
-              background: var(--blue-alternative);
-            }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
           }
         }
       }

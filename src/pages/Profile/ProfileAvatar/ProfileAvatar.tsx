@@ -10,7 +10,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { Modal } from '../../../components/UI/Modal/Modal';
 import { ChangeAvatar } from '../../../components/ChangeAvatar/ChangeAvatar';
 import { ModalMessage } from '../../../components/ModalMessage/ModalMessage';
-import { Buttonsfriend } from '../../../components/UI/ButtonsFriend/Buttonsfriend';
+import { ButtonsFriend } from '../../../components/UI/ButtonsFriend/ButtonsFriend';
 
 export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
   const { id } = useParams();
@@ -69,7 +69,7 @@ export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
           Написать сообщение
         </Button>
       )}
-      {loginUser.id !== id && <Buttonsfriend />}
+      {loginUser.id !== id && <ButtonsFriend id={id} />}
       {loginUser.id === id && (
         <Modal setModal={setAvatarModal} modal={avatarModal}>
           <ChangeAvatar setModal={setAvatarModal} userId={id!} />

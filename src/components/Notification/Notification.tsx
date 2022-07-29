@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../NotificationList/NotificationList.module.scss';
+import styles from './Notification.module.scss';
 import { API_URL } from '../../http/axios';
 import { Link } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
@@ -9,6 +9,7 @@ import { ModalMessage } from '../ModalMessage/ModalMessage';
 import { ReactComponent as ArrowDownIcon } from '../../helpers/icons/arrowDown.svg';
 import { NotificationProps } from './Notification.props';
 import { useAppSelector } from '../../hooks/redux';
+import { ButtonsFriend } from '../UI/ButtonsFriend/ButtonsFriend';
 
 export const Notification = ({ notification, ...props }: NotificationProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -67,6 +68,7 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
                 </div>
               </div>
               <div className={styles.infoHoverBottom}>
+                <ButtonsFriend id={notification.user._id} />
                 <Button
                   appearance='primary'
                   className={styles.message}

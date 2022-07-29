@@ -1,15 +1,14 @@
 import React from 'react';
-import styles from '../../../pages/Profile/ProfileAvatar/ProfileAvatar.module.scss';
+import styles from './ButtonFriend.module.scss';
 import { Button } from '../Button/Button';
 import { ReactComponent as AllReadyFriendsIcon } from '../../../helpers/icons/allreadyFriens.svg';
 import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDown.svg';
 import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
-import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
+import { ButtonFriendProps } from './ButtonFriend.props';
 
-export const Buttonsfriend = () => {
-  const { id } = useParams();
+export const ButtonsFriend = ({ id }: ButtonFriendProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { friends, request, addFriend } = useRequest();
   const { followings, handleFollow, handleUnfollow } = useFollow();
