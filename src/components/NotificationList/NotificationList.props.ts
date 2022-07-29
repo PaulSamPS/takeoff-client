@@ -1,7 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { INotification } from '../../hooks/useNotifications';
 
-export interface NotificationProps
+export interface NotificationListProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  notification: INotification;
+  setVisibleNotification: (click: boolean) => void;
 }

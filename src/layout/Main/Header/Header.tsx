@@ -8,7 +8,7 @@ import { ReactComponent as NotificationIcon } from '../../../helpers/icons/notif
 import { ReactComponent as SearchIcon } from '../../../helpers/icons/search.svg';
 import { ProfileMenu } from '../../../components/ProfileMenu/ProfileMenu';
 import { Count } from '../../../components/Count/Count';
-import { Notification } from '../../../components/Notification/Notification';
+import { NotificationList } from '../../../components/NotificationList/NotificationList';
 import { Input } from '../../../components/UI/Input/Input';
 import cn from 'classnames';
 import { useNotifications } from '../../../hooks/useNotifications';
@@ -40,7 +40,9 @@ export const Header = () => {
           {totalNotifications.length > 0 && (
             <Count className={styles.count}>{totalNotifications.length}</Count>
           )}
-          {visibleNotification && <Notification setVisibleNotification={setVisibleNotification} />}
+          {visibleNotification && (
+            <NotificationList setVisibleNotification={setVisibleNotification} />
+          )}
         </div>
         <div
           className={cn(styles.profile, { [styles.profileMenuVisible]: visibleMenu })}

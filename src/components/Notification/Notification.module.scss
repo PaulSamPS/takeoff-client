@@ -1,192 +1,161 @@
-.wrapper {
-  position: absolute;
-  background: var(--white);
-  top: 49px;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-  width: 470px;
+.notification {
+  padding: 10px 14px;
+  display: flex;
+  column-gap: 12px;
+  cursor: pointer;
+  transition: all ease .2s;
+  position: relative;
 
-  .top {
-      font-size: 13px;
-    padding: 11px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--grey-super-light);
+  &:hover {
+    background: rgba(174, 183, 194, 0.16);
+  }
 
-    span {
-      font-weight: 500;
-      color: var(--black);
+  .avatar {
+    position: relative;
+
+    img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
     }
 
-    a {
-      text-decoration: none;
-      color: var(--blue);
-      transition: all ease .2s;
+    .icon {
+      position: absolute;
+      bottom: 15px;
+      right: -5px;
+      width: 20px;
+      height: 20px;
+    }
+  }
 
-      &:hover {
-        text-decoration: underline;
+  .info {
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    .infoText {
+      line-height: 17px;
+
+      .user {
+        display: inline-block;
+
+        a {
+          color: var(--blue);
+          font-weight: 500;
+          margin-right: 5px;
+        }
+
+        &:hover {
+          .hoverUser {
+            display: flex;
+          }
+        }
+
+        .hoverUser {
+          display: none;
+          flex-direction: column;
+          width: 340px;
+          background: var(--white);
+          position: absolute;
+          top: 27px;
+          left: 14px;
+          box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+          z-index: 12;
+
+          .hoverUserTop {
+            display: flex;
+            column-gap: 12px;
+            padding: 12px 14px;
+
+            img {
+              width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+
+            .infoHoverUser {
+              display: flex;
+              flex-direction: column;
+              row-gap: 10px;
+
+              a {
+                font-size: 14px;
+                color: var(--blue);
+                font-weight: 500;
+              }
+
+              .online {
+                position: relative;
+                color: var(--grey-middle);
+                font-size: 12px;
+              }
+
+              .lastVisit {
+                color: var(--grey-middle);
+                font-size: 12px;
+              }
+            }
+          }
+
+          .infoHoverBottom {
+            border-top: 1px solid var(--grey-super-light);
+            padding: 12px 14px;
+
+            button {
+              width: 100%;
+              background: var(--blue-alternative);
+            }
+          }
+        }
+      }
+
+      span {
+        margin-right: 5px;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--blue-alternative);
+        transition: all ease .2s;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
 
-  .notification {
-    padding: 10px 14px;
+  .postImage {
+    margin-left: 10px;
     display: flex;
-    column-gap: 12px;
-    cursor: pointer;
-    transition: all ease .2s;
-    position: relative;
 
-    &:hover {
-      background: rgba(174, 183, 194, 0.16);
+    img {
+      width: 50px;
+      height: 60px;
+      border-radius: 0;
+      object-fit: unset;
     }
 
-   .avatar {
-     position: relative;
+    button {
+      min-width: unset;
+      width: 21px;
+      height: 25px;
+      padding: 0;
 
-     img {
-       width: 40px;
-       height: 40px;
-       object-fit: cover;
-       border-radius: 50%;
-     }
-
-     .icon {
-       position: absolute;
-       bottom: 15px;
-       right: -5px;
-         width: 20px;
-         height: 20px;
-     }
-   }
-
-    .info {
-      font-size: 13px;
-      display: flex;
-      flex-direction: column;
-      row-gap: 10px;
-
-      .infoText {
-        line-height: 17px;
-
-        .user {
-          display: inline-block;
-
-          a {
-            color: var(--blue);
-            font-weight: 500;
-            margin-right: 5px;
-          }
-
-          &:hover {
-            .hoverUser {
-              display: flex;
-            }
-          }
-
-          .hoverUser {
-            display: none;
-            flex-direction: column;
-            width: 340px;
-            background: var(--white);
-            position: absolute;
-            top: 27px;
-            left: 14px;
-            box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-
-            .hoverUserTop {
-              display: flex;
-              column-gap: 12px;
-              padding: 12px 14px;
-
-              img {
-                width: 80px;
-                height: 80px;
-                object-fit: cover;
-              }
-
-              .infoHoverUser {
-                display: flex;
-                flex-direction: column;
-                row-gap: 10px;
-
-                a {
-                  font-size: 14px;
-                  color: var(--blue);
-                  font-weight: 500;
-                }
-
-                .online {
-                  position: relative;
-                  color: var(--grey-middle);
-                  font-size: 12px;
-                }
-
-                .lastVisit {
-                  color: var(--grey-middle);
-                  font-size: 12px;
-                }
-              }
-            }
-
-            .infoHoverBottom {
-              border-top: 1px solid var(--grey-super-light);
-              padding: 12px 14px;
-
-              button {
-                width: 100%;
-                background: var(--blue-alternative);
-              }
-            }
-          }
-        }
-
-        span {
-          margin-right: 5px;
-        }
-
-        a {
-          text-decoration: none;
-          color: var(--blue-alternative);
-          transition: all ease .2s;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-
-    .postImage {
-      margin-left: 10px;
-      display: flex;
-
-      img {
-        width: 50px;
-        height: 60px;
-        border-radius: 0;
-        object-fit: unset;
+      &:hover {
+        background: none;
       }
 
-      button {
-        min-width: unset;
-        width: 21px;
-        height: 25px;
-        padding: 0;
+      &:active {
+        transform: unset;
+      }
 
-        &:hover {
-          background: none;
-        }
-
-        &:active {
-          transform: unset;
-        }
-
-        svg {
-          path {
-            fill: var(--grey-middle);
-          }
+      svg {
+        path {
+          fill: var(--grey-middle);
         }
       }
     }

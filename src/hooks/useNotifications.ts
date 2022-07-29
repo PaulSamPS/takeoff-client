@@ -4,7 +4,7 @@ import React from 'react';
 import { SocketContext } from '../helpers/context';
 import { useAppSelector } from './redux';
 
-interface INotification {
+export interface INotification {
   _id: string;
   type: 'newLike' | 'newComment' | 'newFollower';
   user: IUserNotifications;

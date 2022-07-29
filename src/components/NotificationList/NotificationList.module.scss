@@ -1,0 +1,32 @@
+.wrapper {
+  position: absolute;
+  background: var(--white);
+  top: 49px;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+  width: 470px;
+
+  .top {
+      font-size: 13px;
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--grey-super-light);
+
+    span {
+      font-weight: 500;
+      color: var(--black);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--blue);
+      transition: all ease .2s;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
