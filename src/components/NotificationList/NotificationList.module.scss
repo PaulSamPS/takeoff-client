@@ -29,4 +29,36 @@
       }
     }
   }
+
+  .middle {
+    max-height: 390px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--grey300);
+      border-radius: 4px;
+    }
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 14px;
+    border-top: 1px solid var(--grey-super-light);
+
+    a {
+      text-decoration: none;
+      color: var(--blue);
+      transition: all ease .2s;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+  }
 }

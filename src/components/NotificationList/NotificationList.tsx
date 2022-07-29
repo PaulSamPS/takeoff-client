@@ -19,12 +19,23 @@ export const NotificationList = ({ setVisibleNotification }: NotificationListPro
         <span>Ваша страница</span>
         <Link to={'#'}>Настройки</Link>
       </div>
-      {notifications.notifications.length > 0 &&
-        notifications.notifications
-          .filter((n) => n.user._id !== loginUser.id)
-          .map((notification) => (
-            <Notification key={notification._id} notification={notification} />
-          ))}
+      <div className={styles.middle}>
+        {notifications.notifications.length > 0 &&
+          notifications.notifications
+            .filter((n) => n.user._id !== loginUser.id)
+            .map((notification) => (
+              <Notification key={notification._id} notification={notification} />
+            ))}
+        {notifications.notifications.length > 0 &&
+          notifications.notifications
+            .filter((n) => n.user._id !== loginUser.id)
+            .map((notification) => (
+              <Notification key={notification._id} notification={notification} />
+            ))}
+      </div>
+      <div className={styles.bottom}>
+        <Link to={'#'}>Показать все</Link>
+      </div>
     </div>
   );
 };

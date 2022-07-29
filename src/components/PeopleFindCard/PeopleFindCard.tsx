@@ -9,12 +9,12 @@ import { useRequest } from '../../hooks/useRequest';
 import { useFollow } from '../../hooks/useFollow';
 import { useAppSelector } from '../../hooks/redux';
 
-export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.Element => {
+export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
   const { friends, request } = useRequest();
   const { handleFollow, followings } = useFollow();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const friend = friends.map((f) => f.id);
-  const followeings = followings !== null ? followings.map((f) => f.id) : [];
+  const followingsDone = followings !== null ? followings.map((f) => f.id) : [];
   const requestsDone = request.map((request) => request.id);
 
   const handleClickFollow = () => {
@@ -33,7 +33,7 @@ export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.El
       <div className={styles.info}>
         <Link to={`/main/profile/${user.id}`}>{user.firstName + ' ' + user.lastName}</Link>
         {friend.includes(user.id) ||
-        followeings.includes(loginUser.id) ||
+        followingsDone.includes(loginUser.id) ||
         requestsDone.includes(user.id) ? (
           <AllReadyFriendsIcon className={styles.allReadyFriends} />
         ) : (
@@ -42,4 +42,4 @@ export const PeopleFindCard = React.memo(({ user }: PeopleFindCardProps): JSX.El
       </div>
     </div>
   );
-});
+};
