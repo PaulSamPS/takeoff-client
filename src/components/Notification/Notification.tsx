@@ -18,6 +18,14 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const usersOnline = users.map((user: any) => user.userId);
   const [conversationModal, setConversationModal] = React.useState<boolean>(false);
+  const [offsetTop, setOffsetTop] = React.useState<number>(0);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  const coordsEl = () => {
+    const rect = ref.current?.getBoundingClientRect();
+    setOffsetTop(rect!.top);
+    console.log(rect!.top);
+  };
 
   const handleSendMessage = (id: string) => {
     localStorage.setItem('receiverUserId', id);
@@ -25,7 +33,7 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
   };
 
   return (
-    <div className={styles.notification} {...props}>
+    <div className={styles.notification} ref={ref} {...props}>
       <div className={styles.avatar}>
         <img
           src={
@@ -47,10 +55,20 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
       <div className={styles.info}>
         <span className={styles.infoText}>
           <div className={styles.user}>
-            <Link to={`/main/profile/${notification.user._id}`}>
+            <Link
+              id='notification'
+              onMouseEnter={coordsEl}
+              to={`/main/profile/${notification.user._id}`}
+            >
               {notification.user.firstName + ' ' + notification.user.lastName}
             </Link>
-            <div className={styles.hoverUser}>
+            <div
+              className={styles.hoverUser}
+              style={{
+                top: `${offsetTop <= 250 ? '30px' : 'unset'}`,
+                bottom: `${offsetTop > 250 ? '70px' : 'unset'}`,
+              }}
+            >
               <div className={styles.hoverUserTop}>
                 <img
                   src={
