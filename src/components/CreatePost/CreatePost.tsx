@@ -6,13 +6,15 @@ import { ReactComponent as FotoIcon } from '../../helpers/icons/foto.svg';
 import { IAppendAvatarInterface } from '../../interfaces/AppendNews.interface';
 import { motion } from 'framer-motion';
 import { Button } from '../UI/Button/Button';
-import { createPost, getPosts } from '../../redux/actions/postAction';
+import { createPost } from '../../redux/actions/postAction';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useParams } from 'react-router-dom';
 import { useOnClickOutside } from '../../hooks/useOnclickOutside';
 import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
+import { SocketContext } from '../../helpers/context';
 
 export const CreatePost = () => {
+  const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const [active, setActive] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string>('');
@@ -61,12 +63,11 @@ export const CreatePost = () => {
       id: user.id,
     };
     dispatch(createPost(filesAvatar === null ? obj : formData)).then(() => {
+      socket?.emit('post:get', { userId: user.id });
       setFilesAvatar(null);
       setPreviewAvatar([]);
       setText('');
       setActive(false);
-      document.getElementById('placeholder')!.innerHTML = '';
-      dispatch(getPosts(user.id));
     });
   };
 

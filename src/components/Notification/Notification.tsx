@@ -19,12 +19,11 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
   const usersOnline = users.map((user: any) => user.userId);
   const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [offsetTop, setOffsetTop] = React.useState<number>(0);
-  const ref = React.useRef<HTMLDivElement>(null);
+  const notificationRef = React.useRef<HTMLDivElement>(null);
 
   const coordsEl = () => {
-    const rect = ref.current?.getBoundingClientRect();
+    const rect = notificationRef.current?.getBoundingClientRect();
     setOffsetTop(rect!.top);
-    console.log(rect!.top);
   };
 
   const handleSendMessage = (id: string) => {
@@ -33,7 +32,7 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
   };
 
   return (
-    <div className={styles.notification} ref={ref} {...props}>
+    <div className={styles.notification} ref={notificationRef} {...props}>
       <div className={styles.avatar}>
         <img
           src={

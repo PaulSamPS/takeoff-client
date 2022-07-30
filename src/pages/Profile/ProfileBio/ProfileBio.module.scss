@@ -60,7 +60,7 @@
 				color: var(--grey-middle);
 				font-size: 13px;
 				text-decoration: none;
-				transition: all ease .2s;
+				transition: all ease 0.2s;
 
 				&:hover {
 					text-decoration: underline;
@@ -98,12 +98,12 @@
 		}
 
 		.visibleInfo {
-			background: transparent;
-			color: var(--blue);
-			font-size: 13px;
-			padding-left: 165px;
 			justify-content: unset;
 			width: 100%;
+			padding-left: 165px;
+			color: var(--blue);
+			font-size: 13px;
+			background: transparent;
 			cursor: pointer;
 			transition: all ease 0.2s;
 

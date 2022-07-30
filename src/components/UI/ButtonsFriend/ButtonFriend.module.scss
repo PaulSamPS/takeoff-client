@@ -1,24 +1,24 @@
 .follow {
-  button {
-    width: 100% !important;
-    font-weight: 400;
-    background: var(--blue-alternative);
-  }
+	button {
+		width: 100% !important;
+		font-weight: 400;
+		background: var(--blue-alternative);
+	}
 
-  .allReadyFriends {
-    background: transparent;
-    color: var(--blue-alternative);
-    padding-left: 0;
-    justify-content: unset;
-    transform: unset;
-    font-weight: 400;
+	.allReadyFriends {
+		justify-content: unset;
+		padding-left: 0;
+		color: var(--blue-alternative);
+		font-weight: 400;
+		background: transparent;
+		transform: unset;
 
-    .allReadyIcon {
-      margin-right: 10px;
-    }
+		.allReadyIcon {
+			margin-right: 10px;
+		}
 
-    .arrowDown {
-      margin-left: 5px;
-    }
-  }
+		.arrowDown {
+			margin-left: 5px;
+		}
+	}
 }

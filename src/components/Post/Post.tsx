@@ -4,15 +4,17 @@ import { API_URL } from '../../http/axios';
 import styles from './Post.module.scss';
 import { ReactComponent as CommentIcon } from '../../helpers/icons/comment.svg';
 import { ReactComponent as LikesIcon } from '../../helpers/icons/like.svg';
+import { ReactComponent as MoreIcon } from '../../helpers/icons/more.svg';
 import cn from 'classnames';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { Button } from '../UI/Button/Button';
 import { calculateTime } from '../../helpers/calculateTime';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { SocketContext } from '../../helpers/context';
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 import { Link } from 'react-router-dom';
+import { deletePost } from '../../redux/actions/postAction';
 
 interface IUserPost {
   _id: string;
@@ -35,33 +37,35 @@ interface ICommentsPost {
 
 export const Post = ({ post }: PostProps) => {
   const socket = React.useContext(SocketContext);
-  const { user } = useAppSelector((state) => state.loginReducer);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [likes, setLikes] = React.useState<ILikes[]>(post.likes);
   const [comments, setComments] = React.useState<ICommentsPost[]>(post.comments);
   const [text, setText] = React.useState<string | null>('');
   const [likesLoading, setLikesLoading] = React.useState<boolean>(false);
-  const isLiked = likes.length > 0 && likes.filter((like) => like.user._id === user.id).length > 0;
+  const isLiked =
+    likes.length > 0 && likes.filter((like) => like.user._id === loginUser.id).length > 0;
+  const dispatch = useAppDispatch();
 
   const handleLike = () => {
     setLikesLoading(true);
     socket?.emit('like:post', {
       postId: post._id,
-      userId: user.id,
+      userId: loginUser.id,
       userToNotifyId: post.user._id,
       like: isLiked ? false : true,
     });
     socket?.once('post:liked', ({ likeId }) => {
       if (isLiked) {
-        setLikes((prev: any) => prev.filter((like: ILikes) => like.user._id !== user.id));
+        setLikes((prev: any) => prev.filter((like: ILikes) => like.user._id !== loginUser.id));
         setLikesLoading(false);
       } else {
         const newLike = {
           _id: likeId,
           user: {
-            _id: user.id,
-            avatar: user.avatar,
-            firsName: user.firstName,
-            lastName: user.lastName,
+            _id: loginUser.id,
+            avatar: loginUser.avatar,
+            firsName: loginUser.firstName,
+            lastName: loginUser.lastName,
           },
         };
         setLikes((prev: any) => [...prev, newLike]);
@@ -71,11 +75,11 @@ export const Post = ({ post }: PostProps) => {
   };
 
   const handleComment = () => {
-    socket?.emit('comment:post', { postId: post._id, userId: user.id, text: text });
+    socket?.emit('comment:post', { postId: post._id, userId: loginUser.id, text: text });
     socket?.once('post:commented', ({ commentId }) => {
       const newComment = {
         _id: commentId,
-        user,
+        user: loginUser,
         text,
         date: Date.now(),
       };
@@ -84,8 +88,22 @@ export const Post = ({ post }: PostProps) => {
     });
   };
 
+  const handleDeletePost = () => {
+    dispatch(deletePost(post._id, post.user._id)).then(() => {
+      socket?.emit('post:get', { userId: loginUser.id });
+    });
+  };
+
   return (
     <div className={styles.wrapper}>
+      {post.user._id === loginUser.id && (
+        <div className={styles.more}>
+          <MoreIcon />
+          <div className={styles.moreOptions}>
+            <div onClick={handleDeletePost}>Удалить</div>
+          </div>
+        </div>
+      )}
       <div className={styles.user}>
         <Link to={`/user-profile?user=${post.user._id}`}>
           <img
@@ -135,7 +153,7 @@ export const Post = ({ post }: PostProps) => {
                 <div
                   className={cn(styles.icon, {
                     [styles.likeBackgroundImage]:
-                      likes.length > 0 && likes.map((p) => p.user._id).includes(user.id),
+                      likes.length > 0 && likes.map((p) => p.user._id).includes(loginUser.id),
                   })}
                 >
                   <LikesIcon />

@@ -1,64 +1,64 @@
 .wrapper {
-  position: absolute;
-  background: var(--white);
-  top: 49px;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-  width: 470px;
+	position: absolute;
+	top: 49px;
+	width: 470px;
+	background: var(--white);
+	border-radius: 0 0 4px 4px;
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
-  .top {
-      font-size: 13px;
-    padding: 11px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--grey-super-light);
+	.top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 11px 14px;
+		font-size: 13px;
+		border-bottom: 1px solid var(--grey-super-light);
 
-    span {
-      font-weight: 500;
-      color: var(--black);
-    }
+		span {
+			color: var(--black);
+			font-weight: 500;
+		}
 
-    a {
-      text-decoration: none;
-      color: var(--blue);
-      transition: all ease .2s;
+		a {
+			color: var(--blue);
+			text-decoration: none;
+			transition: all ease 0.2s;
 
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 
-  .middle {
-    max-height: 390px;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
+	.middle {
+		max-height: 390px;
+		overflow-y: auto;
 
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--grey300);
-      border-radius: 4px;
-    }
-  }
+		&::-webkit-scrollbar {
+			width: 8px;
+		}
 
-  .bottom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 14px;
-    border-top: 1px solid var(--grey-super-light);
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--grey300);
+			border-radius: 4px;
+		}
+	}
 
-    a {
-      text-decoration: none;
-      color: var(--blue);
-      transition: all ease .2s;
+	.bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 12px 14px;
+		border-top: 1px solid var(--grey-super-light);
 
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+		a {
+			color: var(--blue);
+			text-decoration: none;
+			transition: all ease 0.2s;
 
-  }
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }

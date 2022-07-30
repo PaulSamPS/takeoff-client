@@ -3,12 +3,12 @@
 	grid-template-areas: "avatar text icon" "image image image" "bottom bottom bottom";
 	grid-template-columns: 30px 1fr auto;
 	align-items: flex-start;
+	width: 100%;
+	min-width: 530px;
 	margin-bottom: 20px;
 	padding: 20px;
 	column-gap: 10px;
 	background: var(--white);
-	width: 100%;
-	min-width: 530px;
 	border-radius: 4px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
@@ -33,18 +33,19 @@
 
 		&::placeholder {
 			font-family:
-							-apple-system,
-							BlinkMacSystemFont,
-							"Segoe UI",
-							Roboto,
-							Oxygen,
-							Ubuntu,
-							Cantarell,
-							"Fira Sans",
-							"Droid Sans",
-							"Helvetica Neue",
-							sans-serif;
+				-apple-system,
+				BlinkMacSystemFont,
+				"Segoe UI",
+				Roboto,
+				Oxygen,
+				Ubuntu,
+				Cantarell,
+				"Fira Sans",
+				"Droid Sans",
+				"Helvetica Neue",
+				sans-serif;
 		}
+
 		&:focus {
 			outline: none;
 		}
@@ -93,9 +94,9 @@
 
 	.openBlock {
 		display: flex;
+		grid-area: bottom;
 		align-items: center;
 		justify-content: space-between;
-		grid-area: bottom;
 		margin-top: 40px;
 
 		.publish {

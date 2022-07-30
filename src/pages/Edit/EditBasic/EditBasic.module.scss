@@ -1,55 +1,55 @@
 .wrapper {
-  background: var(--white);
-  width: 550px;
-  border-radius: 4px;
+	width: 550px;
+	background: var(--white);
+	border-radius: 4px;
 
-  .top {
-    padding: 20px;
-    background: var(--bg-grey-light);
-    border-bottom: 1px solid var(--border);
-    border-radius: 4px 4px 0 0;
-  }
+	.top {
+		padding: 20px;
+		background: var(--bg-grey-light);
+		border-bottom: 1px solid var(--border);
+		border-radius: 4px 4px 0 0;
+	}
 
-  .main {
-    padding: 20px 40px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
+	.main {
+		display: flex;
+		flex-direction: column;
+		padding: 20px 40px 20px 20px;
+		row-gap: 20px;
 
-    .item {
-      display: flex;
-      align-items: center;
-      column-gap: 10px;
+		.item {
+			display: flex;
+			align-items: center;
+			column-gap: 10px;
 
-      label {
-        text-align: right;
-        min-width: 135px;
-        color: var(--grey);
-        font-size: 13px;
-      }
+			label {
+				min-width: 135px;
+				color: var(--grey);
+				font-size: 13px;
+				text-align: right;
+			}
 
-      input {
-        padding: 10px 7px;
-      }
-    }
+			input {
+				padding: 10px 7px;
+			}
+		}
 
-    .bottom {
-      border-top: 1px solid var(--border);
-      width: 100%;
-      padding-top: 20px;
-      display: flex;
-      align-items: center;
-      column-gap: 20px;
+		.bottom {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			padding-top: 20px;
+			column-gap: 20px;
+			border-top: 1px solid var(--border);
 
-      button {
-        margin-left: 145px;
-        width: fit-content;
-      }
+			button {
+				width: fit-content;
+				margin-left: 145px;
+			}
 
-      span {
-        font-size: 13px;
-        color: var(--grey-middle);
-      }
-    }
-  }
+			span {
+				color: var(--grey-middle);
+				font-size: 13px;
+			}
+		}
+	}
 }

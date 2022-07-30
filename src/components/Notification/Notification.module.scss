@@ -1,182 +1,182 @@
 .notification {
-  padding: 10px 14px;
-  display: flex;
-  column-gap: 12px;
-  cursor: pointer;
-  transition: all ease .2s;
-  position: relative;
+	position: relative;
+	display: flex;
+	padding: 10px 14px;
+	column-gap: 12px;
+	cursor: pointer;
+	transition: all ease 0.2s;
 
-  &:hover {
-    background: rgba(174, 183, 194, 0.16);
-  }
+	&:hover {
+		background: rgb(174 183 194 / 16%);
+	}
 
-  .avatar {
-    position: relative;
+	.avatar {
+		position: relative;
 
-    img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
+		img {
+			width: 40px;
+			height: 40px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
 
-    .icon {
-      position: absolute;
-      bottom: 15px;
-      right: -5px;
-      width: 20px;
-      height: 20px;
-    }
+		.icon {
+			position: absolute;
+			right: -5px;
+			bottom: 15px;
+			width: 20px;
+			height: 20px;
+		}
 
-    .notificationComment {
-      background: var(--green-alternative);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
+		.notificationComment {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--green-alternative);
+			border-radius: 50%;
 
-      svg {
-        height: 12px;
-        width: 12px;
-      }
-    }
-  }
+			svg {
+				width: 12px;
+				height: 12px;
+			}
+		}
+	}
 
-  .info {
-    font-size: 13px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+	.info {
+		display: flex;
+		flex-direction: column;
+		font-size: 13px;
+		row-gap: 10px;
 
-    .infoText {
-      line-height: 17px;
-      width: 280px;
+		.infoText {
+			width: 280px;
+			line-height: 17px;
 
-      .user {
-        display: inline-block;
+			.user {
+				display: inline-block;
 
-        a {
-          color: var(--blue);
-          font-weight: 500;
-          margin-right: 5px;
-        }
+				a {
+					margin-right: 5px;
+					color: var(--blue);
+					font-weight: 500;
+				}
 
-        &:hover {
-          .hoverUser {
-            display: flex;
-          }
-        }
+				&:hover {
+					.hoverUser {
+						display: flex;
+					}
+				}
 
-        .hoverUser {
-          display: none;
-          flex-direction: column;
-          width: 340px;
-          background: var(--white);
-          position: absolute;
-          left: 14px;
-          box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
-          z-index: 12;
+				.hoverUser {
+					position: absolute;
+					left: 14px;
+					z-index: 12;
+					display: none;
+					flex-direction: column;
+					width: 340px;
+					background: var(--white);
+					box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
-          .hoverUserTop {
-            display: flex;
-            column-gap: 12px;
-            padding: 12px 14px;
+					.hoverUserTop {
+						display: flex;
+						padding: 12px 14px;
+						column-gap: 12px;
 
-            img {
-              width: 80px;
-              height: 80px;
-              border-radius: 50%;
-              object-fit: cover;
-            }
+						img {
+							width: 80px;
+							height: 80px;
+							object-fit: cover;
+							border-radius: 50%;
+						}
 
-            .infoHoverUser {
-              display: flex;
-              flex-direction: column;
-              row-gap: 10px;
+						.infoHoverUser {
+							display: flex;
+							flex-direction: column;
+							row-gap: 10px;
 
-              a {
-                font-size: 14px;
-                color: var(--blue);
-                font-weight: 500;
-              }
+							a {
+								color: var(--blue);
+								font-weight: 500;
+								font-size: 14px;
+							}
 
-              .online {
-                position: relative;
-                color: var(--grey-middle);
-                font-size: 12px;
-              }
+							.online {
+								position: relative;
+								color: var(--grey-middle);
+								font-size: 12px;
+							}
 
-              .lastVisit {
-                color: var(--grey-middle);
-                font-size: 12px;
-              }
-            }
-          }
+							.lastVisit {
+								color: var(--grey-middle);
+								font-size: 12px;
+							}
+						}
+					}
 
-          .infoHoverBottom {
-            border-top: 1px solid var(--grey-super-light);
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+					.infoHoverBottom {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						padding: 12px 14px;
+						border-top: 1px solid var(--grey-super-light);
 
-            button {
-              padding: 10px 0 !important;
-            }
+						button {
+							padding: 10px 0 !important;
+						}
 
-            .message {
-              background: var(--blue-alternative);
-            }
-          }
-        }
-      }
+						.message {
+							background: var(--blue-alternative);
+						}
+					}
+				}
+			}
 
-      span {
-        margin-right: 5px;
-      }
+			span {
+				margin-right: 5px;
+			}
 
-      a {
-        text-decoration: none;
-        color: var(--blue-alternative);
-        transition: all ease .2s;
+			a {
+				color: var(--blue-alternative);
+				text-decoration: none;
+				transition: all ease 0.2s;
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
 
-  .postImage {
-    margin-left: 10px;
-    display: flex;
+	.postImage {
+		display: flex;
+		margin-left: 10px;
 
-    img {
-      width: 50px;
-      height: 60px;
-      border-radius: 0;
-      object-fit: unset;
-    }
+		img {
+			width: 50px;
+			height: 60px;
+			object-fit: unset;
+			border-radius: 0;
+		}
 
-    button {
-      min-width: unset;
-      width: 21px;
-      height: 25px;
-      padding: 0;
+		button {
+			width: 21px;
+			min-width: unset;
+			height: 25px;
+			padding: 0;
 
-      &:hover {
-        background: none;
-      }
+			&:hover {
+				background: none;
+			}
 
-      &:active {
-        transform: unset;
-      }
+			&:active {
+				transform: unset;
+			}
 
-      svg {
-        path {
-          fill: var(--grey-middle);
-        }
-      }
-    }
-  }
+			svg {
+				path {
+					fill: var(--grey-middle);
+				}
+			}
+		}
+	}
 }

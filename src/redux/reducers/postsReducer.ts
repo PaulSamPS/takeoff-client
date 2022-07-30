@@ -61,4 +61,6 @@ export const postsReducer = createSlice({
   },
 });
 
+export const { setSuccess } = postsReducer.actions;
+
 export default postsReducer.reducer;

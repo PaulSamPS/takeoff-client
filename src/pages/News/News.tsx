@@ -1,13 +1,15 @@
 import React from 'react';
 import styles from './News.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getPosts } from '../../redux/actions/postAction';
 import { Post } from '../../components/Post/Post';
 import { Spinner } from '../../components/UI/Spinner/Spinner';
 import { CreatePost } from '../../components/CreatePost/CreatePost';
 import { RightBar } from '../../components/RightBar/RightBar';
+import { SocketContext } from '../../helpers/context';
+import { setSuccess } from '../../redux/reducers/postsReducer';
 
 export const News = (): JSX.Element => {
+  const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
   const { posts, isLoading } = useAppSelector((state) => state.postsReducer);
   const dispatch = useAppDispatch();
@@ -15,8 +17,16 @@ export const News = (): JSX.Element => {
   const myPosts = window.location.pathname === `/main/news/${user.id}`;
 
   React.useEffect(() => {
-    dispatch(getPosts(user.id));
-  }, []);
+    socket?.emit('post:get', { userId: user.id });
+    socket?.on('post:send', ({ posts }) => {
+      console.log('444', posts);
+      dispatch(setSuccess(posts));
+    });
+
+    return () => {
+      socket?.off('post:send');
+    };
+  }, [socket]);
 
   if (isLoading) {
     return <Spinner />;
