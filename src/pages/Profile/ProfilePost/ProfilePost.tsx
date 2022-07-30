@@ -2,19 +2,28 @@ import React from 'react';
 import styles from './ProfilePosts.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { useParams } from 'react-router-dom';
-import { getPosts } from '../../../redux/actions/postAction';
 import { CreatePost } from '../../../components/CreatePost/CreatePost';
 import { Post } from '../../../components/Post/Post';
+import { setSuccess } from '../../../redux/reducers/postsReducer';
+import { SocketContext } from '../../../helpers/context';
 
 export const ProfilePost = () => {
+  const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { posts } = useAppSelector((state) => state.postsReducer);
 
   React.useEffect(() => {
-    dispatch(getPosts(id!));
-  }, []);
+    socket?.emit('post:get', { userId: loginUser.id });
+    socket?.on('post:send', ({ posts }) => {
+      dispatch(setSuccess(posts));
+    });
+
+    return () => {
+      socket?.off('post:send');
+    };
+  }, [socket]);
 
   return (
     <div className={styles.wrapper}>

@@ -19,7 +19,6 @@ export const News = (): JSX.Element => {
   React.useEffect(() => {
     socket?.emit('post:get', { userId: user.id });
     socket?.on('post:send', ({ posts }) => {
-      console.log('444', posts);
       dispatch(setSuccess(posts));
     });
 
