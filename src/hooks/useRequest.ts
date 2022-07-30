@@ -29,6 +29,7 @@ export const useRequest = (): IReturn => {
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
   const { id } = useParams();
+  const friendId = localStorage.getItem('friendsUserInfo');
 
   const addFriend = (addFriendUserId: string | undefined) => {
     socket?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
@@ -67,7 +68,7 @@ export const useRequest = (): IReturn => {
       setFriends(friendsUser);
       setLoadingFriends(false);
     });
-    socket?.emit('friendsUserInfo:get', { userId: id });
+    socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
     socket?.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
       setFriendsUserInfo(friendsUser);
     });

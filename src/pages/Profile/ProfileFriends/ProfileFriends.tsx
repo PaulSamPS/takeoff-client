@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ProfileFriends.module.scss';
 import { useRequest } from '../../../hooks/useRequest';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
 import { useAppSelector } from '../../../hooks/redux';
 import { IUser } from '../../../interfaces/user.interface';
@@ -9,8 +9,10 @@ import cn from 'classnames';
 
 export const ProfileFriends = () => {
   const { friendsUserInfo } = useRequest();
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const friendsOnline: IUser[] = [];
+  const { id } = useParams();
 
   friendsUserInfo.filter((friend) => {
     return users.forEach((user) => {
@@ -22,7 +24,11 @@ export const ProfileFriends = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Link to={'#'} className={styles.friendsCount}>
+      <Link
+        to={loginUser.id !== id ? '/main/user-friends' : '/main/friends'}
+        className={styles.friendsCount}
+        onClick={() => localStorage.setItem('friendsUserInfo', id!)}
+      >
         Друзья <span className={styles.count}>{friendsUserInfo.length}</span>
       </Link>
       <div className={styles.friendsGrid}>

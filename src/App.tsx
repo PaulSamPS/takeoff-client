@@ -21,6 +21,7 @@ import { RegistrationSuccess } from './pages/Auth/RegistrationSuccess/Registrati
 import { Edit } from './pages/Edit/Edit';
 import { EditBasic } from './pages/Edit/EditBasic/EditBasic';
 import { EditContacts } from './pages/Edit/EditContacts/EditContacts';
+import { UserFriends } from './pages/UserFriends/UserFriends';
 
 export const App = () => {
   const { socket } = context();
@@ -59,6 +60,9 @@ export const App = () => {
                 <Route index element={<Friends />} />
                 <Route path='requests' element={<FriendsRequests />} />
                 <Route path='find' element={<FriendsFind />} />
+              </Route>
+              <Route path='user-friends' element={<UserFriends />}>
+                <Route index element={<Friends />} />
               </Route>
             </Route>
             <Route path='*' element={<Navigate to='/' replace />} />

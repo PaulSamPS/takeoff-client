@@ -8,7 +8,7 @@ import { FriendsOnline } from './FriendsOnline/FriendsOnline';
 import { IUser } from '../../../interfaces/user.interface';
 
 export const Friends = () => {
-  const { friends } = useRequest();
+  const { friends, friendsUserInfo } = useRequest();
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const [activeSort, setActiveSort] = React.useState<number>(0);
   const friendsOnline: IUser[] = [];
@@ -34,7 +34,16 @@ export const Friends = () => {
           })}
           onClick={() => setActiveSort(0)}
         >
-          Все друзья <span>{friends.length}</span>
+          {window.location.pathname === '/main/friends' && (
+            <>
+              Все друзья <span>{friends.length}</span>
+            </>
+          )}
+          {window.location.pathname === '/main/user-friends' && (
+            <>
+              Все друзья <span>{friendsUserInfo.length}</span>
+            </>
+          )}
         </div>
         <div
           className={cn(styles.sort, {

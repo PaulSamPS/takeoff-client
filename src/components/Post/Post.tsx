@@ -112,7 +112,9 @@ export const Post = ({ post }: PostProps) => {
           />
         </Link>
         <div className={styles.userPost}>
-          <span className={styles.userName}>{post.user.firstName + ' ' + post.user.lastName}</span>
+          <Link to={`/main/profile/${post.user._id}`} className={styles.userName}>
+            {post.user.firstName + ' ' + post.user.lastName}
+          </Link>
           <span className={styles.date}>{calculateTime(post.createdAt)}</span>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { Search } from '../../../../components/UI/Search/Search';
 import { useRequest } from '../../../../hooks/useRequest';
 
 export const FriendsAll = () => {
-  const { friends } = useRequest();
+  const { friends, friendsUserInfo } = useRequest();
   const [text, setText] = React.useState<string>('');
 
   const filteredFriends = friends.filter((friend) =>
@@ -14,23 +14,48 @@ export const FriendsAll = () => {
     )
   );
 
+  const userFilteredFriends = friendsUserInfo.filter((friend) =>
+    (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
+      text?.toLowerCase()
+    )
+  );
+
   return (
     <div
       className={styles.wrapper}
-      style={{ height: filteredFriends.length > 0 ? 'fit-content' : 'calc(100vh - 216px)' }}
+      style={{
+        height:
+          filteredFriends.length > 0 || userFilteredFriends.length > 0
+            ? 'fit-content'
+            : 'calc(100vh - 216px)',
+      }}
     >
       <Search setText={setText} placeholder={'Поиск друзей'} />
       <div
         className={styles.grid}
         style={{
-          display: filteredFriends.length > 0 ? 'block' : 'flex',
-          justifyContent: filteredFriends.length > 0 ? '' : 'center',
+          display: filteredFriends.length > 0 || userFilteredFriends.length > 0 ? 'block' : 'flex',
+          justifyContent:
+            filteredFriends.length > 0 || userFilteredFriends.length > 0 ? '' : 'center',
         }}
       >
-        {filteredFriends.length > 0 ? (
-          filteredFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
-        ) : (
-          <span className={styles.noFriends}>Друзей нет</span>
+        {window.location.pathname === '/main/friends' && (
+          <>
+            {filteredFriends.length > 0 ? (
+              filteredFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
+            ) : (
+              <span className={styles.noFriends}>Друзей нет</span>
+            )}
+          </>
+        )}
+        {window.location.pathname === '/main/user-friends' && (
+          <>
+            {userFilteredFriends.length > 0 ? (
+              userFilteredFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
+            ) : (
+              <span className={styles.noFriends}>Друзей нет</span>
+            )}
+          </>
         )}
       </div>
     </div>

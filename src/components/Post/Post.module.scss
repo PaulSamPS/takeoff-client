@@ -80,6 +80,12 @@
 				color: var(--blue);
 				font-weight: 500;
 				font-size: 13px;
+				text-decoration: none;
+				transition: all ease .2s;
+
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 
 			.date {
