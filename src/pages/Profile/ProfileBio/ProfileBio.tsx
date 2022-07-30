@@ -22,11 +22,22 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
   const usersOnline = users.map((user: any) => user.userId);
   const [visibleInfo, setVisibleInfo] = React.useState<boolean>(false);
   const [friendsModal, setFriendsModal] = React.useState<boolean>(false);
+  const [activeIndex, setActiveIndex] = React.useState<number>(0);
   const { id } = useParams();
 
   const variants = {
     open: { opacity: 1, height: 'auto' },
     closed: { opacity: 0, height: 0 },
+  };
+
+  const handleOpenModalFriends = () => {
+    setActiveIndex(1);
+    setFriendsModal(true);
+  };
+
+  const handleOpenModalFollowings = () => {
+    setActiveIndex(0);
+    setFriendsModal(true);
   };
 
   React.useEffect(() => {
@@ -113,17 +124,17 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
         )}
       </div>
       <div className={styles.bottom}>
-        <Link to={'#'} className={styles.friends} onClick={() => setFriendsModal(true)}>
+        <Link to={'#'} className={styles.friends} onClick={handleOpenModalFriends}>
           <span className={styles.count}>{friendsUserInfo.length}</span>
           {calculateFriendsCount(friendsUserInfo.length)}
         </Link>
-        <Link to={'#'} className={styles.friends}>
+        <Link to={'#'} className={styles.friends} onClick={handleOpenModalFollowings}>
           <span className={styles.count}>{followings && followings.length}</span>
           {calculateFollowersCount(followings && followings.length)}
         </Link>
       </div>
       <Modal modal={friendsModal} setModal={setFriendsModal}>
-        <ModalUsers />
+        <ModalUsers activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       </Modal>
     </div>
   );

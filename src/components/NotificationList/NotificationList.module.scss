@@ -42,24 +42,30 @@
 			background-color: var(--grey300);
 			border-radius: 4px;
 		}
-	}
 
-	.bottom {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 12px 14px;
-		border-top: 1px solid var(--grey-super-light);
+		.bottom {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 12px 14px;
+			border-top: 1px solid var(--grey-super-light);
 
-		a {
-			color: var(--blue);
-			text-decoration: none;
-			transition: all ease 0.2s;
-			font-size: 13px;
+			a {
+				color: var(--blue);
+				text-decoration: none;
+				transition: all ease 0.2s;
+				font-size: 13px;
 
-			&:hover {
-				text-decoration: underline;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
+		}
+
+		.noNotifications {
+			padding: 12px 14px;
+			font-size: 13px;
+			text-align: center;
 		}
 	}
 }

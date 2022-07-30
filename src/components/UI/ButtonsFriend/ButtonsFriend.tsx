@@ -20,7 +20,7 @@ export const ButtonsFriend = ({ id }: ButtonFriendProps) => {
     <>
       {!friendsDone.includes(id!) ? (
         <div className={styles.follow}>
-          {!followingDone.includes(id) && requestsDone.includes(id!) ? (
+          {!followingDone.includes(id!) && requestsDone.includes(id!) ? (
             <Button appearance='primary' onClick={() => addFriend(id!)}>
               Добавить в друзья
             </Button>

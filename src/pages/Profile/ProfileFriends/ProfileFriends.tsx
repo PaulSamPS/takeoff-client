@@ -22,9 +22,9 @@ export const ProfileFriends = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.friendsCount}>
+      <Link to={'#'} className={styles.friendsCount}>
         Друзья <span className={styles.count}>{friendsUserInfo.length}</span>
-      </div>
+      </Link>
       <div className={styles.friendsGrid}>
         {friendsUserInfo.slice(-6).map((friend) => (
           <div key={friend.id} className={styles.friend}>

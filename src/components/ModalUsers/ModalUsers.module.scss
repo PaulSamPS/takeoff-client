@@ -4,16 +4,25 @@
   .top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px;
+    column-gap: 25px;
+    padding: 20px 20px 0;
     background: var(--bg-grey-light);
     border-radius: 4px 4px 0 0;
     font-size: 13px;
     border-bottom: 1px solid var(--grey-super-light);
 
     span {
-      color: var(--black);
+      color: var(--grey);
       font-weight: 500;
+      padding-bottom: 20px;
+      transform: translateY(1px);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+
+    .active {
+      color: var(--black);
+      border-bottom: 2px solid var(--blue-alternative);
     }
   }
 
@@ -21,6 +30,7 @@
     padding: 25px 14px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    min-height: 188px;
 
     .user {
       display: flex;
