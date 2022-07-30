@@ -11,6 +11,8 @@ import { useFollow } from '../../../hooks/useFollow';
 import cn from 'classnames';
 import { Button } from '../../../components/UI/Button/Button';
 import { motion } from 'framer-motion';
+import { Modal } from '../../../components/UI/Modal/Modal';
+import { ModalUsers } from '../../../components/ModalUsers/ModalUsers';
 
 export const ProfileBio = ({ user }: ProfileBioProps) => {
   const { friendsUserInfo } = useRequest();
@@ -19,6 +21,7 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const usersOnline = users.map((user: any) => user.userId);
   const [visibleInfo, setVisibleInfo] = React.useState<boolean>(false);
+  const [friendsModal, setFriendsModal] = React.useState<boolean>(false);
   const { id } = useParams();
 
   const variants = {
@@ -110,7 +113,7 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
         )}
       </div>
       <div className={styles.bottom}>
-        <Link to={'#'} className={styles.friends}>
+        <Link to={'#'} className={styles.friends} onClick={() => setFriendsModal(true)}>
           <span className={styles.count}>{friendsUserInfo.length}</span>
           {calculateFriendsCount(friendsUserInfo.length)}
         </Link>
@@ -119,6 +122,9 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
           {calculateFollowersCount(followings && followings.length)}
         </Link>
       </div>
+      <Modal modal={friendsModal} setModal={setFriendsModal}>
+        <ModalUsers />
+      </Modal>
     </div>
   );
 };

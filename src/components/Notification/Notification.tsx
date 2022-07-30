@@ -117,14 +117,12 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
         <span>{calculateTime(notification.date)}</span>
       </div>
       <div className={styles.postImage}>
-        <img
-          src={
-            notification.post.image == null
-              ? `/photo.png`
-              : `${API_URL}/post/${notification.post.image}`
-          }
-          alt={loginUser.firstName + '' + loginUser.lastName}
-        />
+        {notification.post.image !== null && (
+          <img
+            src={`${API_URL}/post/${notification.post.image}`}
+            alt={loginUser.firstName + '' + loginUser.lastName}
+          />
+        )}
         <Button appearance='transparent'>
           <ArrowDownIcon />
         </Button>

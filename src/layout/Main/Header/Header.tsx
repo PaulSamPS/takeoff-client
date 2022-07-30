@@ -19,9 +19,7 @@ export const Header = () => {
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
   const { notifications } = useNotifications();
 
-  const totalNotifications = notifications.notifications
-    .filter((n) => n.user._id !== loginUser.id)
-    .map((notification) => notification);
+  const totalNotifications = notifications.notifications.filter((n) => n.user._id !== loginUser.id);
 
   return (
     <div className={styles.container}>
