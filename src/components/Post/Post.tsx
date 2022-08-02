@@ -184,18 +184,20 @@ export const Post = ({ post }: PostProps) => {
         <div className={styles.lastComments}>
           {comments.slice(0, 3).map((comment) => (
             <div key={comment._id} className={styles.grid}>
-              <img
-                src={
-                  comment.user.avatar === null
-                    ? `/photo.png`
-                    : `${API_URL}/avatar/${comment.user.avatar}`
-                }
-                alt={comment.user.firstName + ' ' + comment.user.lastName}
-              />
+              <Link to={`/main/profile/${comment.user._id}`}>
+                <img
+                  src={
+                    comment.user.avatar === null
+                      ? `/photo.png`
+                      : `${API_URL}/avatar/${comment.user.avatar}`
+                  }
+                  alt={comment.user.firstName + ' ' + comment.user.lastName}
+                />
+              </Link>
               <div className={styles.body}>
-                <span className={styles.user}>
+                <Link to={`/main/profile/${comment.user._id}`} className={styles.user}>
                   {comment.user.firstName + ' ' + comment.user.lastName}
-                </span>
+                </Link>
                 <span className={styles.comment}>{comment.text}</span>
                 <span className={styles.dateComment}>{calculateTime(comment.date)}</span>
               </div>
