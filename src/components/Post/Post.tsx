@@ -133,7 +133,11 @@ export const Post = ({ post }: PostProps) => {
             <div className={styles.peopleLikedPopup}>
               <span>Нравится</span>
               {likes.slice(-3).map((like) => (
-                <div key={like._id} className={styles.likedPopup}>
+                <Link
+                  to={`/main/profile/${like.user._id}`}
+                  key={like._id}
+                  className={styles.likedPopup}
+                >
                   <img
                     src={
                       like.user.avatar === null
@@ -142,7 +146,10 @@ export const Post = ({ post }: PostProps) => {
                     }
                     alt={like.user.firstName + ' ' + like.user.lastName}
                   />
-                </div>
+                  <div className={styles.tooltip}>
+                    <span>{like.user.firstName + ' ' + like.user.lastName}</span>
+                  </div>
+                </Link>
               ))}
               {likes.length > 3 && <div className={styles.likeMore}>{`+${likes.length - 3}`}</div>}
             </div>
