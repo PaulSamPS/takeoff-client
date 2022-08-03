@@ -32,7 +32,6 @@
 				display: grid;
 				grid-template-areas: "avatar name" ". actions";
 				grid-template-columns: 80px 1fr;
-				align-items: center;
 				padding-bottom: 20px;
 				column-gap: 20px;
 				border-bottom: 1px solid var(--border);
@@ -41,6 +40,12 @@
 					grid-area: name;
 					color: var(--grey);
 					font-weight: 500;
+					text-decoration: none;
+					transition: all ease .2s;
+
+					&:hover {
+						text-decoration: underline;
+					}
 				}
 
 				.followers {

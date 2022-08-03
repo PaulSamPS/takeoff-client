@@ -32,6 +32,7 @@
 
 	.middle {
 		max-height: 390px;
+		min-height: 390px;
 		overflow-y: auto;
 
 		&::-webkit-scrollbar {
@@ -43,29 +44,29 @@
 			border-radius: 4px;
 		}
 
-		.bottom {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 12px 14px;
-			border-top: 1px solid var(--grey-super-light);
-
-			a {
-				color: var(--blue);
-				text-decoration: none;
-				transition: all ease 0.2s;
-				font-size: 13px;
-
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-		}
-
 		.noNotifications {
 			padding: 12px 14px;
 			font-size: 13px;
 			text-align: center;
+		}
+	}
+
+	.bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 12px 14px;
+		border-top: 1px solid var(--grey-super-light);
+
+		a {
+			color: var(--blue);
+			text-decoration: none;
+			transition: all ease 0.2s;
+			font-size: 13px;
+
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 }

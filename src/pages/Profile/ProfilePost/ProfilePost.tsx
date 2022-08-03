@@ -15,7 +15,7 @@ export const ProfilePost = () => {
   const { posts } = useAppSelector((state) => state.postsReducer);
 
   React.useEffect(() => {
-    socket?.emit('post:get', { userId: loginUser.id });
+    socket?.emit('post:get', { userId: id });
     socket?.on('post:send', ({ posts }) => {
       dispatch(setSuccess(posts));
     });
@@ -23,7 +23,7 @@ export const ProfilePost = () => {
     return () => {
       socket?.off('post:send');
     };
-  }, [socket]);
+  }, [socket, id]);
 
   return (
     <div className={styles.wrapper}>

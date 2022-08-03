@@ -27,13 +27,13 @@ export const NotificationList = ({ setVisibleNotification }: NotificationListPro
               .map((notification) => (
                 <Notification key={notification._id} notification={notification} />
               ))}
-            <div className={styles.bottom}>
-              <Link to={'#'}>Показать все</Link>
-            </div>
           </>
         ) : (
           <div className={styles.noNotifications}>Нет уведомлений</div>
         )}
+      </div>
+      <div className={styles.bottom}>
+        <Link to={'#'}>Показать все</Link>
       </div>
     </div>
   );

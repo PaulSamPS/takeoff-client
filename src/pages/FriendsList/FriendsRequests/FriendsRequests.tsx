@@ -31,7 +31,9 @@ export const FriendsRequests = () => {
                     alt={f.firstName + ' ' + f.lastName}
                   />
                 </Link>
-                <span className={styles.userName}>{f.firstName + ' ' + f.lastName}</span>
+                <Link to={`/main/people/${f.id}`} className={styles.userName}>
+                  {f.firstName + ' ' + f.lastName}
+                </Link>
                 <div className={styles.action}>
                   <Button
                     appearance='primary'

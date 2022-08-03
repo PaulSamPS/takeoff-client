@@ -13,9 +13,9 @@ export const Search = ({ setText, placeholder, className, ...props }: SearchProp
     <div
       className={cn(styles.wrapper, className)}
       style={{
-        position: scrollY >= 75 ? 'sticky' : 'relative',
-        top: scrollY >= 75 ? '71px' : '0',
-        zIndex: scrollY >= 75 ? '11' : '0',
+        position: scrollY >= 51 ? 'sticky' : 'relative',
+        top: scrollY >= 51 ? '49px' : '0',
+        zIndex: scrollY >= 51 ? '11' : '0',
       }}
       {...props}
     >

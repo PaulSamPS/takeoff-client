@@ -63,6 +63,7 @@ export const App = () => {
               </Route>
               <Route path='user-friends' element={<UserFriends />}>
                 <Route index element={<Friends />} />
+                <Route path='followers' element={<Friends />} />
               </Route>
             </Route>
             <Route path='*' element={<Navigate to='/' replace />} />

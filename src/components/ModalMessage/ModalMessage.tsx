@@ -26,7 +26,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) =
     <div className={styles.modalMessage}>
       <div className={styles.topModal}>
         <span>Новое сообщение</span>
-        <Link to={`/main/conversations?with=${userId}`}>
+        <Link to={`/main/conversations/${userId}`} onClick={() => setModal(false)}>
           Перейтик диалогу c {friend!.firstName + ' ' + friend!.lastName}
         </Link>
       </div>

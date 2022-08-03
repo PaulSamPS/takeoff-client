@@ -33,7 +33,7 @@ export const RightBar = ({
       className={styles.wrapper}
       style={{
         position: !isFixed ? (scrollY >= 20 ? 'sticky' : 'relative') : 'sticky',
-        top: !isFixed ? (scrollY >= 20 ? '71px' : '0') : '91px',
+        top: !isFixed ? (scrollY >= 20 ? '49px' : '0') : '91px',
       }}
     >
       <CustomLink to={firstItemLink} appearance='rightMenu'>

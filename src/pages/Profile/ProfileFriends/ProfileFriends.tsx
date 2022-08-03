@@ -48,9 +48,13 @@ export const ProfileFriends = () => {
       </div>
       {friendsOnline.length > 0 && (
         <>
-          <div className={cn(styles.friendsCount, styles.onlineCount)}>
+          <Link
+            to={loginUser.id !== id ? '/main/user-friends' : '/main/friends'}
+            className={cn(styles.friendsCount, styles.onlineCount)}
+            onClick={() => localStorage.setItem('friendsUserInfo', id!)}
+          >
             Друзья онлайн <span className={styles.count}>{friendsOnline.length}</span>
-          </div>
+          </Link>
           <div className={styles.friendsGrid}>
             {friendsOnline.slice(-6).map((onlineFriend) => (
               <div key={onlineFriend.id} className={styles.friend}>

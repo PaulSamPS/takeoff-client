@@ -16,6 +16,17 @@
 		border-bottom: 1px solid var(--border);
 		border-radius: 5px 5px 0 0;
 
+		.title {
+			margin: 0 15px 0 0;
+			padding-bottom: 18px;
+			border-bottom: 2px solid transparent;
+			color: var(--black);
+
+			span {
+				color: var(--grey-middle);
+			}
+		}
+
 		.sort {
 			position: relative;
 			display: inline-block;

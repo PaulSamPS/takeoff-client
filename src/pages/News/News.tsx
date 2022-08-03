@@ -10,14 +10,14 @@ import { setSuccess } from '../../redux/reducers/postsReducer';
 
 export const News = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
-  const { user } = useAppSelector((state) => state.loginReducer);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { posts, isLoading } = useAppSelector((state) => state.postsReducer);
   const dispatch = useAppDispatch();
   const allPosts = window.location.pathname === '/main/news';
-  const myPosts = window.location.pathname === `/main/news/${user.id}`;
+  const myPosts = window.location.pathname === `/main/news/${loginUser.id}`;
 
   React.useEffect(() => {
-    socket?.emit('post:get', { userId: user.id });
+    socket?.emit('post:get', { userId: loginUser.id });
     socket?.on('post:send', ({ posts }) => {
       dispatch(setSuccess(posts));
     });
@@ -38,7 +38,7 @@ export const News = (): JSX.Element => {
         <div className={styles.posts}>
           {myPosts &&
             posts
-              .filter((f) => f.user._id === user.id)
+              .filter((f) => f.user._id === loginUser.id)
               .map((post) => <Post key={post._id} post={post} />)}
           {allPosts && posts.map((post) => <Post key={post._id} post={post} />)}
         </div>
@@ -47,7 +47,7 @@ export const News = (): JSX.Element => {
         firstItem={'Все посты'}
         secondItem={'Мои посты'}
         firstItemLink={'/main/news'}
-        secondItemLink={`/main/news/${user.id}`}
+        secondItemLink={`/main/news/${loginUser.id}`}
       />
     </div>
   );

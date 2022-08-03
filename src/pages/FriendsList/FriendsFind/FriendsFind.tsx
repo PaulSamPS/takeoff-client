@@ -7,11 +7,13 @@ import styles from './FriendsFind.module.scss';
 import { PeopleFindCard } from '../../../components/PeopleFindCard/PeopleFindCard';
 
 export const FriendsFind = () => {
-  const { user } = useAppSelector((state) => state.loginReducer);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users, isLoading } = useAppSelector((state) => state.usersReducer);
   const [search, setSearch] = React.useState<string | null>('');
   const dispatch = useAppDispatch();
   console.log(search);
+
+  const usersWithoutLoginUser = users.filter((u) => u.id !== loginUser.id);
 
   React.useEffect(() => {
     dispatch(getUsers());
@@ -20,16 +22,24 @@ export const FriendsFind = () => {
   return (
     <div className={styles.wrapper}>
       <Search setText={setSearch} placeholder={'Введите запрос'} className={styles.search} />
-      <div className={styles.grid} style={{ display: isLoading ? 'block' : 'grid' }}>
+      <div
+        className={styles.grid}
+        style={{
+          display: isLoading || usersWithoutLoginUser.length <= 0 ? 'block' : 'grid',
+          height: usersWithoutLoginUser.length > 0 ? 'fit-content' : 'calc(100vh - 216px)',
+        }}
+      >
         {!isLoading ? (
           users
-            .filter((u) => u.id !== user.id)
+            .filter((u) => u.id !== loginUser.id)
             .map((user) => <PeopleFindCard key={user.id} user={user} />)
         ) : (
           <Spinner />
         )}
+        {usersWithoutLoginUser.length <= 0 && (
+          <span className={styles.searchResult}>Ничего не найдено</span>
+        )}
       </div>
-      {users.length <= 0 && <h3 className={styles.searchResult}>Ничего не найдено</h3>}
     </div>
   );
 };

@@ -64,8 +64,8 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
             <div
               className={styles.hoverUser}
               style={{
-                top: `${offsetTop <= 250 ? '30px' : 'unset'}`,
-                bottom: `${offsetTop > 250 ? '70px' : 'unset'}`,
+                top: `${offsetTop <= 250 ? '27 px' : 'unset'}`,
+                bottom: `${offsetTop > 250 ? '67px' : 'unset'}`,
               }}
             >
               <div className={styles.hoverUserTop}>
