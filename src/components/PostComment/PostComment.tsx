@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { PostCommentProps } from './PostComment.props';
 import styles from './PostComment.module.scss';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,9 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { Button } from '../UI/Button/Button';
 import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
 import { usePost } from '../../hooks/usePost';
+import reactStringReplace from 'react-string-replace';
+import { Emoji } from 'emoji-mart';
+import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
 
 export const PostComment = ({ post }: PostCommentProps) => {
   const { comments, handleComment, setText, text } = usePost(post);
@@ -47,7 +50,11 @@ export const PostComment = ({ post }: PostCommentProps) => {
                 <Link to={`/main/profile/${comment.user._id}`} className={styles.user}>
                   {comment.user.firstName + ' ' + comment.user.lastName}
                 </Link>
-                <span className={styles.comment}>{comment.text}</span>
+                <span className={styles.comment}>
+                  {reactStringReplace(comment.text, /:(.+?):/g, (match, i) => (
+                    <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
+                  ))}
+                </span>
                 <span className={styles.dateComment}>{calculateTime(comment.date)}</span>
               </div>
             </div>
@@ -69,15 +76,13 @@ export const PostComment = ({ post }: PostCommentProps) => {
         </div>
       )}
       <div className={styles.sendComment}>
-        <div
+        <input
           className={styles.input}
-          id='input'
-          contentEditable='true'
           placeholder='Написать комментарий...'
-          role='textbox'
-          aria-multiline='true'
-          onInput={(e: FormEvent<HTMLDivElement>) => setText(e.currentTarget.textContent)}
-        ></div>
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+          value={text!}
+        ></input>
+        <EmojiPicker setText={setText} text={text!} bottom={-255} left={-156} />
         <Button appearance='primary' disabled={!(text && text.length > 0)} onClick={handleComment}>
           <SendIcon className={styles.send} />
         </Button>

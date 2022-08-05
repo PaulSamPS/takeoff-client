@@ -70,6 +70,7 @@ export const usePost = (post: IPost) => {
       setComments((prev: any) => [newComment, ...prev]);
       document.getElementById('input')!.innerHTML = '';
     });
+    setText('');
   };
 
   const handleDeletePost = () => {
