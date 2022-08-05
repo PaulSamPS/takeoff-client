@@ -10,12 +10,28 @@ import { usePost } from '../../hooks/usePost';
 
 export const PostComment = ({ post }: PostCommentProps) => {
   const { comments, handleComment, setText, text } = usePost(post);
+  const [isAllComments, setIsAllComments] = React.useState<boolean>(false);
+  const [countComments, setCountComments] = React.useState<number>(0);
+
+  const handleViewComments = () => {
+    setIsAllComments(true);
+    setCountComments((prevState) => prevState + 10);
+  };
+
+  const handleMoreComments = () => {
+    setCountComments(3);
+    setIsAllComments(false);
+  };
+
+  const loadMore = () => {
+    setCountComments((prevState) => (comments.length > prevState ? prevState + 10 : prevState));
+  };
 
   return (
     <>
       {post.comments.length > 0 && (
         <div className={styles.lastComments}>
-          {comments.slice(0, 3).map((comment) => (
+          {comments.slice(0, isAllComments ? countComments : 3).map((comment) => (
             <div key={comment._id} className={styles.grid}>
               <Link to={`/main/profile/${comment.user._id}`}>
                 <img
@@ -38,7 +54,16 @@ export const PostComment = ({ post }: PostCommentProps) => {
           ))}
           {post.comments.length > 0 && (
             <div className={styles.showAllComments}>
-              <span>Показать все комментарии</span>
+              {comments.length > 3 && !isAllComments ? (
+                <span onClick={handleViewComments}>Показать все комментарии</span>
+              ) : (
+                <span onClick={handleMoreComments}>Скрыть комментарии</span>
+              )}
+            </div>
+          )}
+          {comments.length > countComments && isAllComments && (
+            <div className={styles.loadMore}>
+              <span onClick={loadMore}>Загрузить еще</span>
             </div>
           )}
         </div>

@@ -12,6 +12,8 @@ export const NotificationList = ({ setVisibleNotification }: NotificationListPro
   const ref = React.useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setVisibleNotification(false));
   const { notifications } = useNotifications();
+  const notificationsLength =
+    notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0;
 
   return (
     <div className={styles.wrapper} ref={ref}>
@@ -19,7 +21,7 @@ export const NotificationList = ({ setVisibleNotification }: NotificationListPro
         <span>Ваша страница</span>
         <Link to={'#'}>Настройки</Link>
       </div>
-      <div className={styles.middle}>
+      <div className={styles.middle} style={{ display: notificationsLength ? 'block' : 'flex' }}>
         {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (
           <>
             {notifications.notifications

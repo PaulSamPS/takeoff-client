@@ -68,6 +68,18 @@
       cursor: pointer;
     }
   }
+
+  .loadMore {
+    text-align: center;
+    padding: 0 0 10px 0;
+    color: var(--blue);
+    font-weight: 500;
+    font-size: 13px;
+
+    span {
+      cursor: pointer;
+    }
+  }
 }
 .sendComment {
   display: flex;

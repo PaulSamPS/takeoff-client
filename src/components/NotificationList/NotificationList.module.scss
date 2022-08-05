@@ -34,6 +34,8 @@
 		max-height: 390px;
 		min-height: 390px;
 		overflow-y: auto;
+		justify-content: center;
+		align-items: center;
 
 		&::-webkit-scrollbar {
 			width: 8px;
