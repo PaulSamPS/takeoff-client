@@ -24,6 +24,8 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
   const coordsEl = () => {
     const rect = notificationRef.current?.getBoundingClientRect();
     setOffsetTop(rect!.top);
+    localStorage.setItem('followId', notification.user._id);
+    localStorage.setItem('friendsUserInfo', notification.user._id);
   };
 
   const handleSendMessage = (id: string) => {
@@ -92,7 +94,7 @@ export const Notification = ({ notification, ...props }: NotificationProps) => {
                 </div>
               </div>
               <div className={styles.infoHoverBottom}>
-                <ButtonsFriend id={notification.user._id} />
+                <ButtonsFriend userId={notification.user._id} />
                 <Button
                   appearance='primary'
                   className={styles.message}

@@ -4,4 +4,6 @@ import { IPost } from '../../redux/reducers/postsReducer';
 export interface PostCommentProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   post: IPost;
+  setIsAllComments: (click: boolean) => void;
+  isAllComments: boolean;
 }

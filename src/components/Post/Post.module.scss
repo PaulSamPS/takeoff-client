@@ -75,6 +75,12 @@
 	}
 }
 
+.iconBgHover {
+	&:hover {
+		background: #E8E8E8;
+	}
+}
+
 .iconBg {
 	display: flex;
 	align-items: center;
@@ -83,10 +89,7 @@
 	background: var(--bg);
 	border-radius: 30px;
 	cursor: pointer;
-
-	&:hover {
-		background: #E8E8E8;
-	}
+	transition: all ease .2s;
 
 	svg {
 		width: 24px;

@@ -10,10 +10,10 @@ import { usePost } from '../../hooks/usePost';
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
+import cn from 'classnames';
 
-export const PostComment = ({ post }: PostCommentProps) => {
+export const PostComment = ({ post, isAllComments, setIsAllComments }: PostCommentProps) => {
   const { comments, handleComment, setText, text } = usePost(post);
-  const [isAllComments, setIsAllComments] = React.useState<boolean>(false);
   const [countComments, setCountComments] = React.useState<number>(0);
 
   const handleViewComments = () => {
@@ -46,7 +46,7 @@ export const PostComment = ({ post }: PostCommentProps) => {
                   alt={comment.user.firstName + ' ' + comment.user.lastName}
                 />
               </Link>
-              <div className={styles.body}>
+              <div className={cn(styles.body, { [styles.bodyBorder]: comments.length <= 1 })}>
                 <Link to={`/main/profile/${comment.user._id}`} className={styles.user}>
                   {comment.user.firstName + ' ' + comment.user.lastName}
                 </Link>
@@ -59,12 +59,12 @@ export const PostComment = ({ post }: PostCommentProps) => {
               </div>
             </div>
           ))}
-          {post.comments.length > 0 && (
+          {post.comments.length > 3 && (
             <div className={styles.showAllComments}>
               {comments.length > 3 && !isAllComments ? (
                 <span onClick={handleViewComments}>Показать все комментарии</span>
               ) : (
-                <span onClick={handleMoreComments}>Скрыть комментарии</span>
+                isAllComments && <span onClick={handleMoreComments}>Скрыть комментарии</span>
               )}
             </div>
           )}

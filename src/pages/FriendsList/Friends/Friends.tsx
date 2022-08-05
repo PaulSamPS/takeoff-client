@@ -15,6 +15,7 @@ export const Friends = () => {
   const [activeSort, setActiveSort] = React.useState<number>(0);
   const friendsOnline: IUser[] = [];
   const friendsOnlineUser: IUser[] = [];
+  console.log(friendsUserInfo, 'info');
 
   friends.filter((friend) => {
     return users.forEach((user) => {
@@ -24,13 +25,14 @@ export const Friends = () => {
     });
   });
 
-  friendsUserInfo.filter((friend) => {
-    return users.forEach((user) => {
-      if (friend.id === user.userId) {
-        friendsOnlineUser.push(friend);
-      }
+  friendsUserInfo !== null &&
+    friendsUserInfo.filter((friend) => {
+      return users.forEach((user) => {
+        if (friend.id === user.userId) {
+          friendsOnlineUser.push(friend);
+        }
+      });
     });
-  });
 
   React.useEffect(() => {
     document.getElementById('input')?.focus();

@@ -25,26 +25,26 @@ export const useFollow = (): IFollowReturn => {
 
   const handleFollow = () => {
     socket?.emit('follow', {
-      userId: id !== undefined ? id : localStorage.getItem('followId'),
+      userId: id !== undefined && id! !== loginUser.id ? id : localStorage.getItem('followId'),
       userToFollowId: loginUser.id,
     });
     setTimeout(() => {
       socket?.emit('followings:get', {
-        userId: id !== undefined ? id : localStorage.getItem('followId'),
+        userId: id !== undefined && id! !== loginUser.id ? id : localStorage.getItem('followId'),
       });
     }, 500);
   };
 
   const handleUnfollow = () => {
     socket?.emit('unfollow', {
-      userId: id !== undefined ? id : localStorage.getItem('followId'),
+      userId: id !== undefined && id! !== loginUser.id ? id : localStorage.getItem('followId'),
       userToUnfollowId: loginUser.id,
     });
   };
 
   React.useEffect(() => {
     socket?.emit('followings:get', {
-      userId: id !== undefined ? id : localStorage.getItem('followId'),
+      userId: id !== undefined && id! !== loginUser.id ? id : localStorage.getItem('followId'),
     });
     socket?.on('followings:sent', ({ followingsUser, followersUser }: IFollow) => {
       setFollowings(followingsUser);

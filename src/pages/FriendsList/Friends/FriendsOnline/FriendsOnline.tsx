@@ -19,28 +19,24 @@ export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnline
     )
   );
 
+  const conditions =
+    window.location.pathname !== '/main/user-friends/followers'
+      ? filteredOnlineFriends.length > 0
+      : filteredOnlineUsersFriends.length > 0;
+
   return (
     <div
       className={styles.wrapper}
       style={{
-        height:
-          filteredOnlineFriends.length > 0 || filteredOnlineUsersFriends.length > 0
-            ? 'fit-content'
-            : 'calc(100vh - 216px)',
+        height: conditions ? 'fit-content' : 'calc(100vh - 216px)',
       }}
     >
       <Search setText={setText} placeholder={'Поиск друзей'} />
       <div
         className={styles.grid}
         style={{
-          display:
-            filteredOnlineFriends.length > 0 || filteredOnlineUsersFriends.length > 0
-              ? 'block'
-              : 'flex',
-          justifyContent:
-            filteredOnlineFriends.length > 0 || filteredOnlineUsersFriends.length > 0
-              ? ''
-              : 'center',
+          display: conditions ? 'block' : 'flex',
+          justifyContent: conditions ? '' : 'center',
         }}
       >
         {window.location.pathname === '/main/friends' && (

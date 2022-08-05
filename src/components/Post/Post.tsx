@@ -8,10 +8,12 @@ import { usePost } from '../../hooks/usePost';
 import { PostBody } from '../PostBody/PostBody';
 import { ReactComponent as MoreIcon } from '../../helpers/icons/more.svg';
 import { useAppSelector } from '../../hooks/redux';
+import cn from 'classnames';
 
 export const Post = ({ post }: PostProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { handleDeletePost, comments } = usePost(post);
+  const [isAllComments, setIsAllComments] = React.useState<boolean>(false);
 
   return (
     <div className={styles.wrapper}>
@@ -29,7 +31,11 @@ export const Post = ({ post }: PostProps) => {
         style={{ paddingBottom: `${post.comments.length > 0 && '20px'}` }}
       >
         <PostLike post={post} />
-        <div className={styles.iconBg}>
+        <div
+          className={cn(styles.iconBg, { [styles.iconBgHover]: comments.length > 3 })}
+          style={{ cursor: comments.length > 3 ? 'pointer' : 'none' }}
+          onClick={comments.length > 3 ? () => setIsAllComments(!isAllComments) : undefined}
+        >
           <div className={styles.icon}>
             <CommentIcon />
           </div>
@@ -37,7 +43,7 @@ export const Post = ({ post }: PostProps) => {
         </div>
         {post.comments.length > 0 && <div className={styles.border} />}
       </div>
-      <PostComment post={post} />
+      <PostComment post={post} isAllComments={isAllComments} setIsAllComments={setIsAllComments} />
     </div>
   );
 };

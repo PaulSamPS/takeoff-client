@@ -69,7 +69,7 @@ export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
           Написать сообщение
         </Button>
       )}
-      {loginUser.id !== id && <ButtonsFriend id={id} />}
+      {loginUser.id !== id && <ButtonsFriend userId={id} />}
       {loginUser.id === id && (
         <Modal setModal={setAvatarModal} modal={avatarModal}>
           <ChangeAvatar setModal={setAvatarModal} userId={id!} />

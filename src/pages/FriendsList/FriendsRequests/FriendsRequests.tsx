@@ -25,13 +25,13 @@ export const FriendsRequests = () => {
           request.map((f) => (
             <div className={styles.request} key={f.id}>
               <div className={styles.card}>
-                <Link to={`/main/people/${f.id}`} replace className={styles.followers}>
+                <Link to={`/main/profile/${f.id}`} replace className={styles.followers}>
                   <img
                     src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
                     alt={f.firstName + ' ' + f.lastName}
                   />
                 </Link>
-                <Link to={`/main/people/${f.id}`} className={styles.userName}>
+                <Link to={`/main/profile/${f.id}`} className={styles.userName}>
                   {f.firstName + ' ' + f.lastName}
                 </Link>
                 <div className={styles.action}>
