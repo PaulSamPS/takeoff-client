@@ -61,7 +61,7 @@ export const Friends = () => {
               )}
               {window.location.pathname === '/main/user-friends' && (
                 <>
-                  Все друзья <span>{friendsUserInfo.length}</span>
+                  Все друзья <span>{friendsUserInfo!.length}</span>
                 </>
               )}
             </div>

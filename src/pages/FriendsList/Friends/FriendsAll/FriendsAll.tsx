@@ -44,7 +44,7 @@ export const FriendsAll = () => {
         height: conditions ? 'fit-content' : 'calc(100vh - 216px)',
       }}
     >
-      <Search setText={setText} placeholder={!conditions ? 'Поиск друзей' : 'Поиск подписчиков'} />
+      <Search setText={setText} placeholder={'Поиск друзей'} />
       <div
         className={styles.grid}
         style={{

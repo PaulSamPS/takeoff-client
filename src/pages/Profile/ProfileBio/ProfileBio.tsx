@@ -134,7 +134,11 @@ export const ProfileBio = ({ user }: ProfileBioProps) => {
         </Link>
       </div>
       <Modal modal={friendsModal} setModal={setFriendsModal}>
-        <ModalUsers activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        <ModalUsers
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+          setFriendsModal={setFriendsModal}
+        />
       </Modal>
     </div>
   );

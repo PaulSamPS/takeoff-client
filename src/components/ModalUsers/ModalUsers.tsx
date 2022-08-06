@@ -7,9 +7,13 @@ import cn from 'classnames';
 import { ModalUserProps } from './ModalUser.props';
 import { useFollow } from '../../hooks/useFollow';
 
-export const ModalUsers = ({ activeIndex, setActiveIndex }: ModalUserProps) => {
+export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: ModalUserProps) => {
   const { friendsUserInfo } = useRequest();
   const { followings } = useFollow();
+
+  const handleClickCloseModal = () => {
+    setFriendsModal(false);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -31,7 +35,11 @@ export const ModalUsers = ({ activeIndex, setActiveIndex }: ModalUserProps) => {
         {activeIndex === 0 &&
           followings.map((following) => (
             <div key={following.id} className={styles.user}>
-              <Link to={`/main/profile/${following.id}`} className={styles.avatar}>
+              <Link
+                to={`/main/profile/${following.id}`}
+                className={styles.avatar}
+                onClick={handleClickCloseModal}
+              >
                 <img
                   src={
                     following.avatar == null
@@ -41,7 +49,11 @@ export const ModalUsers = ({ activeIndex, setActiveIndex }: ModalUserProps) => {
                   alt={following.firstName + '' + following.lastName}
                 />
               </Link>
-              <Link to={`/main/profile/${following.id}`} className={styles.name}>
+              <Link
+                to={`/main/profile/${following.id}`}
+                className={styles.name}
+                onClick={handleClickCloseModal}
+              >
                 <span>{following.firstName}</span>
                 <span>{following.lastName}</span>
               </Link>
@@ -50,13 +62,21 @@ export const ModalUsers = ({ activeIndex, setActiveIndex }: ModalUserProps) => {
         {activeIndex === 1 &&
           friendsUserInfo.map((friend) => (
             <div key={friend.id} className={styles.user}>
-              <Link to={`/main/profile/${friend.id}`} className={styles.avatar}>
+              <Link
+                to={`/main/profile/${friend.id}`}
+                className={styles.avatar}
+                onClick={handleClickCloseModal}
+              >
                 <img
                   src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
                   alt={friend.firstName + '' + friend.lastName}
                 />
               </Link>
-              <Link to={`/main/profile/${friend.id}`} className={styles.name}>
+              <Link
+                to={`/main/profile/${friend.id}`}
+                className={styles.name}
+                onClick={handleClickCloseModal}
+              >
                 <span>{friend.firstName}</span>
                 <span>{friend.lastName}</span>
               </Link>

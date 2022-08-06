@@ -3,9 +3,11 @@ import styles from './FriendsOnline.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
 import { Search } from '../../../../components/UI/Search/Search';
 import { FriendOnlineProps } from './FriendOnline.props';
+import { useFollow } from '../../../../hooks/useFollow';
 
 export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnlineProps) => {
   const [text, setText] = React.useState<string>('');
+  const { followings } = useFollow();
 
   const filteredOnlineFriends = friendsOnline.filter((friend) =>
     (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
@@ -20,7 +22,7 @@ export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnline
   );
 
   const conditions =
-    window.location.pathname !== '/main/user-friends/followers'
+    window.location.pathname !== '/main/user-friends'
       ? filteredOnlineFriends.length > 0
       : filteredOnlineUsersFriends.length > 0;
 
@@ -31,7 +33,14 @@ export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnline
         height: conditions ? 'fit-content' : 'calc(100vh - 216px)',
       }}
     >
-      <Search setText={setText} placeholder={'Поиск друзей'} />
+      <Search
+        setText={setText}
+        placeholder={
+          window.location.pathname === '/main/user-friends/followers'
+            ? 'Поиск подписчиков'
+            : 'Поиск друзей'
+        }
+      />
       <div
         className={styles.grid}
         style={{
@@ -56,6 +65,15 @@ export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnline
               ))
             ) : (
               <div className={styles.noOnlineFriends}>Друзей онлайн нет</div>
+            )}
+          </>
+        )}
+        {window.location.pathname === '/main/user-friends/followers' && (
+          <>
+            {followings.length > 0 ? (
+              followings.map((friend) => <FriendCard key={friend.id} friend={friend} />)
+            ) : (
+              <div className={styles.noOnlineFriends}>Подписчиков нет</div>
             )}
           </>
         )}
