@@ -13,12 +13,11 @@ import { ModalMessage } from '../../../components/ModalMessage/ModalMessage';
 import { ButtonsFriend } from '../../../components/UI/ButtonsFriend/ButtonsFriend';
 
 export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
-  const { id } = useParams();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [hover, setHover] = React.useState<boolean>(false);
-
   const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [avatarModal, setAvatarModal] = React.useState<boolean>(false);
+  const { id } = useParams();
 
   const variantsModal = {
     open: { opacity: 1, height: '20%' },

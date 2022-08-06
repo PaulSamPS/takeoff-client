@@ -8,7 +8,7 @@ import { useFollow } from '../../../hooks/useFollow';
 import { useAppSelector } from '../../../hooks/redux';
 import { ButtonFriendProps } from './ButtonFriend.props';
 
-export const ButtonsFriend = ({ id }: ButtonFriendProps) => {
+export const ButtonsFriend = ({ userId }: ButtonFriendProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { friends, request, addFriend } = useRequest();
   const { followings, handleFollow, handleUnfollow } = useFollow();
@@ -18,10 +18,10 @@ export const ButtonsFriend = ({ id }: ButtonFriendProps) => {
 
   return (
     <>
-      {!friendsDone.includes(id!) ? (
+      {!friendsDone.includes(userId!) ? (
         <div className={styles.follow}>
-          {!followingDone.includes(id!) && requestsDone.includes(id!) ? (
-            <Button appearance='primary' onClick={() => addFriend(id!)}>
+          {!followingDone.includes(userId!) && requestsDone.includes(userId!) ? (
+            <Button appearance='primary' onClick={() => addFriend(userId!)}>
               Добавить в друзья
             </Button>
           ) : followingDone.includes(loginUser.id) ? (

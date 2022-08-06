@@ -33,6 +33,7 @@ export const useRequest = (): IReturn => {
 
   const addFriend = (addFriendUserId: string | undefined) => {
     socket?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
+    socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
   };
 
   const rejectFriend = (rejectFriendUserId: string | undefined) => {
@@ -48,7 +49,6 @@ export const useRequest = (): IReturn => {
     socket?.emit('friendsRequest:get', {
       userId: user.id,
     });
-    console.log('reject');
     socket?.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
     });
