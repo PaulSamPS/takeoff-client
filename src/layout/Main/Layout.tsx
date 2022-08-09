@@ -87,12 +87,14 @@ export const Layout = () => {
           </div>
         </div>
       </div>
-      <Toast
-        setModal={setShowNewMessageModal}
-        modal={showNewMessageModal}
-        bannerData={bannerData}
-        newMessageReceived={newMessageReceived}
-      />
+      {loginUser.settings.notification.messagesToast && (
+        <Toast
+          setModal={setShowNewMessageModal}
+          modal={showNewMessageModal}
+          bannerData={bannerData}
+          newMessageReceived={newMessageReceived}
+        />
+      )}
     </>
   );
 };

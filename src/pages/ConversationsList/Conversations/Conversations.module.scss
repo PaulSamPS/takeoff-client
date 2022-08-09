@@ -2,11 +2,12 @@
 
 .borderTop {
 	position: fixed;
-	top: 71px;
+	top: 48px;
 	z-index: 9;
-	width: 550px;
+	left: 0;
+	width: 100%;
 	border-bottom: 0 solid var(--bg);
-	border-bottom-width: 24px;
+	border-bottom-width: 50px;
 }
 
 .borderTopSidebar {
