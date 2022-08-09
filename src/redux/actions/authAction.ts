@@ -33,6 +33,14 @@ export const login = (formData: ILoginForm) => async (dispatch: AppDispatch) => 
       dispatch(loginReducer.actions.setError(e.response?.data.message));
     });
 };
+interface IObj {
+  userId: string;
+  notification: boolean;
+}
+
+export const setSettings = (obj: IObj) => async (dispatch: AppDispatch) => {
+  await $api.post(`api/auth/settings`, obj);
+};
 
 export const logout = () => (dispatch: AppDispatch) => {
   dispatch(loginReducer.actions.setLoading());

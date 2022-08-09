@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 import styles from './SettingsNotifications.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setNotificationMessage } from '../../../redux/reducers/auth/loginReducer';
+import { setSettings } from '../../../redux/actions/authAction';
 
 export const SettingsNotifications = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -11,8 +12,13 @@ export const SettingsNotifications = () => {
   const dispatch = useAppDispatch();
 
   const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    const obj = {
+      userId: loginUser.id,
+      notification: e.target.checked,
+    };
     setChecked(e.target.checked);
     dispatch(setNotificationMessage(e.target.checked));
+    dispatch(setSettings(obj));
   };
 
   return (
