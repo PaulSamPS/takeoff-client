@@ -33,4 +33,24 @@
       }
     }
   }
+
+  .bottom {
+    background: var(--bg-grey-light);
+    text-align: center;
+    color: var(--black);
+    font-size: 13px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0 0 4px 4px;
+
+    span {
+      color: var(--blue);
+      transition: all ease .2s;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

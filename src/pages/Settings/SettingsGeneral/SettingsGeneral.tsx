@@ -8,8 +8,11 @@ export const SettingsGeneral = () => {
       <div className={styles.body}>
         <div className={styles.item}>
           <div>Пароль</div>
-          <div className={styles.change}>Изменить</div>
+          <span className={styles.change}>Изменить</span>
         </div>
+      </div>
+      <div className={styles.bottom}>
+        Вы можете <span>удалить свою страницу</span>
       </div>
     </div>
   );
