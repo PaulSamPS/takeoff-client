@@ -27,7 +27,11 @@ export const ProfileMenu = ({ setVisibleMenu, ...props }: ProfileMenuType) => {
 
   return (
     <div className={styles.wrapper} ref={ref} {...props}>
-      <CustomLink to={'#'} style={{ padding: '5px 10px' }} onClick={() => setVisibleMenu(false)}>
+      <CustomLink
+        to={'/main/settings'}
+        style={{ padding: '5px 10px' }}
+        onClick={() => setVisibleMenu(false)}
+      >
         <SettingsIcon />
         Настройки
       </CustomLink>

@@ -7,7 +7,7 @@ import { useAppSelector } from '../../hooks/redux';
 import { useNotifications } from '../../hooks/useNotifications';
 import { Notification } from '../Notification/Notification';
 
-export const NotificationList = ({ setVisibleNotification }: NotificationListProps) => {
+export const NotificationList = ({ setVisibleNotification, ...props }: NotificationListProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const ref = React.useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setVisibleNotification(false));
@@ -16,10 +16,12 @@ export const NotificationList = ({ setVisibleNotification }: NotificationListPro
     notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0;
 
   return (
-    <div className={styles.wrapper} ref={ref}>
+    <div className={styles.wrapper} ref={ref} {...props}>
       <div className={styles.top}>
         <span>Ваша страница</span>
-        <Link to={'#'}>Настройки</Link>
+        <Link to={'/main/settings'} onClick={() => setVisibleNotification(false)}>
+          Настройки
+        </Link>
       </div>
       <div className={styles.middle} style={{ display: notificationsLength ? 'block' : 'flex' }}>
         {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (

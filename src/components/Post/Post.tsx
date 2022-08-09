@@ -33,7 +33,7 @@ export const Post = ({ post }: PostProps) => {
         <PostLike post={post} />
         <div
           className={cn(styles.iconBg, { [styles.iconBgHover]: comments.length > 3 })}
-          style={{ cursor: comments.length > 3 ? 'pointer' : 'none' }}
+          style={{ cursor: comments.length > 3 ? 'pointer' : 'auto' }}
           onClick={comments.length > 3 ? () => setIsAllComments(!isAllComments) : undefined}
         >
           <div className={styles.icon}>

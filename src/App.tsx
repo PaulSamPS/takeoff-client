@@ -22,6 +22,9 @@ import { Edit } from './pages/Edit/Edit';
 import { EditBasic } from './pages/Edit/EditBasic/EditBasic';
 import { EditContacts } from './pages/Edit/EditContacts/EditContacts';
 import { UserFriends } from './pages/UserFriends/UserFriends';
+import { Settings } from './pages/Settings/Settings';
+import { SettingsGeneral } from './pages/Settings/SettingsGeneral/SettingsGeneral';
+import { SettingsNotifications } from './pages/Settings/SettingsNotifications/SettingsNotifications';
 
 export const App = () => {
   const { socket } = context();
@@ -64,6 +67,10 @@ export const App = () => {
               <Route path='user-friends' element={<UserFriends />}>
                 <Route index element={<Friends />} />
                 <Route path='followers' element={<Friends />} />
+              </Route>
+              <Route path='settings' element={<Settings />}>
+                <Route index element={<SettingsGeneral />} />
+                <Route path='notifications' element={<SettingsNotifications />} />
               </Route>
             </Route>
             <Route path='*' element={<Navigate to='/' replace />} />

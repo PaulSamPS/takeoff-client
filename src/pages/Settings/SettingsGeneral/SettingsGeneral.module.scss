@@ -1,0 +1,36 @@
+.wrapper {
+  width: 550px;
+  background: var(--white);
+  border-radius: 4px;
+
+  .top {
+    background: var(--bg-grey-light);
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    border-radius: 4px 4px 0 0;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .body {
+    font-size: 13px;
+    color: var(--grey);
+    padding: 15px 20px;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .change {
+        color: var(--blue);
+        cursor: pointer;
+        transition: all ease .2s;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
