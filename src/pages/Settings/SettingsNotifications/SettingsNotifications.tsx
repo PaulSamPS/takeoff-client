@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './SettingsNotifications.module.scss';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { setNotificationMessage } from '../../../redux/reducers/auth/loginReducer';
 
 export const SettingsNotifications = () => {
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
+  const [checked, setChecked] = React.useState<boolean>(
+    loginUser.settings.notification.messagesToast
+  );
+  const dispatch = useAppDispatch();
+
+  const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
+    dispatch(setNotificationMessage(e.target.checked));
+  };
+
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.top}>Уведомления на сайте</h2>
       <div className={styles.item}>
         <span>Показывать мгновенные уведомления</span>
-        <input type='checkbox' name='toggle' id='toggle-button' className={styles.toggleButton} />
+        <input
+          type='checkbox'
+          name='toggle'
+          checked={checked}
+          onChange={handleChecked}
+          className={styles.toggleButton}
+        />
       </div>
     </div>
   );

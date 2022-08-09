@@ -17,6 +17,11 @@ export interface IUser {
     gender: string;
     familyStatus: string;
   };
+  settings: {
+    notification: {
+      messagesToast: boolean;
+    };
+  };
 }
 
 export interface IUserNotifications {

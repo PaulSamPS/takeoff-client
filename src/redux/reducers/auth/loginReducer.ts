@@ -29,7 +29,12 @@ export const loginReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    setNotificationMessage(state, action: PayloadAction<boolean>) {
+      state.user.settings.notification.messagesToast = action.payload;
+    },
   },
 });
+
+export const { setNotificationMessage } = loginReducer.actions;
 
 export default loginReducer.reducer;
