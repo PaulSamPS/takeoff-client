@@ -11,6 +11,7 @@ import styles from '../Auth.module.scss';
 import './select.scss';
 import { gender } from '../../../helpers/optionsSelect/gender';
 import { useRegistration } from '../../../hooks/useRegistration';
+import { city } from '../../../helpers/optionsSelect/city';
 
 export const Registration = (): JSX.Element => {
   const {
@@ -23,6 +24,7 @@ export const Registration = (): JSX.Element => {
   const { isLoading, error } = useAppSelector((state) => state.registrationReducer);
   const { handleSwitchMethod, onSubmit } = useRegistration({ reset, error });
   const optionsGender = gender();
+  const optionsCity = city();
 
   if (isLoading) {
     return <Spinner />;
@@ -87,6 +89,20 @@ export const Registration = (): JSX.Element => {
             classNamePrefix='select'
             options={optionsGender}
             placeholder='Выберите пол'
+          />
+        )}
+      />
+      <Controller
+        name='city'
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <Select
+            {...field}
+            className={styles.selectContainer}
+            classNamePrefix='select'
+            options={optionsCity}
+            placeholder='Выберите город'
           />
         )}
       />

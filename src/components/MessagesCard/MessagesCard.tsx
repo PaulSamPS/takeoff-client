@@ -4,7 +4,7 @@ import { API_URL } from '../../http/axios';
 import { Link } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import { MessagesCardProp } from './MessagesCard.prop';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { setOpenChat } from '../../redux/reducers/openChatReducer';
 import cn from 'classnames';
 import { Count } from '../Count/Count';
@@ -12,8 +12,6 @@ import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 
 export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
-  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
-  const usersOnline = users.map((user: any) => user.userId);
   const dispatch = useAppDispatch();
 
   const handleOpenChat = () => {
@@ -37,7 +35,6 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp) => {
           }
           alt={chat.name}
         />
-        {usersOnline.includes(chat.messagesWith) && <div className={styles.online} />}
       </Link>
       <Link
         to={`/main/conversations/${chat.messagesWith}`}

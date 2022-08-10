@@ -32,6 +32,9 @@ export const useRegistration = ({
     if (typeof formData.gender !== 'string') {
       formData.gender = formData.gender.value;
     }
+    if (typeof formData.city !== 'string') {
+      formData.city = formData.city.value;
+    }
     await dispatch(registration(formData)).then(() => {
       if (error == '') {
         navigate('/registration/success');
