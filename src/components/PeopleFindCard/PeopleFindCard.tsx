@@ -16,14 +16,24 @@ export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
   const friend = friends.map((f) => f.id);
   const followingsDone = followings !== null ? followings.map((f) => f.id) : [];
   const requestsDone = request.map((request) => request.id);
+  const [visibleIcon, setVisibleIcon] = React.useState<boolean>(false);
 
   const handleClickFollow = () => {
     localStorage.setItem('followId', user.id);
     handleFollow();
   };
 
+  const handleHover = () => {
+    localStorage.setItem('followId', user.id);
+    setVisibleIcon(true);
+  };
+
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onMouseEnter={handleHover}
+      onMouseLeave={() => setVisibleIcon(false)}
+    >
       <Link to={`/main/profile/${user.id}`} className={styles.avatar}>
         <img
           src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
@@ -32,12 +42,16 @@ export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
       </Link>
       <div className={styles.info}>
         <Link to={`/main/profile/${user.id}`}>{user.firstName + ' ' + user.lastName}</Link>
-        {friend.includes(user.id) ||
-        followingsDone.includes(loginUser.id) ||
-        requestsDone.includes(user.id) ? (
-          <AllReadyFriendsIcon className={styles.allReadyFriends} />
-        ) : (
-          <AddFriendIcon className={styles.addFriend} onClick={handleClickFollow} />
+        {visibleIcon && (
+          <>
+            {friend.includes(user.id) ||
+            requestsDone.includes(user.id) ||
+            followingsDone.includes(loginUser.id) ? (
+              <AllReadyFriendsIcon className={styles.allReadyFriends} />
+            ) : (
+              <AddFriendIcon className={styles.addFriend} onClick={handleClickFollow} />
+            )}
+          </>
         )}
       </div>
     </div>
