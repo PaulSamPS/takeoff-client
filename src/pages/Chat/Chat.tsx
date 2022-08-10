@@ -40,6 +40,8 @@ export const Chat = (): JSX.Element => {
   const { scrollY } = useScroll();
   const { id } = useParams();
 
+  console.log(scrollY, 'sds');
+
   const handleSetText = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };

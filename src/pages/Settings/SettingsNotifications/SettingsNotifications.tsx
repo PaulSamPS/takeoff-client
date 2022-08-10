@@ -11,14 +11,14 @@ export const SettingsNotifications = () => {
   );
   const dispatch = useAppDispatch();
 
-  const handleChecked = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChecked = async (e: ChangeEvent<HTMLInputElement>) => {
     const obj = {
       userId: loginUser.id,
       notification: e.target.checked,
     };
     setChecked(e.target.checked);
     dispatch(setNotificationMessage(e.target.checked));
-    dispatch(setSettings(obj));
+    await dispatch(setSettings(obj));
   };
 
   return (

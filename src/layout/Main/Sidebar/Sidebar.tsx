@@ -29,9 +29,13 @@ export const Sidebar = ({ className }: SidebarProps) => {
     setTotal(totalUnreadMessages);
   }, [socket, chats]);
 
+  const handleSetId = () => {
+      localStorage.setItem('followId', loginUser.id);
+  };
+
   return (
     <div className={cn(styles.wrapper, className)}>
-      <CustomLink to={`/main/profile/${loginUser.id}`} style={{ padding: '0' }}>
+      <CustomLink to={`/main/profile/${loginUser.id}`} style={{ padding: '0' }} onClick={handleSetId}>
         <MyProfileIcon /> Моя страница
       </CustomLink>
       <CustomLink to={'/main/news'} style={{ padding: '0' }}>

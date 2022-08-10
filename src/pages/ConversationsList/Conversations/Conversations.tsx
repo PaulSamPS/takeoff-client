@@ -21,8 +21,6 @@ export const Conversations = () => {
 
   return (
     <>
-      <div className={styles.borderTop} />
-      <div className={styles.borderTopSidebar} />
       <div
         className={styles.wrapper}
         style={{

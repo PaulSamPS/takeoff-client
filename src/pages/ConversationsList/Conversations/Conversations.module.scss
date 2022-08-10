@@ -1,25 +1,5 @@
 @import "../../../scss/index";
 
-.borderTop {
-	position: fixed;
-	top: 48px;
-	z-index: 9;
-	left: 0;
-	width: 100%;
-	border-bottom: 0 solid var(--bg);
-	border-bottom-width: 50px;
-}
-
-.borderTopSidebar {
-	position: fixed;
-	top: 71px;
-	right: 0;
-	z-index: 11;
-	width: 100%;
-	border-bottom: 0 solid var(--bg);
-	border-bottom-width: 19px;
-}
-
 .wrapper {
 	grid-template-rows: 1fr;
 	width: 550px;
@@ -30,7 +10,7 @@
 
 	.search {
 		position: fixed !important;
-		top: 90px !important;
+		top: 70px !important;
 		z-index: 11 !important;
 		width: 550px !important;
 		border-radius: 5px 5px 0 0;
@@ -52,5 +32,8 @@
 		justify-content: center;
 		color: #939393;
 		font-size: 13px;
+		min-height: 200px;
+		background: var(--white);
+		border-radius: 0 0 4px 4px;
 	}
 }

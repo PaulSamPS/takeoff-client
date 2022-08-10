@@ -21,6 +21,7 @@ export const ConversationsList = () => {
 
   return (
     <div className={styles.wrapper}>
+      <div className={styles.borderTop} />
       <Outlet />
       <RightBar
         totalUnviewed={total}

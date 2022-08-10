@@ -15,7 +15,9 @@
   .body {
     font-size: 13px;
     color: var(--grey);
-    padding: 15px 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 
     .item {
       display: flex;
@@ -26,6 +28,36 @@
         color: var(--blue);
         cursor: pointer;
         transition: all ease .2s;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .changePassword {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+
+      .password {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 130px 1fr;
+        row-gap: 20px;
+      }
+
+      button {
+        width: fit-content;
+        align-self: center;
+      }
+      
+      .hide {
+        color: var(--blue);
+        font-size: 13px;
+        cursor: pointer;
+        transition: all ease .2s;
+        text-align: center;
 
         &:hover {
           text-decoration: underline;
