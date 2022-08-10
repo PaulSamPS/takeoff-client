@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import positionReducer from './reducers/positionReducer';
 import cityReducer from './reducers/cityReducer';
 import registrationReducer from './reducers/auth/registrationReducer';
 import loginReducer from './reducers/auth/loginReducer';
@@ -10,7 +9,6 @@ import conversationReducer from './reducers/conversationReducer';
 import postsReducer from './reducers/postsReducer';
 import openChatReducer from './reducers/openChatReducer';
 import socketOnlineUserReducer from './reducers/socketUsersReducer';
-import notificationReducer from './reducers/notificationReducer';
 
 const persistConfig = {
   key: 'root',
@@ -19,7 +17,6 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  positionReducer,
   cityReducer,
   registrationReducer,
   loginReducer,
@@ -28,7 +25,6 @@ const rootReducer = combineReducers({
   postsReducer,
   openChatReducer,
   socketOnlineUserReducer,
-  notificationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -6,6 +6,7 @@ export interface IUser {
   role: string;
   avatar: string;
   lastVisit: Date;
+  notificationCount: number;
   bio: {
     birthday: {
       day: string;

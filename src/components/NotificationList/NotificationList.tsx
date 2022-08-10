@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 import { useNotifications } from '../../hooks/useNotifications';
 import { Notification } from '../Notification/Notification';
+import { Spinner } from '../UI/Spinner/Spinner';
 
 export const NotificationList = ({ setVisibleNotification, ...props }: NotificationListProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const ref = React.useRef<HTMLDivElement>(null);
+  const { notifications, isLoading } = useNotifications();
   useOnClickOutside(ref, () => setVisibleNotification(false));
-  const { notifications } = useNotifications();
   const notificationsLength =
     notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0;
 
@@ -24,16 +25,23 @@ export const NotificationList = ({ setVisibleNotification, ...props }: Notificat
         </Link>
       </div>
       <div className={styles.middle} style={{ display: notificationsLength ? 'block' : 'flex' }}>
-        {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (
+        {!isLoading ? (
           <>
-            {notifications.notifications
-              .filter((n) => n.user._id !== loginUser.id)
-              .map((notification) => (
-                <Notification key={notification._id} notification={notification} />
-              ))}
+            {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (
+              <>
+                {notifications.notifications
+                  .slice(0, 10)
+                  .filter((n) => n.user._id !== loginUser.id)
+                  .map((notification) => (
+                    <Notification key={notification._id} notification={notification} />
+                  ))}
+              </>
+            ) : (
+              <div className={styles.noNotifications}>Нет уведомлений</div>
+            )}
           </>
         ) : (
-          <div className={styles.noNotifications}>Нет уведомлений</div>
+          <Spinner />
         )}
       </div>
       {notifications.notifications.filter((n) => n._id !== loginUser.id).length > 0 && (

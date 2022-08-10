@@ -28,17 +28,35 @@ export const useNotifications = () => {
     user: {} as IUser,
     notifications: [],
   });
+  const [notificationsCount, setNotificationsCount] = React.useState<number>(0);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    setIsLoading(true);
     socket?.emit('notification:get', { userId: loginUser.id });
     socket?.on('notifications', ({ notification }) => {
       setNotifications(notification);
     });
+    socket?.on('notifications:count', ({ count }) => {
+      setNotificationsCount(count);
+    });
+    setIsLoading(false);
 
     return () => {
       socket?.off('notifications');
+      socket?.off('notifications:count');
     };
-  }, [socket]);
+  }, [socket, window.location.pathname]);
 
-  return { notifications };
+  const handleReadNotifications = () => {
+    socket?.emit('notifications:read', {
+      userId: loginUser.id,
+      readNotificationsCount: notificationsCount,
+    });
+    socket?.on('notifications:unread', ({ count }) => {
+      setNotificationsCount(count);
+    });
+  };
+
+  return { notifications, notificationsCount, handleReadNotifications, isLoading };
 };

@@ -22,6 +22,7 @@ export const PostLike = ({ post }: PostLikeProps) => {
               to={`/main/profile/${like.user._id}`}
               key={like._id}
               className={styles.likedPopup}
+              onClick={() => localStorage.setItem('followId', post.user._id)}
             >
               <img
                 src={

@@ -30,7 +30,7 @@ interface IMessage {
 export const Chat = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
-  const { user } = useAppSelector((state) => state.loginReducer);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [text, setText] = React.useState<string>('');
   const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
@@ -39,8 +39,6 @@ export const Chat = (): JSX.Element => {
   const onlineUser = users.map((u) => u.userId);
   const { scrollY } = useScroll();
   const { id } = useParams();
-
-  console.log(scrollY, 'sds');
 
   const handleSetText = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -64,8 +62,8 @@ export const Chat = (): JSX.Element => {
   }, [messages]);
 
   React.useEffect(() => {
-    socket?.emit('message:read', { userId: user.id, msgSendToUserId: id });
-    setTimeout(() => socket?.emit('chat:get', { userId: user.id }), 1000);
+    socket?.emit('message:read', { userId: loginUser.id, msgSendToUserId: id });
+    setTimeout(() => socket?.emit('chat:get', { userId: loginUser.id }), 1000);
   }, [socket]);
 
   return (
@@ -106,22 +104,30 @@ export const Chat = (): JSX.Element => {
               <div className={styles.chat}>
                 {messages.map((m: IMessage, index) => (
                   <div key={index} className={styles.messages}>
-                    {user.id == m.sender ? (
+                    {loginUser.id == m.sender ? (
                       <>
                         <div className={styles.messageBlock}>
-                          <Link to={`/main/profile/${user.id}`} className={styles.avatar}>
+                          <Link
+                            to={`/main/profile/${loginUser.id}`}
+                            className={styles.avatar}
+                            onClick={() => localStorage.setItem('followId', loginUser.id)}
+                          >
                             <img
                               src={
-                                user.avatar === null
+                                loginUser.avatar === null
                                   ? `/photo.png`
-                                  : `${API_URL}/avatar/${user.avatar}`
+                                  : `${API_URL}/avatar/${loginUser.avatar}`
                               }
-                              alt={user.firstName + ' ' + user.lastName}
+                              alt={loginUser.firstName + ' ' + loginUser.lastName}
                             />
                           </Link>
                           <div className={styles.name}>
-                            <Link to={`/main/profile/${user.id}`} className={styles.userName}>
-                              {user.firstName + ' ' + user.lastName}
+                            <Link
+                              to={`/main/profile/${loginUser.id}`}
+                              className={styles.userName}
+                              onClick={() => localStorage.setItem('followId', loginUser.id)}
+                            >
+                              {loginUser.firstName + ' ' + loginUser.lastName}
                             </Link>
                             <span className={styles.time}>{calculateTime(m.date)}</span>
                           </div>

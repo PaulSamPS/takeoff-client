@@ -11,14 +11,21 @@ export const PostBody = ({ post }: PostBodyProps) => {
   return (
     <>
       <div className={styles.user}>
-        <Link to={`/user-profile?user=${post.user._id}`}>
+        <Link
+          to={`/main/profile/${post.user._id}`}
+          onClick={() => localStorage.setItem('followId', post.user._id)}
+        >
           <img
             src={post.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${post.user.avatar}`}
             alt={post.user.firstName + ' ' + post.user.lastName}
           />
         </Link>
         <div className={styles.userPost}>
-          <Link to={`/main/profile/${post.user._id}`} className={styles.userName}>
+          <Link
+            to={`/main/profile/${post.user._id}`}
+            className={styles.userName}
+            onClick={() => localStorage.setItem('followId', post.user._id)}
+          >
             {post.user.firstName + ' ' + post.user.lastName}
           </Link>
           <span className={styles.date}>{calculateTime(post.createdAt)}</span>

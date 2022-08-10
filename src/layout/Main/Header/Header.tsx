@@ -17,9 +17,7 @@ export const Header = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [visibleMenu, setVisibleMenu] = React.useState<boolean>(false);
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
-  const { notifications } = useNotifications();
-
-  const totalNotifications = notifications.notifications.filter((n) => n.user._id !== loginUser.id);
+  const { notificationsCount, handleReadNotifications } = useNotifications();
 
   return (
     <div className={styles.container}>
@@ -32,12 +30,13 @@ export const Header = () => {
           <SearchIcon />
         </div>
         <div className={styles.notification} onClick={() => setVisibleNotification(true)}>
-          <div className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}>
+          <div
+            className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}
+            onClick={handleReadNotifications}
+          >
             <NotificationIcon />
           </div>
-          {totalNotifications.length > 0 && (
-            <Count className={styles.count}>{totalNotifications.length}</Count>
-          )}
+          {notificationsCount > 0 && <Count className={styles.count}>{notificationsCount}</Count>}
           {visibleNotification && (
             <NotificationList setVisibleNotification={setVisibleNotification} />
           )}

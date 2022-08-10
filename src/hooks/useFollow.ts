@@ -22,7 +22,6 @@ export const useFollow = (): IFollowReturn => {
   const [followings, setFollowings] = React.useState<IUser[]>([]);
   const [followers, setFollowers] = React.useState<IUser[]>([]);
   const { id } = useParams();
-  console.log(id, 'fff');
 
   const handleFollow = () => {
     socket?.emit('follow', {
