@@ -1,13 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-
-interface IChats {
-  avatar: string | null;
-  date: Date;
-  lastMessage: string;
-  messagesWith: string;
-  name: string;
-  countUnreadMessages: number;
-}
+import {IChats} from '../../interfaces/useChat.interface';
 
 export interface MessagesCardProp
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

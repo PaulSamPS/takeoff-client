@@ -68,7 +68,6 @@ export const usePost = (post: IPost) => {
         date: Date.now(),
       };
       setComments((prev: any) => [newComment, ...prev]);
-      document.getElementById('input')!.innerHTML = '';
     });
     setText('');
   };

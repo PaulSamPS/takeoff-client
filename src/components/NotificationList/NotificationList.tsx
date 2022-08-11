@@ -12,9 +12,9 @@ export const NotificationList = ({ setVisibleNotification, ...props }: Notificat
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const ref = React.useRef<HTMLDivElement>(null);
   const { notifications, isLoading } = useNotifications();
-  useOnClickOutside(ref, () => setVisibleNotification(false));
   const notificationsLength =
     notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0;
+  useOnClickOutside(ref, () => setVisibleNotification(false));
 
   return (
     <div className={styles.wrapper} ref={ref} {...props}>

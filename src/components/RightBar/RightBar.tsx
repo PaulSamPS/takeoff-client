@@ -3,7 +3,7 @@ import styles from './RightBar.module.scss';
 import { CustomLink } from '../CustomLink/CustomLink';
 import { Count } from '../Count/Count';
 import { RightBarProps } from './RightBar.props';
-import { useScroll } from '../../hooks/usseScroll';
+import { useScroll } from '../../hooks/useScroll';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { deleteChat } from '../../redux/reducers/openChatReducer';

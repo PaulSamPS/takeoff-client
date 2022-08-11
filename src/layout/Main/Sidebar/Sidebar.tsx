@@ -22,8 +22,8 @@ export const Sidebar = ({ className }: SidebarProps) => {
 
   React.useEffect(() => {
     const totalUnreadMessages = chats
-      .map((chat: any) => chat.countUnreadMessages)
-      .reduce((sum: number, elem: any) => {
+      .map((chat) => chat.countUnreadMessages)
+      .reduce((sum: number, elem: number) => {
         return sum + elem;
       }, 0);
     setTotal(totalUnreadMessages);

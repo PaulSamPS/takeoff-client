@@ -1,8 +1,12 @@
 import React from 'react';
 
-export const useScroll = () => {
+interface IReturnScroll {
+  scrollY: number
+}
+
+export const useScroll = (): IReturnScroll => {
   const isBrowser = typeof window !== 'undefined';
-  const [scrollY, setScrollY] = React.useState(0);
+  const [scrollY, setScrollY] = React.useState<number>(0);
 
   const handleScroll = () => {
     const currentScrollY = isBrowser ? window.scrollY : 0;

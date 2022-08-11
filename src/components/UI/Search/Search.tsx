@@ -3,7 +3,7 @@ import { SearchProps } from './Search.props';
 import { ReactComponent as SearchIcon } from '../../../helpers/icons/search.svg';
 import styles from './Search.module.scss';
 import { Button } from '../Button/Button';
-import { useScroll } from '../../../hooks/usseScroll';
+import { useScroll } from '../../../hooks/useScroll';
 import cn from 'classnames';
 
 export const Search = ({ setText, placeholder, className, ...props }: SearchProps): JSX.Element => {

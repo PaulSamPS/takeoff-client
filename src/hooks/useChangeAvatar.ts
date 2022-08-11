@@ -1,5 +1,5 @@
 import React, { ChangeEvent, SyntheticEvent } from 'react';
-import { IAppendAvatarInterface } from '../interfaces/AppendNews.interface';
+import { IAppendAvatarInterface } from '../interfaces/appendAvatar.interface';
 import { useAppDispatch } from './redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { adminUploadAvatar, uploadAvatar } from '../redux/actions/usersAction';

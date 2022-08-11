@@ -1,43 +1,30 @@
-import { IPost } from '../redux/reducers/postsReducer';
-import { IUser, IUserNotifications } from '../interfaces/user.interface';
+import { IUser} from '../interfaces/user.interface';
 import React from 'react';
 import { SocketContext } from '../helpers/context';
 import { useAppSelector } from './redux';
+import {INotifications, INotificationsReturn} from '../interfaces/useNotifications.interface';
 
-export interface INotification {
-  _id: string;
-  type: 'newLike' | 'newComment' | 'newFollower';
-  user: IUserNotifications;
-  post: IPost;
-  commentId: string;
-  text: string;
-  date: Date;
-}
+const initialStateNotifications = {
+  _id: '',
+  user: {} as IUser,
+  notifications: [],
+};
 
-export interface INotifications {
-  _id: string;
-  user: IUser;
-  notifications: INotification[];
-}
-
-export const useNotifications = () => {
+export const useNotifications = (): INotificationsReturn => {
   const socket = React.useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const [notifications, setNotifications] = React.useState<INotifications>({
-    _id: '',
-    user: {} as IUser,
-    notifications: [],
-  });
+
+  const [notifications, setNotifications] = React.useState<INotifications>(initialStateNotifications);
   const [notificationsCount, setNotificationsCount] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setIsLoading(true);
     socket?.emit('notification:get', { userId: loginUser.id });
-    socket?.on('notifications', ({ notification }) => {
+    socket?.on('notifications', ({ notification }: { notification: INotifications }) => {
       setNotifications(notification);
     });
-    socket?.on('notifications:count', ({ count }) => {
+    socket?.on('notifications:count', ({ count }: {count: number}) => {
       setNotificationsCount(count);
     });
     setIsLoading(false);
@@ -53,7 +40,7 @@ export const useNotifications = () => {
       userId: loginUser.id,
       readNotificationsCount: notificationsCount,
     });
-    socket?.on('notifications:unread', ({ count }) => {
+    socket?.on('notifications:unread', ({ count }: {count: number}) => {
       setNotificationsCount(count);
     });
   };

@@ -3,7 +3,7 @@ import styles from './CreatePost.module.scss';
 import { API_URL } from '../../http/axios';
 import { Input } from '../UI/Input/Input';
 import { ReactComponent as FotoIcon } from '../../helpers/icons/foto.svg';
-import { IAppendAvatarInterface } from '../../interfaces/AppendNews.interface';
+import { IAppendAvatarInterface } from '../../interfaces/appendAvatar.interface';
 import { motion } from 'framer-motion';
 import { Button } from '../UI/Button/Button';
 import { createPost } from '../../redux/actions/postAction';

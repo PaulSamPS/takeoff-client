@@ -6,8 +6,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Sidebar } from './Sidebar/Sidebar';
 import { getChatUser } from '../../redux/actions/chatAction';
 import { Toast } from '../../components/UI/Toast/Toast';
-import { useChat } from '../../hooks/useChat';
-import { useRequest } from '../../hooks/useRequest';
 import { SocketContext } from '../../helpers/context';
 import { setSocketUsers } from '../../redux/reducers/socketUsersReducer';
 
@@ -22,8 +20,6 @@ interface IUsers {
 
 export const Layout = () => {
   const socket = useContext(SocketContext);
-  const { chats } = useChat();
-  const { request } = useRequest();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const dispatch = useAppDispatch();
   const [newMessageReceived, setNewMessageReceived] = React.useState<any>(null);
@@ -81,7 +77,7 @@ export const Layout = () => {
       <div className={styles.wrapper}>
         <Header />
         <div className={styles.main}>
-          <Sidebar className={styles.sidebar} chats={chats} requests={request} />
+          <Sidebar className={styles.sidebar}/>
           <div className={styles.content}>
             <Outlet />
           </div>

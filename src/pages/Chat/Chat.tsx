@@ -14,18 +14,8 @@ import { Emoji } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import reactStringReplace from 'react-string-replace';
 import { Input } from '../../components/UI/Input/Input';
-import { useScroll } from '../../hooks/usseScroll';
+import { useScroll } from '../../hooks/useScroll';
 import { EmojiPicker } from '../../components/UI/EmojiPicker/EmojiPicker';
-
-interface IMessage {
-  senderName: string;
-  receiverName: string;
-  receiver: string;
-  sender: string;
-  message: string;
-  date: Date;
-  _id: string;
-}
 
 export const Chat = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
@@ -102,7 +92,7 @@ export const Chat = (): JSX.Element => {
           <div className={styles.grid}>
             {!loadingMessages ? (
               <div className={styles.chat}>
-                {messages.map((m: IMessage, index) => (
+                {messages.map((m, index) => (
                   <div key={index} className={styles.messages}>
                     {loginUser.id == m.sender ? (
                       <>

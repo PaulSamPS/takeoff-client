@@ -3,33 +3,19 @@ import React from 'react';
 import { SocketContext } from '../helpers/context';
 import { useParams } from 'react-router-dom';
 import { IUser } from '../interfaces/user.interface';
+import {IRequest, IReturnRequest} from '../interfaces/useRequest.interface';
 
-interface IRequest {
-  followingsUser: IUser[];
-}
-
-interface IFriends {
-  friendsUser: IUser[];
-}
-
-interface IReturn {
-  request: IUser[];
-  friends: IUser[];
-  loadingFriends: boolean;
-  friendsUserInfo: IUser[];
-  addFriend: (id: string | undefined) => void;
-  rejectFriend: (id: string | undefined) => void;
-}
-
-export const useRequest = (): IReturn => {
+export const useRequest = (): IReturnRequest => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
+
   const [request, setRequest] = React.useState<IUser[]>([]);
   const [friends, setFriends] = React.useState<IUser[]>([]);
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
-  const { id } = useParams();
+
   const friendId = localStorage.getItem('friendsUserInfo');
+  const { id } = useParams();
 
   const addFriend = (addFriendUserId: string | undefined) => {
     socket?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
@@ -64,19 +50,19 @@ export const useRequest = (): IReturn => {
 
   React.useEffect(() => {
     socket?.emit('friends:get', { userId: user.id });
-    socket?.on('friends:set', ({ friendsUser }: IFriends) => {
+    socket?.on('friends:set', ({ friendsUser }: {friendsUser: IUser[]}) => {
       setFriends(friendsUser);
       setLoadingFriends(false);
     });
     socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
-    socket?.on('friendsUserInfo:set', ({ friendsUser }: IFriends) => {
+    socket?.on('friendsUserInfo:set', ({ friendsUser }: {friendsUser: IUser[]}) => {
       setFriendsUserInfo(friendsUser);
     });
     return () => {
       socket?.off('friends:set');
       socket?.off('friendsUserInfo:set');
     };
-  }, [socket, id]);
+  }, [socket, id, friendId]);
 
   return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
 };

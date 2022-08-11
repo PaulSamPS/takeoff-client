@@ -3,62 +3,15 @@ import { useAppDispatch, useAppSelector } from './redux';
 import { getChatUser } from '../redux/actions/chatAction';
 import { filteredChats } from '../helpers/filteChats';
 import { SocketContext } from '../helpers/context';
-import { useScroll } from './usseScroll';
+import { useScroll } from './useScroll';
 import { useParams } from 'react-router-dom';
-
-interface IBanner {
-  name: string | undefined;
-  avatar: string | undefined;
-  lastVisit?: Date | number;
-  bio: { gender: string | undefined };
-}
-
-// interface IMessagesWith {
-//   _id: string;
-//   name: string;
-//   email: string;
-//   position: string;
-//   level: string;
-//   role: string;
-//   avatar: string;
-//   unreadMessage: boolean;
-//   countUnreadMessages: number;
-//   lastVisit: Date;
-//   isOnline: boolean;
-// }
-
-// interface IMessages {
-//   message: string;
-//   sender: string;
-//   receiver: string;
-//   date: Date;
-//   _id: string;
-// }
-
-// interface IChat {
-//   chat: {
-//     messagesWith: IMessagesWith;
-//     messages: IMessages[];
-//   };
-// }
-
-interface INewMessage {
-  newMessage: {
-    sender: string;
-    receiver: string;
-    message: string;
-    date: Date | null;
-  };
-}
-
-interface IChats {
-  avatar: string | null;
-  date: Date;
-  lastMessage: string;
-  messagesWith: string;
-  name: string;
-  countUnreadMessages: number;
-}
+import {
+  IBanner,
+  IChatLoadMore,
+  IChats,
+  IMessages,
+  IReturn
+} from '../interfaces/useChat.interface';
 
 const initialStateBannerData = {
   name: '',
@@ -67,24 +20,34 @@ const initialStateBannerData = {
   bio: { gender: '' },
 };
 
-export const useChat = () => {
+const initialStateChats = [{
+  avatar: null,
+  date: Date.now(),
+  lastMessage: '',
+  messagesWith: '',
+  name: '',
+  countUnreadMessages: 0,
+  lastVisit: Date.now()
+}];
+
+export const useChat = (): IReturn => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
-  const { conversation } = useAppSelector((state) => state.conversationReducer);
-  const { id } = useParams();
   const dispatch = useAppDispatch();
-  const [messages, setMessages] = React.useState<any[]>([]);
-  const [bannerData, setBannerData] = React.useState<IBanner>(initialStateBannerData);
-  const receiverUserId = localStorage.getItem('receiverUserId');
 
-  const openChatId = React.useRef<string | null>('');
-  const [chats, setChats] = React.useState<IChats[]>(conversation);
+  const [messages, setMessages] = React.useState<IMessages[]>([]);
+  const [bannerData, setBannerData] = React.useState<IBanner>(initialStateBannerData);
+  const [chats, setChats] = React.useState<IChats[]>(initialStateChats);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
   const [totalMessages, setTotalMessages] = React.useState<number>(0);
   const [currentCountMessages, setCurrentCountMessages] = React.useState<number>(20);
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
+
   const { scrollY } = useScroll();
+  const openChatId = React.useRef<string | null>('');
+  const receiverUserId = localStorage.getItem('receiverUserId');
+  const { id } = useParams();
 
   React.useEffect(() => {
     if (scrollY <= 0 && messages.length < totalMessages) {
@@ -100,7 +63,7 @@ export const useChat = () => {
         messagesWith: id,
       });
 
-      socket?.on('message_list:update', ({ chat }: any) => {
+      socket?.on('message_list:update', ({ chat }: IChatLoadMore) => {
         setMessages(chat.messages.slice(-currentCountMessages));
         setLoadingMessages(false);
         setIsFetching(false);
@@ -117,7 +80,7 @@ export const useChat = () => {
 
   React.useEffect(() => {
     socket?.emit('chat:get', { userId: user.id });
-    socket?.on('chat:send', ({ chatsToBeSent }) => {
+    socket?.on('chat:send', ({ chatsToBeSent }: {chatsToBeSent: IChats[]}) => {
       setChats(chatsToBeSent);
       setLoading(false);
     });
@@ -132,13 +95,13 @@ export const useChat = () => {
       messagesWith: id,
     });
 
-    socket?.on('message_list:update', ({ chat }: any) => {
+    socket?.on('message_list:update', ({ chat }: IChatLoadMore) => {
       setMessages(chat.messages.slice(-currentCountMessages));
       setBannerData({
         name: chat.messagesWith.firstName + ' ' + chat.messagesWith.lastName,
         avatar: chat.messagesWith.avatar,
         lastVisit: chat.messagesWith.lastVisit,
-        bio: chat.messagesWith.bio.gender,
+        bio: {gender: chat.messagesWith.bio.gender},
       });
       openChatId.current = chat.messagesWith._id;
       setTotalMessages(chat.messages.length);
@@ -163,9 +126,9 @@ export const useChat = () => {
   };
 
   React.useEffect(() => {
-    socket?.on('messages:sent', ({ newMessage }: INewMessage) => {
+    socket?.on('messages:sent', ({ newMessage }: {newMessage: IMessages}) => {
       if (newMessage.receiver === id) {
-        setMessages((prev: any) => [...prev, newMessage]);
+        setMessages((prev) => [...prev, newMessage]);
         setChats((prev) => {
           const receiver = newMessage.receiver;
           filteredChats(prev, newMessage, receiver);
@@ -174,7 +137,7 @@ export const useChat = () => {
       }
     });
 
-    socket?.on('message:received', async ({ newMessage }: INewMessage) => {
+    socket?.on('message:received', async ({ newMessage }: {newMessage: IMessages}) => {
       if (newMessage.sender === id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev) => {
@@ -183,35 +146,37 @@ export const useChat = () => {
         });
       } else {
         const ifPreviouslyMessaged =
-          chats.filter((chat: any) => chat.messagesWith === newMessage.sender).length > 0;
+          chats.filter((chat) => chat.messagesWith === newMessage.sender).length > 0;
 
         if (ifPreviouslyMessaged) {
           setChats((prev) => {
             const { previousChat } = filteredChats(prev, newMessage);
-            console.log(previousChat);
             return [
               previousChat,
-              ...prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),
+              ...prev.filter((chat) => chat.messagesWith !== newMessage.sender),
             ];
           });
         } else {
           const user = await dispatch(getChatUser(newMessage.sender));
           setBannerData({
-            name: user?.firstName + ' ' + user?.lastName,
-            avatar: user?.avatar,
-            bio: { gender: user?.bio.gender },
+            name: user!.firstName + ' ' + user!.lastName,
+            avatar: user!.avatar,
+            bio: { gender: user!.bio.gender },
           });
 
-          const newChat = {
+          const newChat: IChats = {
             messagesWith: newMessage.sender,
-            name: user?.firstName + ' ' + user?.lastName,
-            avatar: user?.avatar,
+            name: user!.firstName + ' ' + user!.lastName,
+            avatar: user!.avatar,
             lastMessage: newMessage.message,
             date: newMessage.date,
+            countUnreadMessages: 0,
+            lastVisit: 0
           };
-          setChats((prev: any) => [
+
+          setChats((prev) => [
             newChat,
-            ...prev.filter((chat: any) => chat.messagesWith !== newMessage.sender),
+            ...prev.filter((chat) => chat.messagesWith !== newMessage.sender),
           ]);
         }
       }
@@ -231,7 +196,6 @@ export const useChat = () => {
   };
 
   return {
-    user,
     messages,
     bannerData,
     sendMessage,
