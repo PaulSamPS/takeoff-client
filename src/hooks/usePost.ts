@@ -3,33 +3,17 @@ import { SocketContext } from '../helpers/context';
 import { useAppDispatch, useAppSelector } from './redux';
 import { deletePost } from '../redux/actions/postAction';
 import { IPost } from '../redux/reducers/postsReducer';
+import {ICommentsPost, ILikes, IPostReturn} from '../interfaces/usePost.interface';
 
-interface IUserPost {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  avatar: string | null;
-}
-
-interface ILikes {
-  _id: string;
-  user: IUserPost;
-}
-
-interface ICommentsPost {
-  _id: string;
-  user: IUserPost;
-  text: string;
-  date: Date;
-}
-
-export const usePost = (post: IPost) => {
+export const usePost = (post: IPost): IPostReturn => {
   const socket = React.useContext(SocketContext);
-  const [likes, setLikes] = React.useState<ILikes[]>(post.likes);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const [comments, setComments] = React.useState<ICommentsPost[]>(post.comments);
-  const [text, setText] = React.useState<string | null>('');
   const dispatch = useAppDispatch();
+
+  const [likes, setLikes] = React.useState<ILikes[]>(post.likes);
+  const [comments, setComments] = React.useState<ICommentsPost[]>(post.comments);
+  const [text, setText] = React.useState<string>('');
+
   const isLiked =
     likes.length > 0 && likes.filter((like) => like.user._id === loginUser.id).length > 0;
 
@@ -40,34 +24,39 @@ export const usePost = (post: IPost) => {
       userToNotifyId: post.user._id,
       like: isLiked ? false : true,
     });
-    socket?.once('post:liked', ({ likeId }) => {
+    socket?.once('post:liked', ({ likeId }: {likeId: string}) => {
       if (isLiked) {
-        setLikes((prev: any) => prev.filter((like: ILikes) => like.user._id !== loginUser.id));
+        setLikes((prev) => prev.filter((like: ILikes) => like.user._id !== loginUser.id));
       } else {
         const newLike = {
           _id: likeId,
           user: {
             _id: loginUser.id,
             avatar: loginUser.avatar,
-            firsName: loginUser.firstName,
+            firstName: loginUser.firstName,
             lastName: loginUser.lastName,
           },
         };
-        setLikes((prev: any) => [...prev, newLike]);
+        setLikes((prev) => [...prev, newLike]);
       }
     });
   };
 
   const handleComment = () => {
     socket?.emit('comment:post', { postId: post._id, userId: loginUser.id, text: text });
-    socket?.once('post:commented', ({ commentId }) => {
-      const newComment = {
+    socket?.once('post:commented', ({ commentId }: {commentId: string}) => {
+      const newComment: ICommentsPost = {
         _id: commentId,
-        user: loginUser,
+        user: {
+          _id: loginUser.id,
+          avatar: loginUser.avatar,
+          firstName: loginUser.firstName,
+          lastName: loginUser.lastName,
+        },
         text,
         date: Date.now(),
       };
-      setComments((prev: any) => [newComment, ...prev]);
+      setComments((prev) => [newComment, ...prev]);
     });
     setText('');
   };
