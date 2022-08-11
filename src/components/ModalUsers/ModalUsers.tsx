@@ -7,7 +7,7 @@ import cn from 'classnames';
 import { ModalUserProps } from './ModalUser.props';
 import { useFollow } from '../../hooks/useFollow';
 
-export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: ModalUserProps) => {
+export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: ModalUserProps): JSX.Element => {
   const { friendsUserInfo } = useRequest();
   const { followings } = useFollow();
 

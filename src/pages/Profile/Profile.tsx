@@ -8,18 +8,15 @@ import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
 import { ProfileFriends } from './ProfileFriends/ProfileFriends';
 import { ProfilePost } from './ProfilePost/ProfilePost';
 
-interface IUserInfo {
-  user: IUser;
-}
-
 export const Profile = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
-  const { id } = useParams();
   const [user, setUser] = React.useState<IUser>();
+
+  const { id } = useParams();
 
   React.useEffect(() => {
     socket?.emit('userInfo:get', { userId: id });
-    socket?.on('userInfo:user', ({ user }: IUserInfo) => {
+    socket?.on('userInfo:user', ({ user }: {user: IUser}) => {
       setUser(user);
     });
 

@@ -13,6 +13,7 @@ export const News = (): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { posts, isLoading } = useAppSelector((state) => state.postsReducer);
   const dispatch = useAppDispatch();
+
   const allPosts = window.location.pathname === '/main/news';
   const myPosts = window.location.pathname === `/main/news/${loginUser.id}`;
 

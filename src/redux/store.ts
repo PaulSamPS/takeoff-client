@@ -5,7 +5,6 @@ import cityReducer from './reducers/cityReducer';
 import registrationReducer from './reducers/auth/registrationReducer';
 import loginReducer from './reducers/auth/loginReducer';
 import usersReducer from './reducers/usersReducer';
-import conversationReducer from './reducers/conversationReducer';
 import postsReducer from './reducers/postsReducer';
 import openChatReducer from './reducers/openChatReducer';
 import socketOnlineUserReducer from './reducers/socketUsersReducer';
@@ -17,14 +16,13 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  cityReducer,
-  registrationReducer,
   loginReducer,
+  socketOnlineUserReducer,
   usersReducer,
-  conversationReducer,
   postsReducer,
   openChatReducer,
-  socketOnlineUserReducer,
+  cityReducer,
+  registrationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

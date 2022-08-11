@@ -1,26 +1,14 @@
-import { IRegistrationForm } from '../interfaces/registrationForm.interface';
+import {IRegistrationForm, IUseRegistrationProps, IUseRegistrationReturn} from '../interfaces/registrationForm.interface';
 import { registration } from '../redux/actions/authAction';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from './redux';
-import { DefaultValues, KeepStateOptions, UnpackNestedValue } from 'react-hook-form';
-
-interface IUseRegistrationProps {
-  reset: (
-    values?: DefaultValues<IRegistrationForm> | UnpackNestedValue<IRegistrationForm>,
-    keepStateOptions?: KeepStateOptions
-  ) => void;
-  error: string | undefined;
-}
-
-interface IUseRegistrationReturn {
-  handleSwitchMethod: () => void;
-  onSubmit: (formData: IRegistrationForm) => Promise<void>;
-}
+import {useAppDispatch, useAppSelector} from './redux';
 
 export const useRegistration = ({
   reset,
   error,
 }: IUseRegistrationProps): IUseRegistrationReturn => {
+  const {status} = useAppSelector((state) => state.registrationReducer);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -36,8 +24,10 @@ export const useRegistration = ({
       formData.city = formData.city.value;
     }
     await dispatch(registration(formData)).then(() => {
-      if (error == '') {
+      if (status == 200) {
         navigate('/registration/success');
+        reset();
+      } else {
         reset();
       }
     });

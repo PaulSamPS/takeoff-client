@@ -1,21 +1,10 @@
-import React, { ChangeEvent, SyntheticEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { IAppendAvatarInterface } from '../interfaces/appendAvatar.interface';
 import { useAppDispatch } from './redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { adminUploadAvatar, uploadAvatar } from '../redux/actions/usersAction';
 import { SocketContext } from '../helpers/context';
-
-interface IUseChangeAvatarProps {
-  setModal: (click: boolean) => void;
-  userId: string;
-}
-
-interface IUseChangeAvatar {
-  onSubmit: (e: SyntheticEvent) => void;
-  previewAvatar: IAppendAvatarInterface[];
-  selectFileAvatar: (e: ChangeEvent<HTMLInputElement>) => void;
-  filesAvatar: FileList | null;
-}
+import {IUseChangeAvatar, IUseChangeAvatarProps} from '../interfaces/useChangeAvatar.interface';
 
 export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IUseChangeAvatar => {
   const socket = React.useContext(SocketContext);

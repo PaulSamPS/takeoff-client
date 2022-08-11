@@ -4,7 +4,7 @@ import { useRequest } from '../../hooks/useRequest';
 import { RightBar } from '../../components/RightBar/RightBar';
 import { Outlet } from 'react-router-dom';
 
-export const FriendsList = () => {
+export const FriendsList = (): JSX.Element => {
   const { request } = useRequest();
 
   return (

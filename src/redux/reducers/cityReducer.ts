@@ -10,7 +10,7 @@ const initialState: ICity = {
 };
 
 export const cityReducer = createSlice({
-  name: 'level',
+  name: 'city',
   initialState,
   reducers: {
     setLevelSuccess(state, action: PayloadAction<ICityInterface[]>) {

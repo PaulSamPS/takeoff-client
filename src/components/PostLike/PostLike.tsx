@@ -8,7 +8,7 @@ import { useAppSelector } from '../../hooks/redux';
 import { PostLikeProps } from './PostLike.props';
 import { usePost } from '../../hooks/usePost';
 
-export const PostLike = ({ post }: PostLikeProps) => {
+export const PostLike = ({ post }: PostLikeProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { likes, handleLike } = usePost(post);
 

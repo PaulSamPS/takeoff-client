@@ -3,7 +3,7 @@ import { RightBar } from '../../components/RightBar/RightBar';
 import { Outlet } from 'react-router-dom';
 import styles from './Edit.module.scss';
 
-export const Edit = () => {
+export const Edit = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <Outlet />

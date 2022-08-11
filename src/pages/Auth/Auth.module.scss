@@ -23,14 +23,20 @@
 	}
 }
 
-.switch {
-	margin-left: 10px;
-	color: var(--grey);
-	font-weight: 700;
-	cursor: pointer;
-	transition: all ease 0.2s;
+.success {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--grey-middle);
 
-	&:hover {
+	.switch {
+		margin-left: 10px;
 		color: var(--blue);
+		font-weight: 500;
+		text-decoration: none;
+		transition: all ease 0.2s;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 }

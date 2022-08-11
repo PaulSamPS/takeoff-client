@@ -10,13 +10,16 @@ import { useFollow } from '../../hooks/useFollow';
 import { useAppSelector } from '../../hooks/redux';
 
 export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
+
+  const [visibleIcon, setVisibleIcon] = React.useState<boolean>(false);
+
   const { friends, request } = useRequest();
   const { handleFollow, followings } = useFollow();
-  const loginUser = useAppSelector((state) => state.loginReducer.user);
+
   const friend = friends.map((f) => f.id);
   const followingsDone = followings !== null ? followings.map((f) => f.id) : [];
   const requestsDone = request.map((request) => request.id);
-  const [visibleIcon, setVisibleIcon] = React.useState<boolean>(false);
 
   const handleClickFollow = () => {
     localStorage.setItem('followId', user.id);

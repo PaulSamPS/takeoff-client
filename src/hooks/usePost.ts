@@ -2,8 +2,7 @@ import React from 'react';
 import { SocketContext } from '../helpers/context';
 import { useAppDispatch, useAppSelector } from './redux';
 import { deletePost } from '../redux/actions/postAction';
-import { IPost } from '../redux/reducers/postsReducer';
-import {ICommentsPost, ILikes, IPostReturn} from '../interfaces/usePost.interface';
+import {ICommentsPost, ILikes, IPost, IPostReturn} from '../interfaces/usePost.interface';
 
 export const usePost = (post: IPost): IPostReturn => {
   const socket = React.useContext(SocketContext);

@@ -1,5 +1,5 @@
 import {IUser, IUserNotifications} from './user.interface';
-import {IPost} from '../redux/reducers/postsReducer';
+import {IPost} from './usePost.interface';
 
 export interface INotification {
     _id: string;

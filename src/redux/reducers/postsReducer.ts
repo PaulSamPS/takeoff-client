@@ -1,34 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface IUserPost {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  avatar: string | null;
-}
-
-interface ILikes {
-  _id: string;
-  user: IUserPost;
-}
-
-interface ICommentsPost {
-  _id: string;
-  user: IUserPost;
-  text: string;
-  date: Date;
-}
-
-export interface IPost {
-  _id: string;
-  user: IUserPost;
-  text: string;
-  image: string | null;
-  likes: ILikes[];
-  comments: ICommentsPost[];
-  createdAt: Date;
-  updatedAt: Date;
-}
+import {IPost} from '../../interfaces/usePost.interface';
 
 interface IPostResponse {
   posts: IPost[];

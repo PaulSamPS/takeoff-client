@@ -5,10 +5,11 @@ import { Search } from '../../../../components/UI/Search/Search';
 import { useRequest } from '../../../../hooks/useRequest';
 import { useFollow } from '../../../../hooks/useFollow';
 
-export const FriendsAll = () => {
+export const FriendsAll = (): JSX.Element => {
+  const [text, setText] = React.useState<string>('');
+
   const { friends, friendsUserInfo } = useRequest();
   const { followings } = useFollow();
-  const [text, setText] = React.useState<string>('');
 
   const filteredFriends = friends.filter((friend) =>
     (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(

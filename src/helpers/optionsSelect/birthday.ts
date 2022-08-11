@@ -1,6 +1,6 @@
 import { ISelectOption } from '../../interfaces/select.interface';
 import { optionsCreator } from '../optionsCrearot';
-import { days, months, years } from '../selectData';
+import { days, months, years } from './selectDate';
 
 export const day = (): ISelectOption[] => {
   const optionsDay: ISelectOption[] = [];

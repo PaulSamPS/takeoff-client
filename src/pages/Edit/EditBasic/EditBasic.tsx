@@ -11,7 +11,7 @@ import { IEditProfile } from '../../../interfaces/editProfile.interface';
 import { gender } from '../../../helpers/optionsSelect/gender';
 import { familyStatus } from '../../../helpers/optionsSelect/familyStatus';
 
-export const EditBasic = () => {
+export const EditBasic = (): JSX.Element => {
   const {
     register,
     formState: { errors },
@@ -19,7 +19,9 @@ export const EditBasic = () => {
     handleSubmit,
   } = useForm<IEditProfile>({ mode: 'onChange', reValidateMode: 'onBlur' });
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+
   const [saved, setSaved] = React.useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const optionsDay = day();
   const optionsMonth = month();

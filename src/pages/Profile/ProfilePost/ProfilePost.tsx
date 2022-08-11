@@ -6,17 +6,19 @@ import { CreatePost } from '../../../components/CreatePost/CreatePost';
 import { Post } from '../../../components/Post/Post';
 import { setSuccess } from '../../../redux/reducers/postsReducer';
 import { SocketContext } from '../../../helpers/context';
+import {IPost} from '../../../interfaces/usePost.interface';
 
-export const ProfilePost = () => {
+export const ProfilePost = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
-  const { id } = useParams();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { posts } = useAppSelector((state) => state.postsReducer);
 
+  const { id } = useParams();
+
   React.useEffect(() => {
     socket?.emit('post:get', { userId: id });
-    socket?.on('post:send', ({ posts }) => {
+    socket?.on('post:send', ({ posts }: {posts: IPost[]}) => {
       dispatch(setSuccess(posts));
     });
 

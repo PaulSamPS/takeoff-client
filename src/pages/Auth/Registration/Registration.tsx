@@ -23,6 +23,7 @@ export const Registration = (): JSX.Element => {
   } = useForm<IRegistrationForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
   const { isLoading, error } = useAppSelector((state) => state.registrationReducer);
   const { handleSwitchMethod, onSubmit } = useRegistration({ reset, error });
+
   const optionsGender = gender();
   const optionsCity = city();
 

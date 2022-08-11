@@ -11,15 +11,16 @@ import styles from '../Auth.module.scss';
 import { login } from '../../../redux/actions/authAction';
 
 export const Login = (): JSX.Element => {
+  const { error, isLoading } = useAppSelector((state) => state.loginReducer);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset,
   } = useForm<ILoginForm>({ mode: 'onChange', reValidateMode: 'onBlur' });
-  const { error, isLoading } = useAppSelector((state) => state.loginReducer);
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const handleSwitchMethod = () => {
     navigate('registration');

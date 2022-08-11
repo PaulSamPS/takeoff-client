@@ -8,34 +8,31 @@ import { getChatUser } from '../../redux/actions/chatAction';
 import { Toast } from '../../components/UI/Toast/Toast';
 import { SocketContext } from '../../helpers/context';
 import { setSocketUsers } from '../../redux/reducers/socketUsersReducer';
+import {IMessages} from '../../interfaces/useChat.interface';
+import {INewMessageToast, IOnlineUsers} from '../../interfaces/layout.interface';
 
-interface IOnlineUsers {
-  userId: string | undefined;
-  socketId: string;
-}
+const initialStateBannerData = {
+  name: '',
+  avatar: '',
+};
 
-interface IUsers {
-  usersOnline: IOnlineUsers[];
-}
-
-export const Layout = () => {
+export const Layout = (): JSX.Element => {
   const socket = useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const dispatch = useAppDispatch();
-  const [newMessageReceived, setNewMessageReceived] = React.useState<any>(null);
+  const [newMessageReceived, setNewMessageReceived] = React.useState<INewMessageToast | null>(null);
   const [showNewMessageModal, setShowNewMessageModal] = React.useState<boolean>(false);
-  const [bannerData, setBannerData] = React.useState<any>({
-    name: '',
-    avatar: '',
-  });
+
+  const [bannerData, setBannerData] = React.useState<any>(initialStateBannerData);
 
   const { user } = useAppSelector((state) => state.loginReducer);
+  console.log(newMessageReceived);
 
   React.useEffect(() => {
     setInterval(() => {
       socket?.emit('user:add', { userId: user.id });
     }, 3000);
-    socket?.on('user_list:update', ({ usersOnline }: IUsers) => {
+    socket?.on('user_list:update', ({ usersOnline }: {usersOnline: IOnlineUsers[]}) => {
       dispatch(setSocketUsers(usersOnline));
       console.log('u', usersOnline);
     });
@@ -47,10 +44,10 @@ export const Layout = () => {
   }, [socket]);
 
   React.useEffect(() => {
-    socket?.on('message:received', async ({ newMessage }) => {
+    socket?.on('message:received', async ({ newMessage }: {newMessage: IMessages}) => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
-        setBannerData({ name: user?.firstName + ' ' + user?.lastName, avatar: user?.avatar });
+        setBannerData({ name: user!.firstName + ' ' + user!.lastName, avatar: user!.avatar });
         socket?.emit('message:toUnread', {
           receiver: loginUser.id,
           sender: newMessage.sender,
@@ -60,11 +57,11 @@ export const Layout = () => {
         }, 500);
         setNewMessageReceived({
           ...newMessage,
-          name: user?.firstName + ' ' + user?.lastName,
-          avatar: user?.avatar,
+          name: user!.firstName + ' ' + user!.lastName,
+          avatar: user!.avatar,
         });
         setShowNewMessageModal(true);
-        document.title = `Новое сообщение от ${user?.firstName + ' ' + user?.lastName}`;
+        document.title = `Новое сообщение от ${user!.firstName + ' ' + user!.lastName}`;
       }
     });
     return () => {

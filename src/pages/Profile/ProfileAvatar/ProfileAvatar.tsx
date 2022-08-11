@@ -12,11 +12,13 @@ import { ChangeAvatar } from '../../../components/ChangeAvatar/ChangeAvatar';
 import { ModalMessage } from '../../../components/ModalMessage/ModalMessage';
 import { ButtonsFriend } from '../../../components/UI/ButtonsFriend/ButtonsFriend';
 
-export const ProfileAvatar = ({ user }: ProfileAvatarProps) => {
+export const ProfileAvatar = ({ user }: ProfileAvatarProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+
   const [hover, setHover] = React.useState<boolean>(false);
   const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [avatarModal, setAvatarModal] = React.useState<boolean>(false);
+
   const { id } = useParams();
 
   const variantsModal = {

@@ -12,9 +12,9 @@ import { Emoji } from 'emoji-mart';
 import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
 import cn from 'classnames';
 
-export const PostComment = ({ post, isAllComments, setIsAllComments }: PostCommentProps) => {
-  const { comments, handleComment, setText, text } = usePost(post);
+export const PostComment = ({ post, isAllComments, setIsAllComments }: PostCommentProps): JSX.Element => {
   const [countComments, setCountComments] = React.useState<number>(0);
+  const { comments, handleComment, setText, text } = usePost(post);
 
   const handleViewComments = () => {
     setIsAllComments(true);

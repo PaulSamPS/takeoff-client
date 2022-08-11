@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './RightBar.module.scss';
-import { CustomLink } from '../CustomLink/CustomLink';
+import { CustomLink } from '../UI/CustomLink/CustomLink';
 import { Count } from '../Count/Count';
 import { RightBarProps } from './RightBar.props';
 import { useScroll } from '../../hooks/useScroll';
@@ -19,9 +19,10 @@ export const RightBar = ({
   thirdItem,
   isFixed,
 }: RightBarProps): JSX.Element => {
-  const { scrollY } = useScroll();
   const { openChat } = useAppSelector((state) => state.openChatReducer);
   const dispatch = useAppDispatch();
+
+  const { scrollY } = useScroll();
   const { id } = useParams();
 
   const handleDeleteChat = (chatId: string) => {

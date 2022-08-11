@@ -5,7 +5,7 @@ import { Search } from '../../../../components/UI/Search/Search';
 import { FriendOnlineProps } from './FriendOnline.props';
 import { useFollow } from '../../../../hooks/useFollow';
 
-export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnlineProps) => {
+export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnlineProps): JSX.Element => {
   const [text, setText] = React.useState<string>('');
   const { followings } = useFollow();
 

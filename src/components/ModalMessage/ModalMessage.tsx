@@ -8,9 +8,10 @@ import { Button } from '../UI/Button/Button';
 import { useChat } from '../../hooks/useChat';
 import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
 
-export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps) => {
+export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): JSX.Element => {
   const [text, setText] = React.useState<string>('');
   const { sendMessage } = useChat();
+
   const userId = localStorage.getItem('receiverUserId');
 
   const handleSendMessage = () => {

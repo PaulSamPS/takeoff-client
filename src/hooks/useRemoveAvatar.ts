@@ -1,14 +1,7 @@
 import { useAppDispatch } from './redux';
 import { useLocation } from 'react-router-dom';
 import { adminRemoveAvatar, removeAvatar, removeUser } from '../redux/actions/usersAction';
-
-interface IRemoveAvatar {
-  avatar: string;
-  userId: string;
-  setModal: (click: boolean) => void;
-  setDeleteUser?: (click: boolean) => void;
-  deleteUser?: boolean;
-}
+import {IRemoveAvatar} from '../interfaces/removeAvatar.interface';
 
 export const useRemoveAvatar = ({
   avatar,

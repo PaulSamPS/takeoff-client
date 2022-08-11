@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../../interfaces/user.interface';
 
-interface IRegistration {
+interface ILogin {
   error: string | undefined;
   isLoading: boolean;
   user: IUser;
 }
 
-const initialState: IRegistration = {
+const initialState: ILogin = {
   error: '',
   isLoading: false,
   user: {} as IUser,

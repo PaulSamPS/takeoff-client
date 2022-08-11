@@ -2,19 +2,12 @@ import React from 'react';
 import styles from '../Conversations/Conversations.module.scss';
 import { Search } from '../../../components/UI/Search/Search';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
-import { useAppSelector } from '../../../hooks/redux';
 import { useChat } from '../../../hooks/useChat';
-import { Spinner } from '../../../components/UI/Spinner/Spinner';
 
-export const ConversationsUnread = () => {
-  const { isLoading } = useAppSelector((state) => state.conversationReducer);
+export const ConversationsUnread = (): JSX.Element => {
   const [search, setSearch] = React.useState<string | null>('');
   const { chats } = useChat();
   console.log(search);
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <div

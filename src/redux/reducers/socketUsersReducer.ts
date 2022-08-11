@@ -22,5 +22,7 @@ export const socketUsersReducer = createSlice({
     },
   },
 });
+
 export const { setSocketUsers } = socketUsersReducer.actions;
+
 export default socketUsersReducer.reducer;

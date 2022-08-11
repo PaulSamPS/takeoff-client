@@ -8,14 +8,16 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Button } from '../../../components/UI/Button/Button';
 import { updateUser } from '../../../redux/actions/usersAction';
 
-export const EditContacts = () => {
+export const EditContacts = (): JSX.Element => {
   const { control, handleSubmit } = useForm<IEditProfile>({
     mode: 'onChange',
     reValidateMode: 'onBlur',
   });
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const [saved, setSaved] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
+
+  const [saved, setSaved] = React.useState<boolean>(false);
+
   const optionsCity = city();
 
   const onSubmit = async (formData: IEditProfile) => {

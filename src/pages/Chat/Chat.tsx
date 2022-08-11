@@ -19,14 +19,19 @@ import { EmojiPicker } from '../../components/UI/EmojiPicker/EmojiPicker';
 
 export const Chat = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
-  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+
   const [text, setText] = React.useState<string>('');
-  const { sendMessage, messages, bannerData, loadingMessages } = useChat();
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
+
+  const { sendMessage, messages, bannerData, loadingMessages } = useChat();
+
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
+
   const onlineUser = users.map((u) => u.userId);
+
   const { scrollY } = useScroll();
   const { id } = useParams();
 

@@ -10,10 +10,11 @@ import { ReactComponent as MoreIcon } from '../../helpers/icons/more.svg';
 import { useAppSelector } from '../../hooks/redux';
 import cn from 'classnames';
 
-export const Post = ({ post }: PostProps) => {
+export const Post = ({ post }: PostProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const { handleDeletePost, comments } = usePost(post);
   const [isAllComments, setIsAllComments] = React.useState<boolean>(false);
+
+  const { handleDeletePost, comments } = usePost(post);
 
   return (
     <div className={styles.wrapper}>

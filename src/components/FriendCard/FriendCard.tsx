@@ -6,7 +6,7 @@ import { FriendCardProps } from './FriendCard.props';
 import { Modal } from '../UI/Modal/Modal';
 import { ModalMessage } from '../ModalMessage/ModalMessage';
 
-export const FriendCard = ({ friend }: FriendCardProps) => {
+export const FriendCard = ({ friend }: FriendCardProps): JSX.Element => {
   const [modal, setModal] = React.useState<boolean>(false);
 
   const handleSendMessage = () => {

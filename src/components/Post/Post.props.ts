@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { IPost } from '../../redux/reducers/postsReducer';
+import {IPost} from '../../interfaces/usePost.interface';
 
 export interface PostProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

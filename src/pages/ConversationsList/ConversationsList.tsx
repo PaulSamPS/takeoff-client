@@ -5,15 +5,15 @@ import { RightBar } from '../../components/RightBar/RightBar';
 import { useChat } from '../../hooks/useChat';
 import { SocketContext } from '../../helpers/context';
 
-export const ConversationsList = () => {
+export const ConversationsList = (): JSX.Element => {
   const socket = useContext(SocketContext);
-  const { chats } = useChat();
   const [total, setTotal] = React.useState<number>(0);
+  const { chats } = useChat();
 
   React.useEffect(() => {
     const totalUnreadMessages = chats
-      .map((chat: any) => chat.countUnreadMessages)
-      .reduce((sum: number, elem: any) => {
+      .map((chat ) => chat.countUnreadMessages)
+      .reduce((sum: number, elem: number) => {
         return sum + elem;
       }, 0);
     setTotal(totalUnreadMessages);

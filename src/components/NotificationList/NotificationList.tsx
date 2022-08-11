@@ -8,13 +8,15 @@ import { useNotifications } from '../../hooks/useNotifications';
 import { Notification } from '../Notification/Notification';
 import { Spinner } from '../UI/Spinner/Spinner';
 
-export const NotificationList = ({ setVisibleNotification, ...props }: NotificationListProps) => {
+export const NotificationList = ({ setVisibleNotification, ...props }: NotificationListProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const ref = React.useRef<HTMLDivElement>(null);
   const { notifications, isLoading } = useNotifications();
+
+  const ref = React.useRef<HTMLDivElement>(null);
+  useOnClickOutside(ref, () => setVisibleNotification(false));
+
   const notificationsLength =
     notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0;
-  useOnClickOutside(ref, () => setVisibleNotification(false));
 
   return (
     <div className={styles.wrapper} ref={ref} {...props}>

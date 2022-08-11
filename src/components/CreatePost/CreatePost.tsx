@@ -16,17 +16,17 @@ import { SocketContext } from '../../helpers/context';
 export const CreatePost = () => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
+  const dispatch = useAppDispatch();
+
   const [active, setActive] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string>('');
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const [submitDisabled, setSubmitDisabled] = React.useState<boolean>(true);
-  const dispatch = useAppDispatch();
-  const { id } = useParams();
+
   const ref = useRef<HTMLFormElement>(null);
   useOnClickOutside(ref, () => setActive(false));
-
-  console.log(filesAvatar, submitDisabled);
+  const { id } = useParams();
 
   React.useEffect(() => {
     setSubmitDisabled(!text?.trim());

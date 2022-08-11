@@ -14,16 +14,19 @@ import { motion } from 'framer-motion';
 import { Modal } from '../../../components/UI/Modal/Modal';
 import { ModalUsers } from '../../../components/ModalUsers/ModalUsers';
 
-export const ProfileBio = ({ user }: ProfileBioProps) => {
-  const { friendsUserInfo } = useRequest();
-  const { followings } = useFollow();
+export const ProfileBio = ({ user }: ProfileBioProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
-  const usersOnline = users.map((user: any) => user.userId);
+
   const [visibleInfo, setVisibleInfo] = React.useState<boolean>(false);
   const [friendsModal, setFriendsModal] = React.useState<boolean>(false);
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
+
+  const { friendsUserInfo } = useRequest();
+  const { followings } = useFollow();
   const { id } = useParams();
+
+  const usersOnline = users.map((user: any) => user.userId);
 
   const variants = {
     open: { opacity: 1, height: 'auto' },

@@ -2,12 +2,9 @@ import React from 'react';
 import { useChat } from '../../../hooks/useChat';
 import styles from './Conversations.module.scss';
 import { Search } from '../../../components/UI/Search/Search';
-import { useAppSelector } from '../../../hooks/redux';
-import { Spinner } from '../../../components/UI/Spinner/Spinner';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
 
-export const Conversations = () => {
-  const { isLoading } = useAppSelector((state) => state.conversationReducer);
+export const Conversations = (): JSX.Element => {
   const [search, setSearch] = React.useState<string>('');
   const { chats } = useChat();
 
@@ -28,17 +25,11 @@ export const Conversations = () => {
           height: filteredChats.length > 0 ? 'fit-content' : 'calc(100vh - 160px)',
         }}
       >
-        {!isLoading ? (
-          <>
-            <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
-            {filteredChats.map((chat) => (
-              <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
-            ))}
-            {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
-          </>
-        ) : (
-          <Spinner />
-        )}
+        <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
+        {filteredChats.map((chat) => (
+          <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
+        ))}
+        {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
       </div>
     </>
   );

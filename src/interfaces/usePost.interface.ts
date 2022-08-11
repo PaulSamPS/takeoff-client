@@ -26,3 +26,15 @@ export interface IPostReturn {
     handleComment: () => void,
     handleDeletePost: () => void
 }
+
+export interface IPost {
+    _id: string;
+    user: IUserPost;
+    text: string;
+    image: string | null;
+    likes: ILikes[];
+    comments: ICommentsPost[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Sidebar.module.scss';
-import { CustomLink } from '../../../components/CustomLink/CustomLink';
+import { CustomLink } from '../../../components/UI/CustomLink/CustomLink';
 import { ReactComponent as MessagesIcon } from '../../../helpers/icons/chat.svg';
 import { ReactComponent as NewsIcon } from '../../../helpers/icons/news.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
@@ -16,7 +16,9 @@ import { useAppSelector } from '../../../hooks/redux';
 export const Sidebar = ({ className }: SidebarProps) => {
   const socket = React.useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+
   const [total, setTotal] = React.useState<number>(0);
+
   const { chats } = useChat();
   const { request } = useRequest();
 

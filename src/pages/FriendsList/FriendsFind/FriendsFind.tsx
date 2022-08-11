@@ -6,11 +6,12 @@ import { Spinner } from '../../../components/UI/Spinner/Spinner';
 import styles from './FriendsFind.module.scss';
 import { PeopleFindCard } from '../../../components/PeopleFindCard/PeopleFindCard';
 
-export const FriendsFind = () => {
+export const FriendsFind = (): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users, isLoading } = useAppSelector((state) => state.usersReducer);
-  const [search, setSearch] = React.useState<string | null>('');
   const dispatch = useAppDispatch();
+
+  const [search, setSearch] = React.useState<string | null>('');
   console.log(search);
 
   const usersWithoutLoginUser = users.filter((u) => u.id !== loginUser.id);

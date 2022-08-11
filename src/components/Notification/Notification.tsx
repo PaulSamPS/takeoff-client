@@ -13,13 +13,15 @@ import { useAppSelector } from '../../hooks/redux';
 import { ButtonsFriend } from '../UI/ButtonsFriend/ButtonsFriend';
 import cn from 'classnames';
 
-export const Notification = ({ notification, ...props }: NotificationProps) => {
+export const Notification = ({ notification, ...props }: NotificationProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
-  const usersOnline = users.map((user: any) => user.userId);
+
   const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [offsetTop, setOffsetTop] = React.useState<number>(0);
+
   const notificationRef = React.useRef<HTMLDivElement>(null);
+  const usersOnline = users.map((user: any) => user.userId);
 
   const coordsEl = () => {
     const rect = notificationRef.current?.getBoundingClientRect();

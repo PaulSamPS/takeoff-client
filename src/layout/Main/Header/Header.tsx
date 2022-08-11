@@ -15,8 +15,10 @@ import { useNotifications } from '../../../hooks/useNotifications';
 
 export const Header = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+
   const [visibleMenu, setVisibleMenu] = React.useState<boolean>(false);
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
+
   const { notificationsCount, handleReadNotifications } = useNotifications();
 
   return (

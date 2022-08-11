@@ -8,14 +8,16 @@ import { FriendsOnline } from './FriendsOnline/FriendsOnline';
 import { IUser } from '../../../interfaces/user.interface';
 import { useFollow } from '../../../hooks/useFollow';
 
-export const Friends = () => {
+export const Friends = (): JSX.Element => {
+  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+
+  const [activeSort, setActiveSort] = React.useState<number>(0);
+
   const { friends, friendsUserInfo } = useRequest();
   const { followings } = useFollow();
-  const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
-  const [activeSort, setActiveSort] = React.useState<number>(0);
+
   const friendsOnline: IUser[] = [];
   const friendsOnlineUser: IUser[] = [];
-  console.log(friendsUserInfo, 'info');
 
   friends.filter((friend) => {
     return users.forEach((user) => {

@@ -8,10 +8,12 @@ import { useFollow } from '../../../hooks/useFollow';
 import { useAppSelector } from '../../../hooks/redux';
 import { ButtonFriendProps } from './ButtonFriend.props';
 
-export const ButtonsFriend = ({ userId }: ButtonFriendProps) => {
+export const ButtonsFriend = ({ userId }: ButtonFriendProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+
   const { friends, request, addFriend } = useRequest();
   const { followings, handleFollow, handleUnfollow } = useFollow();
+
   const friendsDone = friends.map((friend) => friend.id);
   const requestsDone = request.map((request) => request.id);
   const followingDone = followings !== null ? followings.map((following) => following.id) : [];

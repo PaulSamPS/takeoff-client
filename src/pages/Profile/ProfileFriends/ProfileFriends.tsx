@@ -7,11 +7,13 @@ import { useAppSelector } from '../../../hooks/redux';
 import { IUser } from '../../../interfaces/user.interface';
 import cn from 'classnames';
 
-export const ProfileFriends = () => {
-  const { friendsUserInfo } = useRequest();
+export const ProfileFriends = (): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+
+  const { friendsUserInfo } = useRequest();
   const friendsOnline: IUser[] = [];
+
   const { id } = useParams();
 
   friendsUserInfo.filter((friend) => {

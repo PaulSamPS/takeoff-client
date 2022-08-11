@@ -7,7 +7,7 @@ import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 import { PostBodyProps } from './PostBody.props';
 
-export const PostBody = ({ post }: PostBodyProps) => {
+export const PostBody = ({ post }: PostBodyProps): JSX.Element => {
   return (
     <>
       <div className={styles.user}>
