@@ -1,18 +1,19 @@
-import {IUser} from './user.interface';
+import { IUser } from './user.interface';
 
 export interface IRequest {
-    followingsUser: IUser[];
+  followingsUser: IUser[];
 }
 
 export interface IFriends {
-    friendsUser: IUser[];
+  friendsUser: IUser[];
 }
 
 export interface IReturnRequest {
-    request: IUser[];
-    friends: IUser[];
-    loadingFriends: boolean;
-    friendsUserInfo: IUser[];
-    addFriend: (id: string | undefined) => void;
-    rejectFriend: (id: string | undefined) => void;
+  request: IUser[];
+  friends: IUser[];
+  loadingFriends: boolean;
+  friendsUserInfo: IUser[];
+  addFriend: (id: string | undefined) => void;
+  rejectFriend: (id: string | undefined) => void;
+  deleteFromFriend: (deleteUserId: string | undefined) => void;
 }

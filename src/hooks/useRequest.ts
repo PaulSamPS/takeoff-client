@@ -3,11 +3,11 @@ import React from 'react';
 import { SocketContext } from '../helpers/context';
 import { useParams } from 'react-router-dom';
 import { IUser } from '../interfaces/user.interface';
-import {IRequest, IReturnRequest} from '../interfaces/useRequest.interface';
+import { IRequest, IReturnRequest } from '../interfaces/useRequest.interface';
 
 export const useRequest = (): IReturnRequest => {
   const socket = React.useContext(SocketContext);
-  const { user } = useAppSelector((state) => state.loginReducer);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
 
   const [request, setRequest] = React.useState<IUser[]>([]);
   const [friends, setFriends] = React.useState<IUser[]>([]);
@@ -18,22 +18,33 @@ export const useRequest = (): IReturnRequest => {
   const { id } = useParams();
 
   const addFriend = (addFriendUserId: string | undefined) => {
-    socket?.emit('friends:add', { userId: user.id, userToFriendId: addFriendUserId });
-    socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
+    socket?.emit('friends:add', { userId: loginUser.id, userToFriendId: addFriendUserId });
+    setTimeout(() => {
+      socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
+      socket?.emit('friends:get', { userId: loginUser.id });
+    }, 500);
   };
 
   const rejectFriend = (rejectFriendUserId: string | undefined) => {
-    socket?.emit('friends:reject', { userId: user.id, userToRejectId: rejectFriendUserId });
+    socket?.emit('friends:reject', { userId: loginUser.id, userToRejectId: rejectFriendUserId });
     setTimeout(() => {
       socket?.emit('friendsRequest:get', {
-        userId: user.id,
+        userId: loginUser.id,
       });
     }, 500);
   };
 
+  const deleteFromFriend = (deleteUserId: string | undefined) => {
+    socket?.emit('friends:delete', { userId: loginUser.id, deleteUserId: deleteUserId });
+    socket?.on('friends:deleteSuccess', () => {
+      socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
+      socket?.emit('friends:get', { userId: loginUser.id });
+    });
+  };
+
   React.useEffect(() => {
     socket?.emit('friendsRequest:get', {
-      userId: user.id,
+      userId: loginUser.id,
     });
     socket?.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
@@ -49,20 +60,35 @@ export const useRequest = (): IReturnRequest => {
   }, [socket, window.location.pathname]);
 
   React.useEffect(() => {
-    socket?.emit('friends:get', { userId: user.id });
-    socket?.on('friends:set', ({ friendsUser }: {friendsUser: IUser[]}) => {
+    socket?.emit('friends:get', { userId: loginUser.id });
+    socket?.on('friends:set', ({ friendsUser }: { friendsUser: IUser[] }) => {
       setFriends(friendsUser);
       setLoadingFriends(false);
     });
-    socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
-    socket?.on('friendsUserInfo:set', ({ friendsUser }: {friendsUser: IUser[]}) => {
-      setFriendsUserInfo(friendsUser);
-    });
+
     return () => {
       socket?.off('friends:set');
+    };
+  }, [socket, loginUser.id]);
+
+  React.useEffect(() => {
+    socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
+    socket?.on('friendsUserInfo:set', ({ friendsUser }: { friendsUser: IUser[] }) => {
+      setFriendsUserInfo(friendsUser);
+    });
+
+    return () => {
       socket?.off('friendsUserInfo:set');
     };
   }, [socket, id, friendId]);
 
-  return { addFriend, rejectFriend, request, friends, loadingFriends, friendsUserInfo };
+  return {
+    addFriend,
+    rejectFriend,
+    request,
+    friends,
+    loadingFriends,
+    friendsUserInfo,
+    deleteFromFriend,
+  };
 };

@@ -11,7 +11,7 @@ import { ButtonFriendProps } from './ButtonFriend.props';
 export const ButtonsFriend = ({ userId }: ButtonFriendProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
 
-  const { friends, request, addFriend } = useRequest();
+  const { friends, request, addFriend, deleteFromFriend } = useRequest();
   const { followings, handleFollow, handleUnfollow } = useFollow();
 
   const friendsDone = friends.map((friend) => friend.id);
@@ -38,7 +38,11 @@ export const ButtonsFriend = ({ userId }: ButtonFriendProps): JSX.Element => {
         </div>
       ) : (
         <div className={styles.follow}>
-          <Button className={styles.allReadyFriends} appearance='primary'>
+          <Button
+            className={styles.allReadyFriends}
+            appearance='primary'
+            onClick={() => deleteFromFriend(userId!)}
+          >
             <AllReadyFriendsIcon className={styles.allReadyIcon} />
             У вас в друзьях
             <ArrowDownIcon className={styles.arrowDown} />
