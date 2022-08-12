@@ -87,9 +87,9 @@ export const Chat = (): JSX.Element => {
           <div className={styles.grid}>
             {!loadingMessages ? (
               <div className={styles.chat}>
-                {messages.map((message, index) => (
+                {messages.map((message) => (
                   <ChatMessages
-                    key={message._id + ' ' + index}
+                    key={message._id}
                     message={message}
                     bannerData={bannerData}
                     deleteMessage={deleteMessage}
