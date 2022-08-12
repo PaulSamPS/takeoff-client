@@ -33,26 +33,10 @@ export const FriendsAll = (): JSX.Element => {
       )
     : [];
 
-  const conditions =
-    window.location.pathname !== '/main/user-friends/followers'
-      ? filteredFriends.length > 0 || userFilteredFriends.length > 0
-      : filteredFollowers.length > 0;
-
   return (
-    <div
-      className={styles.wrapper}
-      style={{
-        height: conditions ? 'fit-content' : 'calc(100vh - 216px)',
-      }}
-    >
+    <div className={styles.wrapper}>
       <Search setText={setText} placeholder={'Поиск друзей'} />
-      <div
-        className={styles.grid}
-        style={{
-          display: conditions ? 'block' : 'flex',
-          justifyContent: conditions ? '' : 'center',
-        }}
-      >
+      <div className={styles.grid}>
         {window.location.pathname === '/main/friends' && (
           <>
             {filteredFriends.length > 0 ? (

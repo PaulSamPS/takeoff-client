@@ -41,7 +41,6 @@ export const useChat = (): IReturn => {
   const [messages, setMessages] = React.useState<IMessages[]>([]);
   const [bannerData, setBannerData] = React.useState<IBanner>(initialStateBannerData);
   const [chats, setChats] = React.useState<IChats[]>(initialStateChats);
-  const [loading, setLoading] = React.useState<boolean>(true);
   const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
   const [totalMessages, setTotalMessages] = React.useState<number>(0);
   const [currentCountMessages, setCurrentCountMessages] = React.useState<number>(20);
@@ -85,7 +84,6 @@ export const useChat = (): IReturn => {
     socket?.emit('chat:get', { userId: user.id });
     socket?.on('chat:send', ({ chatsToBeSent }: { chatsToBeSent: IChats[] }) => {
       setChats(chatsToBeSent);
-      setLoading(false);
     });
     return () => {
       socket?.off('chat:send');
@@ -206,7 +204,6 @@ export const useChat = (): IReturn => {
     chats,
     setChats,
     deleteMessage,
-    loading,
     loadingMessages,
     totalMessages,
   };

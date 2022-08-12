@@ -5,7 +5,10 @@ import { Search } from '../../../../components/UI/Search/Search';
 import { FriendOnlineProps } from './FriendOnline.props';
 import { useFollow } from '../../../../hooks/useFollow';
 
-export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnlineProps): JSX.Element => {
+export const FriendsOnline = ({
+  friendsOnline,
+  friendsOnlineUser,
+}: FriendOnlineProps): JSX.Element => {
   const [text, setText] = React.useState<string>('');
   const { followings } = useFollow();
 
@@ -27,12 +30,7 @@ export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: FriendOnline
       : filteredOnlineUsersFriends.length > 0;
 
   return (
-    <div
-      className={styles.wrapper}
-      style={{
-        height: conditions ? 'fit-content' : 'calc(100vh - 216px)',
-      }}
-    >
+    <div className={styles.wrapper}>
       <Search
         setText={setText}
         placeholder={

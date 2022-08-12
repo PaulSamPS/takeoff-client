@@ -10,17 +10,7 @@ export const ConversationsUnread = (): JSX.Element => {
   console.log(search);
 
   return (
-    <div
-      className={styles.wrapper}
-      style={{
-        display:
-          chats.filter((chat) => chat.countUnreadMessages).length <= 0 ? 'grid' : 'block',
-        height:
-          chats.filter((chat) => chat.countUnreadMessages).length > 0
-            ? 'fit-content'
-            : 'calc(100vh - 160px)',
-      }}
-    >
+    <div className={styles.wrapper}>
       <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
       {chats.map(
         (chat) =>

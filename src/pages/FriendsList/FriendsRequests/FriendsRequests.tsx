@@ -9,18 +9,9 @@ export const FriendsRequests = (): JSX.Element => {
   const { request, addFriend, rejectFriend } = useRequest();
 
   return (
-    <div
-      className={styles.wrapper}
-      style={{ height: request.length > 0 ? 'fit-content' : 'calc(100vh - 216px)' }}
-    >
+    <div className={styles.wrapper}>
       <div className={styles.top}>Заявки в друзья</div>
-      <div
-        className={styles.grid}
-        style={{
-          display: request.length > 0 ? 'block' : 'flex',
-          justifyContent: request.length > 0 ? '' : 'center',
-        }}
-      >
+      <div className={styles.grid}>
         {request.length > 0 ? (
           request.map((f) => (
             <div className={styles.request} key={f.id}>
