@@ -3,14 +3,14 @@ import styles from './FriendsOnline.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
 import { Search } from '../../../../components/UI/Search/Search';
 import { FriendOnlineProps } from './FriendOnline.props';
-import { useFollow } from '../../../../hooks/useFollow';
+import { useLocation } from 'react-router-dom';
 
 export const FriendsOnline = ({
   friendsOnline,
   friendsOnlineUser,
 }: FriendOnlineProps): JSX.Element => {
   const [text, setText] = React.useState<string>('');
-  const { followings } = useFollow();
+  const { pathname } = useLocation();
 
   const filteredOnlineFriends = friendsOnline.filter((friend) =>
     (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
@@ -24,29 +24,11 @@ export const FriendsOnline = ({
     )
   );
 
-  const conditions =
-    window.location.pathname !== '/main/user-friends'
-      ? filteredOnlineFriends.length > 0
-      : filteredOnlineUsersFriends.length > 0;
-
   return (
     <div className={styles.wrapper}>
-      <Search
-        setText={setText}
-        placeholder={
-          window.location.pathname === '/main/user-friends/followers'
-            ? 'Поиск подписчиков'
-            : 'Поиск друзей'
-        }
-      />
-      <div
-        className={styles.grid}
-        style={{
-          display: conditions ? 'block' : 'flex',
-          justifyContent: conditions ? '' : 'center',
-        }}
-      >
-        {window.location.pathname === '/main/friends' && (
+      <Search setText={setText} placeholder={'Поиск друзей'} />
+      <div className={styles.grid}>
+        {pathname === '/main/friends' && (
           <>
             {filteredOnlineFriends.length > 0 ? (
               filteredOnlineFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
@@ -55,7 +37,7 @@ export const FriendsOnline = ({
             )}
           </>
         )}
-        {window.location.pathname === '/main/user-friends' && (
+        {pathname === '/main/user-friends' && (
           <>
             {filteredOnlineUsersFriends.length > 0 ? (
               filteredOnlineUsersFriends.map((friend) => (
@@ -63,15 +45,6 @@ export const FriendsOnline = ({
               ))
             ) : (
               <div className={styles.noOnlineFriends}>Друзей онлайн нет</div>
-            )}
-          </>
-        )}
-        {window.location.pathname === '/main/user-friends/followers' && (
-          <>
-            {followings.length > 0 ? (
-              followings.map((friend) => <FriendCard key={friend.id} friend={friend} />)
-            ) : (
-              <div className={styles.noOnlineFriends}>Подписчиков нет</div>
             )}
           </>
         )}

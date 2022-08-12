@@ -85,7 +85,7 @@ a {
 	padding: 70px 20px;
 	background: var(--white);
 	border-bottom: 0 solid var(--bg);
-	border-bottom-width: 70px;
+	border-bottom-width: 20px;
 	border-radius: 4px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
@@ -128,7 +128,7 @@ a {
 
 .bottomContainer {
 	position: fixed;
-	bottom: 70px;
+	bottom: 20px;
 	z-index: 9;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
@@ -166,8 +166,8 @@ a {
 .borderBottom {
 	position: fixed;
 	bottom: 0;
-	z-index: 9;
+	z-index: 8;
 	width: 100%;
 	border-top: 0 solid var(--bg);
-	border-top-width: 70px;
+	border-top-width: 60px;
 }

@@ -24,12 +24,17 @@ export const ProfileFriends = (): JSX.Element => {
     });
   });
 
+  const handleClickSetUserId = () => {
+    localStorage.setItem('friendsUserInfo', id!);
+    localStorage.setItem('followId', id!);
+  };
+
   return (
     <div className={styles.wrapper}>
       <Link
         to={loginUser.id !== id ? '/main/user-friends' : '/main/friends'}
         className={styles.friendsCount}
-        onClick={() => localStorage.setItem('friendsUserInfo', id!)}
+        onClick={handleClickSetUserId}
       >
         Друзья <span className={styles.count}>{friendsUserInfo.length}</span>
       </Link>

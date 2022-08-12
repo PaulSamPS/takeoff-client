@@ -4,12 +4,14 @@ import { FriendCard } from '../../../../components/FriendCard/FriendCard';
 import { Search } from '../../../../components/UI/Search/Search';
 import { useRequest } from '../../../../hooks/useRequest';
 import { useFollow } from '../../../../hooks/useFollow';
+import { useLocation } from 'react-router-dom';
 
 export const FriendsAll = (): JSX.Element => {
   const [text, setText] = React.useState<string>('');
 
   const { friends, friendsUserInfo } = useRequest();
   const { followings } = useFollow();
+  const { pathname } = useLocation();
 
   const filteredFriends = friends.filter((friend) =>
     (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
@@ -37,7 +39,7 @@ export const FriendsAll = (): JSX.Element => {
     <div className={styles.wrapper}>
       <Search setText={setText} placeholder={'Поиск друзей'} />
       <div className={styles.grid}>
-        {window.location.pathname === '/main/friends' && (
+        {pathname === '/main/friends' && (
           <>
             {filteredFriends.length > 0 ? (
               filteredFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
@@ -46,7 +48,7 @@ export const FriendsAll = (): JSX.Element => {
             )}
           </>
         )}
-        {window.location.pathname === '/main/user-friends' && (
+        {pathname === '/main/user-friends' && (
           <>
             {userFilteredFriends.length > 0 ? (
               userFilteredFriends.map((friend) => <FriendCard key={friend.id} friend={friend} />)
@@ -55,7 +57,7 @@ export const FriendsAll = (): JSX.Element => {
             )}
           </>
         )}
-        {window.location.pathname === '/main/user-friends/followers' && (
+        {pathname === '/main/user-friends/followers' && (
           <>
             {filteredFollowers.length > 0 ? (
               filteredFollowers.map((follower) => (

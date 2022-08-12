@@ -23,13 +23,7 @@ export const FriendsFind = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <Search setText={setSearch} placeholder={'Введите запрос'} className={styles.search} />
-      <div
-        className={styles.grid}
-        style={{
-          display: isLoading || usersWithoutLoginUser.length <= 0 ? 'block' : 'grid',
-          height: usersWithoutLoginUser.length > 0 ? 'fit-content' : 'calc(100vh - 216px)',
-        }}
-      >
+      <div className={styles.grid}>
         {!isLoading ? (
           users
             .filter((u) => u.id !== loginUser.id)

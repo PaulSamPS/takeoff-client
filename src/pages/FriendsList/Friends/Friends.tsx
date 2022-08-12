@@ -7,6 +7,7 @@ import { FriendsAll } from './FriendsAll/FriendsAll';
 import { FriendsOnline } from './FriendsOnline/FriendsOnline';
 import { IUser } from '../../../interfaces/user.interface';
 import { useFollow } from '../../../hooks/useFollow';
+import { useLocation } from 'react-router-dom';
 
 export const Friends = (): JSX.Element => {
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
@@ -15,6 +16,7 @@ export const Friends = (): JSX.Element => {
 
   const { friends, friendsUserInfo } = useRequest();
   const { followings } = useFollow();
+  const { pathname } = useLocation();
 
   const friendsOnline: IUser[] = [];
   const friendsOnlineUser: IUser[] = [];
@@ -43,12 +45,12 @@ export const Friends = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
-        {window.location.pathname === '/main/user-friends/followers' && (
+        {pathname === '/main/user-friends/followers' && (
           <div className={styles.title}>
             Подписчики <span>{followings !== null ? followings.length : 0}</span>
           </div>
         )}
-        {window.location.pathname !== '/main/user-friends/followers' && (
+        {pathname !== '/main/user-friends/followers' && (
           <>
             <div
               className={cn(styles.sort, {
@@ -73,12 +75,12 @@ export const Friends = (): JSX.Element => {
               })}
               onClick={() => setActiveSort(1)}
             >
-              {window.location.pathname === '/main/friends' && (
+              {pathname === '/main/friends' && (
                 <>
                   Друзья онлайн <span>{friendsOnline.length}</span>
                 </>
               )}
-              {window.location.pathname === '/main/user-friends' && (
+              {pathname === '/main/user-friends' && (
                 <>
                   Друзья онлайн <span>{friendsOnlineUser.length}</span>
                 </>
@@ -87,7 +89,7 @@ export const Friends = (): JSX.Element => {
           </>
         )}
       </div>
-      {activeSort === 0 ? (
+      {activeSort === 0 || pathname === '/main/user-friends/followers' ? (
         <FriendsAll />
       ) : (
         <FriendsOnline friendsOnline={friendsOnline} friendsOnlineUser={friendsOnlineUser} />

@@ -3,7 +3,7 @@ import { useAppSelector } from './redux';
 import { SocketContext } from '../helpers/context';
 import { useParams } from 'react-router-dom';
 import { IUser } from '../interfaces/user.interface';
-import {IFollow, IFollowReturn} from '../interfaces/useFollow.interface';
+import { IFollow, IFollowReturn } from '../interfaces/useFollow.interface';
 
 export const useFollow = (): IFollowReturn => {
   const socket = React.useContext(SocketContext);
@@ -12,8 +12,9 @@ export const useFollow = (): IFollowReturn => {
   const [followings, setFollowings] = React.useState<IUser[]>([]);
   const [followers, setFollowers] = React.useState<IUser[]>([]);
 
-  const followId = localStorage.getItem('followId');
   const { id } = useParams();
+
+  const followId = localStorage.getItem('followId');
 
   const handleFollow = () => {
     socket?.emit('follow', {
