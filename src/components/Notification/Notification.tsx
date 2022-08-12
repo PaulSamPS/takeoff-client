@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Notification.module.scss';
 import { API_URL } from '../../http/axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Button } from '../UI/Button/Button';
 import { Modal } from '../UI/Modal/Modal';
@@ -20,6 +20,8 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
   const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [offsetTop, setOffsetTop] = React.useState<number>(0);
 
+  const { pathname } = useLocation();
+
   const notificationRef = React.useRef<HTMLDivElement>(null);
   const usersOnline = users.map((user: any) => user.userId);
 
@@ -35,8 +37,16 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
     setConversationModal(true);
   };
 
+  const condition =
+    pathname === '/main/all-notifications' || pathname === '/main/all-notifications/comments';
+
   return (
-    <div className={styles.notification} ref={notificationRef} {...props}>
+    <div
+      className={styles.notification}
+      ref={notificationRef}
+      {...props}
+      style={{ justifyContent: condition ? 'space-between' : 'unset' }}
+    >
       <div className={styles.avatar}>
         <img
           src={

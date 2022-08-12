@@ -12,6 +12,13 @@
 		font-weight: 400;
 		background: transparent;
 		transform: unset;
+		position: relative;
+
+		&:hover {
+			.friendOptions {
+				display: block;
+			}
+		}
 
 		.allReadyIcon {
 			margin-right: 10px;
@@ -19,6 +26,32 @@
 
 		.arrowDown {
 			margin-left: 5px;
+		}
+
+		.friendOptions {
+			display: none;
+			background: rgba(0,0,0, 0.5);
+			box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+			position: absolute;
+			top: 35px;
+			left: 0;
+			padding: 5px 0;
+			width: inherit;
+			border-radius: 4px;
+			white-space: nowrap;
+
+			div {
+				text-align: center;
+				font-size: 13px;
+				cursor: pointer;
+				color: var(--white);
+				padding: 10px 20px;
+				transition: all ease .2s;
+
+				&:hover {
+					background: rgba(255, 255, 255, 0.2);
+				}
+			}
 		}
 	}
 }

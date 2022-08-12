@@ -41,11 +41,13 @@ export const ButtonsFriend = ({ userId }: ButtonFriendProps): JSX.Element => {
           <Button
             className={styles.allReadyFriends}
             appearance='primary'
-            onClick={() => deleteFromFriend(userId!)}
           >
             <AllReadyFriendsIcon className={styles.allReadyIcon} />
             У вас в друзьях
             <ArrowDownIcon className={styles.arrowDown} />
+            <div className={styles.friendOptions}>
+              <div onClick={() => deleteFromFriend(userId!)}>Удалить из друзей</div>
+            </div>
           </Button>
         </div>
       )}

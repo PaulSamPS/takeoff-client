@@ -25,6 +25,8 @@ import { UserFriends } from './pages/UserFriends/UserFriends';
 import { Settings } from './pages/Settings/Settings';
 import { SettingsGeneral } from './pages/Settings/SettingsGeneral/SettingsGeneral';
 import { SettingsNotifications } from './pages/Settings/SettingsNotifications/SettingsNotifications';
+import { AllNotifications } from './pages/AllNotifications/AllNotifications';
+import { AllNotificationsLikes } from './pages/AllNotifications/AllNotificationsLikes/AllNotificationsLikes';
 
 export const App = () => {
   const { socket } = context();
@@ -71,6 +73,10 @@ export const App = () => {
               <Route path='settings' element={<Settings />}>
                 <Route index element={<SettingsGeneral />} />
                 <Route path='notifications' element={<SettingsNotifications />} />
+              </Route>
+              <Route path='all-notifications' element={<AllNotifications />}>
+                <Route index element={<AllNotificationsLikes />} />
+                <Route path='comments' element={<AllNotificationsLikes />} />
               </Route>
             </Route>
             <Route path='*' element={<Navigate to='/' replace />} />

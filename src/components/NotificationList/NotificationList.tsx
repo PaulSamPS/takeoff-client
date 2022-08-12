@@ -48,7 +48,7 @@ export const NotificationList = ({ setVisibleNotification, ...props }: Notificat
       </div>
       {notifications.notifications.filter((n) => n._id !== loginUser.id).length > 0 && (
         <div className={styles.bottom}>
-          <Link to={'#'}>Показать все</Link>
+          <Link to={'/main/all-notifications'}>Показать все</Link>
         </div>
       )}
     </div>

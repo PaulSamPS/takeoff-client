@@ -19,19 +19,19 @@ export const useRequest = (): IReturnRequest => {
 
   const addFriend = (addFriendUserId: string | undefined) => {
     socket?.emit('friends:add', { userId: loginUser.id, userToFriendId: addFriendUserId });
-    setTimeout(() => {
+    socket?.on('followers:addSuccess', () => {
       socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
       socket?.emit('friends:get', { userId: loginUser.id });
-    }, 500);
+    });
   };
 
   const rejectFriend = (rejectFriendUserId: string | undefined) => {
     socket?.emit('friends:reject', { userId: loginUser.id, userToRejectId: rejectFriendUserId });
-    setTimeout(() => {
+    socket?.on('friends:rejectSuccess', () => {
       socket?.emit('friendsRequest:get', {
         userId: loginUser.id,
       });
-    }, 500);
+    });
   };
 
   const deleteFromFriend = (deleteUserId: string | undefined) => {
