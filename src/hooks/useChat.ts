@@ -10,8 +10,9 @@ import {
   IChatLoadMore,
   IChats,
   IMessages,
-  IReturn
+  IReturn,
 } from '../interfaces/useChat.interface';
+import * as uuid from 'uuid';
 
 const initialStateBannerData = {
   name: '',
@@ -20,15 +21,17 @@ const initialStateBannerData = {
   bio: { gender: '' },
 };
 
-const initialStateChats = [{
-  avatar: null,
-  date: Date.now(),
-  lastMessage: '',
-  messagesWith: '',
-  name: '',
-  countUnreadMessages: 0,
-  lastVisit: Date.now()
-}];
+const initialStateChats = [
+  {
+    avatar: null,
+    date: Date.now(),
+    lastMessage: '',
+    messagesWith: '',
+    name: '',
+    countUnreadMessages: 0,
+    lastVisit: Date.now(),
+  },
+];
 
 export const useChat = (): IReturn => {
   const socket = React.useContext(SocketContext);
@@ -80,7 +83,7 @@ export const useChat = (): IReturn => {
 
   React.useEffect(() => {
     socket?.emit('chat:get', { userId: user.id });
-    socket?.on('chat:send', ({ chatsToBeSent }: {chatsToBeSent: IChats[]}) => {
+    socket?.on('chat:send', ({ chatsToBeSent }: { chatsToBeSent: IChats[] }) => {
       setChats(chatsToBeSent);
       setLoading(false);
     });
@@ -101,7 +104,7 @@ export const useChat = (): IReturn => {
         name: chat.messagesWith.firstName + ' ' + chat.messagesWith.lastName,
         avatar: chat.messagesWith.avatar,
         lastVisit: chat.messagesWith.lastVisit,
-        bio: {gender: chat.messagesWith.bio.gender},
+        bio: { gender: chat.messagesWith.bio.gender },
       });
       openChatId.current = chat.messagesWith._id;
       setTotalMessages(chat.messages.length);
@@ -119,6 +122,7 @@ export const useChat = (): IReturn => {
 
   const sendMessage = (message: string | null) => {
     socket?.emit('message:add', {
+      _id: uuid.v4(),
       sender: user.id,
       receiver: receiverUserId,
       message,
@@ -126,7 +130,7 @@ export const useChat = (): IReturn => {
   };
 
   React.useEffect(() => {
-    socket?.on('messages:sent', ({ newMessage }: {newMessage: IMessages}) => {
+    socket?.on('messages:sent', ({ newMessage }: { newMessage: IMessages }) => {
       if (newMessage.receiver === id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev) => {
@@ -137,7 +141,7 @@ export const useChat = (): IReturn => {
       }
     });
 
-    socket?.on('message:received', async ({ newMessage }: {newMessage: IMessages}) => {
+    socket?.on('message:received', async ({ newMessage }: { newMessage: IMessages }) => {
       if (newMessage.sender === id) {
         setMessages((prev) => [...prev, newMessage]);
         setChats((prev) => {
@@ -171,7 +175,7 @@ export const useChat = (): IReturn => {
             lastMessage: newMessage.message,
             date: newMessage.date,
             countUnreadMessages: 0,
-            lastVisit: 0
+            lastVisit: 0,
           };
 
           setChats((prev) => [

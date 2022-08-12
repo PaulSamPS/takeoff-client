@@ -8,8 +8,8 @@ import { getChatUser } from '../../redux/actions/chatAction';
 import { Toast } from '../../components/UI/Toast/Toast';
 import { SocketContext } from '../../helpers/context';
 import { setSocketUsers } from '../../redux/reducers/socketUsersReducer';
-import {IMessages} from '../../interfaces/useChat.interface';
-import {INewMessageToast, IOnlineUsers} from '../../interfaces/layout.interface';
+import { IMessages } from '../../interfaces/useChat.interface';
+import { INewMessageToast, IOnlineUsers } from '../../interfaces/layout.interface';
 
 const initialStateBannerData = {
   name: '',
@@ -26,15 +26,13 @@ export const Layout = (): JSX.Element => {
   const [bannerData, setBannerData] = React.useState<any>(initialStateBannerData);
 
   const { user } = useAppSelector((state) => state.loginReducer);
-  console.log(newMessageReceived);
 
   React.useEffect(() => {
     setInterval(() => {
       socket?.emit('user:add', { userId: user.id });
     }, 3000);
-    socket?.on('user_list:update', ({ usersOnline }: {usersOnline: IOnlineUsers[]}) => {
+    socket?.on('user_list:update', ({ usersOnline }: { usersOnline: IOnlineUsers[] }) => {
       dispatch(setSocketUsers(usersOnline));
-      console.log('u', usersOnline);
     });
 
     return () => {
@@ -44,7 +42,7 @@ export const Layout = (): JSX.Element => {
   }, [socket]);
 
   React.useEffect(() => {
-    socket?.on('message:received', async ({ newMessage }: {newMessage: IMessages}) => {
+    socket?.on('message:received', async ({ newMessage }: { newMessage: IMessages }) => {
       if (window.location.pathname !== `/main/conversations/${newMessage.sender}`) {
         const user = await dispatch(getChatUser(newMessage.sender));
         setBannerData({ name: user!.firstName + ' ' + user!.lastName, avatar: user!.avatar });
@@ -74,7 +72,7 @@ export const Layout = (): JSX.Element => {
       <div className={styles.wrapper}>
         <Header />
         <div className={styles.main}>
-          <Sidebar className={styles.sidebar}/>
+          <Sidebar className={styles.sidebar} />
           <div className={styles.content}>
             <Outlet />
           </div>

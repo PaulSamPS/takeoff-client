@@ -10,12 +10,10 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/UI/Spinner/Spinner';
 import { SocketContext } from '../../helpers/context';
-import { Emoji } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
-import reactStringReplace from 'react-string-replace';
 import { Input } from '../../components/UI/Input/Input';
-import { useScroll } from '../../hooks/useScroll';
 import { EmojiPicker } from '../../components/UI/EmojiPicker/EmojiPicker';
+import { ChatMessages } from './ChatMessages';
 
 export const Chat = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
@@ -25,14 +23,12 @@ export const Chat = (): JSX.Element => {
   const [text, setText] = React.useState<string>('');
   const [submitDisabled, setSubmitDisabled] = React.useState(true);
 
-  const { sendMessage, messages, bannerData, loadingMessages } = useChat();
+  const { sendMessage, bannerData, loadingMessages, messages, deleteMessage } = useChat();
 
   const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
 
   const onlineUser = users.map((u) => u.userId);
 
-  const { scrollY } = useScroll();
   const { id } = useParams();
 
   const handleSetText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,12 +45,6 @@ export const Chat = (): JSX.Element => {
     sendMessage(text);
     setText('');
   };
-
-  React.useEffect(() => {
-    bottomRef.current?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }, [messages]);
 
   React.useEffect(() => {
     socket?.emit('message:read', { userId: loginUser.id, msgSendToUserId: id });
@@ -97,72 +87,14 @@ export const Chat = (): JSX.Element => {
           <div className={styles.grid}>
             {!loadingMessages ? (
               <div className={styles.chat}>
-                {messages.map((m, index) => (
-                  <div key={index} className={styles.messages}>
-                    {loginUser.id == m.sender ? (
-                      <>
-                        <div className={styles.messageBlock}>
-                          <Link
-                            to={`/main/profile/${loginUser.id}`}
-                            className={styles.avatar}
-                            onClick={() => localStorage.setItem('followId', loginUser.id)}
-                          >
-                            <img
-                              src={
-                                loginUser.avatar === null
-                                  ? `/photo.png`
-                                  : `${API_URL}/avatar/${loginUser.avatar}`
-                              }
-                              alt={loginUser.firstName + ' ' + loginUser.lastName}
-                            />
-                          </Link>
-                          <div className={styles.name}>
-                            <Link
-                              to={`/main/profile/${loginUser.id}`}
-                              className={styles.userName}
-                              onClick={() => localStorage.setItem('followId', loginUser.id)}
-                            >
-                              {loginUser.firstName + ' ' + loginUser.lastName}
-                            </Link>
-                            <span className={styles.time}>{calculateTime(m.date)}</span>
-                          </div>
-                          <span className={styles.text}>
-                            {reactStringReplace(m.message, /:(.+?):/g, (match, i) => (
-                              <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
-                            ))}
-                          </span>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className={styles.messageBlock}>
-                          <Link to={`/main/profile/${id}`} className={styles.avatar}>
-                            <img
-                              src={
-                                bannerData.avatar === null
-                                  ? `/photo.png`
-                                  : `${API_URL}/avatar/${bannerData.avatar}`
-                              }
-                              alt={bannerData.name}
-                            />
-                          </Link>
-                          <div className={styles.name}>
-                            <Link to={`/main/profile/${id}`} className={styles.userName}>
-                              {bannerData.name}
-                            </Link>
-                            <span className={styles.time}>{calculateTime(m.date)}</span>
-                          </div>
-                          <span className={styles.text}>
-                            {reactStringReplace(m.message, /:(.+?):/g, (match, i) => (
-                              <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
-                            ))}
-                          </span>
-                        </div>
-                      </>
-                    )}
-                  </div>
+                {messages.map((message, index) => (
+                  <ChatMessages
+                    key={message._id + ' ' + index}
+                    message={message}
+                    bannerData={bannerData}
+                    deleteMessage={deleteMessage}
+                  />
                 ))}
-                {scrollY < window.innerHeight / 2 && <p ref={bottomRef} />}
               </div>
             ) : (
               <Spinner />
