@@ -67,6 +67,16 @@ body {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+
+	a {
+		text-decoration: none;
+		color: var(--blue);
+		transition: all ease .2s;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
 
 :root {
@@ -88,5 +98,5 @@ body {
 	--green-alternative: #32B332;
 	--white: #FFF;
 	--red: #DD070A;
-	--grey-nonChecked: #aeb7c2;
+	--grey-nonChecked: #AEB7C2;
 }

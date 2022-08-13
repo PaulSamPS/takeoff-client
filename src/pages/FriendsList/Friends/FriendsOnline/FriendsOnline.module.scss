@@ -2,10 +2,9 @@
 	display: grid;
 	grid-template-rows: auto 1fr;
 	width: 100%;
+	min-height: 100px;
 	background: var(--white);
 	border-radius: 5px;
-
-	min-height: 100px;
 
 	.grid {
 		padding: 0 20px;
@@ -15,9 +14,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		min-height: 200px;
 		color: #939393;
 		font-size: 13px;
-		min-height: 200px;
 		background: var(--white);
 		border-radius: 0 0 4px 4px;
 	}

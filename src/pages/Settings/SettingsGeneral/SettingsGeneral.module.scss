@@ -1,88 +1,88 @@
 .wrapper {
-  width: 550px;
-  background: var(--white);
-  border-radius: 4px;
+	width: 550px;
+	background: var(--white);
+	border-radius: 4px;
 
-  .top {
-    background: var(--bg-grey-light);
-    padding: 20px;
-    border-bottom: 1px solid var(--border);
-    border-radius: 4px 4px 0 0;
-    font-size: 16px;
-    font-weight: 400;
-  }
+	.top {
+		padding: 20px;
+		font-weight: 400;
+		font-size: 16px;
+		background: var(--bg-grey-light);
+		border-bottom: 1px solid var(--border);
+		border-radius: 4px 4px 0 0;
+	}
 
-  .body {
-    font-size: 13px;
-    color: var(--grey);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+	.body {
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+		color: var(--grey);
+		font-size: 13px;
 
-    .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      
-      .change {
-        color: var(--blue);
-        cursor: pointer;
-        transition: all ease .2s;
+		.item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
+			.change {
+				color: var(--blue);
+				cursor: pointer;
+				transition: all ease 0.2s;
 
-    .changePassword {
-      display: flex;
-      flex-direction: column;
-      row-gap: 20px;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
 
-      .password {
-        display: grid;
-        align-items: center;
-        grid-template-columns: 130px 1fr;
-        row-gap: 20px;
-      }
+		.changePassword {
+			display: flex;
+			flex-direction: column;
+			row-gap: 20px;
 
-      button {
-        width: fit-content;
-        align-self: center;
-      }
-      
-      .hide {
-        color: var(--blue);
-        font-size: 13px;
-        cursor: pointer;
-        transition: all ease .2s;
-        text-align: center;
+			.password {
+				display: grid;
+				grid-template-columns: 130px 1fr;
+				align-items: center;
+				row-gap: 20px;
+			}
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
+			button {
+				align-self: center;
+				width: fit-content;
+			}
 
-  .bottom {
-    background: var(--bg-grey-light);
-    text-align: center;
-    color: var(--black);
-    font-size: 13px;
-    padding: 20px 0;
-    border-top: 1px solid var(--border);
-    border-radius: 0 0 4px 4px;
+			.hide {
+				color: var(--blue);
+				font-size: 13px;
+				text-align: center;
+				cursor: pointer;
+				transition: all ease 0.2s;
 
-    span {
-      color: var(--blue);
-      transition: all ease .2s;
-      cursor: pointer;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
 
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
+	.bottom {
+		padding: 20px 0;
+		color: var(--black);
+		font-size: 13px;
+		text-align: center;
+		background: var(--bg-grey-light);
+		border-top: 1px solid var(--border);
+		border-radius: 0 0 4px 4px;
+
+		span {
+			color: var(--blue);
+			cursor: pointer;
+			transition: all ease 0.2s;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }

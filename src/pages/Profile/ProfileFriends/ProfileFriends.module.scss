@@ -7,10 +7,10 @@
 	.friendsCount {
 		display: block;
 		padding: 20px 20px 0;
-		font-size: 13px;
-		cursor: pointer;
-		text-decoration: none;
 		color: var(--black);
+		font-size: 13px;
+		text-decoration: none;
+		cursor: pointer;
 
 		.count {
 			color: var(--grey-middle);

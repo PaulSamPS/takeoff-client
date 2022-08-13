@@ -1,125 +1,130 @@
 .lastComments {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
 
-  .grid {
-    display: grid;
-    grid-template-columns: 34px 1fr;
-    align-items: flex-start;
-    column-gap: 10px;
+	.grid {
+		display: grid;
+		grid-template-columns: 34px 1fr;
+		align-items: flex-start;
+		column-gap: 10px;
 
-    &:last-child {
-      .body {
-        border-bottom: none;
-      }
-    }
+		&:last-child {
+			.body {
+				border-bottom: none;
+			}
+		}
 
-    img {
-      width: 34px;
-      height: 34px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
+		img {
+			width: 34px;
+			height: 34px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
 
-    .bodyBorder {
-      &:last-child {
-        border-bottom: none;
-      }
-    }
+		.bodyBorder {
+			&:last-child {
+				border-bottom: none;
+			}
+		}
 
-    .body {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding-bottom: 30px;
-      border-bottom: 1px solid var(--border);
+		.body {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			padding-bottom: 30px;
+			border-bottom: 1px solid var(--border);
 
-      .user {
-        color: var(--blue);
-        font-weight: 500;
-        font-size: 13px;
-        text-decoration: unset;
-        transition: all ease .2s;
+			.user {
+				color: var(--blue);
+				font-weight: 500;
+				font-size: 13px;
+				text-decoration: unset;
+				transition: all ease 0.2s;
 
-        &:hover {
-          text-decoration: underline;
-        }
-      }
+				&:hover {
+					text-decoration: underline;
+				}
+			}
 
-      .comment {
-        font-size: 13px;
-        line-height: 1.36;
-        word-wrap: break-word;
-      }
+			.comment {
+				font-size: 13px;
+				line-height: 1.36;
+				word-wrap: break-word;
+			}
 
-      .dateComment {
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        color: var(--grey);
-        font-size: 12.5px;
-      }
-    }
-  }
+			.dateComment {
+				position: absolute;
+				bottom: 10px;
+				left: 0;
+				color: var(--grey);
+				font-size: 12.5px;
+			}
+		}
+	}
 
-  .showAllComments {
-    display: inline-block;
-    padding: 10px 0;
-    color: var(--blue);
-    font-weight: 500;
-    font-size: 13px;
+	.showAllComments {
+		display: inline-block;
+		padding: 10px 0;
+		color: var(--blue);
+		font-weight: 500;
+		font-size: 13px;
 
-    span {
-      cursor: pointer;
-    }
-  }
+		span {
+			cursor: pointer;
+		}
+	}
 
-  .loadMore {
-    text-align: center;
-    padding: 0 0 10px 0;
-    color: var(--blue);
-    font-weight: 500;
-    font-size: 13px;
+	.loadMore {
+		padding: 0 0 10px;
+		color: var(--blue);
+		font-weight: 500;
+		font-size: 13px;
+		text-align: center;
 
-    span {
-      cursor: pointer;
-    }
-  }
+		span {
+			cursor: pointer;
+		}
+	}
 }
+
 .sendComment {
-  display: flex;
-  align-items: center;
-  column-gap: 20px;
+	display: flex;
+	align-items: center;
+	column-gap: 20px;
 
-  .input {
-    grid-area: text;
-    width: 100%;
-    padding: 10px;
-    overflow: hidden;
-    color: var(--grey);
-    font-size: 13px;
-    word-wrap: break-word;
-    border: 1px solid var(--borderColor);
-    border-radius: 4px;
-    resize: none;
+	.input {
+		grid-area: text;
+		width: 100%;
+		padding: 10px;
+		overflow: hidden;
+		color: var(--grey);
+		font-size: 13px;
+		word-wrap: break-word;
+		border: 1px solid var(--borderColor);
+		border-radius: 4px;
+		resize: none;
 
-    &:focus {
-      outline: none;
-    }
-  }
+		&:focus {
+			outline: none;
+		}
+	}
 
-  button {
-    min-width: unset;
-    height: 37px;
-    padding: 5px;
-    background: none;
-    box-shadow: unset;
+	button {
+		min-width: unset;
+		height: 37px;
+		padding: 5px;
+		background: none;
+		box-shadow: unset;
 
-    .send {
-      width: 24px;
-      height: 24px;
-      fill: var(--greyDark);
-    }
-  }
+		&:hover {
+			background: none;
+		}
+
+		.send {
+			width: 24px;
+			height: 24px;
+			fill: var(--greyDark);
+		}
+	}
 }

@@ -20,6 +20,7 @@ export const registration = (formData: IRegistrationForm) => async (dispatch: Ap
     .post(`api/auth/registration`, formData)
     .then((res: AxiosResponse) => {
       dispatch(registrationReducer.actions.setSuccess(res.status));
+      window.location.replace('http://localhost:3000/registration/success');
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(registrationReducer.actions.setError(e.response?.data.message));

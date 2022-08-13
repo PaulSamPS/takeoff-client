@@ -35,23 +35,23 @@
 	}
 
 	.moreOptions {
-		display: none;
-		background: var(--white);
-		box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 		position: absolute;
 		top: 17px;
 		right: 0;
-		padding: 5px 0;
+		display: none;
 		width: 150px;
+		padding: 5px 0;
+		background: var(--white);
 		border-radius: 4px;
+		box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 		div {
-			text-align: center;
-			font-size: 13px;
-			cursor: pointer;
-			color: #55677D;
 			padding: 10px 20px;
-			transition: all ease .2s;
+			color: #55677D;
+			font-size: 13px;
+			text-align: center;
+			cursor: pointer;
+			transition: all ease 0.2s;
 
 			&:hover {
 				background: #E5EBF1;
@@ -82,7 +82,6 @@
 }
 
 .iconBg {
-	user-select: none;
 	display: flex;
 	align-items: center;
 	padding: 5px 15px;
@@ -90,7 +89,8 @@
 	background: var(--bg);
 	border-radius: 30px;
 	cursor: pointer;
-	transition: all ease .2s;
+	transition: all ease 0.2s;
+	user-select: none;
 
 	svg {
 		width: 24px;

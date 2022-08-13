@@ -1,16 +1,14 @@
 .wrapper {
-	display: grid;
-	grid-template-rows: auto 1fr;
-	width: 100%;
-	min-height: 100px;
+	display: flex;
+	flex-direction: column;
+	width: 550px;
+	padding: 10px 0;
+	color: var(--grey-middle);
 	background: var(--white);
 	border-radius: 4px;
+	row-gap: 10px;
 
-	.grid {
-		padding: 0 20px;
-	}
-
-	.noFriends {
+	.noNotifications {
 		display: flex;
 		align-items: center;
 		justify-content: center;

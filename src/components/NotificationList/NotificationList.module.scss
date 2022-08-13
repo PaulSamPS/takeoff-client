@@ -31,11 +31,11 @@
 	}
 
 	.middle {
-		max-height: 390px;
-		min-height: 390px;
-		overflow-y: auto;
-		justify-content: center;
 		align-items: center;
+		justify-content: center;
+		min-height: 390px;
+		max-height: 390px;
+		overflow-y: auto;
 
 		&::-webkit-scrollbar {
 			width: 8px;
@@ -62,9 +62,9 @@
 
 		a {
 			color: var(--blue);
+			font-size: 13px;
 			text-decoration: none;
 			transition: all ease 0.2s;
-			font-size: 13px;
 
 			&:hover {
 				text-decoration: underline;

@@ -26,7 +26,7 @@ import { Settings } from './pages/Settings/Settings';
 import { SettingsGeneral } from './pages/Settings/SettingsGeneral/SettingsGeneral';
 import { SettingsNotifications } from './pages/Settings/SettingsNotifications/SettingsNotifications';
 import { AllNotifications } from './pages/AllNotifications/AllNotifications';
-import { AllNotificationsLikes } from './pages/AllNotifications/AllNotificationsLikes/AllNotificationsLikes';
+import { AllNotificationsLikes } from './pages/AllNotifications/AllNotificationsItems/AllNotificationsLikes';
 
 export const App = () => {
   const { socket } = context();

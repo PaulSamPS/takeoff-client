@@ -1,65 +1,66 @@
 .wrapper {
-  border-radius: 4px;
-  width: 650px;
-  .top {
-    display: flex;
-    align-items: center;
-    column-gap: 25px;
-    padding: 20px 20px 0;
-    background: var(--bg-grey-light);
-    border-radius: 4px 4px 0 0;
-    font-size: 13px;
-    border-bottom: 1px solid var(--grey-super-light);
+	width: 650px;
+	border-radius: 4px;
 
-    span {
-      color: var(--grey);
-      font-weight: 500;
-      padding-bottom: 20px;
-      transform: translateY(1px);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-    }
+	.top {
+		display: flex;
+		align-items: center;
+		padding: 20px 20px 0;
+		font-size: 13px;
+		column-gap: 25px;
+		background: var(--bg-grey-light);
+		border-bottom: 1px solid var(--grey-super-light);
+		border-radius: 4px 4px 0 0;
 
-    .active {
-      color: var(--black);
-      border-bottom: 2px solid var(--blue-alternative);
-    }
-  }
+		span {
+			padding-bottom: 20px;
+			color: var(--grey);
+			font-weight: 500;
+			border-bottom: 2px solid transparent;
+			transform: translateY(1px);
+			cursor: pointer;
+		}
 
-  .usersList {
-    padding: 25px 14px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    min-height: 188px;
+		.active {
+			color: var(--black);
+			border-bottom: 2px solid var(--blue-alternative);
+		}
+	}
 
-    .user {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 11px;
+	.usersList {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		min-height: 188px;
+		padding: 25px 14px;
 
-      img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
+		.user {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 0 11px;
 
-      .name {
-        text-align: center;
-        margin-top: 5px;
-        color: var(--blue-alternative);
-        transition: all ease .2s;
+			img {
+				width: 100px;
+				height: 100px;
+				object-fit: cover;
+				border-radius: 50%;
+			}
 
-        &:hover {
-          text-decoration: underline;
-        }
+			.name {
+				margin-top: 5px;
+				color: var(--blue-alternative);
+				text-align: center;
+				transition: all ease 0.2s;
 
-        span {
-          display: block;
-        }
-      }
-    }
-  }
+				&:hover {
+					text-decoration: underline;
+				}
+
+				span {
+					display: block;
+				}
+			}
+		}
+	}
 }

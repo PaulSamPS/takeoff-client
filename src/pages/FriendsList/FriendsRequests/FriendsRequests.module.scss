@@ -41,7 +41,7 @@
 					color: var(--blue);
 					font-weight: 500;
 					text-decoration: none;
-					transition: all ease .2s;
+					transition: all ease 0.2s;
 
 					&:hover {
 						text-decoration: underline;
@@ -79,9 +79,9 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			min-height: 200px;
 			color: #939393;
 			font-size: 13px;
-			min-height: 200px;
 			background: var(--white);
 			border-radius: 0 0 4px 4px;
 		}

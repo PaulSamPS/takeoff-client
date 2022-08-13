@@ -6,13 +6,13 @@
 	}
 
 	.allReadyFriends {
+		position: relative;
 		justify-content: unset;
 		padding-left: 0;
 		color: var(--blue-alternative);
 		font-weight: 400;
 		background: transparent;
 		transform: unset;
-		position: relative;
 
 		&:hover {
 			.friendOptions {
@@ -29,27 +29,27 @@
 		}
 
 		.friendOptions {
-			display: none;
-			background: rgba(0,0,0, 0.5);
-			box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 			position: absolute;
 			top: 35px;
 			left: 0;
-			padding: 5px 0;
+			display: none;
 			width: inherit;
-			border-radius: 4px;
+			padding: 5px 0;
 			white-space: nowrap;
+			background: rgb(0 0 0 / 50%);
+			border-radius: 4px;
+			box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 			div {
-				text-align: center;
-				font-size: 13px;
-				cursor: pointer;
-				color: var(--white);
 				padding: 10px 20px;
-				transition: all ease .2s;
+				color: var(--white);
+				font-size: 13px;
+				text-align: center;
+				cursor: pointer;
+				transition: all ease 0.2s;
 
 				&:hover {
-					background: rgba(255, 255, 255, 0.2);
+					background: rgb(255 255 255 / 20%);
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Notification.module.scss';
 import { API_URL } from '../../http/axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Button } from '../UI/Button/Button';
 import { Modal } from '../UI/Modal/Modal';
@@ -12,15 +12,18 @@ import { NotificationProps } from './Notification.props';
 import { useAppSelector } from '../../hooks/redux';
 import { ButtonsFriend } from '../UI/ButtonsFriend/ButtonsFriend';
 import cn from 'classnames';
+import { usePost } from '../../hooks/usePost';
+import { ModalPost } from '../ModalPost/ModalPost';
 
 export const Notification = ({ notification, ...props }: NotificationProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 
   const [conversationModal, setConversationModal] = React.useState<boolean>(false);
+  const [isPostModal, setIsPostModal] = React.useState<boolean>(false);
   const [offsetTop, setOffsetTop] = React.useState<number>(0);
 
-  const { pathname } = useLocation();
+  const { handleFindPost, findPost } = usePost(notification.post);
 
   const notificationRef = React.useRef<HTMLDivElement>(null);
   const usersOnline = users.map((user: any) => user.userId);
@@ -37,16 +40,13 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
     setConversationModal(true);
   };
 
-  const condition =
-    pathname === '/main/all-notifications' || pathname === '/main/all-notifications/comments';
+  const handleOpenPostModal = () => {
+    handleFindPost(notification.post._id);
+    setIsPostModal(true);
+  };
 
   return (
-    <div
-      className={styles.notification}
-      ref={notificationRef}
-      {...props}
-      style={{ justifyContent: condition ? 'space-between' : 'unset' }}
-    >
+    <div className={styles.notification} ref={notificationRef} {...props}>
       <div className={styles.avatar}>
         <img
           src={
@@ -126,7 +126,9 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
           </div>
           {notification.type === 'newLike' && <span>оценил ваш пост от</span>}
           {notification.type === 'newComment' && <span>прокомментировал ваш пост от</span>}
-          <Link to={'#'}>{calculateTime(notification.post.createdAt)}</Link>
+          <Link to={'#'} onClick={handleOpenPostModal}>
+            {calculateTime(notification.post.createdAt)}
+          </Link>
         </span>
         <span>{calculateTime(notification.date)}</span>
       </div>
@@ -141,6 +143,9 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
           <ArrowDownIcon />
         </Button>
       </div>
+      <Modal setModal={setIsPostModal} modal={isPostModal}>
+        <ModalPost post={findPost} />
+      </Modal>
     </div>
   );
 };
