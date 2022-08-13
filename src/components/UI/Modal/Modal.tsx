@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Modal.module.scss';
 import { useScroll } from '../../../hooks/useScroll';
 
-export const Modal = ({ children, setModal, modal }: ModalProps): JSX.Element => {
+export const Modal = ({ children, setModal, modal, postModal }: ModalProps): JSX.Element => {
   const [scrollModalOpen, setScrollModalOpen] = React.useState<number>(0);
   const { scrollY } = useScroll();
 
@@ -44,6 +44,7 @@ export const Modal = ({ children, setModal, modal }: ModalProps): JSX.Element =>
       {modal && (
         <motion.div
           className={styles.overlay}
+          style={{ alignItems: postModal ? 'flex-start' : 'center' }}
           onClick={handleCloseModal}
           animate={modal ? 'open' : 'closed'}
           variants={variants}
@@ -68,11 +69,12 @@ export const Modal = ({ children, setModal, modal }: ModalProps): JSX.Element =>
               stiffness: 360,
             }}
           >
-            <CloseIcon className={styles.closeIcon} onClick={handleCloseModal} />
+            {!postModal && <CloseIcon className={styles.closeIcon} onClick={handleCloseModal} />}
             {children}
           </motion.div>
         </motion.div>
       )}
+      {postModal && <CloseIcon className={styles.closeIconPostModal} onClick={handleCloseModal} />}
     </AnimatePresence>
   );
 };

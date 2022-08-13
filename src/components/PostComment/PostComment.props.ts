@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import {IPost} from '../../interfaces/usePost.interface';
+import { IPost } from '../../interfaces/usePost.interface';
 
 export interface PostCommentProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {

@@ -36,7 +36,7 @@ export const PostComment = ({
 
   return (
     <>
-      {post.comments.length > 0 && (
+      {post.comments.length > 0 && !isAllComments && (
         <div className={styles.lastComments}>
           {comments.slice(0, isAllComments ? countComments : 3).map((comment) => (
             <div key={comment._id} className={styles.grid}>

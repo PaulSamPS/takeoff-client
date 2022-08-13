@@ -10,7 +10,7 @@ import { ReactComponent as MoreIcon } from '../../helpers/icons/more.svg';
 import { useAppSelector } from '../../hooks/redux';
 import cn from 'classnames';
 
-export const Post = ({ post }: PostProps): JSX.Element => {
+export const Post = ({ post, postModal }: PostProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [isAllComments, setIsAllComments] = React.useState<boolean>(false);
 
@@ -44,7 +44,14 @@ export const Post = ({ post }: PostProps): JSX.Element => {
             {post.comments.length > 0 ? post.comments.length : 0}
           </span>
         </div>
-        {post.comments.length > 0 && <div className={styles.border} />}
+        {post.comments.length > 0 && (
+          <div
+            className={styles.border}
+            style={{
+              borderBottom: postModal && !isAllComments ? 'none' : '1px solid var(--border)',
+            }}
+          />
+        )}
       </div>
       <PostComment post={post} isAllComments={isAllComments} setIsAllComments={setIsAllComments} />
     </div>

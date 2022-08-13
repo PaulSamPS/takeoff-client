@@ -145,8 +145,8 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
           <ArrowDownIcon />
         </Button>
       </div>
-      <Modal setModal={setIsPostModal} modal={isPostModal}>
-        <Post post={findPost} />
+      <Modal setModal={setIsPostModal} modal={isPostModal} postModal={isPostModal}>
+        <Post post={findPost} postModal={isPostModal} />
       </Modal>
     </div>
   );

@@ -75,6 +75,7 @@ export const usePost = (post: IPost): IPostReturn => {
       };
       setComments((prev) => [newComment, ...prev]);
       socket?.emit('post:get', { userId: post.user._id });
+      handleFindPost(post._id);
     });
     setText('');
   };
