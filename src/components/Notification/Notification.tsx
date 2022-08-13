@@ -13,7 +13,7 @@ import { useAppSelector } from '../../hooks/redux';
 import { ButtonsFriend } from '../UI/ButtonsFriend/ButtonsFriend';
 import cn from 'classnames';
 import { usePost } from '../../hooks/usePost';
-import { ModalPost } from '../ModalPost/ModalPost';
+import { Post } from '../Post/Post';
 
 export const Notification = ({ notification, ...props }: NotificationProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -42,7 +42,9 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
 
   const handleOpenPostModal = () => {
     handleFindPost(notification.post._id);
-    setIsPostModal(true);
+    setTimeout(() => {
+      setIsPostModal(true);
+    }, 500);
   };
 
   return (
@@ -144,7 +146,7 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
         </Button>
       </div>
       <Modal setModal={setIsPostModal} modal={isPostModal}>
-        <ModalPost post={findPost} />
+        <Post post={findPost} />
       </Modal>
     </div>
   );

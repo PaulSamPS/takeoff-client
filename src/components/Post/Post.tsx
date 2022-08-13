@@ -14,7 +14,7 @@ export const Post = ({ post }: PostProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [isAllComments, setIsAllComments] = React.useState<boolean>(false);
 
-  const { handleDeletePost, comments } = usePost(post);
+  const { handleDeletePost } = usePost(post);
 
   return (
     <div className={styles.wrapper}>
@@ -33,14 +33,16 @@ export const Post = ({ post }: PostProps): JSX.Element => {
       >
         <PostLike post={post} />
         <div
-          className={cn(styles.iconBg, { [styles.iconBgHover]: comments.length > 3 })}
-          style={{ cursor: comments.length > 3 ? 'pointer' : 'auto' }}
-          onClick={comments.length > 3 ? () => setIsAllComments(!isAllComments) : undefined}
+          className={cn(styles.iconBg, { [styles.iconBgHover]: post.comments.length > 3 })}
+          style={{ cursor: post.comments.length > 3 ? 'pointer' : 'auto' }}
+          onClick={post.comments.length > 3 ? () => setIsAllComments(!isAllComments) : undefined}
         >
           <div className={styles.icon}>
             <CommentIcon />
           </div>
-          <span className={styles.count}>{comments.length > 0 ? comments.length : 0}</span>
+          <span className={styles.count}>
+            {post.comments.length > 0 ? post.comments.length : 0}
+          </span>
         </div>
         {post.comments.length > 0 && <div className={styles.border} />}
       </div>

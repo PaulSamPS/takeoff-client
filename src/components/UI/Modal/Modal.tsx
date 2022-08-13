@@ -68,7 +68,7 @@ export const Modal = ({ children, setModal, modal }: ModalProps): JSX.Element =>
               stiffness: 360,
             }}
           >
-            <CloseIcon onClick={handleCloseModal} />
+            <CloseIcon className={styles.closeIcon} onClick={handleCloseModal} />
             {children}
           </motion.div>
         </motion.div>

@@ -54,6 +54,7 @@
 
     .middle {
       padding: 20px 20px 0;
+      flex-grow: 1;
 
       .comment {
         display: flex;
@@ -92,6 +93,52 @@
             color: var(--grey);
             font-size: 12.5px;
           }
+        }
+      }
+    }
+
+    .sendComment {
+      display: flex;
+      align-items: center;
+      column-gap: 10px;
+      position: relative;
+      padding: 0 20px;
+
+      svg {
+        position: relative;
+      }
+
+      .input {
+        width: 100%;
+        padding: 10px;
+        overflow: hidden;
+        color: var(--grey);
+        font-size: 13px;
+        word-wrap: break-word;
+        border: 1px solid var(--borderColor);
+        border-radius: 4px;
+        resize: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      button {
+        min-width: unset;
+        height: 37px;
+        padding: 5px;
+        background: none;
+        box-shadow: unset;
+
+        &:hover {
+          background: none;
+        }
+
+        .send {
+          width: 24px;
+          height: 24px;
+          fill: var(--greyDark);
         }
       }
     }

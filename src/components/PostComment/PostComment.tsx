@@ -19,7 +19,6 @@ export const PostComment = ({
 }: PostCommentProps): JSX.Element => {
   const [countComments, setCountComments] = React.useState<number>(10);
   const { comments, handleComment, setText, text } = usePost(post);
-  console.log(isAllComments);
 
   const handleViewComments = () => {
     setIsAllComments(true);

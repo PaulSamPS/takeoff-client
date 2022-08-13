@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './ModalPost.module.scss';
 import { ModalPostProps } from './ModalPost.props';
 import { API_URL } from '../../http/axios';
@@ -6,9 +6,14 @@ import { Link } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
+import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
+import { Button } from '../UI/Button/Button';
+import { ReactComponent as SendIcon } from '../../helpers/icons/send.svg';
+import { usePost } from '../../hooks/usePost';
 
 export const ModalPost = ({ post }: ModalPostProps): JSX.Element => {
-  console.log(post);
+  const { handleComment, setText, text } = usePost(post);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
@@ -43,7 +48,7 @@ export const ModalPost = ({ post }: ModalPostProps): JSX.Element => {
         </div>
         <div className={styles.middle}>
           {post.comments.length > 0 &&
-            post.comments.map((comment) => (
+            post.comments.slice(-4).map((comment) => (
               <div className={styles.comment} key={comment._id}>
                 <img
                   src={
@@ -62,10 +67,26 @@ export const ModalPost = ({ post }: ModalPostProps): JSX.Element => {
                       <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
                     ))}
                   </span>
-                  <span className={styles.dateComment}>{calculateTime(post.createdAt)}</span>
+                  <span className={styles.dateComment}>{calculateTime(comment.date)}</span>
                 </div>
               </div>
             ))}
+        </div>
+        <div className={styles.sendComment}>
+          <input
+            className={styles.input}
+            placeholder='Написать комментарий...'
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
+            value={text!}
+          />
+          <EmojiPicker setText={setText} text={text!} bottom={-255} left={-156} />
+          <Button
+            appearance='primary'
+            disabled={!(text && text.length > 0)}
+            onClick={handleComment}
+          >
+            <SendIcon className={styles.send} />
+          </Button>
         </div>
       </div>
     </div>
