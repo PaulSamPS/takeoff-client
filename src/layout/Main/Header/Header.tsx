@@ -21,6 +21,11 @@ export const Header = () => {
 
   const { notificationsCount, handleReadNotifications } = useNotifications();
 
+  const handleOpenNotifications = () => {
+    setVisibleNotification(true);
+    handleReadNotifications();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -31,11 +36,8 @@ export const Header = () => {
           <Input placeholder='Поиск' />
           <SearchIcon />
         </div>
-        <div className={styles.notification} onClick={() => setVisibleNotification(true)}>
-          <div
-            className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}
-            onClick={handleReadNotifications}
-          >
+        <div className={styles.notification} onClick={handleOpenNotifications}>
+          <div className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}>
             <NotificationIcon />
           </div>
           {notificationsCount > 0 && <Count className={styles.count}>{notificationsCount}</Count>}

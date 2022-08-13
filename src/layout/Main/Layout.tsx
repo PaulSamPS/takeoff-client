@@ -25,11 +25,10 @@ export const Layout = (): JSX.Element => {
 
   const [bannerData, setBannerData] = React.useState<any>(initialStateBannerData);
 
-  const { user } = useAppSelector((state) => state.loginReducer);
-
   React.useEffect(() => {
     setInterval(() => {
-      socket?.emit('user:add', { userId: user.id });
+      socket?.emit('user:add', { userId: loginUser.id });
+      socket?.emit('notifications:countGet', { userId: loginUser.id });
     }, 3000);
     socket?.on('user_list:update', ({ usersOnline }: { usersOnline: IOnlineUsers[] }) => {
       dispatch(setSocketUsers(usersOnline));
