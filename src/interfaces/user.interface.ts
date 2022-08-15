@@ -1,7 +1,9 @@
 export interface IUser {
   id: string;
-  firstName: string;
-  lastName: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
   email: string;
   role: string;
   avatar: string;
@@ -22,27 +24,6 @@ export interface IUser {
     notification: {
       messagesToast: boolean;
     };
-  };
-}
-
-export interface IUserNotifications {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  role: string;
-  avatar: string;
-  lastVisit: Date;
-  bio: {
-    birthday: {
-      day: string;
-      month: string;
-      year: string;
-    };
-    city: string;
-    language: string;
-    gender: string;
-    familyStatus: string;
   };
 }
 

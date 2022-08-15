@@ -40,11 +40,13 @@ export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
       <Link to={`/main/profile/${user.id}`} className={styles.avatar}>
         <img
           src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-          alt={user.firstName + ' ' + user.lastName}
+          alt={user.name.firstName + ' ' + user.name.lastName}
         />
       </Link>
       <div className={styles.info}>
-        <Link to={`/main/profile/${user.id}`}>{user.firstName + ' ' + user.lastName}</Link>
+        <Link to={`/main/profile/${user.id}`}>
+          {user.name.firstName + ' ' + user.name.lastName}
+        </Link>
         {visibleIcon && (
           <>
             {friend.includes(user.id) ||

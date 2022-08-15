@@ -31,8 +31,8 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
   const coordsEl = () => {
     const rect = notificationRef.current?.getBoundingClientRect();
     setOffsetTop(rect!.top);
-    localStorage.setItem('followId', notification.user._id);
-    localStorage.setItem('friendsUserInfo', notification.user._id);
+    localStorage.setItem('followId', notification.user.id);
+    localStorage.setItem('friendsUserInfo', notification.user.id);
   };
 
   const handleSendMessage = (id: string) => {
@@ -56,7 +56,7 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
               ? `/photo.png`
               : `${API_URL}/avatar/${notification.user.avatar}`
           }
-          alt={notification.user.firstName + '' + notification.user.lastName}
+          alt={notification.user.name.firstName + '' + notification.user.name.lastName}
         />
         {notification.type === 'newLike' && (
           <img className={styles.icon} src={'/like.png'} alt={'like'} />
@@ -73,9 +73,9 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
             <Link
               id='notification'
               onMouseEnter={coordsEl}
-              to={`/main/profile/${notification.user._id}`}
+              to={`/main/profile/${notification.user.id}`}
             >
-              {notification.user.firstName + ' ' + notification.user.lastName}
+              {notification.user.name.firstName + ' ' + notification.user.name.lastName}
             </Link>
             <div
               className={styles.hoverUser}
@@ -91,13 +91,13 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
                       ? `/photo.png`
                       : `${API_URL}/avatar/${notification.user.avatar}`
                   }
-                  alt={notification.user.firstName + '' + notification.user.lastName}
+                  alt={notification.user.name.firstName + '' + notification.user.name.lastName}
                 />
                 <div className={styles.infoHoverUser}>
-                  <Link to={`/main/profile/${notification.user._id}`}>
-                    {notification.user.firstName + ' ' + notification.user.lastName}
+                  <Link to={`/main/profile/${notification.user.id}`}>
+                    {notification.user.name.firstName + ' ' + notification.user.name.lastName}
                   </Link>
-                  {usersOnline.includes(notification.user._id) ? (
+                  {usersOnline.includes(notification.user.id) ? (
                     <div className={styles.online}>online</div>
                   ) : (
                     <div className={styles.lastVisit}>
@@ -108,11 +108,11 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
                 </div>
               </div>
               <div className={styles.infoHoverBottom}>
-                <ButtonsFriend userId={notification.user._id} />
+                <ButtonsFriend userId={notification.user.id} />
                 <Button
                   appearance='primary'
                   className={styles.message}
-                  onClick={() => handleSendMessage(notification.user._id)}
+                  onClick={() => handleSendMessage(notification.user.id)}
                 >
                   Написать сообщение
                 </Button>
@@ -138,7 +138,7 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
         {notification.post.image !== null && (
           <img
             src={`${API_URL}/post/${notification.post.image}`}
-            alt={loginUser.firstName + '' + loginUser.lastName}
+            alt={loginUser.name.firstName + '' + loginUser.name.lastName}
           />
         )}
         <Button appearance='transparent'>

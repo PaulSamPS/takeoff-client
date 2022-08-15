@@ -55,7 +55,11 @@ export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessage
                   ? `/photo.png`
                   : `${API_URL}/avatar/${ownMessage ? loginUser.avatar : bannerData.avatar}`
               }
-              alt={ownMessage ? loginUser.firstName + ' ' + loginUser.lastName : bannerData.name}
+              alt={
+                ownMessage
+                  ? loginUser.name.firstName + ' ' + loginUser.name.lastName
+                  : bannerData.name
+              }
             />
           </Link>
           <div className={styles.name}>
@@ -64,7 +68,9 @@ export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessage
               className={styles.userName}
               onClick={() => localStorage.setItem('followId', ownMessage ? loginUser.id : id!)}
             >
-              {ownMessage ? loginUser.firstName + ' ' + loginUser.lastName : bannerData.name}
+              {ownMessage
+                ? loginUser.name.firstName + ' ' + loginUser.name.lastName
+                : bannerData.name}
             </Link>
             <span className={styles.time}>{calculateTime(message.date)}</span>
           </div>

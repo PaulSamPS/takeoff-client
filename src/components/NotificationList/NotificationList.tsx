@@ -8,7 +8,10 @@ import { useNotifications } from '../../hooks/useNotifications';
 import { Notification } from '../Notification/Notification';
 import { Spinner } from '../UI/Spinner/Spinner';
 
-export const NotificationList = ({ setVisibleNotification, ...props }: NotificationListProps): JSX.Element => {
+export const NotificationList = ({
+  setVisibleNotification,
+  ...props
+}: NotificationListProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { notifications, isLoading } = useNotifications();
 
@@ -16,7 +19,7 @@ export const NotificationList = ({ setVisibleNotification, ...props }: Notificat
   useOnClickOutside(ref, () => setVisibleNotification(false));
 
   const notificationsLength =
-    notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0;
+    notifications.notifications.filter((n) => n.user.id !== loginUser.id).length > 0;
 
   return (
     <div className={styles.wrapper} ref={ref} {...props}>
@@ -29,11 +32,11 @@ export const NotificationList = ({ setVisibleNotification, ...props }: Notificat
       <div className={styles.middle} style={{ display: notificationsLength ? 'block' : 'flex' }}>
         {!isLoading ? (
           <>
-            {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (
+            {notifications.notifications.filter((n) => n.user.id !== loginUser.id).length > 0 ? (
               <>
                 {notifications.notifications
                   .slice(0, 10)
-                  .filter((n) => n.user._id !== loginUser.id)
+                  .filter((n) => n.user.id !== loginUser.id)
                   .map((notification) => (
                     <Notification key={notification._id} notification={notification} />
                   ))}

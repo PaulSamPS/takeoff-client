@@ -7,7 +7,11 @@ import cn from 'classnames';
 import { ModalUserProps } from './ModalUser.props';
 import { useFollow } from '../../hooks/useFollow';
 
-export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: ModalUserProps): JSX.Element => {
+export const ModalUsers = ({
+  activeIndex,
+  setActiveIndex,
+  setFriendsModal,
+}: ModalUserProps): JSX.Element => {
   const { friendsUserInfo } = useRequest();
   const { followings } = useFollow();
 
@@ -46,7 +50,7 @@ export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: Mod
                       ? `/photo.png`
                       : `${API_URL}/avatar/${following.avatar}`
                   }
-                  alt={following.firstName + '' + following.lastName}
+                  alt={following.name.firstName + '' + following.name.lastName}
                 />
               </Link>
               <Link
@@ -54,8 +58,8 @@ export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: Mod
                 className={styles.name}
                 onClick={handleClickCloseModal}
               >
-                <span>{following.firstName}</span>
-                <span>{following.lastName}</span>
+                <span>{following.name.firstName}</span>
+                <span>{following.name.lastName}</span>
               </Link>
             </div>
           ))}
@@ -69,7 +73,7 @@ export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: Mod
               >
                 <img
                   src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
-                  alt={friend.firstName + '' + friend.lastName}
+                  alt={friend.name.firstName + '' + friend.name.lastName}
                 />
               </Link>
               <Link
@@ -77,8 +81,8 @@ export const ModalUsers = ({ activeIndex, setActiveIndex, setFriendsModal }: Mod
                 className={styles.name}
                 onClick={handleClickCloseModal}
               >
-                <span>{friend.firstName}</span>
-                <span>{friend.lastName}</span>
+                <span>{friend.name.firstName}</span>
+                <span>{friend.name.lastName}</span>
               </Link>
             </div>
           ))}

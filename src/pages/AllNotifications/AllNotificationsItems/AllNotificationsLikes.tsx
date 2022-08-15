@@ -12,23 +12,29 @@ export const AllNotificationsLikes = () => {
 
   return (
     <div className={styles.wrapper}>
-      {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (
+      {notifications.notifications.filter((n) => n.user.id !== loginUser.id).length > 0 ? (
         <>
-          {pathname === '/main/all-notifications'
-            ? notifications.notifications
-                .slice(0, 10)
-                .filter((n) => n.user._id !== loginUser.id)
+          {pathname === '/main/all-notifications' ? (
+            <>
+              {notifications.notifications
+                .filter((n) => n.user.id !== loginUser.id)
                 .filter((n) => n.type === 'newLike')
-                .map((notification) => (
-                  <Notification key={notification._id} notification={notification} />
-                ))
-            : notifications.notifications
                 .slice(0, 10)
-                .filter((n) => n.user._id !== loginUser.id)
-                .filter((n) => n.type === 'newComment')
                 .map((notification) => (
                   <Notification key={notification._id} notification={notification} />
                 ))}
+            </>
+          ) : (
+            <>
+              {notifications.notifications
+                .filter((n) => n.user.id !== loginUser.id)
+                .filter((n) => n.type === 'newComment')
+                .slice(0, 10)
+                .map((notification) => (
+                  <Notification key={notification._id} notification={notification} />
+                ))}
+            </>
+          )}
         </>
       ) : (
         <div className={styles.noNotifications}>Нет уведомлений</div>

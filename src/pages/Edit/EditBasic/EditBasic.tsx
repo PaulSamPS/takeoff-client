@@ -67,7 +67,7 @@ export const EditBasic = (): JSX.Element => {
               minLength: { value: 3, message: 'Не короче  3 символов' },
               maxLength: { value: 15, message: 'Имя не должно превышать 20 символов' },
             })}
-            placeholder={loginUser.firstName}
+            placeholder={loginUser.name.firstName}
             type='text'
             error={errors.firstName}
           />
@@ -79,7 +79,7 @@ export const EditBasic = (): JSX.Element => {
               minLength: { value: 3, message: 'Не короче  3 символов' },
               maxLength: { value: 15, message: 'Фамилия не должно превышать 20 символов' },
             })}
-            placeholder={loginUser.lastName}
+            placeholder={loginUser.name.lastName}
             type='text'
             error={errors.lastName}
           />

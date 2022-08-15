@@ -50,7 +50,7 @@ export const ProfileBio = ({ user }: ProfileBioProps): JSX.Element => {
   return (
     <div className={styles.bio}>
       <div className={styles.top}>
-        <h1>{user?.firstName + ' ' + user?.lastName}</h1>
+        <h1>{user?.name.firstName + ' ' + user?.name.lastName}</h1>
         {usersOnline.includes(id) ? (
           <div className={styles.online}>online</div>
         ) : (

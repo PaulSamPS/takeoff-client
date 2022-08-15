@@ -44,11 +44,11 @@ export const ProfileFriends = (): JSX.Element => {
             <Link to={`/main/profile/${friend.id}`} className={styles.avatar}>
               <img
                 src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
-                alt={friend.firstName + '' + friend.lastName}
+                alt={friend.name.firstName + '' + friend.name.lastName}
               />
             </Link>
             <Link className={styles.name} to={`/main/profile/${friend.id}`}>
-              {friend.firstName}
+              {friend.name.firstName}
             </Link>
           </div>
         ))}
@@ -72,11 +72,11 @@ export const ProfileFriends = (): JSX.Element => {
                         ? `/photo.png`
                         : `${API_URL}/avatar/${onlineFriend.avatar}`
                     }
-                    alt={onlineFriend.firstName + '' + onlineFriend.lastName}
+                    alt={onlineFriend.name.firstName + '' + onlineFriend.name.lastName}
                   />
                 </Link>
                 <Link className={styles.name} to={`/main/profile/${onlineFriend.id}`}>
-                  {onlineFriend.firstName}
+                  {onlineFriend.name.firstName}
                 </Link>
               </div>
             ))}

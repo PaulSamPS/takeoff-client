@@ -1,4 +1,4 @@
-import { IUserNotifications } from './user.interface';
+import { IUser } from './user.interface';
 
 export interface IBanner {
   name: string | undefined;
@@ -21,7 +21,7 @@ export interface IChatLoadMore {
   chat: {
     countUnreadMessages: number;
     messages: IMessages[];
-    messagesWith: IUserNotifications;
+    messagesWith: IUser;
     _id: string;
   };
 }

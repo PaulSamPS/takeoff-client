@@ -5,12 +5,14 @@ interface IRegistration {
   error: string | undefined;
   isLoading: boolean;
   users: IUser[];
+  searchUsers: IUser[];
 }
 
 const initialState: IRegistration = {
   error: '',
   isLoading: false,
   users: [],
+  searchUsers: [],
 };
 
 export const usersReducer = createSlice({
@@ -29,7 +31,12 @@ export const usersReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    getSearchUsers(state, action: PayloadAction<IUser[]>) {
+      state.searchUsers = action.payload;
+    },
   },
 });
+
+export const { getSearchUsers } = usersReducer.actions;
 
 export default usersReducer.reducer;

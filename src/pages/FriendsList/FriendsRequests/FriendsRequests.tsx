@@ -19,11 +19,11 @@ export const FriendsRequests = (): JSX.Element => {
                 <Link to={`/main/profile/${f.id}`} replace className={styles.followers}>
                   <img
                     src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
-                    alt={f.firstName + ' ' + f.lastName}
+                    alt={f.name.firstName + ' ' + f.name.lastName}
                   />
                 </Link>
                 <Link to={`/main/profile/${f.id}`} className={styles.userName}>
-                  {f.firstName + ' ' + f.lastName}
+                  {f.name.firstName + ' ' + f.name.lastName}
                 </Link>
                 <div className={styles.action}>
                   <Button

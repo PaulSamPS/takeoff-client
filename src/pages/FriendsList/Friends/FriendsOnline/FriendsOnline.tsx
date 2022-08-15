@@ -13,13 +13,13 @@ export const FriendsOnline = ({
   const { pathname } = useLocation();
 
   const filteredOnlineFriends = friendsOnline.filter((friend) =>
-    (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
+    (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
       text?.toLowerCase()
     )
   );
 
   const filteredOnlineUsersFriends = friendsOnlineUser.filter((friend) =>
-    (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
+    (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
       text?.toLowerCase()
     )
   );

@@ -14,14 +14,14 @@ export const FriendsAll = (): JSX.Element => {
   const { pathname } = useLocation();
 
   const filteredFriends = friends.filter((friend) =>
-    (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
+    (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
       text?.toLowerCase()
     )
   );
 
   const userFilteredFriends = friendsUserInfo
     ? friendsUserInfo.filter((friend) =>
-        (friend.firstName.toLowerCase() + '' + friend.lastName.toLowerCase()).includes(
+        (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
           text?.toLowerCase()
         )
       )
@@ -29,9 +29,11 @@ export const FriendsAll = (): JSX.Element => {
 
   const filteredFollowers = followings
     ? followings.filter((follower) =>
-        (follower.firstName.toLowerCase() + '' + follower.lastName.toLowerCase()).includes(
-          text?.toLowerCase()
-        )
+        (
+          follower.name.firstName.toLowerCase() +
+          '' +
+          follower.name.lastName.toLowerCase()
+        ).includes(text?.toLowerCase())
       )
     : [];
 

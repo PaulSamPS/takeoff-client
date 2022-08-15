@@ -80,7 +80,7 @@ export const CreatePost = () => {
       <img
         className={styles.avatar}
         src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-        alt={user.firstName + ' ' + user.lastName}
+        alt={user.name.firstName + ' ' + user.name.lastName}
       />
       <textarea
         className={styles.textarea}

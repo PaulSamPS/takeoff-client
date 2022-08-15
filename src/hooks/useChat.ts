@@ -99,12 +99,12 @@ export const useChat = (): IReturn => {
     socket?.on('message_list:update', ({ chat }: IChatLoadMore) => {
       setMessages(chat.messages.slice(-currentCountMessages));
       setBannerData({
-        name: chat.messagesWith.firstName + ' ' + chat.messagesWith.lastName,
+        name: chat.messagesWith.name.firstName + ' ' + chat.messagesWith.name.lastName,
         avatar: chat.messagesWith.avatar,
         lastVisit: chat.messagesWith.lastVisit,
         bio: { gender: chat.messagesWith.bio.gender },
       });
-      openChatId.current = chat.messagesWith._id;
+      openChatId.current = chat.messagesWith.id;
       setTotalMessages(chat.messages.length);
       setLoadingMessages(false);
     });
@@ -161,14 +161,14 @@ export const useChat = (): IReturn => {
         } else {
           const user = await dispatch(getChatUser(newMessage.sender));
           setBannerData({
-            name: user!.firstName + ' ' + user!.lastName,
+            name: user!.name.firstName + ' ' + user!.name.lastName,
             avatar: user!.avatar,
             bio: { gender: user!.bio.gender },
           });
 
           const newChat: IChats = {
             messagesWith: newMessage.sender,
-            name: user!.firstName + ' ' + user!.lastName,
+            name: user!.name.firstName + ' ' + user!.name.lastName,
             avatar: user!.avatar,
             lastMessage: newMessage.message,
             date: newMessage.date,
