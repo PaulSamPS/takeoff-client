@@ -3,8 +3,8 @@ import { IAppendAvatarInterface } from '../interfaces/appendAvatar.interface';
 import { useAppDispatch } from './redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { adminUploadAvatar, uploadAvatar } from '../redux/actions/usersAction';
-import { SocketContext } from '../helpers/context';
-import {IUseChangeAvatar, IUseChangeAvatarProps} from '../interfaces/useChangeAvatar.interface';
+import { SocketContext } from '../helpers/socketContext';
+import { IUseChangeAvatar, IUseChangeAvatarProps } from '../interfaces/useChangeAvatar.interface';
 
 export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IUseChangeAvatar => {
   const socket = React.useContext(SocketContext);

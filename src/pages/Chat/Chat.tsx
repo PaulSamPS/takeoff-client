@@ -9,7 +9,7 @@ import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../../components/UI/Spinner/Spinner';
-import { SocketContext } from '../../helpers/context';
+import { SocketContext } from '../../helpers/socketContext';
 import 'emoji-mart/css/emoji-mart.css';
 import { Input } from '../../components/UI/Input/Input';
 import { EmojiPicker } from '../../components/UI/EmojiPicker/EmojiPicker';

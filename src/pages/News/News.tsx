@@ -5,7 +5,7 @@ import { Post } from '../../components/Post/Post';
 import { Spinner } from '../../components/UI/Spinner/Spinner';
 import { CreatePost } from '../../components/CreatePost/CreatePost';
 import { RightBar } from '../../components/RightBar/RightBar';
-import { SocketContext } from '../../helpers/context';
+import { SocketContext } from '../../helpers/socketContext';
 import { setSuccess } from '../../redux/reducers/postsReducer';
 
 export const News = (): JSX.Element => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Profile.module.scss';
 import { IUser } from '../../interfaces/user.interface';
-import { SocketContext } from '../../helpers/context';
+import { SocketContext } from '../../helpers/socketContext';
 import { useParams } from 'react-router-dom';
 import { ProfileBio } from './ProfileBio/ProfileBio';
 import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
@@ -16,7 +16,7 @@ export const Profile = (): JSX.Element => {
 
   React.useEffect(() => {
     socket?.emit('userInfo:get', { userId: id });
-    socket?.on('userInfo:user', ({ user }: {user: IUser}) => {
+    socket?.on('userInfo:user', ({ user }: { user: IUser }) => {
       setUser(user);
     });
 

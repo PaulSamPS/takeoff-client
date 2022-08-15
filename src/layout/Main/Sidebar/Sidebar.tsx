@@ -8,7 +8,7 @@ import { ReactComponent as MyProfileIcon } from '../../../helpers/icons/profile.
 import { SidebarProps } from './Sidebar.props';
 import cn from 'classnames';
 import { Count } from '../../../components/Count/Count';
-import { SocketContext } from '../../../helpers/context';
+import { SocketContext } from '../../../helpers/socketContext';
 import { useChat } from '../../../hooks/useChat';
 import { useRequest } from '../../../hooks/useRequest';
 import { useAppSelector } from '../../../hooks/redux';
@@ -32,12 +32,16 @@ export const Sidebar = ({ className }: SidebarProps) => {
   }, [socket, chats]);
 
   const handleSetId = () => {
-      localStorage.setItem('followId', loginUser.id);
+    localStorage.setItem('followId', loginUser.id);
   };
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      <CustomLink to={`/main/profile/${loginUser.id}`} style={{ padding: '0' }} onClick={handleSetId}>
+      <CustomLink
+        to={`/main/profile/${loginUser.id}`}
+        style={{ padding: '0' }}
+        onClick={handleSetId}
+      >
         <MyProfileIcon /> Моя страница
       </CustomLink>
       <CustomLink to={'/main/news'} style={{ padding: '0' }}>

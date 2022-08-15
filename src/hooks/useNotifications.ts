@@ -1,6 +1,6 @@
 import { IUser } from '../interfaces/user.interface';
 import React from 'react';
-import { SocketContext } from '../helpers/context';
+import { SocketContext } from '../helpers/socketContext';
 import { useAppSelector } from './redux';
 import { INotifications, INotificationsReturn } from '../interfaces/useNotifications.interface';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from './redux';
 import { getChatUser } from '../redux/actions/chatAction';
 import { filteredChats } from '../helpers/filteChats';
-import { SocketContext } from '../helpers/context';
+import { SocketContext } from '../helpers/socketContext';
 import { useScroll } from './useScroll';
 import { useParams } from 'react-router-dom';
 import {

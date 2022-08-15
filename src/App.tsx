@@ -7,7 +7,7 @@ import { AuthLayout } from './layout/Auth/AuthLayout';
 import { PrivateAuth } from './helpers/PrivateAuth';
 import { FriendsList } from './pages/FriendsList/FriendsList';
 import { ConversationsList } from './pages/ConversationsList/ConversationsList';
-import { context, SocketContext } from './helpers/context';
+import { socketContext, SocketContext } from './helpers/socketContext';
 import { Profile } from './pages/Profile/Profile';
 import { Chat } from './pages/Chat/Chat';
 import { ConversationsUnread } from './pages/ConversationsList/ConversationsUnread/ConversationsUnread';
@@ -29,7 +29,7 @@ import { AllNotifications } from './pages/AllNotifications/AllNotifications';
 import { AllNotificationsLikes } from './pages/AllNotifications/AllNotificationsItems/AllNotificationsLikes';
 
 export const App = () => {
-  const { socket } = context();
+  const { socket } = socketContext();
 
   return (
     <>

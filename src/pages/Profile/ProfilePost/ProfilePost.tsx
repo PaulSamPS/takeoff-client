@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import { CreatePost } from '../../../components/CreatePost/CreatePost';
 import { Post } from '../../../components/Post/Post';
 import { setSuccess } from '../../../redux/reducers/postsReducer';
-import { SocketContext } from '../../../helpers/context';
-import {IPost} from '../../../interfaces/usePost.interface';
+import { SocketContext } from '../../../helpers/socketContext';
+import { IPost } from '../../../interfaces/usePost.interface';
 
 export const ProfilePost = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
@@ -18,7 +18,7 @@ export const ProfilePost = (): JSX.Element => {
 
   React.useEffect(() => {
     socket?.emit('post:get', { userId: id });
-    socket?.on('post:send', ({ posts }: {posts: IPost[]}) => {
+    socket?.on('post:send', ({ posts }: { posts: IPost[] }) => {
       dispatch(setSuccess(posts));
     });
 

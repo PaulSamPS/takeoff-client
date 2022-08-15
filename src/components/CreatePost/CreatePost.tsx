@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useParams } from 'react-router-dom';
 import { useOnClickOutside } from '../../hooks/useOnclickOutside';
 import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
-import { SocketContext } from '../../helpers/context';
+import { SocketContext } from '../../helpers/socketContext';
 
 export const CreatePost = () => {
   const socket = React.useContext(SocketContext);

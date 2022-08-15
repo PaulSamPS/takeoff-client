@@ -3,7 +3,7 @@ import styles from './ProfileMenu.module.scss';
 import { ReactComponent as SettingsIcon } from '../../helpers/icons/settings.svg';
 import { ReactComponent as ExitIcon } from '../../helpers/icons/exit.svg';
 import { CustomLink } from '../UI/CustomLink/CustomLink';
-import { SocketContext } from '../../helpers/context';
+import { SocketContext } from '../../helpers/socketContext';
 import { logout } from '../../redux/actions/authAction';
 import { useAppDispatch } from '../../hooks/redux';
 import { useNavigate } from 'react-router-dom';

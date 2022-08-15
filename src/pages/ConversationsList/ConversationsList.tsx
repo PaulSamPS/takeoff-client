@@ -3,7 +3,7 @@ import styles from './ConversationList.module.scss';
 import { Outlet } from 'react-router-dom';
 import { RightBar } from '../../components/RightBar/RightBar';
 import { useChat } from '../../hooks/useChat';
-import { SocketContext } from '../../helpers/context';
+import { SocketContext } from '../../helpers/socketContext';
 
 export const ConversationsList = (): JSX.Element => {
   const socket = useContext(SocketContext);
@@ -12,7 +12,7 @@ export const ConversationsList = (): JSX.Element => {
 
   React.useEffect(() => {
     const totalUnreadMessages = chats
-      .map((chat ) => chat.countUnreadMessages)
+      .map((chat) => chat.countUnreadMessages)
       .reduce((sum: number, elem: number) => {
         return sum + elem;
       }, 0);

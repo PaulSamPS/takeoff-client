@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector } from './redux';
-import { SocketContext } from '../helpers/context';
+import { SocketContext } from '../helpers/socketContext';
 import { useParams } from 'react-router-dom';
 import { IUser } from '../interfaces/user.interface';
 import { IFollow, IFollowReturn } from '../interfaces/useFollow.interface';

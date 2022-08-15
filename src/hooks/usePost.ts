@@ -1,5 +1,5 @@
 import React from 'react';
-import { SocketContext } from '../helpers/context';
+import { SocketContext } from '../helpers/socketContext';
 import { useAppDispatch, useAppSelector } from './redux';
 import { deletePost } from '../redux/actions/postAction';
 import {

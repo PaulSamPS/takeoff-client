@@ -17,40 +17,40 @@ import debounce from 'lodash.debounce';
 import { usersReducer } from '../../../redux/reducers/usersReducer';
 import { AxiosResponse } from 'axios';
 import { IUser } from '../../../interfaces/user.interface';
+import { Spinner } from '../../../components/UI/Spinner/Spinner';
+import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 
 export const Header = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { searchUsers } = useAppSelector((state) => state.usersReducer);
+
   const dispatch = useAppDispatch();
-  console.log('searchAct', searchUsers);
 
   const [visibleMenu, setVisibleMenu] = React.useState<boolean>(false);
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
-  const [isSearch] = React.useState<boolean>(true);
+  const [isSearch, setIsSearch] = React.useState<boolean>(false);
   const [text, setText] = React.useState<string>('');
+  const [isLoadingSearchUsers, setIsLoadingSearchUsers] = React.useState<boolean>(false);
+
+  const searchRef = React.useRef<HTMLDivElement>(null);
+
   const { notificationsCount, handleReadNotifications } = useNotifications();
   const { friends } = useRequest();
+  useOnClickOutside(searchRef, () => setIsSearch(false));
 
   const handleOpenNotifications = () => {
     setVisibleNotification(true);
     handleReadNotifications();
   };
 
-  const filteredFriends = friends.filter((friend) =>
+  const filteredFriends = friends.filter((friend) => {
     (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
       text?.toLowerCase()
-    )
-  );
-
-  console.log(friends, searchUsers);
+    );
+    setIsLoadingSearchUsers(false);
+  });
 
   const searchPeople = filteredFriends.length > 0 ? filteredFriends : searchUsers;
-
-  // const throttleGetUsers = async () => {
-  //   await $apiAuth.post(`api/user/search`, { name: text }).then((res: AxiosResponse<IUser[]>) => {
-  //     dispatch(usersReducer.actions.getSearchUsers(res.data));
-  //   });
-  // };
 
   const testDebounce = React.useCallback(
     debounce(async (userName: string) => {
@@ -58,14 +58,21 @@ export const Header = () => {
         .post(`api/user/search`, { name: userName })
         .then((res: AxiosResponse<IUser[]>) => {
           dispatch(usersReducer.actions.getSearchUsers(res.data));
+          setIsLoadingSearchUsers(false);
         });
-    }, 1000),
+    }, 500),
     []
   );
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsLoadingSearchUsers(true);
     setText(e.target.value);
     testDebounce(e.target.value);
+  };
+
+  const handleOnHover = (userId: string) => {
+    localStorage.setItem('followId', userId);
+    localStorage.setItem('friendsUserInfo', userId);
   };
 
   return (
@@ -74,23 +81,47 @@ export const Header = () => {
         <Link to={'/main/news'} className={styles.logo}>
           <h2>TakeOff</h2>
         </Link>
-        <div className={styles.search}>
-          <Input placeholder='Поиск' onChange={handleSearch} value={text} />
+        <div className={styles.search} ref={searchRef}>
+          <Input
+            placeholder='Поиск'
+            onChange={handleSearch}
+            value={text}
+            onClick={() => setIsSearch(true)}
+          />
           <SearchIcon />
           {isSearch && (
             <div className={styles.searchUsers}>
-              {searchPeople.map((people) => (
-                <div key={people.id} className={styles.user}>
-                  <Link to={`/main/profile/${people.id}`} replace className={styles.avatar}>
-                    <img
-                      src={
-                        people.avatar == null ? `/photo.png` : `${API_URL}/avatar/${people.avatar}`
-                      }
-                      alt={people.name.firstName + ' ' + people.name.lastName}
-                    />
-                  </Link>
-                </div>
-              ))}
+              {isLoadingSearchUsers ? (
+                <Spinner className={styles.spinner} />
+              ) : searchUsers.length > 0 ? (
+                searchPeople.map((people) => (
+                  <div key={people.id} className={styles.user}>
+                    <Link to={`/main/profile/${people.id}`} replace className={styles.avatar}>
+                      <img
+                        src={
+                          people.avatar == null
+                            ? `/photo.png`
+                            : `${API_URL}/avatar/${people.avatar}`
+                        }
+                        alt={people.name.firstName + ' ' + people.name.lastName}
+                        onClick={() => setIsSearch(false)}
+                      />
+                    </Link>
+                    <div
+                      className={styles.userInfo}
+                      onMouseEnter={() => handleOnHover(people.id)}
+                      onClick={() => setIsSearch(false)}
+                    >
+                      <Link to={`/main/profile/${people.id}`} replace className={styles.userName}>
+                        {people.name.firstName + ' ' + people.name.lastName}
+                      </Link>
+                      <span>{people.bio.city}</span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <span className={styles.notFound}>Ничего не найдено</span>
+              )}
             </div>
           )}
         </div>

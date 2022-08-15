@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { Sidebar } from './Sidebar/Sidebar';
 import { getChatUser } from '../../redux/actions/chatAction';
 import { Toast } from '../../components/UI/Toast/Toast';
-import { SocketContext } from '../../helpers/context';
+import { SocketContext } from '../../helpers/socketContext';
 import { setSocketUsers } from '../../redux/reducers/socketUsersReducer';
 import { IMessages } from '../../interfaces/useChat.interface';
 import { INewMessageToast, IOnlineUsers } from '../../interfaces/layout.interface';
