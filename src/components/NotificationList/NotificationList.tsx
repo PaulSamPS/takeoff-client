@@ -6,23 +6,20 @@ import { useAppSelector } from '../../hooks/redux';
 import { useNotifications } from '../../hooks/useNotifications';
 import { Notification } from '../Notification/Notification';
 import { Spinner } from '../UI/Spinner/Spinner';
-import { useOnClickOutside } from '../../hooks/useOnclickOutside';
 
 export const NotificationList = ({
   setVisibleNotification,
+  ...props
 }: NotificationListProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
 
-  const notificationsRef = React.useRef<HTMLDivElement>(null);
-
   const { notifications, isLoading } = useNotifications();
-  useOnClickOutside(notificationsRef, () => setVisibleNotification(false));
 
   const notificationsLength =
     notifications.notifications.filter((n) => n.user.id !== loginUser.id).length > 0;
 
   return (
-    <div className={styles.wrapper} ref={notificationsRef}>
+    <div className={styles.wrapper} {...props}>
       <div className={styles.top}>
         <span>Ваша страница</span>
         <Link to={'/main/settings'} onClick={() => setVisibleNotification(false)}>

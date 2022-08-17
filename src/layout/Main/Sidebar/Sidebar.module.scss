@@ -1,4 +1,10 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
+
+	a {
+		&:hover {
+			text-decoration: none;
+		}
+	}
 }

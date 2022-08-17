@@ -31,12 +31,12 @@ export const usersReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    getSearchUsers(state, action: PayloadAction<IUser[]>) {
+    setSearchUsers(state, action: PayloadAction<IUser[]>) {
       state.searchUsers = action.payload;
     },
   },
 });
 
-export const { getSearchUsers } = usersReducer.actions;
+export const { setSuccess, setSearchUsers } = usersReducer.actions;
 
 export default usersReducer.reducer;

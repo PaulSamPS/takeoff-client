@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import styles from '../Conversations/Conversations.module.scss';
 import { Search } from '../../../components/UI/Search/Search';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
@@ -9,9 +9,13 @@ export const ConversationsUnread = (): JSX.Element => {
   const { chats } = useChat();
   console.log(search);
 
+  const handleSearch = (e: FormEvent<HTMLDivElement>) => {
+    setSearch(e.currentTarget.textContent!.toString());
+  };
+
   return (
     <div className={styles.wrapper}>
-      <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
+      <Search onInput={handleSearch} className={styles.search} placeholder={'Поиск'} />
       {chats.map(
         (chat) =>
           chat.countUnreadMessages > 0 && (

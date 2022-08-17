@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { useChat } from '../../../hooks/useChat';
 import styles from './Conversations.module.scss';
 import { Search } from '../../../components/UI/Search/Search';
@@ -11,6 +11,10 @@ export const Conversations = (): JSX.Element => {
   const filteredChats = chats.filter((chat) =>
     chat.name.toLowerCase().includes(search?.toLowerCase())
   );
+
+  const handleSearch = (e: FormEvent<HTMLDivElement>) => {
+    setSearch(e.currentTarget.textContent!.toString());
+  };
 
   React.useEffect(() => {
     document.getElementById('input')?.focus();
@@ -25,7 +29,7 @@ export const Conversations = (): JSX.Element => {
           height: filteredChats.length > 0 ? 'fit-content' : 'calc(100vh - 160px)',
         }}
       >
-        <Search setText={setSearch} className={styles.search} placeholder={'Поиск'} />
+        <Search onInput={handleSearch} className={styles.search} placeholder={'Поиск'} />
         {filteredChats.map((chat) => (
           <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
         ))}

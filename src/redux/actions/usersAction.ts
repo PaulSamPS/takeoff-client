@@ -7,10 +7,10 @@ import { usersReducer } from '../reducers/usersReducer';
 import { loginReducer } from '../reducers/auth/loginReducer';
 import { IEditProfile } from '../../interfaces/editProfile.interface';
 
-export const getUsers = () => async (dispatch: AppDispatch) => {
+export const getUsers = (search?: string) => async (dispatch: AppDispatch) => {
   dispatch(usersReducer.actions.setLoading());
   await $apiAuth
-    .get(`api/user`)
+    .post(`api/user`, { search })
     .then((res: AxiosResponse<IUser[]>) => {
       dispatch(usersReducer.actions.setSuccess(res.data));
     })

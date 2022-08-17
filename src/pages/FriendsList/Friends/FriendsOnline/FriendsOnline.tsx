@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import styles from './FriendsOnline.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
 import { Search } from '../../../../components/UI/Search/Search';
@@ -9,24 +9,28 @@ export const FriendsOnline = ({
   friendsOnline,
   friendsOnlineUser,
 }: FriendOnlineProps): JSX.Element => {
-  const [text, setText] = React.useState<string>('');
+  const [search, setSearch] = React.useState<string>('');
   const { pathname } = useLocation();
 
   const filteredOnlineFriends = friendsOnline.filter((friend) =>
     (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
-      text?.toLowerCase()
+      search?.toLowerCase()
     )
   );
 
   const filteredOnlineUsersFriends = friendsOnlineUser.filter((friend) =>
     (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
-      text?.toLowerCase()
+      search?.toLowerCase()
     )
   );
 
+  const handleSearch = (e: FormEvent<HTMLDivElement>) => {
+    setSearch(e.currentTarget.textContent!.toString());
+  };
+
   return (
     <div className={styles.wrapper}>
-      <Search setText={setText} placeholder={'Поиск друзей'} />
+      <Search placeholder={'Поиск друзей'} onInput={handleSearch} />
       <div className={styles.grid}>
         {pathname === '/main/friends' && (
           <>

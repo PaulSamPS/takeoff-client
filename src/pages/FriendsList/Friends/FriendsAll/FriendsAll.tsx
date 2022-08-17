@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import styles from './FriendsAll.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
 import { Search } from '../../../../components/UI/Search/Search';
@@ -7,7 +7,7 @@ import { useFollow } from '../../../../hooks/useFollow';
 import { useLocation } from 'react-router-dom';
 
 export const FriendsAll = (): JSX.Element => {
-  const [text, setText] = React.useState<string>('');
+  const [search, setSearch] = React.useState<string>('');
 
   const { friends, friendsUserInfo } = useRequest();
   const { followings } = useFollow();
@@ -15,14 +15,14 @@ export const FriendsAll = (): JSX.Element => {
 
   const filteredFriends = friends.filter((friend) =>
     (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
-      text?.toLowerCase()
+      search?.toLowerCase()
     )
   );
 
   const userFilteredFriends = friendsUserInfo
     ? friendsUserInfo.filter((friend) =>
         (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
-          text?.toLowerCase()
+          search?.toLowerCase()
         )
       )
     : [];
@@ -33,13 +33,17 @@ export const FriendsAll = (): JSX.Element => {
           follower.name.firstName.toLowerCase() +
           '' +
           follower.name.lastName.toLowerCase()
-        ).includes(text?.toLowerCase())
+        ).includes(search?.toLowerCase())
       )
     : [];
 
+  const handleSearch = (e: FormEvent<HTMLDivElement>) => {
+    setSearch(e.currentTarget.textContent!.toString());
+  };
+
   return (
     <div className={styles.wrapper}>
-      <Search setText={setText} placeholder={'Поиск друзей'} />
+      <Search onInput={handleSearch} placeholder={'Поиск друзей'} />
       <div className={styles.grid}>
         {pathname === '/main/friends' && (
           <>

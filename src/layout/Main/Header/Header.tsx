@@ -33,6 +33,9 @@ export const Header = () => {
   const [isLoadingSearchUsers, setIsLoadingSearchUsers] = React.useState<boolean>(false);
 
   const searchRef = React.useRef<HTMLDivElement>(null);
+  const notificationsRef = React.useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(notificationsRef, () => setVisibleNotification(false));
 
   const { notificationsCount, handleReadNotifications } = useNotifications();
   const { friends } = useRequest();
@@ -52,12 +55,12 @@ export const Header = () => {
 
   const searchPeople = filteredFriends.length > 0 ? filteredFriends : searchUsers;
 
-  const testDebounce = React.useCallback(
+  const searchDebounce = React.useCallback(
     debounce(async (userName: string) => {
       await $apiAuth
         .post(`api/user/search`, { name: userName })
         .then((res: AxiosResponse<IUser[]>) => {
-          dispatch(usersReducer.actions.getSearchUsers(res.data));
+          dispatch(usersReducer.actions.setSearchUsers(res.data));
           setIsLoadingSearchUsers(false);
         });
     }, 500),
@@ -67,7 +70,7 @@ export const Header = () => {
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setIsLoadingSearchUsers(true);
     setText(e.target.value);
-    testDebounce(e.target.value);
+    searchDebounce(e.target.value);
   };
 
   const handleOnHover = (userId: string) => {
@@ -131,7 +134,12 @@ export const Header = () => {
           </div>
           {notificationsCount > 0 && <Count className={styles.count}>{notificationsCount}</Count>}
           {visibleNotification && (
-            <NotificationList setVisibleNotification={setVisibleNotification} />
+            <div ref={notificationsRef}>
+              <NotificationList
+                onClick={(e) => e.stopPropagation()}
+                setVisibleNotification={setVisibleNotification}
+              />
+            </div>
           )}
         </div>
         <div
