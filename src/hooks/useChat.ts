@@ -46,8 +46,6 @@ export const useChat = (): IReturn => {
   const [currentCountMessages, setCurrentCountMessages] = React.useState<number>(20);
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
 
-  console.log(chats);
-
   const { scrollY } = useScroll();
   const openChatId = React.useRef<string | null>('');
   const receiverUserId = localStorage.getItem('receiverUserId');

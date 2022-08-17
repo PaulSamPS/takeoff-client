@@ -6,21 +6,29 @@ import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 import { EmojiPickerProps } from './EmojiPicker.props';
 import cn from 'classnames';
 
-export const EmojiPicker = ({
-  className,
-  setText,
-  text,
-  bottom,
-  left,
-}: EmojiPickerProps): JSX.Element => {
+export const EmojiPicker = ({ className, setText, text, left }: EmojiPickerProps): JSX.Element => {
   const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
+  const [offsetBot, setOffsetBot] = React.useState<number>(0);
 
   const refPicker = useRef<HTMLDivElement>(null);
+  const postRef = React.useRef<SVGSVGElement>(null);
+
   useOnClickOutside(refPicker, () => setShowEmoji(false));
+
+  const coordsEl = () => {
+    const rect = postRef.current?.getBoundingClientRect();
+    setOffsetBot(rect!.bottom);
+  };
 
   const addEmoji = (e: BaseEmoji) => {
     setText(text + '' + e.colons);
   };
+
+  const handleClickIcon = () => {
+    setShowEmoji(!showEmoji);
+    coordsEl();
+  };
+
   return (
     <div className={cn(styles.picker, className)} ref={refPicker}>
       {showEmoji && (
@@ -34,14 +42,14 @@ export const EmojiPicker = ({
           style={{
             top: 'unset',
             right: 'unset',
-            bottom: `${bottom}px`,
+            bottom: `${offsetBot < 300 ? -235 : 32}px`,
             left: `${left}px`,
             zIndex: '8',
             width: '255px',
           }}
         />
       )}
-      <SmileIcon className={styles.emoji} onClick={() => setShowEmoji(!showEmoji)} />
+      <SmileIcon className={styles.emoji} onClick={handleClickIcon} ref={postRef} />
     </div>
   );
 };

@@ -56,7 +56,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): 
         />
         <div className={styles.bottom}>
           <div className={styles.picker}>
-            <EmojiPicker setText={setText} text={text} bottom={52} left={-20} />
+            <EmojiPicker setText={setText} text={text} left={-20} />
           </div>
           <div className={styles.button}>
             <Button

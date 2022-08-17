@@ -86,7 +86,7 @@ export const PostComment = ({
           onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
           value={text!}
         ></input>
-        <EmojiPicker setText={setText} text={text!} bottom={-255} left={-156} />
+        <EmojiPicker setText={setText} text={text!} left={-156} />
         <Button appearance='primary' disabled={!(text && text.length > 0)} onClick={handleComment}>
           <SendIcon className={styles.send} />
         </Button>

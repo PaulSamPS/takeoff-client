@@ -117,7 +117,7 @@ export const CreatePost = () => {
             duration: 0.2,
           }}
         >
-          <EmojiPicker setText={setText} text={text} bottom={-255} left={-21} />
+          <EmojiPicker setText={setText} text={text} left={-21} />
           <Button
             appearance='primary'
             type='submit'

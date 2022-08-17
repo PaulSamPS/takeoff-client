@@ -112,13 +112,7 @@ export const Chat = (): JSX.Element => {
             value={text}
             ref={inputRef}
           />
-          <EmojiPicker
-            className={styles.emoji}
-            setText={setText}
-            text={text}
-            bottom={60}
-            left={-140}
-          />
+          <EmojiPicker className={styles.emoji} setText={setText} text={text} left={-140} />
           <Button appearance='primary' disabled={submitDisabled}>
             <SendIcon className={styles.send} />
           </Button>
