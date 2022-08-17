@@ -14,14 +14,14 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
   const location = useLocation();
   const { id } = useParams();
 
-  const selectFileAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+  const selectFileAvatar = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
     avatar.push({ avatar: URL.createObjectURL(e.target.files![0]), number: Date.now() });
     setPreviewAvatar(avatar);
     setFilesAvatar(e.target.files);
-  };
+  }, []);
 
-  const onSubmit = (e: React.SyntheticEvent) => {
+  const onSubmit = React.useCallback((e: React.SyntheticEvent) => {
     e.preventDefault();
     const formData = new FormData();
     if (filesAvatar) {
@@ -41,7 +41,7 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
         setPreviewAvatar([]);
       });
     }
-  };
+  }, []);
 
   return { onSubmit, previewAvatar, selectFileAvatar, filesAvatar };
 };

@@ -32,6 +32,8 @@
 		grid-template-columns: repeat(5, 1fr);
 		min-height: 188px;
 		padding: 25px 14px;
+		background: var(--white);
+		border-radius: 0 0 4px 4px;
 
 		.user {
 			display: flex;

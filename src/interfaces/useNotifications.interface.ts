@@ -1,10 +1,10 @@
-import { IUser } from './user.interface';
+import { IUser, IUserNotification } from './user.interface';
 import { IPost } from './usePost.interface';
 
 export interface INotification {
   _id: string;
   type: 'newLike' | 'newComment' | 'newFollower';
-  user: IUser;
+  user: IUserNotification;
   post: IPost;
   commentId: string;
   text: string;

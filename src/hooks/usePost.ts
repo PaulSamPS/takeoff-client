@@ -50,8 +50,10 @@ export const usePost = (post: IPost): IPostReturn => {
           user: {
             _id: loginUser.id,
             avatar: loginUser.avatar,
-            firstName: loginUser.name.firstName,
-            lastName: loginUser.name.lastName,
+            name: {
+              firstName: loginUser.name.firstName,
+              lastName: loginUser.name.lastName,
+            },
           },
         };
         setLikes((prev) => [...prev, newLike]);
@@ -67,8 +69,10 @@ export const usePost = (post: IPost): IPostReturn => {
         user: {
           _id: loginUser.id,
           avatar: loginUser.avatar,
-          firstName: loginUser.name.firstName,
-          lastName: loginUser.name.lastName,
+          name: {
+            firstName: loginUser.name.firstName,
+            lastName: loginUser.name.lastName,
+          },
         },
         text,
         date: Date.now(),

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styles from './MessagesCard.module.scss';
 import { API_URL } from '../../http/axios';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { Count } from '../Count/Count';
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 
-export const MessagesCard = memo(({ chat, className }: MessagesCardProp): JSX.Element => {
+export const MessagesCard = ({ chat, className }: MessagesCardProp): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const handleOpenChat = () => {
@@ -57,4 +57,4 @@ export const MessagesCard = memo(({ chat, className }: MessagesCardProp): JSX.El
       </Link>
     </div>
   );
-});
+};

@@ -17,7 +17,7 @@ export const PostBody = ({ post }: PostBodyProps): JSX.Element => {
         >
           <img
             src={post.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${post.user.avatar}`}
-            alt={post.user.firstName + ' ' + post.user.lastName}
+            alt={post.user.name.firstName + ' ' + post.user.name.lastName}
           />
         </Link>
         <div className={styles.userPost}>
@@ -26,7 +26,7 @@ export const PostBody = ({ post }: PostBodyProps): JSX.Element => {
             className={styles.userName}
             onClick={() => localStorage.setItem('followId', post.user._id)}
           >
-            {post.user.firstName + ' ' + post.user.lastName}
+            {post.user.name.firstName + ' ' + post.user.name.lastName}
           </Link>
           <span className={styles.date}>{calculateTime(post.createdAt)}</span>
         </div>

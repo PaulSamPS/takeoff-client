@@ -12,12 +12,12 @@ export const AllNotificationsLikes = () => {
 
   return (
     <div className={styles.wrapper}>
-      {notifications.notifications.filter((n) => n.user.id !== loginUser.id).length > 0 ? (
+      {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (
         <>
           {pathname === '/main/all-notifications' ? (
             <>
               {notifications.notifications
-                .filter((n) => n.user.id !== loginUser.id)
+                .filter((n) => n.user._id !== loginUser.id)
                 .filter((n) => n.type === 'newLike')
                 .slice(0, 10)
                 .map((notification) => (
@@ -27,7 +27,7 @@ export const AllNotificationsLikes = () => {
           ) : (
             <>
               {notifications.notifications
-                .filter((n) => n.user.id !== loginUser.id)
+                .filter((n) => n.user._id !== loginUser.id)
                 .filter((n) => n.type === 'newComment')
                 .slice(0, 10)
                 .map((notification) => (

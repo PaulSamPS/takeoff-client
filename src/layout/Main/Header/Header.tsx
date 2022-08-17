@@ -12,7 +12,6 @@ import { NotificationList } from '../../../components/NotificationList/Notificat
 import { Input } from '../../../components/UI/Input/Input';
 import cn from 'classnames';
 import { useNotifications } from '../../../hooks/useNotifications';
-import { useRequest } from '../../../hooks/useRequest';
 import debounce from 'lodash.debounce';
 import { usersReducer } from '../../../redux/reducers/usersReducer';
 import { AxiosResponse } from 'axios';
@@ -22,23 +21,19 @@ import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 
 export const Header = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  // const { searchUsers } = useAppSelector((state) => state.usersReducer);
+  const { searchUsers } = useAppSelector((state) => state.usersReducer);
 
   const dispatch = useAppDispatch();
 
   const [visibleMenu, setVisibleMenu] = React.useState<boolean>(false);
   const [visibleNotification, setVisibleNotification] = React.useState<boolean>(false);
   const [isSearch, setIsSearch] = React.useState<boolean>(false);
-  const [text, setText] = React.useState<string>('');
+  const [search, setSearch] = React.useState<string>('');
   const [isLoadingSearchUsers, setIsLoadingSearchUsers] = React.useState<boolean>(false);
 
   const searchRef = React.useRef<HTMLDivElement>(null);
-  const notificationsRef = React.useRef<HTMLDivElement>(null);
-
-  useOnClickOutside(notificationsRef, () => setVisibleNotification(false));
 
   const { notificationsCount, handleReadNotifications } = useNotifications();
-  const { friends } = useRequest();
   useOnClickOutside(searchRef, () => setIsSearch(false));
 
   const handleOpenNotifications = () => {
@@ -46,15 +41,10 @@ export const Header = () => {
     handleReadNotifications();
   };
 
-  // const filteredFriends = friends.filter((friend) => {
-  //   (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
-  //     text?.toLowerCase()
-  //   );
-  //   setIsLoadingSearchUsers(false);
-  // });
+  const visibleSearch = () => {
+    setIsSearch(true);
+  };
 
-  // const searchPeople = filteredFriends.length > 0 ? filteredFriends : searchUsers;
-  console.log(friends);
   const searchDebounce = React.useCallback(
     debounce(async (userName: string) => {
       await $apiAuth
@@ -69,7 +59,7 @@ export const Header = () => {
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setIsLoadingSearchUsers(true);
-    setText(e.target.value);
+    setSearch(e.target.value);
     searchDebounce(e.target.value);
   };
 
@@ -88,16 +78,16 @@ export const Header = () => {
           <Input
             placeholder='Поиск'
             onChange={handleSearch}
-            value={text}
-            onClick={() => setIsSearch(true)}
+            value={search}
+            onClick={visibleSearch}
           />
           <SearchIcon />
           {isSearch && (
             <div className={styles.searchUsers}>
               {isLoadingSearchUsers ? (
                 <Spinner className={styles.spinner} />
-              ) : friends.length > 0 ? (
-                friends.map((people) => (
+              ) : searchUsers.length > 0 ? (
+                searchUsers.map((people) => (
                   <div key={people.id} className={styles.user}>
                     <Link to={`/main/profile/${people.id}`} replace className={styles.avatar}>
                       <img
@@ -134,12 +124,7 @@ export const Header = () => {
           </div>
           {notificationsCount > 0 && <Count className={styles.count}>{notificationsCount}</Count>}
           {visibleNotification && (
-            <div ref={notificationsRef}>
-              <NotificationList
-                onClick={(e) => e.stopPropagation()}
-                setVisibleNotification={setVisibleNotification}
-              />
-            </div>
+            <NotificationList setVisibleNotification={setVisibleNotification} />
           )}
         </div>
         <div

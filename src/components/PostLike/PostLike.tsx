@@ -28,10 +28,10 @@ export const PostLike = ({ post }: PostLikeProps): JSX.Element => {
                 src={
                   like.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${like.user.avatar}`
                 }
-                alt={like.user.firstName + ' ' + like.user.lastName}
+                alt={like.user.name.firstName + ' ' + like.user.name.lastName}
               />
               <div className={styles.tooltip}>
-                <span>{like.user.firstName + ' ' + like.user.lastName}</span>
+                <span>{like.user.name.firstName + ' ' + like.user.name.lastName}</span>
               </div>
             </Link>
           ))}

@@ -19,11 +19,13 @@ export const useNotifications = (): INotificationsReturn => {
   const [notificationsCount, setNotificationsCount] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  console.log(notifications);
+
   React.useEffect(() => {
     setIsLoading(true);
     socket?.emit('notification:get', { userId: loginUser.id });
-    socket?.on('notifications', ({ notification }: { notification: INotifications }) => {
-      setNotifications(notification);
+    socket?.on('notifications', ({ _id, user, notifications }: INotifications) => {
+      setNotifications({ _id: _id, user: user, notifications: notifications });
     });
     setIsLoading(false);
 

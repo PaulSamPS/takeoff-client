@@ -15,11 +15,15 @@ import cn from 'classnames';
 import { usePost } from '../../hooks/usePost';
 import { Post } from '../Post/Post';
 
-export const Notification = ({ notification, ...props }: NotificationProps): JSX.Element => {
+export const Notification = ({
+  notification,
+  setVisibleNotification,
+  ...props
+}: NotificationProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 
-  const [conversationModal, setConversationModal] = React.useState<boolean>(false);
+  const [conversationModal, setConversationModal] = React.useState<boolean>(true);
   const [isPostModal, setIsPostModal] = React.useState<boolean>(false);
   const [offsetTop, setOffsetTop] = React.useState<number>(0);
 
@@ -31,8 +35,8 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
   const coordsEl = () => {
     const rect = notificationRef.current?.getBoundingClientRect();
     setOffsetTop(rect!.top);
-    localStorage.setItem('followId', notification.user.id);
-    localStorage.setItem('friendsUserInfo', notification.user.id);
+    localStorage.setItem('followId', notification.user._id);
+    localStorage.setItem('friendsUserInfo', notification.user._id);
   };
 
   const handleSendMessage = (id: string) => {
@@ -73,7 +77,8 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
             <Link
               id='notification'
               onMouseEnter={coordsEl}
-              to={`/main/profile/${notification.user.id}`}
+              to={`/main/profile/${notification.user._id}`}
+              onClick={() => (setVisibleNotification ? setVisibleNotification(false) : undefined)}
             >
               {notification.user.name.firstName + ' ' + notification.user.name.lastName}
             </Link>
@@ -94,10 +99,10 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
                   alt={notification.user.name.firstName + '' + notification.user.name.lastName}
                 />
                 <div className={styles.infoHoverUser}>
-                  <Link to={`/main/profile/${notification.user.id}`}>
+                  <Link to={`/main/profile/${notification.user._id}`}>
                     {notification.user.name.firstName + ' ' + notification.user.name.lastName}
                   </Link>
-                  {usersOnline.includes(notification.user.id) ? (
+                  {usersOnline.includes(notification.user._id) ? (
                     <div className={styles.online}>online</div>
                   ) : (
                     <div className={styles.lastVisit}>
@@ -108,11 +113,11 @@ export const Notification = ({ notification, ...props }: NotificationProps): JSX
                 </div>
               </div>
               <div className={styles.infoHoverBottom}>
-                <ButtonsFriend userId={notification.user.id} />
+                <ButtonsFriend userId={notification.user._id} />
                 <Button
                   appearance='primary'
                   className={styles.message}
-                  onClick={() => handleSendMessage(notification.user.id)}
+                  onClick={() => handleSendMessage(notification.user._id)}
                 >
                   Написать сообщение
                 </Button>

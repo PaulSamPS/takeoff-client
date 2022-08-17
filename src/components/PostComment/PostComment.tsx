@@ -47,12 +47,12 @@ export const PostComment = ({
                       ? `/photo.png`
                       : `${API_URL}/avatar/${comment.user.avatar}`
                   }
-                  alt={comment.user.firstName + ' ' + comment.user.lastName}
+                  alt={comment.user.name.firstName + ' ' + comment.user.name.lastName}
                 />
               </Link>
               <div className={cn(styles.body, { [styles.bodyBorder]: comments.length <= 1 })}>
                 <Link to={`/main/profile/${comment.user._id}`} className={styles.user}>
-                  {comment.user.firstName + ' ' + comment.user.lastName}
+                  {comment.user.name.firstName + ' ' + comment.user.name.lastName}
                 </Link>
                 <span className={styles.comment}>
                   {reactStringReplace(comment.text, /:(.+?):/g, (match, i) => (

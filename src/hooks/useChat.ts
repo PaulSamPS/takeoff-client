@@ -46,6 +46,8 @@ export const useChat = (): IReturn => {
   const [currentCountMessages, setCurrentCountMessages] = React.useState<number>(20);
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
 
+  console.log(chats);
+
   const { scrollY } = useScroll();
   const openChatId = React.useRef<string | null>('');
   const receiverUserId = localStorage.getItem('receiverUserId');
@@ -104,7 +106,7 @@ export const useChat = (): IReturn => {
         lastVisit: chat.messagesWith.lastVisit,
         bio: { gender: chat.messagesWith.bio.gender },
       });
-      openChatId.current = chat.messagesWith.id;
+      openChatId.current = chat.messagesWith._id;
       setTotalMessages(chat.messages.length);
       setLoadingMessages(false);
     });
@@ -160,6 +162,7 @@ export const useChat = (): IReturn => {
           });
         } else {
           const user = await dispatch(getChatUser(newMessage.sender));
+          console.log('user', newMessage.sender);
           setBannerData({
             name: user!.name.firstName + ' ' + user!.name.lastName,
             avatar: user!.avatar,

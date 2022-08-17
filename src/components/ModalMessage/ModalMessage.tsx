@@ -42,7 +42,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): 
           <Link to={`/main/profile/${userId}`} className={styles.name}>
             {friend!.name.firstName + ' ' + friend!.name.lastName}
           </Link>
-          <span>{calculateTime(friend!.lastVisit)}</span>
+          <span> был в сети {calculateTime(friend!.lastVisit)}</span>
         </div>
       </div>
       <div className={styles.message}>

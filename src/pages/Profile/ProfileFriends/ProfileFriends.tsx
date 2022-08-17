@@ -16,13 +16,15 @@ export const ProfileFriends = (): JSX.Element => {
 
   const { id } = useParams();
 
-  friendsUserInfo.filter((friend) => {
-    return users.forEach((user) => {
-      if (friend.id === user.userId) {
-        friendsOnline.push(friend as IUser);
-      }
+  React.useEffect(() => {
+    friendsUserInfo.filter((friend) => {
+      return users.forEach((user) => {
+        if (friend.id === user.userId) {
+          friendsOnline.push(friend as IUser);
+        }
+      });
     });
-  });
+  }, []);
 
   const handleClickSetUserId = () => {
     localStorage.setItem('friendsUserInfo', id!);

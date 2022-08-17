@@ -13,17 +13,20 @@ export const FriendsFind = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const [search, setSearch] = React.useState<string>('');
+  const [isLoadingSearchUsers, setIsLoadingSearchUsers] = React.useState<boolean>(false);
 
   const usersWithoutLoginUser = users.filter((u) => u.id !== loginUser.id);
 
   const searchDebounce = React.useCallback(
     debounce(async (userName: string) => {
       await dispatch(getUsers(userName));
+      setIsLoadingSearchUsers(false);
     }, 500),
     []
   );
 
   const handleSearch = (e: FormEvent<HTMLDivElement>) => {
+    setIsLoadingSearchUsers(true);
     setSearch(e.currentTarget.textContent!.toString());
     searchDebounce(e.currentTarget.textContent!.toString());
   };
@@ -37,7 +40,7 @@ export const FriendsFind = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <Search placeholder='Введите запрос' className={styles.search} onInput={handleSearch} />
-      {isLoading ? (
+      {isLoading || isLoadingSearchUsers ? (
         <Spinner />
       ) : (
         <>

@@ -3,7 +3,7 @@ import styles from './DatePicker.module.scss';
 import { ReactComponent as ArrowDownIcon } from '../../helpers/icons/arrowDown.svg';
 import cn from 'classnames';
 import { useOnClickOutside } from '../../hooks/useOnclickOutside';
-import {days, months, years} from '../../helpers/optionsSelect/selectDate';
+import { days, months, years } from '../../helpers/optionsSelect/selectDate';
 
 export const DatePicker = () => {
   const [day, setDay] = React.useState<string>('');

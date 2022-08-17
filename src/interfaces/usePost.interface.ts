@@ -1,7 +1,9 @@
 export interface IUserPost {
   _id: string;
-  firstName: string;
-  lastName: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
   avatar: string | null;
 }
 

@@ -6,7 +6,13 @@ import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 import { EmojiPickerProps } from './EmojiPicker.props';
 import cn from 'classnames';
 
-export const EmojiPicker = ({ className, setText, text, bottom, left }: EmojiPickerProps): JSX.Element => {
+export const EmojiPicker = ({
+  className,
+  setText,
+  text,
+  bottom,
+  left,
+}: EmojiPickerProps): JSX.Element => {
   const [showEmoji, setShowEmoji] = React.useState<boolean>(false);
 
   const refPicker = useRef<HTMLDivElement>(null);
