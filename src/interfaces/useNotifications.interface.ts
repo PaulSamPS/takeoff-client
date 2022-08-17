@@ -21,5 +21,6 @@ export interface INotificationsReturn {
   notifications: INotifications;
   notificationsCount: number;
   handleReadNotifications: () => void;
+  deleteNotification: (userId: string, notificationId: string) => void;
   isLoading: boolean;
 }

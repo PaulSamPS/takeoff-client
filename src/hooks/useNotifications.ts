@@ -19,7 +19,12 @@ export const useNotifications = (): INotificationsReturn => {
   const [notificationsCount, setNotificationsCount] = React.useState<number>(0);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  console.log(notifications);
+  const deleteNotification = (userId: string, notificationId: string) => {
+    socket?.emit('notification:delete', { userId, notificationId });
+    socket?.on('notification:deleted', () => {
+      socket?.emit('notification:get', { userId: loginUser.id });
+    });
+  };
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -55,5 +60,11 @@ export const useNotifications = (): INotificationsReturn => {
     });
   };
 
-  return { notifications, notificationsCount, handleReadNotifications, isLoading };
+  return {
+    notifications,
+    notificationsCount,
+    handleReadNotifications,
+    isLoading,
+    deleteNotification,
+  };
 };

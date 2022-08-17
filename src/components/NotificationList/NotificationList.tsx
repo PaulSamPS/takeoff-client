@@ -60,7 +60,9 @@ export const NotificationList = memo(
         </div>
         {notifications.notifications.filter((n) => n._id !== loginUser.id).length > 0 && (
           <div className={styles.bottom}>
-            <Link to={'/main/all-notifications'}>Показать все</Link>
+            <Link to={'/main/all-notifications'} onClick={() => setVisibleNotification(false)}>
+              Показать все
+            </Link>
           </div>
         )}
       </div>

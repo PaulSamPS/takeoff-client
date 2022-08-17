@@ -14,6 +14,7 @@ import { ButtonsFriend } from '../UI/ButtonsFriend/ButtonsFriend';
 import cn from 'classnames';
 import { usePost } from '../../hooks/usePost';
 import { Post } from '../Post/Post';
+import { useNotifications } from '../../hooks/useNotifications';
 
 export const Notification = ({
   notification,
@@ -23,11 +24,12 @@ export const Notification = ({
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 
-  const [conversationModal, setConversationModal] = React.useState<boolean>(true);
+  const [conversationModal, setConversationModal] = React.useState<boolean>(false);
   const [isPostModal, setIsPostModal] = React.useState<boolean>(false);
   const [offsetTop, setOffsetTop] = React.useState<number>(0);
 
   const { handleFindPost, findPost } = usePost(notification.post);
+  const { deleteNotification } = useNotifications();
 
   const notificationRef = React.useRef<HTMLDivElement>(null);
   const usersOnline = users.map((user: any) => user.userId);
@@ -144,10 +146,14 @@ export const Notification = ({
           <img
             src={`${API_URL}/post/${notification.post.image}`}
             alt={loginUser.name.firstName + '' + loginUser.name.lastName}
+            onClick={handleOpenPostModal}
           />
         )}
         <Button appearance='transparent'>
           <ArrowDownIcon />
+          <div className={styles.deleteNotification}>
+            <div onClick={() => deleteNotification(loginUser.id, notification._id)}>Удалить</div>
+          </div>
         </Button>
       </div>
       <Modal setModal={setIsPostModal} modal={isPostModal} postModal={isPostModal}>

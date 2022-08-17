@@ -9,7 +9,7 @@
 
 	.input {
 		input {
-		padding-left: 8px !important;
+			padding-left: 8px !important;
 		}
 	}
 
@@ -39,11 +39,11 @@
 
 .switch {
 	margin-left: 5px;
-	font-size: 13px;
 	color: var(--blue) !important;
 	font-weight: 500;
-	transition: all ease 0.2s;
+	font-size: 13px;
 	cursor: pointer;
+	transition: all ease 0.2s;
 
 	&:hover {
 		text-decoration: underline;

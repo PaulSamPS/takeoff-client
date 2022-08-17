@@ -52,6 +52,7 @@ export const Header = () => {
         .then((res: AxiosResponse<IUser[]>) => {
           dispatch(usersReducer.actions.setSearchUsers(res.data));
           setIsLoadingSearchUsers(false);
+          setIsSearch(true);
         });
     }, 500),
     []

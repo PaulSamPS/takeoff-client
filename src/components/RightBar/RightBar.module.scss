@@ -20,9 +20,10 @@
 	}
 
 	a {
-			&:hover {
-				text-decoration: none;
-			}
+		&:hover {
+			text-decoration: none;
+		}
+
 		.count {
 			background: var(--blue-alternative);
 		}
