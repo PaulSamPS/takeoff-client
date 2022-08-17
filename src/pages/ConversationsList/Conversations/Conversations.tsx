@@ -22,13 +22,7 @@ export const Conversations = (): JSX.Element => {
 
   return (
     <>
-      <div
-        className={styles.wrapper}
-        style={{
-          display: filteredChats.length <= 0 ? 'grid' : 'block',
-          height: filteredChats.length > 0 ? 'fit-content' : 'calc(100vh - 160px)',
-        }}
-      >
+      <div className={styles.wrapper}>
         <Search onInput={handleSearch} className={styles.search} placeholder={'Поиск'} />
         {filteredChats.map((chat) => (
           <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />

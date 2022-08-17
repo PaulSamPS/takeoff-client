@@ -157,7 +157,12 @@ export const Notification = ({
         </Button>
       </div>
       <Modal setModal={setIsPostModal} modal={isPostModal} postModal={isPostModal}>
-        <Post post={findPost} postModal={isPostModal} />
+        <Post
+          post={findPost}
+          postModal={isPostModal}
+          setIsPostModal={setIsPostModal}
+          setVisibleNotification={setVisibleNotification}
+        />
       </Modal>
     </div>
   );

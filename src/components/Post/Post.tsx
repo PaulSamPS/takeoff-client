@@ -10,7 +10,12 @@ import { ReactComponent as MoreIcon } from '../../helpers/icons/more.svg';
 import { useAppSelector } from '../../hooks/redux';
 import cn from 'classnames';
 
-export const Post = ({ post, postModal }: PostProps): JSX.Element => {
+export const Post = ({
+  post,
+  postModal,
+  setIsPostModal,
+  setVisibleNotification,
+}: PostProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [isAllComments, setIsAllComments] = React.useState<boolean>(false);
 
@@ -31,7 +36,11 @@ export const Post = ({ post, postModal }: PostProps): JSX.Element => {
         className={styles.icons}
         style={{ paddingBottom: `${post.comments.length > 0 && '20px'}` }}
       >
-        <PostLike post={post} />
+        <PostLike
+          post={post}
+          setIsPostModal={setIsPostModal}
+          setVisibleNotification={setVisibleNotification}
+        />
         <div
           className={cn(styles.iconBg, { [styles.iconBgHover]: post.comments.length > 3 })}
           style={{ cursor: post.comments.length > 3 ? 'pointer' : 'auto' }}

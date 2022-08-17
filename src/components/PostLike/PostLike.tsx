@@ -8,9 +8,23 @@ import { useAppSelector } from '../../hooks/redux';
 import { PostLikeProps } from './PostLike.props';
 import { usePost } from '../../hooks/usePost';
 
-export const PostLike = ({ post }: PostLikeProps): JSX.Element => {
+export const PostLike = ({
+  post,
+  setIsPostModal,
+  setVisibleNotification,
+}: PostLikeProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { likes, handleLike } = usePost(post);
+
+  const handleCloseModals = () => {
+    if (setIsPostModal) {
+      setIsPostModal(false);
+    }
+
+    if (setVisibleNotification) {
+      setVisibleNotification(false);
+    }
+  };
 
   return (
     <div className={styles.like}>
@@ -29,6 +43,7 @@ export const PostLike = ({ post }: PostLikeProps): JSX.Element => {
                   like.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${like.user.avatar}`
                 }
                 alt={like.user.name.firstName + ' ' + like.user.name.lastName}
+                onClick={handleCloseModals}
               />
               <div className={styles.tooltip}>
                 <span>{like.user.name.firstName + ' ' + like.user.name.lastName}</span>
