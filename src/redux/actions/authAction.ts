@@ -15,15 +15,14 @@ interface IObj {
 }
 
 export const registration = (formData: IRegistrationForm) => async (dispatch: AppDispatch) => {
-  dispatch(registrationReducer.actions.setLoading());
   await $api
     .post(`api/auth/registration`, formData)
     .then((res: AxiosResponse) => {
-      dispatch(registrationReducer.actions.setSuccess(res.status));
-      window.location.replace('http://localhost:3000/registration/success');
+      dispatch(registrationReducer.actions.setSuccess());
     })
     .catch((e: AxiosError<IErrorResponse>) => {
       dispatch(registrationReducer.actions.setError(e.response?.data.message));
+      console.log(e);
     });
 };
 

@@ -7,6 +7,12 @@
 
 	row-gap: 20px;
 
+	.input {
+		input {
+		padding-left: 8px !important;
+		}
+	}
+
 	.selectContainer {
 		width: 100%;
 	}
@@ -15,28 +21,31 @@
 		position: absolute;
 		top: -35px;
 		color: var(--red);
+		font-size: 13px;
 	}
 
 	.switchBlock {
 		margin-top: 50px;
 		color: var(--grey);
+		font-size: 13px;
 	}
 }
 
 .success {
 	color: var(--grey-middle);
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 13px !important;
+}
 
-	.switch {
-		margin-left: 10px;
-		color: var(--blue);
-		font-weight: 500;
-		text-decoration: none;
-		transition: all ease 0.2s;
+.switch {
+	margin-left: 5px;
+	font-size: 13px;
+	color: var(--blue) !important;
+	font-weight: 500;
+	transition: all ease 0.2s;
+	cursor: pointer;
 
-		&:hover {
-			text-decoration: underline;
-		}
+	&:hover {
+		text-decoration: underline;
 	}
 }

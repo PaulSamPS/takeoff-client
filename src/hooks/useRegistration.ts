@@ -26,8 +26,10 @@ export const useRegistration = ({
       formData.city = formData.city.value;
     }
     await dispatch(registration(formData)).then(() => {
-      navigate('/registration/success');
-      reset();
+      if (!error) {
+        navigate('/registration/success');
+        reset();
+      }
     });
   };
 

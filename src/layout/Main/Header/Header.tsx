@@ -22,7 +22,7 @@ import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 
 export const Header = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const { searchUsers } = useAppSelector((state) => state.usersReducer);
+  // const { searchUsers } = useAppSelector((state) => state.usersReducer);
 
   const dispatch = useAppDispatch();
 
@@ -46,15 +46,15 @@ export const Header = () => {
     handleReadNotifications();
   };
 
-  const filteredFriends = friends.filter((friend) => {
-    (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
-      text?.toLowerCase()
-    );
-    setIsLoadingSearchUsers(false);
-  });
+  // const filteredFriends = friends.filter((friend) => {
+  //   (friend.name.firstName.toLowerCase() + '' + friend.name.lastName.toLowerCase()).includes(
+  //     text?.toLowerCase()
+  //   );
+  //   setIsLoadingSearchUsers(false);
+  // });
 
-  const searchPeople = filteredFriends.length > 0 ? filteredFriends : searchUsers;
-
+  // const searchPeople = filteredFriends.length > 0 ? filteredFriends : searchUsers;
+  console.log(friends);
   const searchDebounce = React.useCallback(
     debounce(async (userName: string) => {
       await $apiAuth
@@ -96,8 +96,8 @@ export const Header = () => {
             <div className={styles.searchUsers}>
               {isLoadingSearchUsers ? (
                 <Spinner className={styles.spinner} />
-              ) : searchUsers.length > 0 ? (
-                searchPeople.map((people) => (
+              ) : friends.length > 0 ? (
+                friends.map((people) => (
                   <div key={people.id} className={styles.user}>
                     <Link to={`/main/profile/${people.id}`} replace className={styles.avatar}>
                       <img

@@ -49,6 +49,7 @@ export const Login = (): JSX.Element => {
     >
       {error && <span className={styles.err}>{error}</span>}
       <Input
+          className={styles.input}
         {...register('email', {
           required: { value: true, message: 'Введите email' },
           pattern: { value: /[^@\s]+@[^@\s]+\.[^@\s]+/g, message: 'Неверный формат  email' },
@@ -58,6 +59,7 @@ export const Login = (): JSX.Element => {
         error={errors.email}
       />
       <Input
+          className={styles.input}
         {...register('password', { required: { value: true, message: 'Введите пароль' } })}
         placeholder='Пароль'
         type='password'
