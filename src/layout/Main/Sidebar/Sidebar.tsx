@@ -1,17 +1,18 @@
 import React from 'react';
-import styles from './Sidebar.module.scss';
-import { CustomLink } from '../../../components/UI/CustomLink/CustomLink';
 import { ReactComponent as MessagesIcon } from '../../../helpers/icons/chat.svg';
 import { ReactComponent as NewsIcon } from '../../../helpers/icons/news.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
 import { ReactComponent as MyProfileIcon } from '../../../helpers/icons/profile.svg';
+import { CustomLink, Count } from '../../../components/UI';
 import { SidebarProps } from './Sidebar.props';
-import cn from 'classnames';
-import { Count } from '../../../components/UI/Count/Count';
 import { SocketContext } from '../../../helpers/socketContext';
 import { useChat } from '../../../hooks/useChat';
 import { useRequest } from '../../../hooks/useRequest';
 import { useAppSelector } from '../../../hooks/redux';
+
+import cn from 'classnames';
+
+import styles from './Sidebar.module.scss';
 
 export const Sidebar = ({ className }: SidebarProps) => {
   const socket = React.useContext(SocketContext);

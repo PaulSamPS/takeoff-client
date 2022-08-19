@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { API_URL } from '../../../http/axios';
 import { calculateTime } from '../../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
-import { Spinner } from '../../../components/UI/Spinner/Spinner';
+import { Spinner } from '../../../components/UI';
 import { SocketContext } from '../../../helpers/socketContext';
 import 'emoji-mart/css/emoji-mart.css';
 import { ChatMessages } from '../../../components/ChatMessage/ChatMessages';

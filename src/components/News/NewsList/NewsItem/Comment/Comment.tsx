@@ -1,16 +1,17 @@
 import React, { ChangeEvent } from 'react';
-import styles from './Comment.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../../../http/axios';
 import { calculateTime } from '../../../../../helpers/calculateTime';
-import { Button } from '../../../../UI/Button/Button';
+import { Button, EmojiPicker } from '../../../../UI';
 import { ReactComponent as SendIcon } from '../../../../../helpers/icons/send.svg';
 import { usePost } from '../../../../../hooks/usePost';
-import reactStringReplace from 'react-string-replace';
-import { Emoji } from 'emoji-mart';
-import { EmojiPicker } from '../../../../UI/EmojiPicker/EmojiPicker';
-import cn from 'classnames';
 import { NewsItemCommentProps } from './Comment.props';
+
+import cn from 'classnames';
+import { Emoji } from 'emoji-mart';
+import reactStringReplace from 'react-string-replace';
+
+import styles from './Comment.module.scss';
 
 export const NewsItemComment = ({
   post,

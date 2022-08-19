@@ -1,11 +1,12 @@
 import React from 'react';
-import styles from '../NotificationListItem.module.scss';
 import { API_URL } from '../../../../http/axios';
-import { Button } from '../../../UI/Button/Button';
+import { Button } from '../../../UI';
 import { ReactComponent as ArrowDownIcon } from '../../../../helpers/icons/arrowDown.svg';
 import { ImageProps } from './Image.props';
 import { useAppSelector } from '../../../../hooks/redux';
 import { useNotifications } from '../../../../hooks/useNotifications';
+
+import styles from '../NotificationListItem.module.scss';
 
 export const NotificationListItemImage = ({ notification }: ImageProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);

@@ -1,7 +1,9 @@
 import React from 'react';
 import { FooterType } from './Footer.type';
-import styles from './Footer.module.scss';
+
 import cn from 'classnames';
+
+import styles from './Footer.module.scss';
 
 export const Footer = ({ className, ...props }: FooterType): JSX.Element => {
   return (

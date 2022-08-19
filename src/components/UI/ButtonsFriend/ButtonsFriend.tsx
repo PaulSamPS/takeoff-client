@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './ButtonFriend.module.scss';
 import { Button } from '../Button/Button';
 import { ReactComponent as AllReadyFriendsIcon } from '../../../helpers/icons/allreadyFriens.svg';
 import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDown.svg';
@@ -7,6 +6,8 @@ import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
 import { useAppSelector } from '../../../hooks/redux';
 import { ButtonFriendProps } from './ButtonFriend.props';
+
+import styles from './ButtonFriend.module.scss';
 
 export const ButtonsFriend = ({ userId }: ButtonFriendProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -38,10 +39,7 @@ export const ButtonsFriend = ({ userId }: ButtonFriendProps): JSX.Element => {
         </div>
       ) : (
         <div className={styles.follow}>
-          <Button
-            className={styles.allReadyFriends}
-            appearance='primary'
-          >
+          <Button className={styles.allReadyFriends} appearance='primary'>
             <AllReadyFriendsIcon className={styles.allReadyIcon} />
             У вас в друзьях
             <ArrowDownIcon className={styles.arrowDown} />

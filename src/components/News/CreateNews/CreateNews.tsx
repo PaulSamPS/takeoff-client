@@ -1,17 +1,17 @@
 import React, { ChangeEvent, useRef } from 'react';
-import styles from './CreateNews.module.scss';
 import { API_URL } from '../../../http/axios';
-import { Input } from '../../UI/Input/Input';
-import { ReactComponent as FotoIcon } from '../../../helpers/icons/foto.svg';
+import { Input, Button, EmojiPicker } from '../../UI';
+import { ReactComponent as PhotoIcon } from '../../../helpers/icons/foto.svg';
 import { IAppendAvatarInterface } from '../../../interfaces/appendAvatar.interface';
-import { motion } from 'framer-motion';
-import { Button } from '../../UI/Button/Button';
 import { createPost } from '../../../redux/actions/postAction';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { useParams } from 'react-router-dom';
 import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
-import { EmojiPicker } from '../../UI/EmojiPicker/EmojiPicker';
 import { SocketContext } from '../../../helpers/socketContext';
+
+import { motion } from 'framer-motion';
+
+import styles from './CreateNews.module.scss';
 
 export const CreateNews = () => {
   const socket = React.useContext(SocketContext);
@@ -92,7 +92,7 @@ export const CreateNews = () => {
       <div className={styles.icons}>
         <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
         <label htmlFor='avatar'>
-          <FotoIcon />
+          <PhotoIcon />
         </label>
       </div>
       {previewAvatar &&

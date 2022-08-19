@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
 import { useChat } from '../../../hooks/useChat';
 import styles from './Conversations.module.scss';
-import { Search } from '../../../components/UI/Search/Search';
+import { Search } from '../../../components/UI';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
 
 export const Conversations = (): JSX.Element => {
@@ -21,12 +21,12 @@ export const Conversations = (): JSX.Element => {
   }, []);
 
   return (
-      <div className={styles.wrapper}>
-        <Search onInput={handleSearch} className={styles.search} placeholder={'Поиск'} />
-        {filteredChats.map((chat) => (
-          <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
-        ))}
-        {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
-      </div>
+    <div className={styles.wrapper}>
+      <Search onInput={handleSearch} className={styles.search} placeholder={'Поиск'} />
+      {filteredChats.map((chat) => (
+        <MessagesCard key={chat.messagesWith} chat={chat} className={styles.card} />
+      ))}
+      {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
+    </div>
   );
 };

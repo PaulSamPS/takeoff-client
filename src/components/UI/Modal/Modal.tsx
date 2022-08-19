@@ -2,8 +2,9 @@ import React from 'react';
 import { ReactComponent as CloseIcon } from '../../../helpers/icons/close.svg';
 import { ModalProps } from './Modal.props';
 import { AnimatePresence, motion } from 'framer-motion';
-import styles from './Modal.module.scss';
 import { useScroll } from '../../../hooks/useScroll';
+
+import styles from './Modal.module.scss';
 
 export const Modal = ({ children, setModal, modal, postModal }: ModalProps): JSX.Element => {
   const [scrollModalOpen, setScrollModalOpen] = React.useState<number>(0);

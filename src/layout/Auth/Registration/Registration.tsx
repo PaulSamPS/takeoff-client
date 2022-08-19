@@ -1,17 +1,17 @@
 import React from 'react';
 import Select from 'react-select';
-import { Input } from '../../../components/UI/Input/Input';
+import { Input, Spinner, Button } from '../../../components/UI';
 import { useForm, Controller } from 'react-hook-form';
-import { motion } from 'framer-motion';
 import { useAppSelector } from '../../../hooks/redux';
 import { IRegistrationForm } from '../../../interfaces/registrationForm.interface';
-import { Spinner } from '../../../components/UI/Spinner/Spinner';
-import { Button } from '../../../components/UI/Button/Button';
-import styles from '../Auth.module.scss';
-import './select.scss';
 import { gender } from '../../../helpers/optionsSelect/gender';
 import { useRegistration } from '../../../hooks/useRegistration';
 import { city } from '../../../helpers/optionsSelect/city';
+
+import { motion } from 'framer-motion';
+
+import './select.scss';
+import styles from '../Auth.module.scss';
 
 export const Registration = (): JSX.Element => {
   const {

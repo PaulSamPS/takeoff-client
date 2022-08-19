@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Requests.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
-import { Button } from '../../../components/UI/Button/Button';
+import { Button } from '../../../components/UI';
 import { useRequest } from '../../../hooks/useRequest';
 
 export const Requests = (): JSX.Element => {

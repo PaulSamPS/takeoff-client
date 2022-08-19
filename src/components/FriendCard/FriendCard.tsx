@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './FriendCard.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../http/axios';
 import { FriendCardProps } from './FriendCard.props';
-import { Modal } from '../UI/Modal/Modal';
+import { Modal } from '../UI';
 import { ModalMessage } from '../ModalMessage/ModalMessage';
+
+import styles from './FriendCard.module.scss';
 
 export const FriendCard = ({ friend }: FriendCardProps): JSX.Element => {
   const [modal, setModal] = React.useState<boolean>(false);

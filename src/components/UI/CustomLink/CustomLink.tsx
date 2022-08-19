@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import { CustomLinkProps } from './CustomLink.props';
+
 import cn from 'classnames';
+
 import styles from './CustomLink.module.scss';
 
 export const CustomLink = ({

@@ -1,14 +1,16 @@
 import React from 'react';
-import styles from './Avatar.module.scss';
 import { API_URL } from '../../../http/axios';
-import { motion } from 'framer-motion';
 import { ReactComponent as AddAvatar } from '../../../helpers/icons/addAvatar.svg';
 import { ProfileAvatarProps } from './Avatar.props';
 import { Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
-import { ChangeAvatar } from '../../ChangeAvatar/ChangeAvatar';
+import { ModalChangeAvatar } from '../../ModalChangeAvatar/ModalChangeAvatar';
 import { ModalMessage } from '../../ModalMessage/ModalMessage';
 import { Button, ButtonsFriend, Modal } from '../../UI';
+
+import { motion } from 'framer-motion';
+
+import styles from './Avatar.module.scss';
 
 export const Avatar = ({ user }: ProfileAvatarProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -71,7 +73,7 @@ export const Avatar = ({ user }: ProfileAvatarProps): JSX.Element => {
       {loginUser.id !== id && <ButtonsFriend userId={id} />}
       {loginUser.id === id && (
         <Modal setModal={setAvatarModal} modal={avatarModal}>
-          <ChangeAvatar setModal={setAvatarModal} userId={id!} />
+          <ModalChangeAvatar setModal={setAvatarModal} userId={id!} />
         </Modal>
       )}
       <Modal setModal={setConversationModal} modal={conversationModal}>

@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './Basic.module.scss';
-import { Input } from '../../../components/UI/Input/Input';
+import { Input, Button } from '../../../components/UI';
 import { Controller, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { updateUser } from '../../../redux/actions/usersAction';
-import { Button } from '../../../components/UI/Button/Button';
 import Select from 'react-select';
 import { day, month, year } from '../../../helpers/optionsSelect/birthday';
 import { IEditProfile } from '../../../interfaces/editProfile.interface';

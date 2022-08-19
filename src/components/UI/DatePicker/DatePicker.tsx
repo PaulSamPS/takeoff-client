@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
-import styles from './DatePicker.module.scss';
 import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDown.svg';
-import cn from 'classnames';
 import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 import { days, months, years } from '../../../helpers/optionsSelect/selectDate';
+
+import cn from 'classnames';
+
+import styles from './DatePicker.module.scss';
 
 export const DatePicker = () => {
   const [day, setDay] = React.useState<string>('');

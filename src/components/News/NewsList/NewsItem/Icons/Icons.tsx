@@ -1,13 +1,15 @@
 import React from 'react';
-import styles from './Icons.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../../../http/axios';
-import cn from 'classnames';
+import { ReactComponent as CommentIcon } from '../../../../../helpers/icons/comment.svg';
 import { ReactComponent as LikesIcon } from '../../../../../helpers/icons/like.svg';
 import { useAppSelector } from '../../../../../hooks/redux';
 import { usePost } from '../../../../../hooks/usePost';
-import { ReactComponent as CommentIcon } from '../../../../../helpers/icons/comment.svg';
 import { NewsItemIconsProps } from './Icons.props';
+
+import cn from 'classnames';
+
+import styles from './Icons.module.scss';
 
 export const NewsItemIcons = ({
   post,

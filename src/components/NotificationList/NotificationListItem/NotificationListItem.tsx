@@ -1,12 +1,13 @@
 import React from 'react';
-import styles from './NotificationListItem.module.scss';
-import { Modal } from '../../UI/Modal/Modal';
+import { Modal } from '../../UI';
 import { NotificationListItemProps } from './NotificationListItem.props';
 import { usePost } from '../../../hooks/usePost';
-import { NewsItem } from '../../News/NewsList/NewsItem/NewsItem';
+import { NewsItem } from '../../News/NewsList';
 import { NotificationListItemInfo } from './Info/Info';
 import { NotificationListItemAvatar } from './Avatar/Avatar';
 import { NotificationListItemImage } from './Image/Image';
+
+import styles from './NotificationListItem.module.scss';
 
 export const NotificationListItem = ({
   notification,

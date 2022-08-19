@@ -1,12 +1,12 @@
 import React, { ChangeEvent } from 'react';
-import styles from './ModalMessage.module.scss';
 import { Link } from 'react-router-dom';
 import { ModalMessageProps } from './ModalMessage.prop';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
-import { Button } from '../UI/Button/Button';
+import { Button, EmojiPicker } from '../UI';
 import { useChat } from '../../hooks/useChat';
-import { EmojiPicker } from '../UI/EmojiPicker/EmojiPicker';
+
+import styles from './ModalMessage.module.scss';
 
 export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): JSX.Element => {
   const [text, setText] = React.useState<string>('');

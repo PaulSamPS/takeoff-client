@@ -1,13 +1,15 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
-import styles from './Layout.module.scss';
-import React from 'react';
 import { Sidebar } from './Sidebar/Sidebar';
-import { Toast } from '../../components/UI/Toast/Toast';
-import {useLayoutSocket} from '../../helpers/layoutSocket';
+import { Toast } from '../../components/UI';
+import { useLayoutSocket } from '../../helpers/layoutSocket';
+
+import styles from './Layout.module.scss';
 
 export const Layout = (): JSX.Element => {
-  const {loginUser, showNewMessageModal, bannerData, newMessageReceived, setShowNewMessageModal} = useLayoutSocket();
+  const { loginUser, showNewMessageModal, bannerData, newMessageReceived, setShowNewMessageModal } =
+    useLayoutSocket();
 
   return (
     <>

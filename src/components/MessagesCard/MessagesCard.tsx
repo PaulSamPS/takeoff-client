@@ -1,15 +1,17 @@
 import React from 'react';
-import styles from './MessagesCard.module.scss';
 import { API_URL } from '../../http/axios';
 import { Link } from 'react-router-dom';
 import { calculateTime } from '../../helpers/calculateTime';
 import { MessagesCardProp } from './MessagesCard.prop';
 import { useAppDispatch } from '../../hooks/redux';
 import { setOpenChat } from '../../redux/reducers/openChatReducer';
-import cn from 'classnames';
-import { Count } from '../UI/Count/Count';
+import { Count } from '../UI';
+
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
+import cn from 'classnames';
+
+import styles from './MessagesCard.module.scss';
 
 export const MessagesCard = ({ chat, className }: MessagesCardProp): JSX.Element => {
   const dispatch = useAppDispatch();

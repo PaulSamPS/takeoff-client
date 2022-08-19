@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from '../../../pages/News/News.module.scss';
 import { NewsItem } from './NewsItem/NewsItem';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setSuccess } from '../../../redux/reducers/postsReducer';
-import { Spinner } from '../../UI/Spinner/Spinner';
+import { Spinner } from '../../UI';
 import { SocketContext } from '../../../helpers/socketContext';
+
+import styles from '../../../pages/News/News.module.scss';
 
 export const NewsList = () => {
   const socket = React.useContext(SocketContext);

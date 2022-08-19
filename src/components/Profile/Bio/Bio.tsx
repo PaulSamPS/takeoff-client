@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Bio.module.scss';
 import { calculateTime } from '../../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { calculateFriendsCount } from '../../../helpers/calculateFriendsCount';
@@ -7,11 +6,14 @@ import { calculateFollowersCount } from '../../../helpers/calculateFollowersCoun
 import { useAppSelector } from '../../../hooks/redux';
 import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
-import cn from 'classnames';
 import { Button, Modal } from '../../UI';
-import { motion } from 'framer-motion';
 import { ModalUsers } from '../../ModalUsers/ModalUsers';
 import { ProfileBioProps } from './Bio.props';
+
+import cn from 'classnames';
+import { motion } from 'framer-motion';
+
+import styles from './Bio.module.scss';
 
 export const Bio = ({ user }: ProfileBioProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);

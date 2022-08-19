@@ -1,6 +1,5 @@
 import React from 'react';
 import { API_URL } from '../../http/axios';
-import styles from './PeopleFindCard.module.scss';
 import { Link } from 'react-router-dom';
 import { PeopleFindCardProps } from './PeopleFindCard.props';
 import { ReactComponent as AddFriendIcon } from '../../helpers/icons/addFriend.svg';
@@ -8,6 +7,8 @@ import { ReactComponent as AllReadyFriendsIcon } from '../../helpers/icons/allre
 import { useRequest } from '../../hooks/useRequest';
 import { useFollow } from '../../hooks/useFollow';
 import { useAppSelector } from '../../hooks/redux';
+
+import styles from './PeopleFindCard.module.scss';
 
 export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);

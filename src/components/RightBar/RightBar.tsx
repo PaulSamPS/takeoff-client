@@ -1,13 +1,13 @@
 import React from 'react';
-import styles from './RightBar.module.scss';
-import { CustomLink } from '../UI/CustomLink/CustomLink';
-import { Count } from '../UI/Count/Count';
+import { CustomLink, Count } from '../UI';
 import { RightBarProps } from './RightBar.props';
 import { useScroll } from '../../hooks/useScroll';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ReactComponent as CloseIcon } from '../../helpers/icons/close.svg';
 import { deleteChat } from '../../redux/reducers/openChatReducer';
 import { Link, useParams } from 'react-router-dom';
+
+import styles from './RightBar.module.scss';
 
 export const RightBar = ({
   totalUnviewed,

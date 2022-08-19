@@ -1,14 +1,15 @@
 import React from 'react';
-import styles from './ProfileMenu.module.scss';
 import { ReactComponent as SettingsIcon } from '../../helpers/icons/settings.svg';
 import { ReactComponent as ExitIcon } from '../../helpers/icons/exit.svg';
-import { CustomLink } from '../UI/CustomLink/CustomLink';
+import { CustomLink } from '../UI';
 import { SocketContext } from '../../helpers/socketContext';
 import { logout } from '../../redux/actions/authAction';
 import { useAppDispatch } from '../../hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import { ProfileMenuType } from './ProfileMenu.type';
 import { useOnClickOutside } from '../../hooks/useOnclickOutside';
+
+import styles from './ProfileMenu.module.scss';
 
 export const ProfileMenu = ({ setVisibleMenu, ...props }: ProfileMenuType): JSX.Element => {
   const socket = React.useContext(SocketContext);

@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
 import styles from './Online.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
-import { Search } from '../../../../components/UI/Search/Search';
+import { Search } from '../../../../components/UI';
 import { OnlineProps } from './Online.props';
 import { useLocation } from 'react-router-dom';
 

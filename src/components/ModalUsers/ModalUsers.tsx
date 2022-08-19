@@ -1,11 +1,13 @@
 import React from 'react';
-import styles from './ModalUsers.module.scss';
 import { API_URL } from '../../http/axios';
 import { Link } from 'react-router-dom';
 import { useRequest } from '../../hooks/useRequest';
-import cn from 'classnames';
 import { ModalUserProps } from './ModalUser.props';
 import { useFollow } from '../../hooks/useFollow';
+
+import cn from 'classnames';
+
+import styles from './ModalUsers.module.scss';
 
 export const ModalUsers = ({
   activeIndex,

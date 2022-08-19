@@ -1,14 +1,16 @@
 import React from 'react';
-import styles from './Body.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../../../http/axios';
 import { calculateTime } from '../../../../../helpers/calculateTime';
 import reactStringReplace from 'react-string-replace';
-import { Emoji } from 'emoji-mart';
 import { ReactComponent as MoreIcon } from '../../../../../helpers/icons/more.svg';
 import { usePost } from '../../../../../hooks/usePost';
 import { useAppSelector } from '../../../../../hooks/redux';
 import { NewsItemBodyProps } from './Body.props';
+
+import { Emoji } from 'emoji-mart';
+
+import styles from './Body.module.scss';
 
 export const NewsItemBody = ({ post, hoverPost }: NewsItemBodyProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);

@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './Auth.module.scss';
 import { Outlet, useNavigate } from 'react-router-dom';
+
+import styles from './Auth.module.scss';
 
 export const Auth = () => {
   const navigate = useNavigate();

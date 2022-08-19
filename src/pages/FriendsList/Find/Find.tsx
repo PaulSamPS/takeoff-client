@@ -1,11 +1,10 @@
 import React, { FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { getUsers } from '../../../redux/actions/usersAction';
-import { Spinner } from '../../../components/UI/Spinner/Spinner';
+import { Spinner, Search } from '../../../components/UI';
 import styles from './Find.module.scss';
 import { PeopleFindCard } from '../../../components/PeopleFindCard/PeopleFindCard';
 import debounce from 'lodash.debounce';
-import { Search } from '../../../components/UI/Search/Search';
 
 export const Find = (): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);

@@ -1,10 +1,12 @@
 import React, { ForwardedRef, forwardRef } from 'react';
 import { SearchProps } from './Search.props';
 import { ReactComponent as SearchIcon } from '../../../helpers/icons/search.svg';
-import styles from './Search.module.scss';
 import { Button } from '../Button/Button';
 import { useScroll } from '../../../hooks/useScroll';
+
 import cn from 'classnames';
+
+import styles from './Search.module.scss';
 
 export const Search = forwardRef(
   (

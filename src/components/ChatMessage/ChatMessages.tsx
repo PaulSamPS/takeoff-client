@@ -1,14 +1,16 @@
 import React from 'react';
-import styles from './ChatMessages.module.scss';
-import { ReactComponent as DeleteIcon } from '../../helpers/icons/close.svg';
 import { Link, useParams } from 'react-router-dom';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
-import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 import { useScroll } from '../../hooks/useScroll';
-import { useAppSelector } from '../../hooks/redux';
 import { ChatMessagesProps } from './ChatMessages.props';
+import { useAppSelector } from '../../hooks/redux';
+import { ReactComponent as DeleteIcon } from '../../helpers/icons/close.svg';
+
+import reactStringReplace from 'react-string-replace';
+
+import styles from './ChatMessages.module.scss';
 
 export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessagesProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);

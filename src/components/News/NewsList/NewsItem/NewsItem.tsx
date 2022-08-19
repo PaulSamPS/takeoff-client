@@ -3,6 +3,7 @@ import { NewsItemProps } from './NewsItem.props';
 import { NewsItemIcons } from './Icons/Icons';
 import { NewsItemComment } from './Comment/Comment';
 import { NewsItemBody } from './Body/Body';
+
 import styles from './NewsItem.module.scss';
 
 export const NewsItem = ({

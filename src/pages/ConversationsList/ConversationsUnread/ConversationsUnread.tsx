@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import styles from '../Conversations/Conversations.module.scss';
-import { Search } from '../../../components/UI/Search/Search';
+import { Search } from '../../../components/UI';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
 import { useChat } from '../../../hooks/useChat';
 

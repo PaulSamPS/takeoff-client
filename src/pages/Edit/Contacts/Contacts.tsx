@@ -5,7 +5,7 @@ import { IEditProfile } from '../../../interfaces/editProfile.interface';
 import Select from 'react-select';
 import { city } from '../../../helpers/optionsSelect/city';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { Button } from '../../../components/UI/Button/Button';
+import { Button } from '../../../components/UI';
 import { updateUser } from '../../../redux/actions/usersAction';
 
 export const Contacts = (): JSX.Element => {

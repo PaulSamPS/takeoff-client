@@ -1,14 +1,13 @@
 import React from 'react';
-import styles from '../NotificationListItem.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../../http/axios';
 import { calculateTime } from '../../../../helpers/calculateTime';
-import { ButtonsFriend } from '../../../UI/ButtonsFriend/ButtonsFriend';
-import { Button } from '../../../UI/Button/Button';
-import { Modal } from '../../../UI/Modal/Modal';
+import { ButtonsFriend, Button, Modal } from '../../../UI';
 import { ModalMessage } from '../../../ModalMessage/ModalMessage';
 import { InfoProps } from './Info.props';
 import { useAppSelector } from '../../../../hooks/redux';
+
+import styles from '../NotificationListItem.module.scss';
 
 export const NotificationListItemInfo = ({
   notification,

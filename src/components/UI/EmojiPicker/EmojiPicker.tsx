@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
-import styles from './EmojiPicker.module.scss';
 import { BaseEmoji, Picker } from 'emoji-mart';
 import { ReactComponent as SmileIcon } from '../../../helpers/icons/smile.svg';
 import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 import { EmojiPickerProps } from './EmojiPicker.props';
+
 import cn from 'classnames';
+
+import styles from './EmojiPicker.module.scss';
 
 export const EmojiPicker = ({ className, setText, text, left }: EmojiPickerProps): JSX.Element => {
   const [showEmoji, setShowEmoji] = React.useState<boolean>(false);

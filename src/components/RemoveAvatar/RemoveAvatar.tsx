@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button } from '../UI/Button/Button';
-import { Modal } from '../UI/Modal/Modal';
+import { Button, Modal } from '../UI';
 import { RemoveAvatarProps } from './RemoveAvatar.props';
-import styles from './RemoveAvatar.module.scss';
 import { useRemoveAvatar } from '../../hooks/useRemoveAvatar';
+
+import styles from './RemoveAvatar.module.scss';
 
 export const RemoveAvatar = ({
   modal,

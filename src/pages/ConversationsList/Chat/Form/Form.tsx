@@ -1,8 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import styles from '../Chat.module.scss';
-import { Input } from '../../../../components/UI/Input/Input';
-import { EmojiPicker } from '../../../../components/UI/EmojiPicker/EmojiPicker';
-import { Button } from '../../../../components/UI/Button/Button';
+import { Input, Button, EmojiPicker } from '../../../../components/UI';
 import { ReactComponent as SendIcon } from '../../../../helpers/icons/send.svg';
 import { useChat } from '../../../../hooks/useChat';
 

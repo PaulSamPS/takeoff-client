@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
-import styles from './NotificationList.module.scss';
 import { NotificationListProps } from './NotificationList.props';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 import { useNotifications } from '../../hooks/useNotifications';
 import { NotificationListItem } from './NotificationListItem/NotificationListItem';
-import { Spinner } from '../UI/Spinner/Spinner';
+import { Spinner } from '../UI';
 import { useOnClickOutside } from '../../hooks/useOnclickOutside';
+
+import styles from './NotificationList.module.scss';
 
 export const NotificationList = memo(
   ({ setVisibleNotification, ...props }: NotificationListProps): JSX.Element => {

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Input } from '../../../components/UI/Input/Input';
+import { Input, Spinner, Button } from '../../../components/UI';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { ILoginForm } from '../../../interfaces/loginForm.interface';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { Spinner } from '../../../components/UI/Spinner/Spinner';
-import { Button } from '../../../components/UI/Button/Button';
-import styles from '../Auth.module.scss';
 import { login } from '../../../redux/actions/authAction';
+
+import { motion } from 'framer-motion';
+
+import styles from '../Auth.module.scss';
 
 export const Login = (): JSX.Element => {
   const { error, isLoading } = useAppSelector((state) => state.loginReducer);

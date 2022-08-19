@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
 import styles from './All.module.scss';
 import { FriendCard } from '../../../../components/FriendCard/FriendCard';
-import { Search } from '../../../../components/UI/Search/Search';
+import { Search } from '../../../../components/UI';
 import { useRequest } from '../../../../hooks/useRequest';
 import { useFollow } from '../../../../hooks/useFollow';
 import { useLocation } from 'react-router-dom';

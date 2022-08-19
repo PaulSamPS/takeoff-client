@@ -1,9 +1,11 @@
 import React from 'react';
-import styles from '../NotificationListItem.module.scss';
 import { API_URL } from '../../../../http/axios';
-import cn from 'classnames';
 import { ReactComponent as NotificationCommentIcon } from '../../../../helpers/icons/notificationComment.svg';
 import { AvatarProps } from './Avatar.props';
+
+import cn from 'classnames';
+
+import styles from '../NotificationListItem.module.scss';
 
 export const NotificationListItemAvatar = ({ notification }: AvatarProps) => {
   return (
