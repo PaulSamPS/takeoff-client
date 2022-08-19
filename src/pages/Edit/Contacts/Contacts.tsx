@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Button } from '../../../components/UI/Button/Button';
 import { updateUser } from '../../../redux/actions/usersAction';
 
-export const EditContacts = (): JSX.Element => {
+export const Contacts = (): JSX.Element => {
   const { control, handleSubmit } = useForm<IEditProfile>({
     mode: 'onChange',
     reValidateMode: 'onBlur',

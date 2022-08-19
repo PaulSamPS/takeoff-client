@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from './ProfilePosts.module.scss';
+import styles from './Post.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { useParams } from 'react-router-dom';
-import { CreateNews } from '../../../components/News/CreateNews/CreateNews';
-import { NewsItem } from '../../../components/News/NewsList/NewsItem/NewsItem';
 import { setSuccess } from '../../../redux/reducers/postsReducer';
 import { SocketContext } from '../../../helpers/socketContext';
 import { IPost } from '../../../interfaces/usePost.interface';
+import { NewsItem } from '../../News/NewsList';
+import { CreateNews } from '../../News';
 
-export const ProfilePost = (): JSX.Element => {
+export const Post = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
   const loginUser = useAppSelector((state) => state.loginReducer.user);

@@ -6,7 +6,7 @@ import { useRequest } from '../../../../hooks/useRequest';
 import { useFollow } from '../../../../hooks/useFollow';
 import { useLocation } from 'react-router-dom';
 
-export const FriendsAll = (): JSX.Element => {
+export const All = (): JSX.Element => {
   const [search, setSearch] = React.useState<string>('');
 
   const { friends, friendsUserInfo } = useRequest();

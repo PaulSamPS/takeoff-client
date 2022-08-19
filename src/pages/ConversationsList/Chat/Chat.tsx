@@ -10,9 +10,9 @@ import { Spinner } from '../../../components/UI/Spinner/Spinner';
 import { SocketContext } from '../../../helpers/socketContext';
 import 'emoji-mart/css/emoji-mart.css';
 import { ChatMessages } from '../../../components/ChatMessage/ChatMessages';
-import {ChatForm} from './Form/Form';
+import { Form } from './Form/Form';
 
-export const ConversationsListChat = (): JSX.Element => {
+export const Chat = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
@@ -79,7 +79,7 @@ export const ConversationsListChat = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <ChatForm/>
+      <Form />
       <div className={styles.borderBottom} />
     </>
   );

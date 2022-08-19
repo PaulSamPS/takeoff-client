@@ -4,7 +4,7 @@ import { Search } from '../../../components/UI/Search/Search';
 import { MessagesCard } from '../../../components/MessagesCard/MessagesCard';
 import { useChat } from '../../../hooks/useChat';
 
-export const ConversationsUnread = (): JSX.Element => {
+export const Unread = (): JSX.Element => {
   const [search, setSearch] = React.useState<string | null>('');
   const { chats } = useChat();
   console.log(search);

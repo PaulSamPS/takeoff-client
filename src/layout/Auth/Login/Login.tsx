@@ -10,7 +10,7 @@ import { Button } from '../../../components/UI/Button/Button';
 import styles from '../Auth.module.scss';
 import { login } from '../../../redux/actions/authAction';
 
-export const AuthLogin = (): JSX.Element => {
+export const Login = (): JSX.Element => {
   const { error, isLoading } = useAppSelector((state) => state.loginReducer);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ export const AuthLogin = (): JSX.Element => {
     >
       {error && <span className={styles.err}>{error}</span>}
       <Input
-          className={styles.input}
+        className={styles.input}
         {...register('email', {
           required: { value: true, message: 'Введите email' },
           pattern: { value: /[^@\s]+@[^@\s]+\.[^@\s]+/g, message: 'Неверный формат  email' },
@@ -59,7 +59,7 @@ export const AuthLogin = (): JSX.Element => {
         error={errors.email}
       />
       <Input
-          className={styles.input}
+        className={styles.input}
         {...register('password', { required: { value: true, message: 'Введите пароль' } })}
         placeholder='Пароль'
         type='password'

@@ -3,8 +3,8 @@ import styles from './Friends.module.scss';
 import { useRequest } from '../../../hooks/useRequest';
 import cn from 'classnames';
 import { useAppSelector } from '../../../hooks/redux';
-import { FriendsAll } from './All/All';
-import { FriendsOnline } from './Online/Online';
+import { All } from './All/All';
+import { Online } from './Online/Online';
 import { IUser } from '../../../interfaces/user.interface';
 import { useFollow } from '../../../hooks/useFollow';
 import { useLocation } from 'react-router-dom';
@@ -90,9 +90,9 @@ export const Friends = (): JSX.Element => {
         )}
       </div>
       {activeSort === 0 || pathname === '/main/user-friends/followers' ? (
-        <FriendsAll />
+        <All />
       ) : (
-        <FriendsOnline friendsOnline={friendsOnline} friendsOnlineUser={friendsOnlineUser} />
+        <Online friendsOnline={friendsOnline} friendsOnlineUser={friendsOnlineUser} />
       )}
     </div>
   );

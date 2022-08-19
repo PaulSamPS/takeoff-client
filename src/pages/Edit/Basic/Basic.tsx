@@ -11,7 +11,7 @@ import { IEditProfile } from '../../../interfaces/editProfile.interface';
 import { gender } from '../../../helpers/optionsSelect/gender';
 import { familyStatus } from '../../../helpers/optionsSelect/familyStatus';
 
-export const EditBasic = (): JSX.Element => {
+export const Basic = (): JSX.Element => {
   const {
     register,
     formState: { errors },

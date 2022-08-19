@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './SettingsGeneral.module.scss';
+import styles from './General.module.scss';
 import { Input } from '../../../components/UI/Input/Input';
 import { Button } from '../../../components/UI/Button/Button';
 
-export const SettingsGeneral = () => {
+export const General = () => {
   const [isChangePassword, setIsChangePassword] = React.useState<boolean>(false);
 
   const handleChangePassword = () => {

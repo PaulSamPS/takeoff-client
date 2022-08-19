@@ -2,11 +2,8 @@ import React from 'react';
 import styles from './Profile.module.scss';
 import { IUser } from '../../interfaces/user.interface';
 import { SocketContext } from '../../helpers/socketContext';
+import { Avatar, Bio, Friends, Post } from '../../components/Profile';
 import { useParams } from 'react-router-dom';
-import { ProfileBio } from './ProfileBio/ProfileBio';
-import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
-import { ProfileFriends } from './ProfileFriends/ProfileFriends';
-import { ProfilePost } from './ProfilePost/ProfilePost';
 
 export const Profile = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
@@ -28,12 +25,12 @@ export const Profile = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <ProfileAvatar user={user} />
-        <ProfileFriends />
+        <Avatar user={user} />
+        <Friends />
       </div>
       <div className={styles.right}>
-        <ProfileBio user={user} />
-        <ProfilePost />
+        <Bio user={user} />
+        <Post />
       </div>
     </div>
   );

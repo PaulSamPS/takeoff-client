@@ -5,7 +5,7 @@ import { NotificationListItem } from '../../../components/NotificationList/Notif
 import { useAppSelector } from '../../../hooks/redux';
 import { useLocation } from 'react-router-dom';
 
-export const AllNotificationsItem = () => {
+export const Item = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { notifications } = useNotifications();
   const { pathname } = useLocation();

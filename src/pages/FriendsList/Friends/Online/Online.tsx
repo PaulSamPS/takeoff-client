@@ -5,7 +5,7 @@ import { Search } from '../../../../components/UI/Search/Search';
 import { OnlineProps } from './Online.props';
 import { useLocation } from 'react-router-dom';
 
-export const FriendsOnline = ({ friendsOnline, friendsOnlineUser }: OnlineProps): JSX.Element => {
+export const Online = ({ friendsOnline, friendsOnlineUser }: OnlineProps): JSX.Element => {
   const [search, setSearch] = React.useState<string>('');
   const { pathname } = useLocation();
 

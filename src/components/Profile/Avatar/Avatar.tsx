@@ -1,18 +1,16 @@
 import React from 'react';
-import styles from './ProfileAvatar.module.scss';
+import styles from './Avatar.module.scss';
 import { API_URL } from '../../../http/axios';
 import { motion } from 'framer-motion';
 import { ReactComponent as AddAvatar } from '../../../helpers/icons/addAvatar.svg';
-import { Button } from '../../../components/UI/Button/Button';
-import { ProfileAvatarProps } from './ProfileAvatar.props';
+import { ProfileAvatarProps } from './Avatar.props';
 import { Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
-import { Modal } from '../../../components/UI/Modal/Modal';
-import { ChangeAvatar } from '../../../components/ChangeAvatar/ChangeAvatar';
-import { ModalMessage } from '../../../components/ModalMessage/ModalMessage';
-import { ButtonsFriend } from '../../../components/UI/ButtonsFriend/ButtonsFriend';
+import { ChangeAvatar } from '../../ChangeAvatar/ChangeAvatar';
+import { ModalMessage } from '../../ModalMessage/ModalMessage';
+import { Button, ButtonsFriend, Modal } from '../../UI';
 
-export const ProfileAvatar = ({ user }: ProfileAvatarProps): JSX.Element => {
+export const Avatar = ({ user }: ProfileAvatarProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
 
   const [hover, setHover] = React.useState<boolean>(false);

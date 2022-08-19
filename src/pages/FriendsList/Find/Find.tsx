@@ -7,7 +7,7 @@ import { PeopleFindCard } from '../../../components/PeopleFindCard/PeopleFindCar
 import debounce from 'lodash.debounce';
 import { Search } from '../../../components/UI/Search/Search';
 
-export const FriendsListFind = (): JSX.Element => {
+export const Find = (): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users, isLoading } = useAppSelector((state) => state.usersReducer);
   const dispatch = useAppDispatch();

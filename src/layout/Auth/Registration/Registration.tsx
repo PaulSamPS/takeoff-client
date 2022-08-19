@@ -13,7 +13,7 @@ import { gender } from '../../../helpers/optionsSelect/gender';
 import { useRegistration } from '../../../hooks/useRegistration';
 import { city } from '../../../helpers/optionsSelect/city';
 
-export const AuthRegistration = (): JSX.Element => {
+export const Registration = (): JSX.Element => {
   const {
     register,
     handleSubmit,
@@ -41,7 +41,7 @@ export const AuthRegistration = (): JSX.Element => {
     >
       {error && <span className={styles.err}>{error}</span>}
       <Input
-          className={styles.input}
+        className={styles.input}
         {...register('firstName', {
           required: { value: true, message: 'Введите имя' },
           minLength: { value: 3, message: 'Не короче  3 символов' },
@@ -52,7 +52,7 @@ export const AuthRegistration = (): JSX.Element => {
         error={errors.firstName}
       />
       <Input
-          className={styles.input}
+        className={styles.input}
         {...register('lastName', {
           required: { value: true, message: 'Введите имя' },
           minLength: { value: 3, message: 'Не короче  3 символов' },
@@ -63,7 +63,7 @@ export const AuthRegistration = (): JSX.Element => {
         error={errors.lastName}
       />
       <Input
-          className={styles.input}
+        className={styles.input}
         {...register('password', {
           required: { value: true, message: 'Введите пароль' },
           minLength: { value: 5, message: 'Не короче 5 символов' },
@@ -74,7 +74,7 @@ export const AuthRegistration = (): JSX.Element => {
         error={errors.password}
       />
       <Input
-          className={styles.input}
+        className={styles.input}
         {...register('email', {
           required: { value: true, message: 'Введите email' },
           pattern: { value: /[^@\s]+@[^@\s]+\.[^@\s]+/g, message: 'Неверный формат  email' },

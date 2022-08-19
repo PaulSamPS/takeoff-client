@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ProfileFriends.module.scss';
+import styles from './Friends.module.scss';
 import { useRequest } from '../../../hooks/useRequest';
 import { Link, useParams } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { IUser } from '../../../interfaces/user.interface';
 import cn from 'classnames';
 
-export const ProfileFriends = (): JSX.Element => {
+export const Friends = (): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 

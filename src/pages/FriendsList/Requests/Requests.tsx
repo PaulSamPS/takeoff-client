@@ -5,7 +5,7 @@ import { API_URL } from '../../../http/axios';
 import { Button } from '../../../components/UI/Button/Button';
 import { useRequest } from '../../../hooks/useRequest';
 
-export const FriendsRequests = (): JSX.Element => {
+export const Requests = (): JSX.Element => {
   const { request, addFriend, rejectFriend } = useRequest();
 
   return (

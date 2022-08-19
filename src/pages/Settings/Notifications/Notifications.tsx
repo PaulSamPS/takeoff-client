@@ -1,10 +1,10 @@
 import React, { ChangeEvent } from 'react';
-import styles from './SettingsNotifications.module.scss';
+import styles from './Notifications.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setNotificationMessage } from '../../../redux/reducers/auth/loginReducer';
 import { setSettings } from '../../../redux/actions/authAction';
 
-export const SettingsNotifications = () => {
+export const Notifications = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [checked, setChecked] = React.useState<boolean>(
     loginUser.settings.notification.messagesToast

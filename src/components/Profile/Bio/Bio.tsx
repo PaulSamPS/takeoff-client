@@ -1,20 +1,19 @@
 import React from 'react';
-import styles from './ProfileBio.module.scss';
+import styles from './Bio.module.scss';
 import { calculateTime } from '../../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { calculateFriendsCount } from '../../../helpers/calculateFriendsCount';
 import { calculateFollowersCount } from '../../../helpers/calculateFollowersCount';
-import { ProfileBioProps } from './ProfileBio.props';
 import { useAppSelector } from '../../../hooks/redux';
 import { useRequest } from '../../../hooks/useRequest';
 import { useFollow } from '../../../hooks/useFollow';
 import cn from 'classnames';
-import { Button } from '../../../components/UI/Button/Button';
+import { Button, Modal } from '../../UI';
 import { motion } from 'framer-motion';
-import { Modal } from '../../../components/UI/Modal/Modal';
-import { ModalUsers } from '../../../components/ModalUsers/ModalUsers';
+import { ModalUsers } from '../../ModalUsers/ModalUsers';
+import { ProfileBioProps } from './Bio.props';
 
-export const ProfileBio = ({ user }: ProfileBioProps): JSX.Element => {
+export const Bio = ({ user }: ProfileBioProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 

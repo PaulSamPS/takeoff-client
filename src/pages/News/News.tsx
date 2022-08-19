@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './News.module.scss';
 import { useAppSelector } from '../../hooks/redux';
 import { RightBar } from '../../components/RightBar/RightBar';
-import { CreateNews } from '../../components/News/CreateNews/CreateNews';
-import { NewsList } from '../../components/News/NewsList/NewsList';
+import { CreateNews, NewsList } from '../../components/News';
 
 export const News = (): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
