@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './RightBar.module.scss';
 import { CustomLink } from '../UI/CustomLink/CustomLink';
-import { Count } from '../Count/Count';
+import { Count } from '../UI/Count/Count';
 import { RightBarProps } from './RightBar.props';
 import { useScroll } from '../../hooks/useScroll';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';

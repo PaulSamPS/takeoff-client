@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './ProfilePosts.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { useParams } from 'react-router-dom';
-import { CreatePost } from '../../../components/CreatePost/CreatePost';
-import { Post } from '../../../components/Post/Post';
+import { CreateNews } from '../../../components/News/CreateNews/CreateNews';
+import { NewsItem } from '../../../components/News/NewsList/NewsItem/NewsItem';
 import { setSuccess } from '../../../redux/reducers/postsReducer';
 import { SocketContext } from '../../../helpers/socketContext';
 import { IPost } from '../../../interfaces/usePost.interface';
@@ -30,13 +30,13 @@ export const ProfilePost = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapper}>
-        {loginUser.id === id && <CreatePost />}
+        {loginUser.id === id && <CreateNews />}
         {posts.length > 0 && (
           <div className={styles.posts}>
             {posts
               .filter((f) => f.user._id === id)
               .map((post) => (
-                <Post key={post._id} post={post} />
+                <NewsItem key={post._id} post={post} />
               ))}
           </div>
         )}

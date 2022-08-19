@@ -4,7 +4,7 @@ import { NotificationListProps } from './NotificationList.props';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 import { useNotifications } from '../../hooks/useNotifications';
-import { Notification } from '../Notification/Notification';
+import { NotificationListItem } from './NotificationListItem/NotificationListItem';
 import { Spinner } from '../UI/Spinner/Spinner';
 import { useOnClickOutside } from '../../hooks/useOnclickOutside';
 
@@ -43,7 +43,7 @@ export const NotificationList = memo(
                     .slice(0, 10)
                     .filter((n) => n.user._id !== loginUser.id)
                     .map((notification) => (
-                      <Notification
+                      <NotificationListItem
                         key={notification._id}
                         setVisibleNotification={setVisibleNotification}
                         notification={notification}

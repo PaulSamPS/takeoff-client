@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './Friiend.module.scss';
+import styles from './Friends.module.scss';
 import { useRequest } from '../../../hooks/useRequest';
 import cn from 'classnames';
 import { useAppSelector } from '../../../hooks/redux';
-import { FriendsAll } from './FriendsAll/FriendsAll';
-import { FriendsOnline } from './FriendsOnline/FriendsOnline';
+import { FriendsAll } from './All/All';
+import { FriendsOnline } from './Online/Online';
 import { IUser } from '../../../interfaces/user.interface';
 import { useFollow } from '../../../hooks/useFollow';
 import { useLocation } from 'react-router-dom';

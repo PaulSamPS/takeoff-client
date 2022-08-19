@@ -13,7 +13,7 @@ import { gender } from '../../../helpers/optionsSelect/gender';
 import { useRegistration } from '../../../hooks/useRegistration';
 import { city } from '../../../helpers/optionsSelect/city';
 
-export const Registration = (): JSX.Element => {
+export const AuthRegistration = (): JSX.Element => {
   const {
     register,
     handleSubmit,

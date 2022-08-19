@@ -1,0 +1,89 @@
+.more {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	display: block;
+	cursor: pointer;
+
+	&:hover {
+		.moreOptions {
+			display: block;
+		}
+	}
+}
+
+.moreOptions {
+	position: absolute;
+	top: 17px;
+	right: 0;
+	display: none;
+	width: 150px;
+	padding: 5px 0;
+	background: var(--white);
+	border-radius: 4px;
+	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+
+	div {
+		padding: 10px 20px;
+		color: #55677D;
+		font-size: 13px;
+		text-align: center;
+		cursor: pointer;
+		transition: all ease 0.2s;
+
+		&:hover {
+			background: #E5EBF1;
+		}
+	}
+}
+
+.user {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+
+	img {
+		width: 50px;
+		height: 50px;
+		object-fit: cover;
+		border-radius: 50%;
+	}
+
+	.userPost {
+		display: flex;
+		flex-direction: column;
+		row-gap: 5px;
+
+		.userName {
+			color: var(--blue);
+			font-weight: 500;
+			font-size: 13px;
+			text-decoration: none;
+			transition: all ease 0.2s;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.date {
+			color: var(--greyDark);
+			font-size: 12.5px;
+		}
+	}
+}
+
+.text {
+	font-size: 13px;
+	word-break: break-word;
+
+	span {
+		transform: translateY(2px);
+		span { display: block; }
+	}
+}
+
+img {
+	max-width: 510px;
+	object-fit: cover;
+}

@@ -21,7 +21,6 @@ export const Conversations = (): JSX.Element => {
   }, []);
 
   return (
-    <>
       <div className={styles.wrapper}>
         <Search onInput={handleSearch} className={styles.search} placeholder={'Поиск'} />
         {filteredChats.map((chat) => (
@@ -29,6 +28,5 @@ export const Conversations = (): JSX.Element => {
         ))}
         {filteredChats.length <= 0 && <span className={styles.noMessages}>Нет сообщений</span>}
       </div>
-    </>
   );
 };

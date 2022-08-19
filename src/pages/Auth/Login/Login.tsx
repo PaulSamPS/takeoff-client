@@ -10,7 +10,7 @@ import { Button } from '../../../components/UI/Button/Button';
 import styles from '../Auth.module.scss';
 import { login } from '../../../redux/actions/authAction';
 
-export const Login = (): JSX.Element => {
+export const AuthLogin = (): JSX.Element => {
   const { error, isLoading } = useAppSelector((state) => state.loginReducer);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

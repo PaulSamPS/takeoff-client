@@ -7,7 +7,7 @@ import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.sv
 import { ReactComponent as MyProfileIcon } from '../../../helpers/icons/profile.svg';
 import { SidebarProps } from './Sidebar.props';
 import cn from 'classnames';
-import { Count } from '../../../components/Count/Count';
+import { Count } from '../../../components/UI/Count/Count';
 import { SocketContext } from '../../../helpers/socketContext';
 import { useChat } from '../../../hooks/useChat';
 import { useRequest } from '../../../hooks/useRequest';

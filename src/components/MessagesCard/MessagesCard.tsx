@@ -7,7 +7,7 @@ import { MessagesCardProp } from './MessagesCard.prop';
 import { useAppDispatch } from '../../hooks/redux';
 import { setOpenChat } from '../../redux/reducers/openChatReducer';
 import cn from 'classnames';
-import { Count } from '../Count/Count';
+import { Count } from '../UI/Count/Count';
 import reactStringReplace from 'react-string-replace';
 import { Emoji } from 'emoji-mart';
 

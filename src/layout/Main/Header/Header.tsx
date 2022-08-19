@@ -7,7 +7,7 @@ import { ReactComponent as ArrowDownIcon } from '../../../helpers/icons/arrowDow
 import { ReactComponent as NotificationIcon } from '../../../helpers/icons/notification.svg';
 import { ReactComponent as SearchIcon } from '../../../helpers/icons/search.svg';
 import { ProfileMenu } from '../../../components/ProfileMenu/ProfileMenu';
-import { Count } from '../../../components/Count/Count';
+import { Count } from '../../../components/UI/Count/Count';
 import { NotificationList } from '../../../components/NotificationList/NotificationList';
 import { Input } from '../../../components/UI/Input/Input';
 import cn from 'classnames';
