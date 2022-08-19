@@ -1,12 +1,23 @@
 import React from 'react';
+import { Input, Button, Modal } from '../../../components/UI';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { deleteAccount } from '../../../redux/actions/usersAction';
+
 import styles from './General.module.scss';
-import { Input, Button } from '../../../components/UI';
 
 export const General = () => {
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
+
   const [isChangePassword, setIsChangePassword] = React.useState<boolean>(false);
+  const [modal, setModal] = React.useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const handleChangePassword = () => {
     setIsChangePassword(true);
+  };
+
+  const handleDeleteAccount = () => {
+    dispatch(deleteAccount(loginUser.id));
   };
 
   return (
@@ -43,8 +54,19 @@ export const General = () => {
         )}
       </div>
       <div className={styles.bottom}>
-        Вы можете <span>удалить свою страницу</span>
+        Вы можете <span onClick={() => setModal(true)}>удалить свою страницу</span>
       </div>
+      <Modal setModal={setModal} modal={modal}>
+        <div className={styles.modal}>
+          <span>Удалить профиль?</span>
+          <Button appearance='primary' onClick={handleDeleteAccount}>
+            Да
+          </Button>
+          <Button appearance='secondary' onClick={() => setModal(false)}>
+            Нет
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };

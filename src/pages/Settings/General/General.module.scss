@@ -85,4 +85,19 @@
 			}
 		}
 	}
+
+	.modal {
+		background:var(--white);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 60px 40px;
+		border-radius: 4px;
+		column-gap: 20px;
+
+		span {
+			color: var(--grey-middle);
+			font-size: 13px;
+		}
+	}
 }

@@ -64,3 +64,7 @@ export const adminRemoveAvatar = (id: string, avatar: string) => async (dispatch
     dispatch(getUsers());
   });
 };
+
+export const deleteAccount = (userId: string) => async (dispatch: AppDispatch) => {
+  await $apiAuth.post('api/user/delete', { userId });
+};
