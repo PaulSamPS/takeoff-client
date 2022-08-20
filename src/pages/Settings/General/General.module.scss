@@ -15,9 +15,20 @@
 	.body {
 		display: flex;
 		flex-direction: column;
-		padding: 20px;
+		padding: 30px 20px;
 		color: var(--grey);
 		font-size: 13px;
+		position: relative;
+		text-align: center;
+
+		.err {
+			position: absolute;
+			top: 6px;
+			color: var(--red);
+			font-size: 13px;
+			left: 0;
+			right: 0;
+		}
 
 		.item {
 			display: flex;
@@ -36,6 +47,7 @@
 		}
 
 		.changePassword {
+			text-align: start;
 			display: flex;
 			flex-direction: column;
 			row-gap: 20px;

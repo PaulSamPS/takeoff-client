@@ -28,21 +28,6 @@ export const uploadAvatar = (id: string, formData: FormData) => async (dispatch:
     });
 };
 
-export const removeAvatar = (id: string, avatar: string) => async (dispatch: AppDispatch) => {
-  await $apiAuth
-    .post(`api/user/${id}/remove/avatar/${avatar}`)
-    .then((res: AxiosResponse<IResponseUser>) => {
-      dispatch(loginReducer.actions.setSuccess(res.data.user));
-      dispatch(getUsers());
-    });
-};
-
-export const removeUser = (id: string, avatar: string) => async (dispatch: AppDispatch) => {
-  await $apiAuth.post(`api/user/${id}/remove/${avatar}`).then((res: AxiosResponse<IUser[]>) => {
-    dispatch(usersReducer.actions.setSuccess(res.data));
-  });
-};
-
 export const updateUser = (id: string, formData: IEditProfile) => async (dispatch: AppDispatch) => {
   await $apiAuth
     .post(`api/user/update/${id}`, formData)
@@ -50,21 +35,4 @@ export const updateUser = (id: string, formData: IEditProfile) => async (dispatc
       dispatch(loginReducer.actions.setSuccess(res.data.user));
       dispatch(getUsers());
     });
-};
-
-export const adminUploadAvatar =
-  (id: string, formData: FormData) => async (dispatch: AppDispatch) => {
-    await $apiAuth.post(`api/user/${id}/upload/avatar`, formData).then(() => {
-      dispatch(getUsers());
-    });
-  };
-
-export const adminRemoveAvatar = (id: string, avatar: string) => async (dispatch: AppDispatch) => {
-  await $apiAuth.post(`api/user/${id}/remove/avatar/${avatar}`).then(() => {
-    dispatch(getUsers());
-  });
-};
-
-export const deleteAccount = (userId: string) => async (dispatch: AppDispatch) => {
-  await $apiAuth.post('api/user/delete', { userId });
 };

@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import { IAppendAvatarInterface } from '../interfaces/appendAvatar.interface';
 import { useAppDispatch } from './redux';
-import { useLocation, useParams } from 'react-router-dom';
-import { adminUploadAvatar, uploadAvatar } from '../redux/actions/usersAction';
+import { useParams } from 'react-router-dom';
+import { uploadAvatar } from '../redux/actions/usersAction';
 import { SocketContext } from '../helpers/socketContext';
 import { IUseChangeAvatar, IUseChangeAvatarProps } from '../interfaces/useChangeAvatar.interface';
 
@@ -11,7 +11,6 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const dispatch = useAppDispatch();
-  const location = useLocation();
   const { id } = useParams();
 
   const selectFileAvatar = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -26,13 +25,6 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
     const formData = new FormData();
     if (filesAvatar) {
       formData.append('avatar', filesAvatar[0]);
-    }
-    if (location.pathname == '/main') {
-      dispatch(adminUploadAvatar(userId, formData)).then(() => {
-        setModal(false);
-        setFilesAvatar(null);
-        setPreviewAvatar([]);
-      });
     } else {
       dispatch(uploadAvatar(userId, formData)).then(() => {
         socket?.emit('userInfo:get', { userId: id });
