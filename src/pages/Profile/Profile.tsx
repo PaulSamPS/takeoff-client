@@ -13,6 +13,7 @@ export const Profile = (): JSX.Element => {
   const { id } = useParams();
 
   React.useEffect(() => {
+    setIsLoadingUserInfo(true);
     socket?.emit('userInfo:get', { userId: id });
     socket?.on('userInfo:user', ({ user }: { user: IUser }) => {
       setUser(user);

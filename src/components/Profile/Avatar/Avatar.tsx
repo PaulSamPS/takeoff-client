@@ -33,15 +33,15 @@ export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Ele
 
   return (
     <div className={styles.avatar}>
-      <div
-        className={styles.img}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        {isLoadingUserInfo ? (
-          <Spinner />
-        ) : (
-          <>
+      {isLoadingUserInfo ? (
+        <Spinner />
+      ) : (
+        <>
+          <div
+            className={styles.img}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          >
             <img
               src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
               alt={user?.name.firstName + '' + user?.name.lastName}
@@ -63,28 +63,32 @@ export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Ele
                 Загрузить аватар
               </motion.div>
             )}
-          </>
-        )}
-      </div>
-      {loginUser.id === id && (
-        <Link to={'/main/edit'} className={styles.edit}>
-          <Button appearance='secondary'>Редактировать</Button>
-        </Link>
+          </div>
+          {loginUser.id === id && (
+            <Link to={'/main/edit'} className={styles.edit}>
+              <Button appearance='secondary'>Редактировать</Button>
+            </Link>
+          )}
+          {loginUser.id !== id && (
+            <Button appearance='primary' className={styles.message} onClick={handleSendMessage}>
+              Написать сообщение
+            </Button>
+          )}
+          {loginUser.id !== id && <ButtonsFriend userId={id} />}
+          {loginUser.id === id && (
+            <Modal setModal={setAvatarModal} modal={avatarModal}>
+              <ModalChangeAvatar setModal={setAvatarModal} userId={id!} />
+            </Modal>
+          )}
+          <Modal setModal={setConversationModal} modal={conversationModal}>
+            <ModalMessage
+              friend={user}
+              setModal={setConversationModal}
+              isModal={conversationModal}
+            />
+          </Modal>
+        </>
       )}
-      {loginUser.id !== id && (
-        <Button appearance='primary' className={styles.message} onClick={handleSendMessage}>
-          Написать сообщение
-        </Button>
-      )}
-      {loginUser.id !== id && <ButtonsFriend userId={id} />}
-      {loginUser.id === id && (
-        <Modal setModal={setAvatarModal} modal={avatarModal}>
-          <ModalChangeAvatar setModal={setAvatarModal} userId={id!} />
-        </Modal>
-      )}
-      <Modal setModal={setConversationModal} modal={conversationModal}>
-        <ModalMessage friend={user} setModal={setConversationModal} isModal={conversationModal} />
-      </Modal>
     </div>
   );
 };
