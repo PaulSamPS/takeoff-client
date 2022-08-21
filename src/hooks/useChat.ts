@@ -21,18 +21,6 @@ const initialStateBannerData = {
   bio: { gender: '' },
 };
 
-const initialStateChats = [
-  {
-    avatar: null,
-    date: Date.now(),
-    lastMessage: '',
-    messagesWith: '',
-    name: '',
-    countUnreadMessages: 0,
-    lastVisit: Date.now(),
-  },
-];
-
 export const useChat = (): IReturn => {
   const socket = React.useContext(SocketContext);
   const { user } = useAppSelector((state) => state.loginReducer);
@@ -40,11 +28,13 @@ export const useChat = (): IReturn => {
 
   const [messages, setMessages] = React.useState<IMessages[]>([]);
   const [bannerData, setBannerData] = React.useState<IBanner>(initialStateBannerData);
-  const [chats, setChats] = React.useState<IChats[]>(initialStateChats);
-  const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
+  const [chats, setChats] = React.useState<IChats[]>([]);
   const [totalMessages, setTotalMessages] = React.useState<number>(0);
   const [currentCountMessages, setCurrentCountMessages] = React.useState<number>(20);
+
   const [isFetching, setIsFetching] = React.useState<boolean>(false);
+  const [loadingMessages, setLoadingMessages] = React.useState<boolean>(true);
+  const [loadingChats, setLoadingChat] = React.useState<boolean>(false);
 
   const { scrollY } = useScroll();
   const openChatId = React.useRef<string | null>('');
@@ -81,9 +71,11 @@ export const useChat = (): IReturn => {
   }, [isFetching]);
 
   React.useEffect(() => {
+    setLoadingChat(true);
     socket?.emit('chat:get', { userId: user.id });
     socket?.on('chat:send', ({ chatsToBeSent }: { chatsToBeSent: IChats[] }) => {
       setChats(chatsToBeSent);
+      setLoadingChat(false);
     });
     return () => {
       socket?.off('chat:send');
@@ -205,7 +197,8 @@ export const useChat = (): IReturn => {
     chats,
     setChats,
     deleteMessage,
-    loadingMessages,
     totalMessages,
+    loadingMessages,
+    loadingChats,
   };
 };
