@@ -3,7 +3,8 @@
 .spinner {
 	@include flexCenterCenter;
 
-	min-height: calc(100vh - 350px);
+	//min-height: calc(100vh - 350px);
+	height: inherit;
 
 	&::after {
 		display: block;

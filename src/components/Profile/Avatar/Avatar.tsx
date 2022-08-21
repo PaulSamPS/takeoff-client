@@ -6,13 +6,13 @@ import { Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
 import { ModalChangeAvatar } from '../../ModalChangeAvatar/ModalChangeAvatar';
 import { ModalMessage } from '../../ModalMessage/ModalMessage';
-import { Button, ButtonsFriend, Modal } from '../../UI';
+import { Button, ButtonsFriend, Modal, Spinner } from '../../UI';
 
 import { motion } from 'framer-motion';
 
 import styles from './Avatar.module.scss';
 
-export const Avatar = ({ user }: ProfileAvatarProps): JSX.Element => {
+export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
 
   const [hover, setHover] = React.useState<boolean>(false);
@@ -38,26 +38,32 @@ export const Avatar = ({ user }: ProfileAvatarProps): JSX.Element => {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <img
-          src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-          alt={user?.name.firstName + '' + user?.name.lastName}
-        />
-        {loginUser.id === id && (
-          <motion.div
-            animate={hover ? 'open' : 'closed'}
-            variants={variantsModal}
-            initial={'closed'}
-            exit={'closed'}
-            transition={{
-              duration: 0.5,
-              type: 'spring',
-            }}
-            className={styles.uploadAvatar}
-            onClick={() => setAvatarModal(true)}
-          >
-            <AddAvatar />
-            Загрузить аватар
-          </motion.div>
+        {isLoadingUserInfo ? (
+          <Spinner />
+        ) : (
+          <>
+            <img
+              src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+              alt={user?.name.firstName + '' + user?.name.lastName}
+            />
+            {loginUser.id === id && (
+              <motion.div
+                animate={hover ? 'open' : 'closed'}
+                variants={variantsModal}
+                initial={'closed'}
+                exit={'closed'}
+                transition={{
+                  duration: 0.5,
+                  type: 'spring',
+                }}
+                className={styles.uploadAvatar}
+                onClick={() => setAvatarModal(true)}
+              >
+                <AddAvatar />
+                Загрузить аватар
+              </motion.div>
+            )}
+          </>
         )}
       </div>
       {loginUser.id === id && (

@@ -1,8 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { IUser } from '../../../interfaces/user.interface';
 
-export interface ProfileBioProps
+export interface ProfileFriendsProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  user: IUser | undefined;
   isLoadingUserInfo: boolean;
 }
