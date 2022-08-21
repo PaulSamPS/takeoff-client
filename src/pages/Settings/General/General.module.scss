@@ -13,21 +13,21 @@
 	}
 
 	.body {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		padding: 30px 20px;
 		color: var(--grey);
 		font-size: 13px;
-		position: relative;
 		text-align: center;
 
 		.err {
 			position: absolute;
 			top: 6px;
+			right: 0;
+			left: 0;
 			color: var(--red);
 			font-size: 13px;
-			left: 0;
-			right: 0;
 		}
 
 		.item {
@@ -47,9 +47,9 @@
 		}
 
 		.changePassword {
-			text-align: start;
 			display: flex;
 			flex-direction: column;
+			text-align: start;
 			row-gap: 20px;
 
 			.password {
@@ -59,9 +59,24 @@
 				row-gap: 20px;
 			}
 
-			button {
-				align-self: center;
-				width: fit-content;
+			.save {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				button {
+					align-self: center;
+					width: fit-content;
+				}
+
+				span {
+					position: absolute;
+					top: 11px;
+					right: 50px;
+					color: var(--grey-middle);
+					font-size: 13px;
+				}
 			}
 
 			.hide {
@@ -99,13 +114,13 @@
 	}
 
 	.modal {
-		background:var(--white);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		padding: 60px 40px;
-		border-radius: 4px;
 		column-gap: 20px;
+		background: var(--white);
+		border-radius: 4px;
 
 		span {
 			color: var(--grey-middle);

@@ -10,12 +10,13 @@ import styles from './General.module.scss';
 
 export const General = () => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const { error } = useAppSelector((state) => state.changePassword);
+  const { error, success } = useAppSelector((state) => state.changePassword);
 
   const dispatch = useAppDispatch();
 
   const [isChangePassword, setIsChangePassword] = React.useState<boolean>(false);
   const [modal, setModal] = React.useState<boolean>(false);
+  const [isSaved, setIsSaved] = React.useState<boolean>(false);
 
   const {
     register,
@@ -40,7 +41,11 @@ export const General = () => {
   const onSubmit = (formData: IChangePassword) => {
     formData.userId = loginUser.id;
     dispatch(changeUserPassword(formData)).then(() => {
+      setIsSaved(true);
       reset();
+      setTimeout(() => {
+        setIsSaved(false);
+      }, 3000);
     });
   };
 
@@ -96,9 +101,12 @@ export const General = () => {
                 error={errors.repeatNewPassword}
               />
             </div>
-            <Button appearance='primary' disabled={!isValid}>
-              Сохранить
-            </Button>
+            <div className={styles.save}>
+              <Button appearance='primary' disabled={!isValid}>
+                Сохранить
+              </Button>
+              {isSaved && <span>{success}</span>}
+            </div>
             <span className={styles.hide} onClick={closeChangePassword}>
               Скрыть
             </span>
