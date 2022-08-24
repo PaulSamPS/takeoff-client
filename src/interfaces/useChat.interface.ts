@@ -41,6 +41,7 @@ export interface IReturn {
   chats: IChats[];
   setChats: (chat: IChats[]) => void;
   deleteMessage: (messageId: string) => void;
-  loadingMessages: boolean;
   totalMessages: number;
+  loadingMessages: boolean;
+  loadingChats: boolean;
 }

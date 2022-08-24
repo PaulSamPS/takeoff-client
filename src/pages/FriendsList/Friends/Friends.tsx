@@ -1,7 +1,5 @@
 import React from 'react';
-import styles from './Friends.module.scss';
 import { useRequest } from '../../../hooks/useRequest';
-import cn from 'classnames';
 import { useAppSelector } from '../../../hooks/redux';
 import { All } from './All/All';
 import { Online } from './Online/Online';
@@ -9,12 +7,17 @@ import { IUser } from '../../../interfaces/user.interface';
 import { useFollow } from '../../../hooks/useFollow';
 import { useLocation } from 'react-router-dom';
 
+import cn from 'classnames';
+
+import styles from './Friends.module.scss';
+import { Spinner } from '../../../components/UI';
+
 export const Friends = (): JSX.Element => {
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 
   const [activeSort, setActiveSort] = React.useState<number>(0);
 
-  const { friends, friendsUserInfo } = useRequest();
+  const { friends, friendsUserInfo, loadingFriends } = useRequest();
   const { followings } = useFollow();
   const { pathname } = useLocation();
 
@@ -89,10 +92,16 @@ export const Friends = (): JSX.Element => {
           </>
         )}
       </div>
-      {activeSort === 0 || pathname === '/main/user-friends/followers' ? (
-        <All />
+      {loadingFriends ? (
+        <Spinner />
       ) : (
-        <Online friendsOnline={friendsOnline} friendsOnlineUser={friendsOnlineUser} />
+        <>
+          {activeSort === 0 || pathname === '/main/user-friends/followers' ? (
+            <All />
+          ) : (
+            <Online friendsOnline={friendsOnline} friendsOnlineUser={friendsOnlineUser} />
+          )}
+        </>
       )}
     </div>
   );

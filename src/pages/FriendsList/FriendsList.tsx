@@ -2,12 +2,15 @@ import React from 'react';
 import styles from './Friendslist.module.scss';
 import { RightBar } from '../../components/RightBar/RightBar';
 import { Outlet } from 'react-router-dom';
+import { useRequest } from '../../hooks/useRequest';
 
 export const FriendsList = (): JSX.Element => {
+  const { request } = useRequest();
   return (
     <div className={styles.wrapper}>
       <Outlet />
       <RightBar
+        totalUnviewed={request.length}
         firstItem={'Мои друзья'}
         secondItem={'Заявки в друзья'}
         thirdItem={'Поиск друзей'}

@@ -6,13 +6,13 @@ import { Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks/redux';
 import { ModalChangeAvatar } from '../../ModalChangeAvatar/ModalChangeAvatar';
 import { ModalMessage } from '../../ModalMessage/ModalMessage';
-import { Button, ButtonsFriend, Modal } from '../../UI';
+import { Button, ButtonsFriend, Modal, Spinner } from '../../UI';
 
 import { motion } from 'framer-motion';
 
 import styles from './Avatar.module.scss';
 
-export const Avatar = ({ user }: ProfileAvatarProps): JSX.Element => {
+export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
 
   const [hover, setHover] = React.useState<boolean>(false);
@@ -33,52 +33,62 @@ export const Avatar = ({ user }: ProfileAvatarProps): JSX.Element => {
 
   return (
     <div className={styles.avatar}>
-      <div
-        className={styles.img}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <img
-          src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-          alt={user?.name.firstName + '' + user?.name.lastName}
-        />
-        {loginUser.id === id && (
-          <motion.div
-            animate={hover ? 'open' : 'closed'}
-            variants={variantsModal}
-            initial={'closed'}
-            exit={'closed'}
-            transition={{
-              duration: 0.5,
-              type: 'spring',
-            }}
-            className={styles.uploadAvatar}
-            onClick={() => setAvatarModal(true)}
+      {isLoadingUserInfo ? (
+        <Spinner />
+      ) : (
+        <>
+          <div
+            className={styles.img}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
           >
-            <AddAvatar />
-            Загрузить аватар
-          </motion.div>
-        )}
-      </div>
-      {loginUser.id === id && (
-        <Link to={'/main/edit'} className={styles.edit}>
-          <Button appearance='secondary'>Редактировать</Button>
-        </Link>
+            <img
+              src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+              alt={user?.name.firstName + '' + user?.name.lastName}
+            />
+            {loginUser.id === id && (
+              <motion.div
+                animate={hover ? 'open' : 'closed'}
+                variants={variantsModal}
+                initial={'closed'}
+                exit={'closed'}
+                transition={{
+                  duration: 0.5,
+                  type: 'spring',
+                }}
+                className={styles.uploadAvatar}
+                onClick={() => setAvatarModal(true)}
+              >
+                <AddAvatar />
+                Загрузить аватар
+              </motion.div>
+            )}
+          </div>
+          {loginUser.id === id && (
+            <Link to={'/main/edit'} className={styles.edit}>
+              <Button appearance='secondary'>Редактировать</Button>
+            </Link>
+          )}
+          {loginUser.id !== id && (
+            <Button appearance='primary' className={styles.message} onClick={handleSendMessage}>
+              Написать сообщение
+            </Button>
+          )}
+          {loginUser.id !== id && <ButtonsFriend userId={id} />}
+          {loginUser.id === id && (
+            <Modal setModal={setAvatarModal} modal={avatarModal}>
+              <ModalChangeAvatar setModal={setAvatarModal} userId={id!} />
+            </Modal>
+          )}
+          <Modal setModal={setConversationModal} modal={conversationModal}>
+            <ModalMessage
+              friend={user}
+              setModal={setConversationModal}
+              isModal={conversationModal}
+            />
+          </Modal>
+        </>
       )}
-      {loginUser.id !== id && (
-        <Button appearance='primary' className={styles.message} onClick={handleSendMessage}>
-          Написать сообщение
-        </Button>
-      )}
-      {loginUser.id !== id && <ButtonsFriend userId={id} />}
-      {loginUser.id === id && (
-        <Modal setModal={setAvatarModal} modal={avatarModal}>
-          <ModalChangeAvatar setModal={setAvatarModal} userId={id!} />
-        </Modal>
-      )}
-      <Modal setModal={setConversationModal} modal={conversationModal}>
-        <ModalMessage friend={user} setModal={setConversationModal} isModal={conversationModal} />
-      </Modal>
     </div>
   );
 };

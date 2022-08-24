@@ -165,11 +165,11 @@
 		}
 
 		button {
+			position: relative;
 			width: 21px;
 			min-width: unset;
 			height: 25px;
 			padding: 0;
-			position: relative;
 
 			&:hover {
 				background: none;

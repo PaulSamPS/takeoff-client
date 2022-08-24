@@ -8,13 +8,16 @@ import { useParams } from 'react-router-dom';
 export const Profile = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const [user, setUser] = React.useState<IUser>();
+  const [isLoadingUserInfo, setIsLoadingUserInfo] = React.useState(true);
 
   const { id } = useParams();
 
   React.useEffect(() => {
+    setIsLoadingUserInfo(true);
     socket?.emit('userInfo:get', { userId: id });
     socket?.on('userInfo:user', ({ user }: { user: IUser }) => {
       setUser(user);
+      setIsLoadingUserInfo(false);
     });
 
     return () => {
@@ -25,12 +28,12 @@ export const Profile = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <Avatar user={user} />
-        <Friends />
+        <Avatar user={user} isLoadingUserInfo={isLoadingUserInfo} />
+        <Friends isLoadingUserInfo={isLoadingUserInfo} />
       </div>
       <div className={styles.right}>
-        <Bio user={user} />
-        <Post />
+        <Bio user={user} isLoadingUserInfo={isLoadingUserInfo} />
+        <Post isLoadingUserInfo={isLoadingUserInfo} />
       </div>
     </div>
   );

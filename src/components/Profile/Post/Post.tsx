@@ -6,10 +6,12 @@ import { SocketContext } from '../../../helpers/socketContext';
 import { IPost } from '../../../interfaces/usePost.interface';
 import { NewsItem } from '../../News/NewsList';
 import { CreateNews } from '../../News';
+import { ProfilePostProps } from './Post.props';
+import { Spinner } from '../../UI';
 
 import styles from './Post.module.scss';
 
-export const Post = (): JSX.Element => {
+export const Post = ({ isLoadingUserInfo }: ProfilePostProps): JSX.Element => {
   const socket = React.useContext(SocketContext);
   const dispatch = useAppDispatch();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -36,9 +38,13 @@ export const Post = (): JSX.Element => {
           <div className={styles.posts}>
             {posts
               .filter((f) => f.user._id === id)
-              .map((post) => (
-                <NewsItem key={post._id} post={post} />
-              ))}
+              .map((post) =>
+                isLoadingUserInfo ? (
+                  <Spinner key={post._id} />
+                ) : (
+                  <NewsItem key={post._id} post={post} />
+                )
+              )}
           </div>
         )}
       </div>
