@@ -71,6 +71,12 @@ export const NewsItemIcons = ({
               [styles.likeBackgroundImage]:
                 likes.length > 0 && likes.map((p) => p.user._id).includes(loginUser.id),
             })}
+            style={{
+              backgroundImage:
+                likes.length > 0 && likes.map((p) => p.user._id).includes(loginUser.id)
+                  ? `url(${API_URL}/like.png)`
+                  : '',
+            }}
           >
             <LikesIcon />
           </div>

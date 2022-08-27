@@ -8,12 +8,14 @@ import { IUser } from '../../../../interfaces/user.interface';
 import { usersReducer } from '../../../../redux/reducers/usersReducer';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { useOnClickOutside } from '../../../../hooks/useOnclickOutside';
+import { SearchProps } from '../../../../components/UI/Search/Search.props';
 
 import debounce from 'lodash.debounce';
+import cn from 'classnames';
 
 import styles from './Search.module.scss';
 
-export const Search = () => {
+export const Search = ({ className }: SearchProps) => {
   const { searchUsers } = useAppSelector((state) => state.usersReducer);
   const dispatch = useAppDispatch();
 
@@ -54,7 +56,7 @@ export const Search = () => {
   };
 
   return (
-    <div className={styles.search} ref={searchRef}>
+    <div className={cn(styles.search, className)} ref={searchRef}>
       <Input placeholder='Поиск' onChange={handleSearch} value={search} onClick={visibleSearch} />
       <SearchIcon />
       {isSearch && (

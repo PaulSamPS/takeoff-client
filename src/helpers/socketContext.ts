@@ -17,9 +17,3 @@ export const socketContext = () => {
 
   return { socket };
 };
-export const NotificationContext = React.createContext<boolean>(false);
-export const notificationContext = () => {
-  const [isVisible, setIsVisible] = React.useState<boolean>(false);
-
-  return { isVisible, setIsVisible };
-};

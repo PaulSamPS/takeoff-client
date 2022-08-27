@@ -1,23 +1,34 @@
 .wrapper {
-	.main {
-		position: relative;
-		width: 990px;
-		margin: 70px auto 50px;
-		padding: 0 20px;
-
-		.sidebar {
+	.container {
 			position: fixed;
-			top: 70px;
-			right: auto;
-			left: auto;
-			z-index: 11;
-			width: 160px;
-		}
-
-		.content {
-			margin-left: 170px;
-		}
+			top: 0;
+			right: 0;
+			left: 0;
+			z-index: 12;
+		width: 100%;
+			height: 49px;
+			background-color: var(--white);
+			border-bottom: 1px solid var(--grey-light);
 	}
+
+		.main {
+			width: 990px;
+			margin: 20px auto 50px;
+			padding: 0 20px;
+
+			.sidebar {
+				position: fixed;
+				top: 70px;
+				right: auto;
+				left: auto;
+				z-index: 11;
+				width: 160px;
+			}
+
+			.content {
+				margin-left: 170px;
+			}
+		}
 
 	.footer {
 		margin-top: auto;

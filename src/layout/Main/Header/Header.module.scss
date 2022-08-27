@@ -1,23 +1,19 @@
 @import "./src/scss/index";
-
 .container {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	z-index: 12;
 	width: 100%;
-	background-color: var(--white);
-	border-bottom: 1px solid var(--grey-light);
+	background: var(--white);
+		position: sticky;
+	top: 0;
+	z-index: 13;
 
 	.wrapper {
 		display: flex;
 		align-items: center;
-		max-width: 990px;
 		height: 48px;
 		margin: 0 auto;
 		padding: 0 20px;
 		color: var(--greyDark);
+		width: 970px;
 
 		.logo {
 			color: var(--greyDark);
@@ -29,12 +25,18 @@
 			}
 		}
 
+		.search {
+			z-index: 13;
+			width: 230px;
+		}
+
 		.notification {
 			position: relative;
 			flex-grow: 1;
 			height: 100%;
 			margin-right: 20px;
 			margin-left: 15px;
+			z-index: 13;
 
 			.count {
 				position: absolute;
@@ -71,6 +73,7 @@
 			column-gap: 5px;
 			cursor: pointer;
 			transition: all ease 0.2s;
+			z-index: 13;
 
 			@include flex;
 
