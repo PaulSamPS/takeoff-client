@@ -1,5 +1,7 @@
 .container {
-	display: flex;
+	display: grid;
+	grid-template-columns: 550px 1fr;
+	column-gap: 10px;
 
 	.wrapper {
 		width: 550px;

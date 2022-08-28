@@ -81,8 +81,9 @@ a {
 }
 
 .wrapper {
-	width: 550px;
 	padding: 70px 20px;
+	width: 550px;
+
 	background: var(--white);
 	border-bottom: 0 solid var(--bg);
 	border-bottom-width: 20px;
@@ -90,6 +91,7 @@ a {
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
 	.container {
+		width: 100%;
 		height: auto;
 		min-height: calc(100vh - 300px);
 
@@ -141,7 +143,7 @@ a {
 		background: var(--bg-grey-light);
 		border-radius: 0 0 5px 5px;
 
-		.input {
+		input {
 			width: 100%;
 		}
 

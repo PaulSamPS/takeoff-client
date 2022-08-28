@@ -1,6 +1,6 @@
 .wrapper {
 	z-index: 10;
-	width: 220px;
+	width: 100%;
 	height: fit-content;
 	margin-left: 10px;
 	padding: 5px 0;
@@ -54,7 +54,7 @@
 
 	hr {
 		display: block;
-		width: 178px;
+		width: 85%;
 		height: 1px;
 		margin: 5px 0 5px 20px;
 		background: var(--border);

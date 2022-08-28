@@ -14,9 +14,11 @@ export const Layout = (): JSX.Element => {
   return (
     <>
       <div className={styles.wrapper}>
-        <Header />
+        <div className={styles.top}>
+          <Header className={styles.header} />
+        </div>
+        <Sidebar className={styles.sidebar} />
         <div className={styles.main}>
-          <Sidebar className={styles.sidebar} />
           <div className={styles.content}>
             <Outlet />
           </div>
