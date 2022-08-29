@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useRef } from 'react';
 import { API_URL } from '../../../http/axios';
-import { Input, Button, EmojiPicker } from '../../UI';
+import { Input, Button, EmojiPicker, Spinner } from '../../UI';
 import { ReactComponent as PhotoIcon } from '../../../helpers/icons/foto.svg';
 import { IAppendAvatarInterface } from '../../../interfaces/appendAvatar.interface';
 import { createPost } from '../../../redux/actions/postAction';
@@ -23,6 +23,7 @@ export const CreateNews = () => {
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const [submitDisabled, setSubmitDisabled] = React.useState<boolean>(true);
+  const [upload, setUpload] = React.useState<boolean>(false);
 
   const ref = useRef<HTMLFormElement>(null);
   useOnClickOutside(ref, () => setActive(false));
@@ -47,6 +48,7 @@ export const CreateNews = () => {
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setUpload(true);
     const formData = new FormData();
     if (filesAvatar) {
       formData.append('image', filesAvatar[0]);
@@ -55,6 +57,8 @@ export const CreateNews = () => {
     }
     if (text !== null) {
       formData.append('text', text);
+    } else {
+      formData.append('text', null as unknown as Blob);
     }
     formData.append('id', user.id);
     const obj = {
@@ -67,6 +71,7 @@ export const CreateNews = () => {
       setFilesAvatar(null);
       setPreviewAvatar([]);
       setText('');
+      setUpload(false);
       setActive(false);
     });
   };
@@ -76,58 +81,64 @@ export const CreateNews = () => {
   }, [id]);
 
   return (
-    <form className={styles.createPost} onSubmit={onSubmit} ref={ref}>
-      <img
-        className={styles.avatar}
-        src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
-        alt={user.name.firstName + ' ' + user.name.lastName}
-      />
-      <textarea
-        className={styles.textarea}
-        placeholder='Что у вас нового?'
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
-        onClick={() => setActive(true)}
-        value={text}
-      />
-      <div className={styles.icons}>
-        <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
-        <label htmlFor='avatar'>
-          <PhotoIcon />
-        </label>
-      </div>
-      {previewAvatar &&
-        previewAvatar.map(
-          (f: IAppendAvatarInterface, index: number): JSX.Element => (
-            <div className={styles.postImage} key={f.number}>
-              <img src={f.avatar} alt={'image' + index} />
-            </div>
-          )
-        )}
-      {active && (
-        <motion.div
-          className={styles.openBlock}
-          animate={active ? 'open' : 'closed'}
-          initial={'closed'}
-          exit={'closed'}
-          variants={variantsOpen}
-          transition={{
-            damping: 20,
-            type: 'spring',
-            stiffness: 260,
-            duration: 0.2,
-          }}
-        >
-          <EmojiPicker setText={setText} text={text} left={-21} />
-          <Button
-            appearance='primary'
-            type='submit'
-            className={styles.publish}
-            disabled={previewAvatar.length <= 0 && submitDisabled}
-          >
-            Опубликовать
-          </Button>
-        </motion.div>
+    <>
+      {upload ? (
+        <Spinner />
+      ) : (
+        <form className={styles.createPost} onSubmit={onSubmit} ref={ref}>
+          <img
+            className={styles.avatar}
+            src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+            alt={user.name.firstName + ' ' + user.name.lastName}
+          />
+          <textarea
+            className={styles.textarea}
+            placeholder='Что у вас нового?'
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
+            onClick={() => setActive(true)}
+            value={text}
+          />
+          <div className={styles.icons}>
+            <Input type='file' id='avatar' onChange={selectFileAvatar} className={styles.file} />
+            <label htmlFor='avatar'>
+              <PhotoIcon />
+            </label>
+          </div>
+          {previewAvatar &&
+            previewAvatar.map(
+              (f: IAppendAvatarInterface, index: number): JSX.Element => (
+                <div className={styles.postImage} key={f.number}>
+                  <img src={f.avatar} alt={'image' + index} />
+                </div>
+              )
+            )}
+          {active && (
+            <motion.div
+              className={styles.openBlock}
+              animate={active ? 'open' : 'closed'}
+              initial={'closed'}
+              exit={'closed'}
+              variants={variantsOpen}
+              transition={{
+                damping: 20,
+                type: 'spring',
+                stiffness: 260,
+                duration: 0.2,
+              }}
+            >
+              <EmojiPicker setText={setText} text={text} left={-21} />
+              <Button
+                appearance='primary'
+                type='submit'
+                className={styles.publish}
+                disabled={previewAvatar.length <= 0 && submitDisabled}
+              >
+                Опубликовать
+              </Button>
+            </motion.div>
+          )}
+        </form>
       )}
-    </form>
+    </>
   );
 };
