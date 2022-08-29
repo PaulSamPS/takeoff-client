@@ -32,22 +32,20 @@ export const Post = ({ isLoadingUserInfo }: ProfilePostProps): JSX.Element => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.wrapper}>
-        {loginUser.id === id && <CreateNews />}
-        {posts.length > 0 && (
-          <div className={styles.posts}>
-            {posts
-              .filter((f) => f.user._id === id)
-              .map((post) =>
-                isLoadingUserInfo ? (
-                  <Spinner key={post._id} />
-                ) : (
-                  <NewsItem key={post._id} post={post} />
-                )
-              )}
-          </div>
-        )}
-      </div>
+      {loginUser.id === id && <CreateNews />}
+      {posts.length > 0 && (
+        <>
+          {posts
+            .filter((f) => f.user._id === id)
+            .map((post) =>
+              isLoadingUserInfo ? (
+                <Spinner key={post._id} />
+              ) : (
+                <NewsItem key={post._id} post={post} />
+              )
+            )}
+        </>
+      )}
     </div>
   );
 };

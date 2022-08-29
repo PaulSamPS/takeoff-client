@@ -5,15 +5,14 @@
 
 	.top {
 		grid-area: header;
-		position: sticky;
+		position: fixed;
+		height: 49px;
 		top: 0;
 		right: 0;
 		left: 0;
 		z-index: 12;
-		width: 100vw;
 		background-color: var(--white);
 		border-bottom: 1px solid var(--grey-light);
-		margin-left: calc(-50vw + 50%);
 	}
 
 	.sidebar {
@@ -29,7 +28,7 @@
 	.main {
 		grid-area: content;
 		position: relative;
-		margin: 20px auto 50px;
+		margin: 70px auto 50px;
 		width: 100%;
 
 		.content {

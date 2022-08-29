@@ -1,13 +1,13 @@
 @import "./src/scss/index";
 
 .container {
-	display: flex;
+	display: grid;
+	grid-template-columns: 230px 580px;
 	column-gap: 20px;
 
 	.left {
 		display: flex;
 		flex-wrap: wrap;
-		width: 230px;
 		height: fit-content;
 		column-gap: 20px;
 		row-gap: 20px;
@@ -16,7 +16,6 @@
 	.right {
 		display: flex;
 		flex-wrap: wrap;
-		width: 580px;
 		height: fit-content;
 		column-gap: 20px;
 		row-gap: 20px;

@@ -1,10 +1,9 @@
 .createPost {
 	display: grid;
 	grid-template-areas: "avatar text icon" "image image image" "bottom bottom bottom";
-	grid-template-columns: 30px 1fr auto;
+	grid-template-columns: 30px 1fr 20px;
 	align-items: flex-start;
 	width: 100%;
-	min-width: 530px;
 	margin-bottom: 20px;
 	padding: 20px;
 	column-gap: 10px;
@@ -60,6 +59,7 @@
 			position: absolute;
 			visibility: hidden;
 			opacity: 0;
+			width: 20px;
 		}
 
 		svg {

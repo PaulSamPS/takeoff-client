@@ -22,9 +22,7 @@ export const ConversationsList = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.borderTop} />
-      <div className={styles.content}>
-        <Outlet />
-      </div>
+      <Outlet />
       <RightBar
         totalUnviewed={total}
         firstItem={'Все чаты'}
