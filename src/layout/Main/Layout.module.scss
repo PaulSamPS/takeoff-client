@@ -1,37 +1,46 @@
-.wrapper {
-	display: grid;
-	grid-template-columns: 160px 830px;
-	grid-template-areas: 'header header' 'sidebar content';
+@import "./src/scss/index";
 
+.wrapper {
 	.top {
+		align-items: center;
+		justify-content: center;
 		grid-area: header;
 		position: fixed;
 		height: 49px;
 		top: 0;
-		right: 0;
 		left: 0;
+		right: 0;
 		z-index: 12;
 		background-color: var(--white);
 		border-bottom: 1px solid var(--grey-light);
+
+		@include _tablet {
+			display: block;
+		}
 	}
 
-	.sidebar {
-		grid-area: sidebar;
-		position: fixed;
-		top: 70px;
-		right: auto;
-		left: auto;
-		z-index: 11;
-		width: 160px;
-	}
-
-	.main {
+	.content {
+		width: 990px;
 		grid-area: content;
-		position: relative;
-		margin: 70px auto 50px;
-		width: 100%;
+		display: grid;
+		grid-template-columns: 160px 830px;
+		grid-template-areas: 'sidebar content';
 
-		.content {
+		.sidebar {
+			grid-area: sidebar;
+			position: fixed;
+			top: 70px;
+			right: auto;
+			left: auto;
+			z-index: 11;
+			width: 160px;
+		}
+
+		.main {
+			grid-area: content;
+			position: relative;
+			margin: 70px auto 50px;
+			width: 100%;
 		}
 	}
 

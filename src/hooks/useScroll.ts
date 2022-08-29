@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface IReturnScroll {
-  scrollY: number
+  scrollY: number;
 }
 
 export const useScroll = (): IReturnScroll => {

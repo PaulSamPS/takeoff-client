@@ -1,4 +1,4 @@
-@import "../../../scss/index";
+@import "./src/scss/index";
 
 .wrapper {
 	position: relative;
@@ -26,7 +26,7 @@
 			outline: none;
 		}
 
-		@include _laptopL {
+		@include _laptop {
 			font-size: 14px;
 		}
 	}

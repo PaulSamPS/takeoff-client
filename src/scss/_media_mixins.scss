@@ -4,19 +4,19 @@
 	}
 }
 
-@mixin _laptopL {
+@mixin _laptop {
 	@media screen and (max-width: 1300px) {
 		@content;
 	}
 }
 
-@mixin _laptop {
-	@media screen and (max-width: 1024px) {
+@mixin _tablet  {
+	@media screen and (max-width: 1000px) {
 		@content;
 	}
 }
 
-@mixin _tablet {
+@mixin _tabletS {
 	@media screen and (max-width: 768px) {
 		@content;
 	}
