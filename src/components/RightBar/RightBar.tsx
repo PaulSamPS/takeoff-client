@@ -8,6 +8,7 @@ import { deleteChat } from '../../redux/reducers/openChatReducer';
 import { Link, useParams } from 'react-router-dom';
 
 import styles from './RightBar.module.scss';
+import cn from 'classnames';
 
 export const RightBar = ({
   totalUnviewed,
@@ -18,6 +19,7 @@ export const RightBar = ({
   thirdItemLink,
   thirdItem,
   isFixed,
+  className,
 }: RightBarProps): JSX.Element => {
   const { openChat } = useAppSelector((state) => state.openChatReducer);
   const dispatch = useAppDispatch();
@@ -31,7 +33,7 @@ export const RightBar = ({
 
   return (
     <div
-      className={styles.wrapper}
+      className={cn(styles.wrapper, className)}
       style={{
         position: !isFixed ? (scrollY >= 20 ? 'sticky' : 'relative') : 'sticky',
         top: !isFixed ? (scrollY >= 20 ? '49px' : '0') : '70px',

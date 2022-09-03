@@ -1,91 +1,95 @@
 @import "./src/scss/index";
 
-	.wrapper {
-		display: grid;
-		align-content: center;
-		grid-template-columns: 160px 230px 1fr 50px;
-		width: 990px;
-		height: 48px;
-		margin: 0 auto;
+.wrapper {
+	display: flex;
+	align-items: center;
+	max-width: 990px;
+	height: 48px;
+	margin: 0 auto;
+	color: var(--greyDark);
+
+	@include _tablet {
+		padding: 0 20px;
+		display: none;
+	}
+
+	.logo {
 		color: var(--greyDark);
+		text-decoration: none;
+		margin-right: 73px;
 
-		@include _tablet {
-			margin: unset;
+		h2 {
+			display: inline-block;
+			cursor: pointer;
+		}
+	}
+
+	.search {
+		width: 230px !important;
+	}
+
+	.notification {
+		position: relative;
+		flex-grow: 1;
+		height: 100%;
+		margin-right: 20px;
+		margin-left: 15px;
+
+		.count {
+			position: absolute;
+			top: 6px;
+			left: 24px;
+			font-size: 12px;
+			background: #FF3347;
+			cursor: pointer;
 		}
 
-		.logo {
-			color: var(--greyDark);
-			text-decoration: none;
-
-			h2 {
-				display: inline-block;
-				cursor: pointer;
-			}
-		}
-
-		input {
-			width: 230px !important;
-		}
-
-		.notification {
-			position: relative;
-			flex-grow: 1;
+		.icon {
+			display: flex;
+			align-items: center;
+			width: 55px;
 			height: 100%;
-			margin-left: 20px;
-
-			.count {
-				position: absolute;
-				top: 6px;
-				left: 24px;
-				font-size: 12px;
-				background: #FF3347;
-				cursor: pointer;
-			}
-
-			.icon {
-				display: flex;
-				align-items: center;
-				width: 55px;
-				height: 100%;
-				padding: 0 15px;
-				cursor: pointer;
-				transition: all ease 0.2s;
-
-				&:hover {
-					background: rgb(174 183 194 / 16%);
-				}
-			}
-		}
-
-		.notificationVisible {
-			background: rgb(174 183 194 / 16%);
-		}
-
-		.profile {
-			position: relative;
-			height: 100%;
+			padding: 0 15px;
 			cursor: pointer;
 			transition: all ease 0.2s;
-
-			@include flex;
 
 			&:hover {
 				background: rgb(174 183 194 / 16%);
 			}
-
-			img {
-				width: 30px;
-				height: 30px;
-				object-fit: cover;
-				border-radius: 50%;
-			}
 		}
+	}
 
-		.profileMenuVisible {
+	.notificationVisible {
+		background: rgb(174 183 194 / 16%);
+	}
+
+	.profile {
+		position: relative;
+		height: 100%;
+		padding: 0 10px 0 15px;
+		column-gap: 5px;
+		cursor: pointer;
+		transition: all ease 0.2s;
+
+		@include flex;
+
+		&:hover {
 			background: rgb(174 183 194 / 16%);
 		}
 
-		.logout {
-			cursor: pointer;
+		img {
+			width: 30px;
+			height: 30px;
+			object-fit: cover;
+			border-radius: 50%;
 		}
 	}
+
+	.profileMenuVisible {
+		background: rgb(174 183 194 / 16%);
+	}
+
+	.logout {
+		cursor: pointer;
+	}
+}

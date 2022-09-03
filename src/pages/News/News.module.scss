@@ -1,11 +1,22 @@
+@import './src/scss/index';
+
 .container {
 	display: grid;
 	grid-template-columns: 550px 1fr;
 	column-gap: 10px;
 
+	@include _tablet {
+		grid-template-columns: 1fr;
+		justify-items: center;
+	}
+
 	.wrapper {
 		width: 550px;
 		border-bottom: 0 solid var(--bg);
 		border-bottom-width: 40px;
+	}
+
+	.rightBar {
+
 	}
 }

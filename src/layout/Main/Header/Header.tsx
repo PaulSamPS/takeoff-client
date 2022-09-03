@@ -34,7 +34,7 @@ export const Header: React.FC<
       <Link to={'/main/news'} className={styles.logo}>
         <h2>TakeOff</h2>
       </Link>
-      <Search />
+      <Search className={styles.search} />
       <div className={styles.notification} onClick={handleOpenNotifications}>
         <div className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}>
           <NotificationIcon />

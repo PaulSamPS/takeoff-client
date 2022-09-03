@@ -1,0 +1,16 @@
+.wrapper {
+		max-width: 990px;
+		margin: 0 auto;
+		color: var(--greyDark);
+	height: 49px;
+		display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 20px;
+
+	svg {
+		height: 35px;
+		width: 35px;
+		cursor: pointer;
+	}
+}

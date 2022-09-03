@@ -14,6 +14,7 @@ export const News = (): JSX.Element => {
         <NewsList />
       </div>
       <RightBar
+        className={styles.rightBar}
         firstItem={'Все посты'}
         secondItem={'Мои посты'}
         firstItemLink={'/main/news'}

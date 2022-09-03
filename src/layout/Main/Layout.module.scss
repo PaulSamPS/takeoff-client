@@ -2,21 +2,14 @@
 
 .wrapper {
 	.top {
-		align-items: center;
-		justify-content: center;
-		grid-area: header;
 		position: fixed;
-		height: 49px;
 		top: 0;
-		left: 0;
 		right: 0;
+		left: 0;
 		z-index: 12;
+		width: 100%;
 		background-color: var(--white);
 		border-bottom: 1px solid var(--grey-light);
-
-		@include _tablet {
-			display: block;
-		}
 	}
 
 	.content {
@@ -25,6 +18,11 @@
 		display: grid;
 		grid-template-columns: 160px 830px;
 		grid-template-areas: 'sidebar content';
+
+		@include _tablet {
+			grid-template-columns: 1fr;
+			grid-template-areas: 'content';
+		}
 
 		.sidebar {
 			grid-area: sidebar;
@@ -38,13 +36,19 @@
 
 		.main {
 			grid-area: content;
-			position: relative;
-			margin: 70px auto 50px;
+			margin: 70px auto 90px;
 			width: 100%;
 		}
 	}
 
-	.footer {
-		margin-top: auto;
+	.bot {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		z-index: 12;
+		width: 100%;
+		background-color: var(--white);
+		border-top: 1px solid var(--grey-light);
 	}
 }

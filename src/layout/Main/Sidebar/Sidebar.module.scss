@@ -1,6 +1,12 @@
+@import "./src/scss/index";
+
 .wrapper {
 	display: flex;
 	flex-direction: column;
+
+	@include _tablet {
+		display: none;
+	}
 
 	a {
 		&:hover {
