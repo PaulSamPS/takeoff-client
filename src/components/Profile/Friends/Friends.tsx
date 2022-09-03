@@ -5,11 +5,11 @@ import { API_URL } from '../../../http/axios';
 import { useAppSelector } from '../../../hooks/redux';
 import { IUser } from '../../../interfaces/user.interface';
 import { ProfileFriendsProps } from './Friends.props';
+import { Spinner } from '../../UI';
 
 import cn from 'classnames';
 
 import styles from './Friends.module.scss';
-import { Spinner } from '../../UI';
 
 export const Friends = ({ isLoadingUserInfo }: ProfileFriendsProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -28,7 +28,7 @@ export const Friends = ({ isLoadingUserInfo }: ProfileFriendsProps): JSX.Element
         }
       });
     });
-  }, []);
+  }, [id]);
 
   const handleClickSetUserId = () => {
     localStorage.setItem('friendsUserInfo', id!);
