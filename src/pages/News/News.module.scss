@@ -6,8 +6,9 @@
 	column-gap: 10px;
 
 	@include _tablet {
-		grid-template-columns: 1fr;
-		justify-items: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.wrapper {

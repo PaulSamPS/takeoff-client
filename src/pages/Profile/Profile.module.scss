@@ -5,12 +5,23 @@
 	grid-template-columns: 230px 580px;
 	column-gap: 20px;
 
+	@include _tablet {
+		grid-template-columns: 1fr;
+		justify-items: center;
+		row-gap: 20px;
+	}
+
 	.left {
 		display: flex;
 		flex-wrap: wrap;
 		height: fit-content;
 		column-gap: 20px;
 		row-gap: 20px;
+
+		@include _tablet {
+			flex-direction: column;
+			width: 550px;
+		}
 	}
 
 	.right {
@@ -19,5 +30,9 @@
 		height: fit-content;
 		column-gap: 20px;
 		row-gap: 20px;
+
+		@include _tablet {
+			width: 550px;
+		}
 	}
 }

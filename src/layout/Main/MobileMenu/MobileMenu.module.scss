@@ -1,5 +1,7 @@
+@import './src/scss/index';
+
 .wrapper {
-		max-width: 990px;
+		width: 990px;
 		margin: 0 auto;
 		color: var(--greyDark);
 	height: 49px;
@@ -7,6 +9,10 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 20px;
+
+	@include _tablet {
+		width: 100%;
+	}
 
 	svg {
 		height: 35px;
