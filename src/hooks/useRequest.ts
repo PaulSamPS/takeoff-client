@@ -58,7 +58,7 @@ export const useRequest = (): IReturnRequest => {
       socket?.off('friendsRequest:sent');
       socket?.off('followings:done');
     };
-  }, [socket, window.location.pathname]);
+  }, [window.location.pathname]);
 
   React.useEffect(() => {
     socket?.emit('friends:get', { userId: loginUser.id });
@@ -70,7 +70,7 @@ export const useRequest = (): IReturnRequest => {
     return () => {
       socket?.off('friends:set');
     };
-  }, [socket, loginUser.id]);
+  }, [loginUser.id]);
 
   React.useEffect(() => {
     socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
@@ -82,7 +82,7 @@ export const useRequest = (): IReturnRequest => {
     return () => {
       socket?.off('friendsUserInfo:set');
     };
-  }, [socket, id, friendId]);
+  }, [id, friendId]);
 
   return {
     addFriend,

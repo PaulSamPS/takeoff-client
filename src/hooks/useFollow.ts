@@ -52,7 +52,7 @@ export const useFollow = (): IFollowReturn => {
       socket?.off('followings:sent');
       socket?.off('followings:done');
     };
-  }, [socket, id, followId]);
+  }, [id, followId]);
 
   return { followings, followers, handleFollow, handleUnfollow };
 };

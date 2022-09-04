@@ -23,7 +23,7 @@ export const Profile = (): JSX.Element => {
     return () => {
       socket?.off('userInfo:user');
     };
-  }, [id, socket]);
+  }, [id]);
 
   return (
     <div className={styles.container}>

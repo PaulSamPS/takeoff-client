@@ -80,7 +80,7 @@ export const useChat = (): IReturn => {
     return () => {
       socket?.off('chat:send');
     };
-  }, [socket, id]);
+  }, [id]);
 
   React.useEffect(() => {
     socket?.emit('messages:get', {
@@ -108,7 +108,7 @@ export const useChat = (): IReturn => {
       socket?.off('message_list:update');
       socket?.off('chat:notFound');
     };
-  }, [socket, id]);
+  }, [id]);
 
   const sendMessage = (message: string | null) => {
     socket?.emit('message:add', {
@@ -176,7 +176,7 @@ export const useChat = (): IReturn => {
         }
       }
     });
-  }, [socket]);
+  }, []);
 
   const deleteMessage = (messageId: string) => {
     socket?.emit('message:delete', {
