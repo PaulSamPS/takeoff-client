@@ -27,6 +27,14 @@ a {
 	border-radius: 5px 5px 0 0;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
+	@include _tabletS {
+		width: 425px;
+	}
+
+	@include _mobileL {
+		width: 385px;
+	}
+
 	.back {
 		a {
 			position: relative;
@@ -82,7 +90,7 @@ a {
 
 .wrapper {
 	padding: 70px 20px;
-	width: 550px;
+	width: 100%;
 
 	background: var(--white);
 	border-bottom: 0 solid var(--bg);
@@ -136,7 +144,7 @@ a {
 
 	@include _tablet {
 		justify-self: center;
-		bottom: 50px;
+		bottom: 70px;
 	}
 
 	.bottom {
@@ -147,6 +155,14 @@ a {
 		padding: 20px;
 		background: var(--bg-grey-light);
 		border-radius: 0 0 5px 5px;
+
+		@include _tabletS {
+			width: 425px;
+		}
+
+		@include _mobileL {
+			width: 385px;
+		}s
 
 		input {
 			width: 100%;
@@ -177,4 +193,8 @@ a {
 	width: 100%;
 	border-top: 0 solid var(--bg);
 	border-top-width: 60px;
+
+	@include  _tablet {
+		bottom: 20px;
+	}
 }
