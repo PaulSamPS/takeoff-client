@@ -8,17 +8,22 @@ import { MobileMenu } from './MobileMenu/MobileMenu';
 
 import styles from './Layout.module.scss';
 import { MobileHeader } from './MobileHeader/MobileHeader';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export const Layout = (): JSX.Element => {
   const { loginUser, showNewMessageModal, bannerData, newMessageReceived, setShowNewMessageModal } =
     useLayoutSocket();
+  const { screenWidth } = useScreenWidth();
 
   return (
     <>
       <div className={styles.wrapper}>
         <div className={styles.top}>
-          <Header className={styles.header} />
-          <MobileHeader className={styles.header} />
+          {screenWidth > 1000 ? (
+            <Header className={styles.header} />
+          ) : (
+            <MobileHeader className={styles.header} />
+          )}
         </div>
         <div className={styles.content}>
           <Sidebar className={styles.sidebar} />
