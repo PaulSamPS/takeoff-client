@@ -9,7 +9,7 @@
   overflow: hidden;
 
   opacity: 1;
-  background: rgba(33, 31, 32, 0.7);
+  background: rgb(33 31 32 / 30%);
   backdrop-filter: blur(2px);
 
   .menu {
@@ -18,10 +18,41 @@
     top: 0;
     bottom: 0;
     left: 0;
+    padding: 20px;
 
     width: 320px;
 
     background: var(--white);
     border-right: 1px solid var(--grey-light);
+
+    .logo {
+      color: var(--greyDark);
+      text-decoration: none;
+
+      h2 {
+        display: inline-block;
+        cursor: pointer;
+      }
+    }
+
+    .avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--grey-light);
+      padding-bottom: 20px;
+      margin-top: 40px;
+
+      img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .profileMenu {
+      margin-top: 40px;
+    }
   }
 }
