@@ -20,7 +20,7 @@ export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessage
   const { scrollY } = useScroll();
   const { id } = useParams();
 
-  const ownMessage = loginUser.id == message.sender;
+  const ownMessage = loginUser.id === message.sender;
 
   React.useEffect(() => {
     bottomRef.current?.scrollIntoView({
@@ -53,9 +53,13 @@ export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessage
           >
             <img
               src={
-                loginUser.avatar === null
+                ownMessage
+                  ? loginUser.avatar == null
+                    ? `/photo.png`
+                    : `${API_URL}/avatar/${loginUser.avatar}`
+                  : bannerData.avatar == null
                   ? `/photo.png`
-                  : `${API_URL}/avatar/${ownMessage ? loginUser.avatar : bannerData.avatar}`
+                  : `${API_URL}/avatar/${bannerData.avatar}`
               }
               alt={
                 ownMessage
