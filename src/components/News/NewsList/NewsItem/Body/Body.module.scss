@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .more {
 	position: absolute;
 	top: 20px;
@@ -87,4 +89,9 @@ img {
 	width: 510px;
 	height: 340px;
 	object-fit: cover;
+
+	@include _tabletS {
+		width: 385px;
+		height: 285px;
+	}
 }

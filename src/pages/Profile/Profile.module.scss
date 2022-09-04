@@ -7,7 +7,6 @@
 
 	@include _tablet {
 		grid-template-columns: 1fr;
-		justify-items: center;
 		row-gap: 20px;
 	}
 
@@ -17,11 +16,7 @@
 		height: fit-content;
 		column-gap: 20px;
 		row-gap: 20px;
-
-		@include _tablet {
-			flex-direction: column;
-			width: 550px;
-		}
+		width: 100%;
 	}
 
 	.right {
@@ -30,9 +25,5 @@
 		height: fit-content;
 		column-gap: 20px;
 		row-gap: 20px;
-
-		@include _tablet {
-			width: 550px;
-		}
 	}
 }

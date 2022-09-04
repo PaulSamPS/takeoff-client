@@ -20,9 +20,14 @@
 		grid-template-areas: 'sidebar content';
 
 		@include _tablet {
-			display: flex;
-			flex-direction: column;
-			width: 100%;
+			grid-template-columns: 550px;
+			grid-template-areas: 'sidebar' 'content';
+			width: unset;
+			justify-content: center;
+		}
+
+		@include _tabletS {
+			grid-template-columns: 425px;
 		}
 
 		.sidebar {

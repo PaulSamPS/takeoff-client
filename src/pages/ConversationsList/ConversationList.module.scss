@@ -5,11 +5,6 @@
 	grid-template-columns: 550px 1fr;
 	column-gap: 10px;
 
-	@include _tablet {
-		grid-template-columns: 550px;
-		justify-content: center;
-	}
-
 	.borderTop {
 		position: fixed;
 		top: 48px;

@@ -5,16 +5,15 @@
 	grid-template-columns: 550px 1fr;
 	column-gap: 10px;
 
-	@include _tablet {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
 
 	.wrapper {
 		width: 550px;
 		border-bottom: 0 solid var(--bg);
 		border-bottom-width: 40px;
+
+		@include _tablet {
+			width: 100%;
+		}
 	}
 
 	.rightBar {
