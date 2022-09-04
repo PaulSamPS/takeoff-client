@@ -46,9 +46,7 @@ export const MobileSidebar = ({ setModal, modal }: MobileSidebarType) => {
           exit={'closed'}
           initial={'closed'}
           transition={{
-            type: 'spring',
-            stiffness: 260,
-            damping: 20,
+            duration: 0.5,
           }}
         >
           <motion.div
@@ -59,9 +57,7 @@ export const MobileSidebar = ({ setModal, modal }: MobileSidebarType) => {
             initial={'closed'}
             exit={'closed'}
             transition={{
-              type: 'spring',
-              stiffness: 260,
-              damping: 20,
+              duration: 0.5,
             }}
           >
             <Link to={'/main/news'} className={styles.logo} onClick={() => setModal(false)}>
