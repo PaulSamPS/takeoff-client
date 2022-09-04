@@ -5,6 +5,18 @@
 	grid-template-columns: 550px 1fr;
 	column-gap: 10px;
 
+	@include _tablet {
+		grid-template-columns: 550px;
+	}
+
+	@include _tabletS {
+		grid-template-columns: 425px;
+	}
+
+	@include _mobileL {
+		grid-template-columns: 385px;
+	}
+
 
 	.wrapper {
 		width: 550px;

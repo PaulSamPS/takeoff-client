@@ -1,11 +1,14 @@
 @import "../../../scss/index";
 
 .wrapper {
-	grid-template-rows: 1fr;
 	padding-top: 45px;
 	background: var(--white);
 	border-radius: 5px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+
+	@include _tabletS {
+		width: 100%;
+	}
 
 	.search {
 		position: fixed !important;
@@ -13,6 +16,14 @@
 		z-index: 11 !important;
 		width: 550px !important;
 		border-radius: 5px 5px 0 0;
+
+		@include _tabletS {
+			width: 425px !important;
+		}
+
+		@include _mobileL {
+			width: 385px !important;
+		}
 	}
 
 	.card {

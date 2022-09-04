@@ -30,6 +30,10 @@
 			grid-template-columns: 425px;
 		}
 
+		@include _mobileL {
+			grid-template-columns: 385px;
+		}
+
 		.sidebar {
 			grid-area: sidebar;
 			position: fixed;

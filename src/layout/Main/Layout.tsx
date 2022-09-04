@@ -26,7 +26,7 @@ export const Layout = (): JSX.Element => {
           )}
         </div>
         <div className={styles.content}>
-          <Sidebar className={styles.sidebar} />
+          {screenWidth > 1000 && <Sidebar className={styles.sidebar} />}
           <div className={styles.main}>
             <Outlet />
           </div>

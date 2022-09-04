@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .wrapper {
 	display: grid;
 	grid-template-columns: 50px 1fr;
@@ -6,6 +8,10 @@
 	column-gap: 20px;
 	background: var(--white);
 	transition: all ease 0.2s;
+
+	@include _tablet {
+		width: 100%;
+	}
 
 	&:hover {
 		background: rgb(174 183 194 / 10%);

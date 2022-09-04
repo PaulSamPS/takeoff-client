@@ -94,4 +94,9 @@ img {
 		width: 385px;
 		height: 285px;
 	}
+
+	@include _mobileL {
+		width: 345px;
+		height: 245px;
+	}
 }
