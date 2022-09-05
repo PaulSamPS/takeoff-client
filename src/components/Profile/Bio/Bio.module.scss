@@ -58,6 +58,7 @@
 			}
 		}
 
+
 		.blockFlex {
 			display: flex;
 			align-items: center;
@@ -115,6 +116,11 @@
 			background: transparent;
 			cursor: pointer;
 			transition: all ease 0.2s;
+
+			@include _tabletS {
+				justify-content: center;
+				padding-left: unset;
+			}
 
 			&:hover {
 				background: rgb(174 183 194 / 10%);
