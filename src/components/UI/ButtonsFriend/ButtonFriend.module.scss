@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .follow {
 	button {
 		width: 100% !important;
@@ -13,6 +15,10 @@
 		font-weight: 400;
 		background: transparent;
 		transform: unset;
+
+		@include _tablet {
+			justify-content: center;
+		}
 
 		&:hover {
 			.friendOptions {

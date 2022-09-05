@@ -8,9 +8,26 @@ import { ReactComponent as ChatIcon } from '../../../helpers/icons/chat.svg';
 import { ReactComponent as FriendsIcon } from '../../../helpers/icons/friends.svg';
 
 import styles from './MobileMenu.module.scss';
+import { useChat } from '../../../hooks/useChat';
+import { Count } from '../../../components/UI';
+import { SocketContext } from '../../../helpers/socketContext';
 
 export const MobileMenu = ({ className, ...props }: MobileMenuType): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+  const socket = React.useContext(SocketContext);
+
+  const [total, setTotal] = React.useState<number>(0);
+
+  const { chats } = useChat();
+
+  React.useEffect(() => {
+    const totalUnreadMessages = chats
+      .map((chat) => chat.countUnreadMessages)
+      .reduce((sum: number, elem: number) => {
+        return sum + elem;
+      }, 0);
+    setTotal(totalUnreadMessages);
+  }, [socket, chats]);
 
   return (
     <div className={styles.wrapper}>
@@ -20,8 +37,9 @@ export const MobileMenu = ({ className, ...props }: MobileMenuType): JSX.Element
       <Link to={'/main/news'}>
         <NewsIcon />
       </Link>
-      <Link to={'/main/conversations'}>
+      <Link to={'/main/conversations'} className={styles.chat}>
         <ChatIcon />
+        {total > 0 && <Count className={styles.count}>{total}</Count>}
       </Link>
       <Link to={'/main/friends'}>
         <FriendsIcon />

@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .bio {
 	width: 100%;
 	height: fit-content;
@@ -12,6 +14,12 @@
 		justify-content: space-between;
 		padding-bottom: 20px;
 		border-bottom: 1px solid var(--grey-super-light);
+
+		@include _tabletS {
+			flex-direction: column;
+			row-gap: 10px;
+			align-items: flex-start;
+		}
 
 		h1 {
 			font-weight: 400;
@@ -99,6 +107,7 @@
 
 		.visibleInfo {
 			justify-content: unset;
+			white-space: nowrap;
 			width: 100%;
 			padding-left: 165px;
 			color: var(--blue);

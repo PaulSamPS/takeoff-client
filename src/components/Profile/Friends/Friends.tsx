@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRequest } from '../../../hooks/useRequest';
 import { Link, useParams } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
 import { useAppSelector } from '../../../hooks/redux';
@@ -10,15 +9,16 @@ import { Spinner } from '../../UI';
 import cn from 'classnames';
 
 import styles from './Friends.module.scss';
+import { useRequest } from '../../../hooks/useRequest';
 
-export const Friends = ({ isLoadingUserInfo }: ProfileFriendsProps): JSX.Element => {
+export const Friends = ({}: ProfileFriendsProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 
-  const { friendsUserInfo } = useRequest();
   const friendsOnline: IUser[] = [];
 
   const { id } = useParams();
+  const { friendsUserInfo, loadingFriends } = useRequest();
 
   React.useEffect(() => {
     friendsUserInfo.filter((friend) => {
@@ -37,7 +37,7 @@ export const Friends = ({ isLoadingUserInfo }: ProfileFriendsProps): JSX.Element
 
   return (
     <div className={styles.wrapper}>
-      {isLoadingUserInfo ? (
+      {loadingFriends ? (
         <Spinner />
       ) : (
         <>

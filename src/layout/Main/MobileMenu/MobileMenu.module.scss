@@ -19,4 +19,14 @@
 		width: 35px;
 		cursor: pointer;
 	}
+
+	.chat {
+		position: relative;
+	}
+
+	.count {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
 }

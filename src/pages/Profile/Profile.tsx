@@ -29,7 +29,7 @@ export const Profile = (): JSX.Element => {
     <div className={styles.container}>
       <div className={styles.left}>
         <Avatar user={user} isLoadingUserInfo={isLoadingUserInfo} />
-        <Friends isLoadingUserInfo={isLoadingUserInfo} />
+        <Friends />
       </div>
       <div className={styles.right}>
         <Bio user={user} isLoadingUserInfo={isLoadingUserInfo} />

@@ -76,7 +76,6 @@ export const useRequest = (): IReturnRequest => {
     socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
     socket?.on('friendsUserInfo:set', ({ friendsUser }: { friendsUser: IUser[] }) => {
       setFriendsUserInfo(friendsUser);
-      setLoadingFriends(false);
     });
 
     return () => {
