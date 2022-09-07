@@ -21,6 +21,8 @@ export const MobileHeader: React.FC<
     handleReadNotifications();
   };
 
+  console.log(navigator.userAgent);
+
   return (
     <div className={cn(styles.wrapper, className)}>
       <BurgerIcon onClick={() => setShowSidebar(true)} />
