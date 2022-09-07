@@ -16,8 +16,6 @@ export const useRequest = (): IReturnRequest => {
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
 
-  console.log(friendsUserInfo);
-
   const friendId = localStorage.getItem('friendsUserInfo');
   const { id } = useParams();
 

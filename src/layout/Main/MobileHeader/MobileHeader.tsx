@@ -7,6 +7,7 @@ import { ReactComponent as NotificationIcon } from '../../../helpers/icons/notif
 import { useNotifications } from '../../../hooks/useNotifications';
 import { Count } from '../../../components/UI';
 import { NotificationList } from '../../../components/NotificationList/NotificationList';
+import { pageTitle } from '../../../helpers/pageTitle';
 
 export const MobileHeader: React.FC<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
@@ -21,11 +22,10 @@ export const MobileHeader: React.FC<
     handleReadNotifications();
   };
 
-  console.log(navigator.userAgent);
-
   return (
     <div className={cn(styles.wrapper, className)}>
       <BurgerIcon onClick={() => setShowSidebar(true)} />
+      <span>{pageTitle()}</span>
       <div className={styles.notifications}>
         <NotificationIcon onClick={handleOpenNotifications} />
         {notificationsCount > 0 && <Count className={styles.count}>{notificationsCount}</Count>}
