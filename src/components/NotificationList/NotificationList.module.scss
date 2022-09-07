@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .wrapper {
 	position: absolute;
 	top: 49px;
@@ -5,6 +7,19 @@
 	background: var(--white);
 	border-radius: 0 0 4px 4px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+
+	@include _tablet {
+		top: 39px;
+		right: 0;
+	}
+
+	@include _tabletS {
+		width: 100vw;
+		right: -18px;
+	}
+
+	@include _mobileL {
+	}
 
 	.top {
 		display: flex;
@@ -36,6 +51,10 @@
 		min-height: 390px;
 		max-height: 390px;
 		overflow-y: auto;
+
+		@include _tablet {
+			min-height: fit-content;
+		}
 
 		&::-webkit-scrollbar {
 			width: 8px;
