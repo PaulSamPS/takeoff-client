@@ -1,5 +1,11 @@
+@import './src/scss/index';
+
 .modalMessage {
 	width: 500px;
+
+	@include _tabletS {
+		width: 100vw;
+	}
 
 	a {
 		color: var(--blue);
@@ -20,6 +26,13 @@
 		background: var(--bg-grey-light);
 		border-bottom: 1px solid var(--border);
 		border-radius: 5px 5px 0 0;
+
+		@include _tabletS {
+			flex-direction: column;
+			row-gap: 10px;
+			justify-content: unset;
+			align-items: flex-start;
+		}
 
 		a {
 			color: var(--blue-alternative);
