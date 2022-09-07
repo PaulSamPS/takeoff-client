@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .wrapper {
 	background: var(--white);
 	border-radius: 5px;
@@ -12,6 +14,15 @@
 		padding: 20px;
 		column-gap: 15px;
 		row-gap: 20px;
+
+		@include _tabletS {
+			grid-template-columns: 1fr 1fr;
+			justify-items: center;
+		}
+
+		@include _mobileL {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.searchResult {

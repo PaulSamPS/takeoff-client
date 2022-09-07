@@ -6,6 +6,10 @@
 	border-radius: 5px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
 
+	@include _tablet {
+		padding-top: 0;
+	}
+
 	@include _tabletS {
 		width: 100%;
 	}
@@ -16,6 +20,11 @@
 		z-index: 11 !important;
 		width: 550px !important;
 		border-radius: 5px 5px 0 0;
+
+		@include _tablet {
+			position: relative !important;
+			top: 0 !important;
+		}
 
 		@include _tabletS {
 			width: 425px !important;

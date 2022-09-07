@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .wrapper {
 	background: var(--white);
 	border-radius: 5px;
@@ -27,23 +29,11 @@
 
 			.card {
 				display: grid;
-				grid-template-areas: "avatar name" ". actions";
+				grid-template-areas: "avatar right";
 				grid-template-columns: 80px 1fr;
 				padding-bottom: 20px;
 				column-gap: 20px;
 				border-bottom: 1px solid var(--border);
-
-				.userName {
-					grid-area: name;
-					color: var(--blue);
-					font-weight: 500;
-					text-decoration: none;
-					transition: all ease 0.2s;
-
-					&:hover {
-						text-decoration: underline;
-					}
-				}
 
 				.followers {
 					position: relative;
@@ -58,15 +48,37 @@
 					}
 				}
 
-				.action {
-					display: flex;
-					grid-area: actions;
-					column-gap: 20px;
+				.right {
+					grid-area: right;
+					display: grid;
+					row-gap: 10px;
 
-					.done {
-						padding: 5px 10px;
+					.userName {
+						color: var(--blue);
+						font-size: 13px;
 						font-weight: 500;
-						font-size: 14px;
+						text-decoration: none;
+						transition: all ease 0.2s;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+
+					.action {
+						display: flex;
+						column-gap: 20px;
+
+						@include _tabletS {
+							flex-direction: column;
+							row-gap: 10px;
+						}
+
+						.done {
+							padding: 5px 10px;
+							font-weight: 500;
+							font-size: 14px;
+						}
 					}
 				}
 			}

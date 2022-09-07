@@ -26,24 +26,26 @@ export const Requests = (): JSX.Element => {
                         alt={f.name.firstName + ' ' + f.name.lastName}
                       />
                     </Link>
-                    <Link to={`/main/profile/${f.id}`} className={styles.userName}>
-                      {f.name.firstName + ' ' + f.name.lastName}
-                    </Link>
-                    <div className={styles.action}>
-                      <Button
-                        appearance='primary'
-                        className={styles.done}
-                        onClick={() => addFriend(f.id)}
-                      >
-                        Принять заявку
-                      </Button>
-                      <Button
-                        appearance='transparent'
-                        className={styles.done}
-                        onClick={() => rejectFriend(f.id)}
-                      >
-                        Отклонить
-                      </Button>
+                    <div className={styles.right}>
+                      <Link to={`/main/profile/${f.id}`} className={styles.userName}>
+                        {f.name.firstName + ' ' + f.name.lastName}
+                      </Link>
+                      <div className={styles.action}>
+                        <Button
+                          appearance='primary'
+                          className={styles.done}
+                          onClick={() => addFriend(f.id)}
+                        >
+                          Принять заявку
+                        </Button>
+                        <Button
+                          appearance='transparent'
+                          className={styles.done}
+                          onClick={() => rejectFriend(f.id)}
+                        >
+                          Отклонить
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>

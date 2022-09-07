@@ -4,14 +4,12 @@ import { Outlet } from 'react-router-dom';
 import { RightBar } from '../../components/RightBar/RightBar';
 import { useChat } from '../../hooks/useChat';
 import { SocketContext } from '../../helpers/socketContext';
-import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export const ConversationsList = (): JSX.Element => {
   const socket = useContext(SocketContext);
   const [total, setTotal] = React.useState<number>(0);
 
   const { chats } = useChat();
-  const { screenWidth } = useScreenWidth();
 
   React.useEffect(() => {
     const totalUnreadMessages = chats
@@ -25,8 +23,10 @@ export const ConversationsList = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.borderTop} />
-      <Outlet />
-      {screenWidth > 1000 && (
+      <div className={styles.content}>
+        <Outlet />
+      </div>
+      <div className={styles.rightBar}>
         <RightBar
           totalUnviewed={total}
           firstItem={'Все чаты'}
@@ -35,7 +35,7 @@ export const ConversationsList = (): JSX.Element => {
           secondItemLink={'/main/conversations/unread'}
           isFixed={true}
         />
-      )}
+      </div>
     </div>
   );
 };

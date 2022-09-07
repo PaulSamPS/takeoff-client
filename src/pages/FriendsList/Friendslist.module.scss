@@ -7,5 +7,19 @@
 
 	@include _tablet {
 		grid-template-columns: 1fr;
+		grid-template-areas: 'rightbar' 'content';
+		row-gap: 20px;
+	}
+
+	.content {
+		@include _tablet {
+			grid-area: content;
+		}
+	}
+
+	.rightBar {
+		@include _tablet {
+			grid-area: rightbar;
+		}
 	}
 }

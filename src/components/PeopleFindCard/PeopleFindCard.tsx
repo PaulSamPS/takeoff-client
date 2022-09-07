@@ -19,7 +19,8 @@ export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
   const { handleFollow, followings } = useFollow();
 
   const friend = friends.map((f) => f.id);
-  const followingsDone = followings !== null || undefined ? followings.map((f) => f.id) : [];
+  const followingsDone =
+    followings !== null && followings !== undefined ? followings.map((f) => f.id) : [];
   const requestsDone = request.map((request) => request.id);
 
   const handleClickFollow = () => {
