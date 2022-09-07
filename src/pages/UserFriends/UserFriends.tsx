@@ -6,6 +6,7 @@ import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export const UserFriends = () => {
   const { screenWidth } = useScreenWidth();
+
   return (
     <div className={styles.wrapper}>
       <Outlet />

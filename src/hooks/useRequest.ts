@@ -1,18 +1,22 @@
-import { useAppSelector } from './redux';
+import { useAppDispatch, useAppSelector } from './redux';
 import React from 'react';
 import { SocketContext } from '../helpers/socketContext';
 import { useParams } from 'react-router-dom';
 import { IUser } from '../interfaces/user.interface';
 import { IRequest, IReturnRequest } from '../interfaces/useRequest.interface';
+import { setFriendsUserInfoReducer } from '../redux/reducers/friendsUserInfoReducer';
 
 export const useRequest = (): IReturnRequest => {
   const socket = React.useContext(SocketContext);
   const loginUser = useAppSelector((state) => state.loginReducer.user);
+  const dispatch = useAppDispatch();
 
   const [request, setRequest] = React.useState<IUser[]>([]);
   const [friends, setFriends] = React.useState<IUser[]>([]);
   const [friendsUserInfo, setFriendsUserInfo] = React.useState<IUser[]>([]);
   const [loadingFriends, setLoadingFriends] = React.useState<boolean>(true);
+
+  console.log(friendsUserInfo);
 
   const friendId = localStorage.getItem('friendsUserInfo');
   const { id } = useParams();
@@ -48,7 +52,6 @@ export const useRequest = (): IReturnRequest => {
     });
     socket?.on('friendsRequest:sent', ({ followingsUser }: IRequest) => {
       setRequest(followingsUser);
-      setLoadingFriends(false);
     });
     socket?.on('followings:done', ({ followingsUser }) => {
       setRequest(followingsUser);
@@ -64,7 +67,6 @@ export const useRequest = (): IReturnRequest => {
     socket?.emit('friends:get', { userId: loginUser.id });
     socket?.on('friends:set', ({ friendsUser }: { friendsUser: IUser[] }) => {
       setFriends(friendsUser);
-      setLoadingFriends(false);
     });
 
     return () => {
@@ -76,6 +78,8 @@ export const useRequest = (): IReturnRequest => {
     socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
     socket?.on('friendsUserInfo:set', ({ friendsUser }: { friendsUser: IUser[] }) => {
       setFriendsUserInfo(friendsUser);
+      dispatch(setFriendsUserInfoReducer(friendsUser));
+      setLoadingFriends(false);
     });
 
     return () => {

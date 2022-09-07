@@ -5,20 +5,21 @@ import { useAppSelector } from '../../../hooks/redux';
 import { IUser } from '../../../interfaces/user.interface';
 import { ProfileFriendsProps } from './Friends.props';
 import { Spinner } from '../../UI';
+import { useRequest } from '../../../hooks/useRequest';
 
 import cn from 'classnames';
 
 import styles from './Friends.module.scss';
-import { useRequest } from '../../../hooks/useRequest';
 
 export const Friends = ({}: ProfileFriendsProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+  const { friendsUserInfo } = useAppSelector((state) => state.friendsUserInfoReducer);
 
   const friendsOnline: IUser[] = [];
 
+  const { loadingFriends } = useRequest();
   const { id } = useParams();
-  const { friendsUserInfo, loadingFriends } = useRequest();
 
   React.useEffect(() => {
     friendsUserInfo.filter((friend) => {
