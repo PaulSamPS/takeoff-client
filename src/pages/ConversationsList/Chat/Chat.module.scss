@@ -33,6 +33,7 @@ a {
 
 	@include _mobileL {
 		width: 350px;
+		grid-template-columns: auto 1fr auto;
 	}
 
 	.back {
