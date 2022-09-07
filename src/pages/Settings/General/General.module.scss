@@ -1,3 +1,5 @@
+@import './src/scss/index';
+
 .wrapper {
 	width: 100%;
 	background: var(--white);
@@ -121,6 +123,11 @@
 		column-gap: 20px;
 		background: var(--white);
 		border-radius: 4px;
+
+		@include _mobileL {
+			flex-direction: column;
+			row-gap: 20px;
+		}
 
 		span {
 			color: var(--grey-middle);
