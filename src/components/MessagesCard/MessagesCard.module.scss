@@ -36,6 +36,9 @@
 		cursor: pointer;
 		row-gap: 10px;
 
+		@include _mobileL {
+		}
+
 		.text {
 			display: grid;
 			grid-template-columns: 1fr;
@@ -64,12 +67,14 @@
 			grid-template-areas: "date" "count";
 			grid-template-columns: 1fr;
 			justify-items: center;
+			align-items: center;
 			row-gap: 10px;
 
 			span {
 				grid-area: date;
 				color: var(--grey);
 				font-size: 13px;
+				align-self: start;
 			}
 		}
 	}

@@ -1,5 +1,7 @@
+@import './src/scss/index';
+
 .wrapper {
-	width: 550px;
+	width: 100%;
 	background: var(--white);
 	border-radius: 4px;
 
@@ -21,11 +23,21 @@
 			align-items: center;
 			column-gap: 10px;
 
+			@include _mobileL {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
 			label {
 				min-width: 135px;
 				color: var(--grey);
 				font-size: 13px;
 				text-align: right;
+
+				@include _mobileL {
+					min-width: unset;
+					margin-bottom: 10px;
+				}
 			}
 
 			input {
@@ -44,6 +56,10 @@
 			button {
 				width: fit-content;
 				margin-left: 145px;
+
+				@include _mobileL {
+					margin-left: unset;
+				}
 			}
 
 			span {
