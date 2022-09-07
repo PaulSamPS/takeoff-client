@@ -33,7 +33,7 @@ export const useLayoutSocket = () => {
       socket?.off('user_list:update');
       socket?.disconnect();
     };
-  }, []);
+  }, [socket]);
 
   React.useEffect(() => {
     socket?.on('message:received', async ({ newMessage }: { newMessage: IMessages }) => {
@@ -62,7 +62,7 @@ export const useLayoutSocket = () => {
     return () => {
       socket?.off('message:received');
     };
-  }, []);
+  }, [socket]);
 
   return { bannerData, newMessageReceived, showNewMessageModal, setShowNewMessageModal, loginUser };
 };
