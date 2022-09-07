@@ -14,9 +14,9 @@
 
 	.content {
 		width: 990px;
-		grid-area: content;
 		display: grid;
-		grid-template-columns: 160px 830px;
+		column-gap: 10px;
+		grid-template-columns: 160px 820px;
 		grid-template-areas: 'sidebar content';
 
 		@include _tablet {
