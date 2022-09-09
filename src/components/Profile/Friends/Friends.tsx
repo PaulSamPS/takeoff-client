@@ -22,13 +22,15 @@ export const Friends = ({}: ProfileFriendsProps): JSX.Element => {
   const { id } = useParams();
 
   React.useEffect(() => {
-    friendsUserInfo.filter((friend) => {
-      return users.forEach((user) => {
-        if (friend.id === user.userId) {
-          friendsOnline.push(friend as IUser);
-        }
+    if (friendsUserInfo !== null) {
+      friendsUserInfo.filter((friend) => {
+        return users.forEach((user) => {
+          if (friend.id === user.userId) {
+            friendsOnline.push(friend as IUser);
+          }
+        });
       });
-    });
+    }
   }, [id]);
 
   const handleClickSetUserId = () => {

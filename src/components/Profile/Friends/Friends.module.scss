@@ -26,8 +26,21 @@
 	.friendsGrid {
 		display: grid;
 		grid-template-columns: repeat(3, 50px);
+		justify-items: center;
 		padding: 20px;
 		column-gap: 20px;
+
+		@include _tablet {
+			grid-template-columns: repeat(6, 1fr);
+		}
+
+		@include _tabletS {
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		@include _mobileL {
+			grid-template-columns: repeat(3, 1fr);
+		}
 	}
 
 	.friend {

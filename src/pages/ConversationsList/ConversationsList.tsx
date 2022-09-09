@@ -1,15 +1,20 @@
 import React, { useContext } from 'react';
 import styles from './ConversationList.module.scss';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { RightBar } from '../../components/RightBar/RightBar';
 import { useChat } from '../../hooks/useChat';
 import { SocketContext } from '../../helpers/socketContext';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export const ConversationsList = (): JSX.Element => {
   const socket = useContext(SocketContext);
   const [total, setTotal] = React.useState<number>(0);
+  const [isMobile, setIsMobile] = React.useState<boolean>(false);
 
   const { chats } = useChat();
+  const { screenWidth } = useScreenWidth();
+  const { pathname } = useLocation();
+  const { id } = useParams();
 
   React.useEffect(() => {
     const totalUnreadMessages = chats
@@ -20,22 +25,32 @@ export const ConversationsList = (): JSX.Element => {
     setTotal(totalUnreadMessages);
   }, [socket, chats]);
 
+  React.useEffect(() => {
+    if (screenWidth < 1000 && pathname === `/main/conversations/${id}`) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [screenWidth, pathname]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.borderTop} />
       <div className={styles.content}>
         <Outlet />
       </div>
-      <div className={styles.rightBar}>
-        <RightBar
-          totalUnviewed={total}
-          firstItem={'Все чаты'}
-          secondItem={'Непрочитанные'}
-          firstItemLink={'/main/conversations'}
-          secondItemLink={'/main/conversations/unread'}
-          isFixed={true}
-        />
-      </div>
+      {!isMobile && (
+        <div className={styles.rightBar}>
+          <RightBar
+            totalUnviewed={total}
+            firstItem={'Все чаты'}
+            secondItem={'Непрочитанные'}
+            firstItemLink={'/main/conversations'}
+            secondItemLink={'/main/conversations/unread'}
+            isFixed={true}
+          />
+        </div>
+      )}
     </div>
   );
 };

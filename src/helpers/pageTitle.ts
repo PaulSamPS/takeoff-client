@@ -6,7 +6,9 @@ export const pageTitle = () => {
 
   switch (pathname) {
     case '/main/news':
-      return 'Новости';
+      return 'Все посты';
+    case `/main/news/${id}`:
+      return 'Мои посты';
     case `/main/profile/${id}`:
       return 'Профиль';
     case '/main/conversations':
@@ -15,5 +17,11 @@ export const pageTitle = () => {
       return 'Чат';
     case '/main/friends':
       return 'Друзья';
+    case '/main/conversations/unread':
+      return 'Непрочитанные';
+    case '/main/friends/requests':
+      return 'Заявки в друзья';
+    case '/main/friends/find':
+      return 'Поиск друзей';
   }
 };

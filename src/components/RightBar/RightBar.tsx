@@ -9,6 +9,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import styles from './RightBar.module.scss';
 import cn from 'classnames';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export const RightBar = ({
   totalUnviewed,
@@ -26,6 +27,7 @@ export const RightBar = ({
 
   const { scrollY } = useScroll();
   const { id } = useParams();
+  const { screenWidth } = useScreenWidth();
 
   const handleDeleteChat = (chatId: string) => {
     dispatch(deleteChat(chatId));
@@ -50,9 +52,10 @@ export const RightBar = ({
           {thirdItem}
         </CustomLink>
       )}
-      {openChat.length > 0 && isFixed && <hr />}
+      {openChat.length > 0 && isFixed && screenWidth > 1000 && <hr />}
       {openChat.length > 0 &&
         isFixed &&
+        screenWidth > 1000 &&
         openChat.map((c) => (
           <div key={c.id} className={styles.item}>
             <CustomLink to={c.link} appearance='rightMenu' className={styles.chatLink}>
