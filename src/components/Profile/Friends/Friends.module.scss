@@ -25,10 +25,11 @@
 
 	.friendsGrid {
 		display: grid;
-		grid-template-columns: repeat(3, 50px);
+		grid-template-columns: repeat(2, 1fr);
 		justify-items: center;
 		padding: 20px;
-		column-gap: 20px;
+		column-gap: 10px;
+		row-gap: 20px;
 
 		@include _tablet {
 			grid-template-columns: repeat(6, 1fr);

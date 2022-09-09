@@ -11,6 +11,7 @@ import styles from './MobileMenu.module.scss';
 import { useChat } from '../../../hooks/useChat';
 import { Count } from '../../../components/UI';
 import { SocketContext } from '../../../helpers/socketContext';
+import { useRequest } from '../../../hooks/useRequest';
 
 export const MobileMenu = ({ className, ...props }: MobileMenuType): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -19,6 +20,7 @@ export const MobileMenu = ({ className, ...props }: MobileMenuType): JSX.Element
   const [total, setTotal] = React.useState<number>(0);
 
   const { chats } = useChat();
+  const { request } = useRequest();
 
   React.useEffect(() => {
     const totalUnreadMessages = chats
@@ -41,8 +43,9 @@ export const MobileMenu = ({ className, ...props }: MobileMenuType): JSX.Element
         <ChatIcon />
         {total > 0 && <Count className={styles.count}>{total}</Count>}
       </Link>
-      <Link to={'/main/friends'}>
-        <FriendsIcon />
+      <Link to={'/main/friends'} className={styles.friends}>
+        <FriendsIcon />{' '}
+        {request && request.length > 0 && <Count className={styles.count}>{request.length}</Count>}
       </Link>
     </div>
   );
