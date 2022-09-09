@@ -59,10 +59,10 @@ export const useChat = (): IReturn => {
         setMessages(chat.messages.slice(-currentCountMessages));
         setLoadingMessages(false);
         setIsFetching(false);
-        window.scrollTo({
-          top: 700,
-          behavior: 'smooth',
-        });
+        // window.scrollTo({
+        //   top: 700,
+        //   behavior: 'smooth',
+        // });
       });
       return () => {
         socket?.off('message_list:update');

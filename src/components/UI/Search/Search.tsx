@@ -14,7 +14,6 @@ export const Search = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const { scrollY } = useScroll();
-    console.log(scrollY);
 
     return (
       <div

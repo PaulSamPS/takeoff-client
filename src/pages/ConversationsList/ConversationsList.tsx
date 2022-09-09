@@ -31,7 +31,7 @@ export const ConversationsList = (): JSX.Element => {
     } else {
       setIsMobile(false);
     }
-  }, [screenWidth, pathname]);
+  }, [screenWidth, pathname, id]);
 
   return (
     <div className={styles.wrapper}>

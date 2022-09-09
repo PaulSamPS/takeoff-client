@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Emoji } from 'emoji-mart';
-import { useScroll } from '../../hooks/useScroll';
 import { ChatMessagesProps } from './ChatMessages.props';
 import { useAppSelector } from '../../hooks/redux';
 import { ReactComponent as DeleteIcon } from '../../helpers/icons/close.svg';
@@ -14,19 +13,15 @@ import styles from './ChatMessages.module.scss';
 
 export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessagesProps) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
-  const bottomRef = React.useRef<HTMLParagraphElement | null>(null);
 
   const [isDeleteMessage, setIsDeleteMessage] = React.useState<boolean>(false);
-  const { scrollY } = useScroll();
   const { id } = useParams();
 
   const ownMessage = loginUser.id === message.sender;
 
   React.useEffect(() => {
-    bottomRef.current?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }, [message]);
+    window.scrollTo(0, document.body.scrollHeight);
+  }, []);
 
   return (
     <>
@@ -87,7 +82,6 @@ export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessage
           </span>
         </div>
       </div>
-      {scrollY < window.innerHeight / 2 && <p ref={bottomRef} />}
     </>
   );
 };
