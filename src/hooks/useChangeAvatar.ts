@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { IAppendAvatarInterface } from '../interfaces/appendAvatar.interface';
-import { useAppDispatch } from './redux';
+import { useAppDispatch, useAppSelector } from './redux';
 import { useParams } from 'react-router-dom';
 import { uploadAvatar } from '../redux/actions/usersAction';
 import { SocketContext } from '../helpers/socketContext';
@@ -8,11 +8,11 @@ import { IUseChangeAvatar, IUseChangeAvatarProps } from '../interfaces/useChange
 
 export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IUseChangeAvatar => {
   const socket = React.useContext(SocketContext);
+  const loginUser = useAppSelector((state) => state.loginReducer.user);
   const [previewAvatar, setPreviewAvatar] = React.useState<IAppendAvatarInterface[]>([]);
   const [filesAvatar, setFilesAvatar] = React.useState<FileList | null>(null);
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  console.log(filesAvatar);
 
   const selectFileAvatar = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const avatar = [] as any[];
@@ -25,6 +25,8 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
     e.preventDefault();
     const formData = new FormData();
     formData.append('avatar', filesAvatar![0]);
+    formData.append('avatarOld', loginUser.avatar);
+    console.log(loginUser.avatar);
     dispatch(uploadAvatar(userId, formData)).then(() => {
       socket?.emit('userInfo:get', { userId: id });
       setModal(false);

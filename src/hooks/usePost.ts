@@ -92,7 +92,7 @@ export const usePost = (post: IPost): IPostReturn => {
   };
 
   const handleDeletePost = () => {
-    dispatch(deletePost(post._id, post.user._id)).then(() => {
+    dispatch(deletePost(post._id, post.user._id, post.image)).then(() => {
       socket?.emit('post:get', { userId: loginUser.id });
     });
   };
