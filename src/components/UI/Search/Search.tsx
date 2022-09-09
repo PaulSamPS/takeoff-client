@@ -14,14 +14,15 @@ export const Search = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const { scrollY } = useScroll();
+    console.log(scrollY);
 
     return (
       <div
         className={cn(styles.wrapper, className)}
         style={{
-          position: scrollY >= 51 ? 'sticky' : 'relative',
-          top: scrollY >= 51 ? '49px' : '0',
-          zIndex: scrollY >= 51 ? '11' : '0',
+          position: scrollY >= 22 ? 'sticky' : 'relative',
+          top: scrollY >= 22 ? '49px' : '0',
+          zIndex: scrollY >= 22 ? '10' : '0',
         }}
         {...props}
       >
