@@ -24,9 +24,8 @@ export const useChangeAvatar = ({ setModal, userId }: IUseChangeAvatarProps): IU
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('avatar', filesAvatar![0]);
-    formData.append('avatarOld', loginUser.avatar);
-    console.log(loginUser.avatar);
+    formData.append('avatarNew', filesAvatar![0]);
+    formData.append('avatarOld', loginUser.avatar !== null ? loginUser.avatar : '');
     dispatch(uploadAvatar(userId, formData)).then(() => {
       socket?.emit('userInfo:get', { userId: id });
       setModal(false);

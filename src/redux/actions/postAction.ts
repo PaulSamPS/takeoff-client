@@ -1,7 +1,13 @@
 import { AppDispatch } from '../store';
 import { $apiAuth } from '../../http/axios';
 
-export const createPost = (obj: any | FormData) => async (dispatch: AppDispatch) => {
+interface IObj {
+  image: File | null;
+  text: string;
+  id: string;
+}
+
+export const createPost = (obj: IObj | FormData) => async (dispatch: AppDispatch) => {
   await $apiAuth.post(`api/post/create`, obj);
 };
 

@@ -41,6 +41,14 @@
 		background: var(--white);
 		border-radius: 0 0 4px 4px;
 
+		@include _tabletS {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		@include _mobileL {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
 		.user {
 			display: flex;
 			flex-direction: column;
