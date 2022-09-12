@@ -22,8 +22,11 @@ export const ConversationsList = (): JSX.Element => {
       .reduce((sum: number, elem: number) => {
         return sum + elem;
       }, 0);
-    setTotal(totalUnreadMessages);
-  }, [socket, chats, pathname]);
+
+    return () => {
+      setTotal(totalUnreadMessages);
+    };
+  }, [socket, chats]);
 
   React.useEffect(() => {
     if (screenWidth < 1000 && pathname === `/main/conversations/${id}`) {

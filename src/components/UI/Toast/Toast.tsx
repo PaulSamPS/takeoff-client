@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ReactComponent as CloseIcon } from '../../../helpers/icons/close.svg';
 import { ToastProps } from './Toast.props';
 import { API_URL } from '../../../http/axios';
+import { AVATAR_URL } from '../../../helpers/constants';
 
 import { Emoji } from 'emoji-mart';
 import reactStringReplace from 'react-string-replace';
@@ -50,7 +51,7 @@ export const Toast = ({
               src={
                 bannerData.avatar === '' || bannerData.avatar === null
                   ? `/photo.png`
-                  : `${API_URL}/avatar/${bannerData.avatar}`
+                  : `${API_URL}/${AVATAR_URL}/${bannerData.avatar}`
               }
               alt={bannerData.name}
             />
