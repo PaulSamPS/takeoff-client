@@ -1,5 +1,4 @@
 import React, { MouseEvent } from 'react';
-import styles from './MobileSidebar.module.scss';
 import { MobileSidebarType } from '../../layout/Main/MobileHeader/MobileSidebar.type';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -10,6 +9,9 @@ import { ReactComponent as ExitIcon } from '../../helpers/icons/exit.svg';
 import { logout } from '../../redux/actions/authAction';
 import { SocketContext } from '../../helpers/socketContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { AVATAR_URL } from '../../helpers/constants';
+
+import styles from './MobileSidebar.module.scss';
 
 export const MobileSidebar = ({ setModal, modal }: MobileSidebarType) => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
@@ -70,7 +72,9 @@ export const MobileSidebar = ({ setModal, modal }: MobileSidebarType) => {
             >
               <img
                 src={
-                  loginUser.avatar == null ? `/photo.png` : `${API_URL}/avatar/${loginUser.avatar}`
+                  loginUser.avatar == null
+                    ? `/photo.png`
+                    : `${API_URL}/${AVATAR_URL}/${loginUser.avatar}`
                 }
                 alt={loginUser.name.firstName + ' ' + loginUser.name.lastName}
               />

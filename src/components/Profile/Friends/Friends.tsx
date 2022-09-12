@@ -6,6 +6,7 @@ import { IUser } from '../../../interfaces/user.interface';
 import { ProfileFriendsProps } from './Friends.props';
 import { Spinner } from '../../UI';
 import { useRequest } from '../../../hooks/useRequest';
+import { AVATAR_URL } from '../../../helpers/constants';
 
 import cn from 'classnames';
 
@@ -57,7 +58,9 @@ export const Friends = ({}: ProfileFriendsProps): JSX.Element => {
                 <Link to={`/main/profile/${friend.id}`} className={styles.avatar}>
                   <img
                     src={
-                      friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`
+                      friend.avatar == null
+                        ? `/photo.png`
+                        : `${API_URL}/${AVATAR_URL}/${friend.avatar}`
                     }
                     alt={friend.name.firstName + '' + friend.name.lastName}
                   />
@@ -85,7 +88,7 @@ export const Friends = ({}: ProfileFriendsProps): JSX.Element => {
                         src={
                           onlineFriend.avatar == null
                             ? `/photo.png`
-                            : `${API_URL}/avatar/${onlineFriend.avatar}`
+                            : `${API_URL}/${AVATAR_URL}/${onlineFriend.avatar}`
                         }
                         alt={onlineFriend.name.firstName + '' + onlineFriend.name.lastName}
                       />

@@ -1,0 +1,38 @@
+@import './src/scss/index';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 550px 1fr;
+  column-gap: 10px;
+
+  @include _tablet {
+    grid-template-columns: 550px;
+    grid-template-areas: 'rightbar' 'content';
+    row-gap: 20px;
+  }
+
+  @include _tabletS {
+    grid-template-columns: 425px;
+  }
+
+  @include _mobileL {
+    grid-template-columns: 350px;
+  }
+
+  .content {
+    width: 550px;
+    border-bottom: 0 solid var(--bg);
+    border-bottom-width: 40px;
+
+    @include _tablet {
+      width: 100%;
+      grid-area: content;
+    }
+  }
+
+  .rightBar {
+    @include _tablet {
+      grid-area: rightbar;
+    }
+  }
+}

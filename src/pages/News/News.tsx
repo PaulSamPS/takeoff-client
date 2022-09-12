@@ -9,7 +9,7 @@ export const News = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.wrapper}>
+      <div className={styles.content}>
         <CreateNews />
         <NewsList />
       </div>

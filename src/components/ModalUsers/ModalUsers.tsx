@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useRequest } from '../../hooks/useRequest';
 import { ModalUserProps } from './ModalUser.props';
 import { useFollow } from '../../hooks/useFollow';
+import { AVATAR_URL } from '../../helpers/constants';
 
 import cn from 'classnames';
 
@@ -50,7 +51,7 @@ export const ModalUsers = ({
                   src={
                     following.avatar == null
                       ? `/photo.png`
-                      : `${API_URL}/avatar/${following.avatar}`
+                      : `${API_URL}/${AVATAR_URL}/${following.avatar}`
                   }
                   alt={following.name.firstName + '' + following.name.lastName}
                 />
@@ -74,7 +75,11 @@ export const ModalUsers = ({
                 onClick={handleClickCloseModal}
               >
                 <img
-                  src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
+                  src={
+                    friend.avatar == null
+                      ? `/photo.png`
+                      : `${API_URL}/${AVATAR_URL}/${friend.avatar}`
+                  }
                   alt={friend.name.firstName + '' + friend.name.lastName}
                 />
               </Link>
