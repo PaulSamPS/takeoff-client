@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ModalMessageProps } from './ModalMessage.prop';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
@@ -16,8 +16,6 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): 
   const dispatch = useAppDispatch();
   const { sendMessage, chats } = useChat();
 
-  const { id } = useParams();
-
   const userId = localStorage.getItem('receiverUserId');
 
   const handleSendMessage = () => {
@@ -25,7 +23,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): 
     setModal(false);
   };
 
-  const handleOpenChat = React.useCallback(() => {
+  const handleOpenChat = () => {
     const newOpenChat = {
       name: friend!.name.firstName + ' ' + friend!.name.lastName,
       link: `/main/conversations/${userId}`,
@@ -33,7 +31,7 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): 
     };
     dispatch(setOpenChat(newOpenChat));
     setModal(false);
-  }, [id]);
+  };
 
   React.useEffect(() => {
     document.getElementById('message')?.focus();
