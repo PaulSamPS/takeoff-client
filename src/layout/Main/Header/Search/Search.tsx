@@ -9,6 +9,7 @@ import { usersReducer } from '../../../../redux/reducers/usersReducer';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { useOnClickOutside } from '../../../../hooks/useOnclickOutside';
 import { SearchProps } from '../../../../components/UI/Search/Search.props';
+import { AVATAR_URL } from '../../../../helpers/constants';
 
 import debounce from 'lodash.debounce';
 import cn from 'classnames';
@@ -69,7 +70,9 @@ export const Search = ({ className }: SearchProps) => {
                 <Link to={`/main/profile/${people.id}`} replace className={styles.avatar}>
                   <img
                     src={
-                      people.avatar == null ? `/photo.png` : `${API_URL}/avatar/${people.avatar}`
+                      people.avatar == null
+                        ? `/photo.png`
+                        : `${API_URL}/${AVATAR_URL}/${people.avatar}`
                     }
                     alt={people.name.firstName + ' ' + people.name.lastName}
                     onClick={() => setIsSearch(false)}

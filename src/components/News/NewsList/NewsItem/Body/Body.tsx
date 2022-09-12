@@ -7,7 +7,7 @@ import { ReactComponent as MoreIcon } from '../../../../../helpers/icons/more.sv
 import { usePost } from '../../../../../hooks/usePost';
 import { useAppSelector } from '../../../../../hooks/redux';
 import { NewsItemBodyProps } from './Body.props';
-import { AVATAR_URL } from '../../../../../helpers/constants';
+import { AVATAR_URL, POST_IMAGE_URL } from '../../../../../helpers/constants';
 
 import { Emoji } from 'emoji-mart';
 
@@ -58,7 +58,7 @@ export const NewsItemBody = ({ post, hoverPost }: NewsItemBodyProps): JSX.Elemen
           <Emoji key={i} emoji={match} set='apple' size={16} native={false} />
         ))}
       </span>
-      {post.image && <img src={`${API_URL}/post/${post.image}`} alt={post.text} />}
+      {post.image && <img src={`${API_URL}/${POST_IMAGE_URL}/${post.image}`} alt={post.text} />}
     </>
   );
 };

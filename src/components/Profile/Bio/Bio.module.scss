@@ -7,6 +7,7 @@
 	background: var(--white);
 	border-radius: 4px;
 	box-shadow: 0 1px 0 0 #DCE1E6, 0 0 0 1px #E7E8EC;
+	font-family: 'VKSansDisplay-Medium', sans-serif;
 
 	.top {
 		display: flex;
@@ -24,6 +25,7 @@
 		h1 {
 			font-weight: 400;
 			font-size: 19px;
+			font-family: 'VKSansDisplay-Regular', sans-serif;
 		}
 
 		.online {
@@ -35,6 +37,7 @@
 		.lastVisit {
 			color: var(--grey-middle);
 			font-size: 12px;
+			font-family: 'VKSansDisplay-Regular', sans-serif;
 		}
 	}
 
@@ -99,6 +102,7 @@
 				color: var(--grey-middle);
 				font-weight: 400;
 				font-size: 13px;
+				font-family: 'VKSansDisplay-Regular', sans-serif;
 			}
 
 			.itemName {
@@ -148,6 +152,11 @@
 				font-weight: 500;
 				font-size: 19px;
 				line-height: 21px;
+				font-family: 'VKSansDisplay-Medium', sans-serif;
+			}
+
+			span {
+				font-family: 'VKSansDisplay-Regular', sans-serif;
 			}
 		}
 	}

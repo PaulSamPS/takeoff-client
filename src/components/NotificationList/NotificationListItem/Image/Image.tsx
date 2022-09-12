@@ -5,6 +5,7 @@ import { ReactComponent as ArrowDownIcon } from '../../../../helpers/icons/arrow
 import { ImageProps } from './Image.props';
 import { useAppSelector } from '../../../../hooks/redux';
 import { useNotifications } from '../../../../hooks/useNotifications';
+import { POST_IMAGE_URL } from '../../../../helpers/constants';
 
 import styles from '../NotificationListItem.module.scss';
 
@@ -16,7 +17,7 @@ export const NotificationListItemImage = ({ notification }: ImageProps) => {
     <div className={styles.postImage}>
       {notification.post.image !== null && (
         <img
-          src={`${API_URL}/post/${notification.post.image}`}
+          src={`${API_URL}/${POST_IMAGE_URL}/${notification.post.image}`}
           alt={loginUser.name.firstName + '' + loginUser.name.lastName}
         />
       )}
