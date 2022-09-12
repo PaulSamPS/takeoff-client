@@ -6,6 +6,7 @@ import { Button, EmojiPicker } from '../../../../UI';
 import { ReactComponent as SendIcon } from '../../../../../helpers/icons/send.svg';
 import { usePost } from '../../../../../hooks/usePost';
 import { NewsItemCommentProps } from './Comment.props';
+import { AVATAR_URL } from '../../../../../helpers/constants';
 
 import cn from 'classnames';
 import { Emoji } from 'emoji-mart';
@@ -46,7 +47,7 @@ export const NewsItemComment = ({
                   src={
                     comment.user.avatar === null
                       ? `/photo.png`
-                      : `${API_URL}/avatar/${comment.user.avatar}`
+                      : `${API_URL}/${AVATAR_URL}/${comment.user.avatar}`
                   }
                   alt={comment.user.name.firstName + ' ' + comment.user.name.lastName}
                 />

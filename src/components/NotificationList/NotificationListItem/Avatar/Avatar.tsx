@@ -2,6 +2,7 @@ import React from 'react';
 import { API_URL } from '../../../../http/axios';
 import { ReactComponent as NotificationCommentIcon } from '../../../../helpers/icons/notificationComment.svg';
 import { AvatarProps } from './Avatar.props';
+import { AVATAR_URL } from '../../../../helpers/constants';
 
 import cn from 'classnames';
 
@@ -14,7 +15,7 @@ export const NotificationListItemAvatar = ({ notification }: AvatarProps) => {
         src={
           notification.user.avatar == null
             ? `/photo.png`
-            : `${API_URL}/avatar/${notification.user.avatar}`
+            : `${API_URL}/${AVATAR_URL}/${notification.user.avatar}`
         }
         alt={notification.user.name.firstName + '' + notification.user.name.lastName}
       />

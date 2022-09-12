@@ -6,6 +6,7 @@ import { ButtonsFriend, Button, Modal } from '../../../UI';
 import { ModalMessage } from '../../../ModalMessage/ModalMessage';
 import { InfoProps } from './Info.props';
 import { useAppSelector } from '../../../../hooks/redux';
+import { AVATAR_URL } from '../../../../helpers/constants';
 
 import styles from '../NotificationListItem.module.scss';
 
@@ -59,7 +60,7 @@ export const NotificationListItemInfo = ({
                 src={
                   notification.user.avatar == null
                     ? `/photo.png`
-                    : `${API_URL}/avatar/${notification.user.avatar}`
+                    : `${API_URL}/${AVATAR_URL}/${notification.user.avatar}`
                 }
                 alt={notification.user.name.firstName + '' + notification.user.name.lastName}
               />

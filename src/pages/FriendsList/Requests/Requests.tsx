@@ -1,9 +1,11 @@
 import React from 'react';
-import styles from './Requests.module.scss';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
 import { Button, Spinner } from '../../../components/UI';
 import { useRequest } from '../../../hooks/useRequest';
+import { AVATAR_URL } from '../../../helpers/constants';
+
+import styles from './Requests.module.scss';
 
 export const Requests = (): JSX.Element => {
   const { request, addFriend, rejectFriend, loadingFriends } = useRequest();
@@ -22,7 +24,9 @@ export const Requests = (): JSX.Element => {
                   <div className={styles.card}>
                     <Link to={`/main/profile/${f.id}`} replace className={styles.followers}>
                       <img
-                        src={f.avatar == null ? `/photo.png` : `${API_URL}/avatar/${f.avatar}`}
+                        src={
+                          f.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${f.avatar}`
+                        }
                         alt={f.name.firstName + ' ' + f.name.lastName}
                       />
                     </Link>

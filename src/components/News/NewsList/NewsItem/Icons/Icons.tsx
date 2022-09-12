@@ -6,6 +6,7 @@ import { ReactComponent as LikesIcon } from '../../../../../helpers/icons/like.s
 import { useAppSelector } from '../../../../../hooks/redux';
 import { usePost } from '../../../../../hooks/usePost';
 import { NewsItemIconsProps } from './Icons.props';
+import { AVATAR_URL } from '../../../../../helpers/constants';
 
 import cn from 'classnames';
 
@@ -52,7 +53,7 @@ export const NewsItemIcons = ({
                   src={
                     like.user.avatar === null
                       ? `/photo.png`
-                      : `${API_URL}/avatar/${like.user.avatar}`
+                      : `${API_URL}/${AVATAR_URL}/${like.user.avatar}`
                   }
                   alt={like.user.name.firstName + ' ' + like.user.name.lastName}
                   onClick={handleCloseModals}

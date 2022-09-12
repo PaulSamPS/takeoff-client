@@ -17,7 +17,10 @@ export const ButtonsFriend = ({ userId }: ButtonFriendProps): JSX.Element => {
 
   const friendsDone = friends.map((friend) => friend.id);
   const requestsDone = request.map((request) => request.id);
-  const followingDone = followings !== null ? followings.map((following) => following.id) : [];
+  const followingDone =
+    followings !== null && followings !== undefined
+      ? followings.map((following) => following.id)
+      : [];
 
   return (
     <>
