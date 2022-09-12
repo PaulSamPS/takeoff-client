@@ -12,33 +12,30 @@ export const Item = () => {
 
   return (
     <div className={styles.wrapper}>
-      {notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0 ? (
-        <>
-          {pathname === '/main/all-notifications' ? (
-            <>
-              {notifications.notifications
-                .filter((n) => n.user._id !== loginUser.id)
-                .filter((n) => n.type === 'newLike')
-                .slice(0, 10)
-                .map((notification) => (
-                  <NotificationListItem key={notification._id} notification={notification} />
-                ))}
-            </>
-          ) : (
-            <>
-              {notifications.notifications
-                .filter((n) => n.user._id !== loginUser.id)
-                .filter((n) => n.type === 'newComment')
-                .slice(0, 10)
-                .map((notification) => (
-                  <NotificationListItem key={notification._id} notification={notification} />
-                ))}
-            </>
+      {pathname === '/main/all-notifications' &&
+      notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0
+        ? notifications.notifications
+            .filter((n) => n.user._id !== loginUser.id)
+            .filter((n) => n.type === 'newLike')
+            .slice(0, 10)
+            .map((notification) => (
+              <NotificationListItem key={notification._id} notification={notification} />
+            ))
+        : pathname === '/main/all-notifications' && (
+            <div className={styles.noNotifications}>Нет уведомлений</div>
           )}
-        </>
-      ) : (
-        <div className={styles.noNotifications}>Нет уведомлений</div>
-      )}
+      {pathname === '/main/all-notifications/comments' &&
+      notifications.notifications.filter((n) => n.user._id !== loginUser.id).length > 0
+        ? notifications.notifications
+            .filter((n) => n.user._id !== loginUser.id)
+            .filter((n) => n.type === 'newComment')
+            .slice(0, 10)
+            .map((notification) => (
+              <NotificationListItem key={notification._id} notification={notification} />
+            ))
+        : pathname === '/main/all-notifications/comments' && (
+            <div className={styles.noNotifications}>Нет уведомлений</div>
+          )}
     </div>
   );
 };

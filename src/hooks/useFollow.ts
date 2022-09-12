@@ -16,7 +16,7 @@ export const useFollow = (): IFollowReturn => {
 
   const followId = localStorage.getItem('followId');
 
-  const handleFollow = () => {
+  const handleFollow = React.useCallback(() => {
     socket?.emit('follow', {
       userId: id !== undefined && id! !== loginUser.id ? id : followId,
       userToFollowId: loginUser.id,
@@ -26,14 +26,14 @@ export const useFollow = (): IFollowReturn => {
         userId: id !== undefined && id! !== loginUser.id ? id : followId,
       });
     }, 500);
-  };
+  }, []);
 
-  const handleUnfollow = () => {
+  const handleUnfollow = React.useCallback(() => {
     socket?.emit('unfollow', {
       userId: id !== undefined && id! !== loginUser.id ? id : followId,
       userToUnfollowId: loginUser.id,
     });
-  };
+  }, []);
 
   React.useEffect(() => {
     socket?.emit('followings:get', {

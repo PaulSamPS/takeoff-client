@@ -20,12 +20,12 @@ export const useNotifications = (): INotificationsReturn => {
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const deleteNotification = (userId: string, notificationId: string) => {
+  const deleteNotification = React.useCallback((userId: string, notificationId: string) => {
     socket?.emit('notification:delete', { userId, notificationId });
     socket?.on('notification:deleted', () => {
       socket?.emit('notification:get', { userId: loginUser.id });
     });
-  };
+  }, []);
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -51,7 +51,7 @@ export const useNotifications = (): INotificationsReturn => {
     };
   }, [socket]);
 
-  const handleReadNotifications = () => {
+  const handleReadNotifications = React.useCallback(() => {
     socket?.emit('notifications:read', {
       userId: loginUser.id,
       readNotificationsCount: notificationsCount,
@@ -59,7 +59,7 @@ export const useNotifications = (): INotificationsReturn => {
     socket?.on('notifications:unread', ({ count }: { count: number }) => {
       setNotificationsCount(count);
     });
-  };
+  }, []);
 
   return {
     notifications,

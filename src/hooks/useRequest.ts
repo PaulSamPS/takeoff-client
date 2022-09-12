@@ -19,30 +19,30 @@ export const useRequest = (): IReturnRequest => {
   const friendId = localStorage.getItem('friendsUserInfo');
   const { id } = useParams();
 
-  const addFriend = (addFriendUserId: string | undefined) => {
+  const addFriend = React.useCallback((addFriendUserId: string | undefined) => {
     socket?.emit('friends:add', { userId: loginUser.id, userToFriendId: addFriendUserId });
     socket?.on('followers:addSuccess', () => {
       socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
       socket?.emit('friends:get', { userId: loginUser.id });
     });
-  };
+  }, []);
 
-  const rejectFriend = (rejectFriendUserId: string | undefined) => {
+  const rejectFriend = React.useCallback((rejectFriendUserId: string | undefined) => {
     socket?.emit('friends:reject', { userId: loginUser.id, userToRejectId: rejectFriendUserId });
     socket?.on('friends:rejectSuccess', () => {
       socket?.emit('friendsRequest:get', {
         userId: loginUser.id,
       });
     });
-  };
+  }, []);
 
-  const deleteFromFriend = (deleteUserId: string | undefined) => {
+  const deleteFromFriend = React.useCallback((deleteUserId: string | undefined) => {
     socket?.emit('friends:delete', { userId: loginUser.id, deleteUserId: deleteUserId });
     socket?.on('friends:deleteSuccess', () => {
       socket?.emit('friendsUserInfo:get', { userId: id ? id : friendId });
       socket?.emit('friends:get', { userId: loginUser.id });
     });
-  };
+  }, []);
 
   React.useEffect(() => {
     socket?.emit('friendsRequest:get', {
