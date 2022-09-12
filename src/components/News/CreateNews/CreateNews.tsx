@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { useParams } from 'react-router-dom';
 import { useOnClickOutside } from '../../../hooks/useOnclickOutside';
 import { SocketContext } from '../../../helpers/socketContext';
+import { AVATAR_URL } from '../../../helpers/constants';
 
 import { motion } from 'framer-motion';
 
@@ -88,7 +89,7 @@ export const CreateNews = () => {
         <form className={styles.createPost} onSubmit={onSubmit} ref={ref}>
           <img
             className={styles.avatar}
-            src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+            src={user.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${user.avatar}`}
             alt={user.name.firstName + ' ' + user.name.lastName}
           />
           <textarea

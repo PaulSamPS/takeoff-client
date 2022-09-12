@@ -5,6 +5,7 @@ import { calculateTime } from '../../helpers/calculateTime';
 import { MessagesCardProp } from './MessagesCard.prop';
 import { useAppDispatch } from '../../hooks/redux';
 import { setOpenChat } from '../../redux/reducers/openChatReducer';
+import { AVATAR_URL } from '../../helpers/constants';
 import { Count } from '../UI';
 
 import reactStringReplace from 'react-string-replace';
@@ -33,7 +34,7 @@ export const MessagesCard = ({ chat, className }: MessagesCardProp): JSX.Element
           src={
             chat.avatar === '' || chat.avatar === null
               ? `/photo.png`
-              : `${API_URL}/avatar/${chat.avatar}`
+              : `${API_URL}/${AVATAR_URL}/${chat.avatar}`
           }
           alt={chat.name}
         />

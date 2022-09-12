@@ -9,6 +9,7 @@ import { Count } from '../../../components/UI';
 import { NotificationList } from '../../../components/NotificationList/NotificationList';
 import { useNotifications } from '../../../hooks/useNotifications';
 import { Search } from './Search/Search';
+import { AVATAR_URL } from '../../../helpers/constants';
 
 import cn from 'classnames';
 
@@ -49,7 +50,9 @@ export const Header: React.FC<
         onClick={() => setVisibleMenu(true)}
       >
         <img
-          src={loginUser.avatar == null ? `/photo.png` : `${API_URL}/avatar/${loginUser.avatar}`}
+          src={
+            loginUser.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${loginUser.avatar}`
+          }
           alt={loginUser.name.firstName + ' ' + loginUser.name.lastName}
         />
         <ArrowDownIcon />

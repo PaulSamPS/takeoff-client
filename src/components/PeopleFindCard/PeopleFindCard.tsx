@@ -7,6 +7,7 @@ import { ReactComponent as AllReadyFriendsIcon } from '../../helpers/icons/allre
 import { useRequest } from '../../hooks/useRequest';
 import { useFollow } from '../../hooks/useFollow';
 import { useAppSelector } from '../../hooks/redux';
+import { AVATAR_URL } from '../../helpers/constants';
 
 import styles from './PeopleFindCard.module.scss';
 
@@ -41,7 +42,7 @@ export const PeopleFindCard = ({ user }: PeopleFindCardProps): JSX.Element => {
     >
       <Link to={`/main/profile/${user.id}`} className={styles.avatar}>
         <img
-          src={user.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+          src={user.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${user.avatar}`}
           alt={user.name.firstName + ' ' + user.name.lastName}
         />
       </Link>

@@ -1,16 +1,22 @@
 import React, { ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ModalMessageProps } from './ModalMessage.prop';
 import { API_URL } from '../../http/axios';
 import { calculateTime } from '../../helpers/calculateTime';
 import { Button, EmojiPicker } from '../UI';
 import { useChat } from '../../hooks/useChat';
+import { AVATAR_URL } from '../../helpers/constants';
+import { useAppDispatch } from '../../hooks/redux';
+import { setOpenChat } from '../../redux/reducers/openChatReducer';
 
 import styles from './ModalMessage.module.scss';
 
 export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): JSX.Element => {
   const [text, setText] = React.useState<string>('');
-  const { sendMessage } = useChat();
+  const dispatch = useAppDispatch();
+  const { sendMessage, chats } = useChat();
+
+  const { id } = useParams();
 
   const userId = localStorage.getItem('receiverUserId');
 
@@ -18,6 +24,16 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): 
     sendMessage(text);
     setModal(false);
   };
+
+  const handleOpenChat = React.useCallback(() => {
+    const newOpenChat = {
+      name: friend!.name.firstName + ' ' + friend!.name.lastName,
+      link: `/main/conversations/${userId}`,
+      id: userId!,
+    };
+    dispatch(setOpenChat(newOpenChat));
+    setModal(false);
+  }, [id]);
 
   React.useEffect(() => {
     document.getElementById('message')?.focus();
@@ -27,14 +43,18 @@ export const ModalMessage = ({ friend, setModal, isModal }: ModalMessageProps): 
     <div className={styles.modalMessage}>
       <div className={styles.topModal}>
         <span>Новое сообщение</span>
-        <Link to={`/main/conversations/${userId}`} onClick={() => setModal(false)}>
-          Перейтик диалогу c {friend!.name.firstName + ' ' + friend!.name.lastName}
-        </Link>
+        {chats.find((chat) => chat.messagesWith === userId) && (
+          <Link to={`/main/conversations/${userId}`} onClick={handleOpenChat}>
+            Перейтик диалогу c {friend!.name.firstName + ' ' + friend!.name.lastName}
+          </Link>
+        )}
       </div>
       <div className={styles.user}>
         <Link to={`/main/profile/${userId}`} replace className={styles.followers}>
           <img
-            src={friend!.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend!.avatar}`}
+            src={
+              friend!.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${friend!.avatar}`
+            }
             alt={friend!.name.firstName + ' ' + friend!.name.lastName}
           />
         </Link>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { ReactComponent as ArrowBack } from '../../../helpers/icons/arrowBack.svg';
-import styles from './Chat.module.scss';
 import { useChat } from '../../../hooks/useChat';
 import { useAppSelector } from '../../../hooks/redux';
 import { API_URL } from '../../../http/axios';
@@ -8,9 +7,13 @@ import { calculateTime } from '../../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../../../components/UI';
 import { SocketContext } from '../../../helpers/socketContext';
-import 'emoji-mart/css/emoji-mart.css';
 import { ChatMessages } from '../../../components/ChatMessage/ChatMessages';
+import { AVATAR_URL } from '../../../helpers/constants';
 import { Form } from './Form/Form';
+
+import 'emoji-mart/css/emoji-mart.css';
+
+import styles from './Chat.module.scss';
 
 export const Chat = (): JSX.Element => {
   const socket = React.useContext(SocketContext);
@@ -53,7 +56,9 @@ export const Chat = (): JSX.Element => {
         <Link to={`/main/profile/${id}`} className={styles.avatar}>
           <img
             src={
-              bannerData.avatar == null ? `/photo.png` : `${API_URL}/avatar/${bannerData.avatar}`
+              bannerData.avatar == null
+                ? `/photo.png`
+                : `${API_URL}/${AVATAR_URL}/${bannerData.avatar}`
             }
             alt={bannerData.name}
           />

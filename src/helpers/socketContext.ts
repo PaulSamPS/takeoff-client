@@ -5,7 +5,7 @@ export const SocketContext = React.createContext<Socket | null>(null);
 export const socketContext = () => {
   const [socket, setSocket] = React.useState<Socket | null>(null);
 
-  const URL = 'https://paulsam.ru';
+  const URL = 'http://localhost:4000';
   React.useEffect(() => {
     const newSocket = io(URL, { transports: ['websocket'] });
     newSocket.connect();

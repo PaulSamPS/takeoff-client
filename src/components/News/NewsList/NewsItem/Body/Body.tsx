@@ -7,6 +7,7 @@ import { ReactComponent as MoreIcon } from '../../../../../helpers/icons/more.sv
 import { usePost } from '../../../../../hooks/usePost';
 import { useAppSelector } from '../../../../../hooks/redux';
 import { NewsItemBodyProps } from './Body.props';
+import { AVATAR_URL } from '../../../../../helpers/constants';
 
 import { Emoji } from 'emoji-mart';
 
@@ -33,7 +34,11 @@ export const NewsItemBody = ({ post, hoverPost }: NewsItemBodyProps): JSX.Elemen
           onClick={() => localStorage.setItem('followId', post.user._id)}
         >
           <img
-            src={post.user.avatar === null ? `/photo.png` : `${API_URL}/avatar/${post.user.avatar}`}
+            src={
+              post.user.avatar === null
+                ? `/photo.png`
+                : `${API_URL}/${AVATAR_URL}/${post.user.avatar}`
+            }
             alt={post.user.name.firstName + ' ' + post.user.name.lastName}
           />
         </Link>

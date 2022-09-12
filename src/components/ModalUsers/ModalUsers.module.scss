@@ -40,6 +40,7 @@
 		padding: 25px 14px;
 		background: var(--white);
 		border-radius: 0 0 4px 4px;
+		row-gap: 20px;
 
 		@include _tabletS {
 			grid-template-columns: repeat(3, 1fr);

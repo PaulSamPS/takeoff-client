@@ -6,6 +6,7 @@ import { Emoji } from 'emoji-mart';
 import { ChatMessagesProps } from './ChatMessages.props';
 import { useAppSelector } from '../../hooks/redux';
 import { ReactComponent as DeleteIcon } from '../../helpers/icons/close.svg';
+import { AVATAR_URL } from '../../helpers/constants';
 
 import reactStringReplace from 'react-string-replace';
 
@@ -51,10 +52,10 @@ export const ChatMessages = ({ message, bannerData, deleteMessage }: ChatMessage
                 ownMessage
                   ? loginUser.avatar == null
                     ? `/photo.png`
-                    : `${API_URL}/avatar/${loginUser.avatar}`
+                    : `${API_URL}/${AVATAR_URL}/${loginUser.avatar}`
                   : bannerData.avatar == null
                   ? `/photo.png`
-                  : `${API_URL}/avatar/${bannerData.avatar}`
+                  : `${API_URL}/${AVATAR_URL}/${bannerData.avatar}`
               }
               alt={
                 ownMessage

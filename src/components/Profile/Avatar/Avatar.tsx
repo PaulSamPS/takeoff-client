@@ -7,6 +7,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { ModalChangeAvatar } from '../../ModalChangeAvatar/ModalChangeAvatar';
 import { ModalMessage } from '../../ModalMessage/ModalMessage';
 import { Button, ButtonsFriend, Modal, Spinner } from '../../UI';
+import { AVATAR_URL } from '../../../helpers/constants';
 
 import { motion } from 'framer-motion';
 
@@ -43,7 +44,7 @@ export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Ele
             onMouseLeave={() => setHover(false)}
           >
             <img
-              src={user?.avatar == null ? `/photo.png` : `${API_URL}/avatar/${user.avatar}`}
+              src={user?.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${user.avatar}`}
               alt={user?.name.firstName + '' + user?.name.lastName}
             />
             {loginUser.id === id && (
