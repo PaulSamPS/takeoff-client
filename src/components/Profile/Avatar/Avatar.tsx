@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { API_URL } from '../../../http/axios';
 import { ReactComponent as AddAvatar } from '../../../helpers/icons/addAvatar.svg';
 import { ProfileAvatarProps } from './Avatar.props';
@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 
 import styles from './Avatar.module.scss';
 
-export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Element => {
+export const Avatar = memo(({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
 
   const [hover, setHover] = React.useState<boolean>(false);
@@ -27,10 +27,10 @@ export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Ele
     closed: { opacity: 0, height: 0 },
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = React.useCallback(() => {
     localStorage.setItem('receiverUserId', id!);
     setConversationModal(true);
-  };
+  }, []);
 
   return (
     <div className={styles.avatar}>
@@ -42,6 +42,7 @@ export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Ele
             className={styles.img}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
+            onTouchStart={() => setHover(true)}
           >
             <img
               src={user?.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${user.avatar}`}
@@ -92,4 +93,4 @@ export const Avatar = ({ user, isLoadingUserInfo }: ProfileAvatarProps): JSX.Ele
       )}
     </div>
   );
-};
+});

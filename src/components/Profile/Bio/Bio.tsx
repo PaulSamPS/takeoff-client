@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { calculateTime } from '../../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { calculateFriendsCount } from '../../../helpers/calculateFriendsCount';
@@ -15,7 +15,7 @@ import { motion } from 'framer-motion';
 
 import styles from './Bio.module.scss';
 
-export const Bio = ({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Element => {
+export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
 
@@ -156,4 +156,4 @@ export const Bio = ({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Element =
       </Modal>
     </div>
   );
-};
+});

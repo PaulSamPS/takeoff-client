@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Modal } from '../../UI';
 import { NotificationListItemProps } from './NotificationListItem.props';
 import { usePost } from '../../../hooks/usePost';
@@ -9,45 +9,43 @@ import { NotificationListItemImage } from './Image/Image';
 
 import styles from './NotificationListItem.module.scss';
 
-export const NotificationListItem = ({
-  notification,
-  setVisibleNotification,
-  ...props
-}: NotificationListItemProps): JSX.Element => {
-  const [isPostModal, setIsPostModal] = React.useState<boolean>(false);
-  const [offsetTop, setOffsetTop] = React.useState<number>(0);
+export const NotificationListItem = memo(
+  ({ notification, setVisibleNotification, ...props }: NotificationListItemProps): JSX.Element => {
+    const [isPostModal, setIsPostModal] = React.useState<boolean>(false);
+    const [offsetTop, setOffsetTop] = React.useState<number>(0);
 
-  const notificationRef = React.useRef<HTMLDivElement>(null);
+    const notificationRef = React.useRef<HTMLDivElement>(null);
 
-  const { handleFindPost, findPost } = usePost(notification.post);
+    const { handleFindPost, findPost } = usePost(notification.post);
 
-  const coordsEl = () => {
-    const rect = notificationRef.current?.getBoundingClientRect();
-    setOffsetTop(rect!.top);
-    localStorage.setItem('followId', notification.user._id);
-    localStorage.setItem('friendsUserInfo', notification.user._id);
-  };
+    const coordsEl = () => {
+      const rect = notificationRef.current?.getBoundingClientRect();
+      setOffsetTop(rect!.top);
+      localStorage.setItem('followId', notification.user._id);
+      localStorage.setItem('friendsUserInfo', notification.user._id);
+    };
 
-  return (
-    <div className={styles.notification} ref={notificationRef} {...props}>
-      <NotificationListItemAvatar notification={notification} />
-      <NotificationListItemInfo
-        notification={notification}
-        offsetTop={offsetTop}
-        coordsEl={coordsEl}
-        setVisibleNotification={setVisibleNotification}
-        setIsPostModal={setIsPostModal}
-        handleFindPost={handleFindPost}
-      />
-      <NotificationListItemImage notification={notification} />
-      <Modal setModal={setIsPostModal} modal={isPostModal} postModal={isPostModal}>
-        <NewsItem
-          post={findPost}
-          postModal={isPostModal}
-          setIsPostModal={setIsPostModal}
+    return (
+      <div className={styles.notification} ref={notificationRef} {...props}>
+        <NotificationListItemAvatar notification={notification} />
+        <NotificationListItemInfo
+          notification={notification}
+          offsetTop={offsetTop}
+          coordsEl={coordsEl}
           setVisibleNotification={setVisibleNotification}
+          setIsPostModal={setIsPostModal}
+          handleFindPost={handleFindPost}
         />
-      </Modal>
-    </div>
-  );
-};
+        <NotificationListItemImage notification={notification} />
+        <Modal setModal={setIsPostModal} modal={isPostModal} postModal={isPostModal}>
+          <NewsItem
+            post={findPost}
+            postModal={isPostModal}
+            setIsPostModal={setIsPostModal}
+            setVisibleNotification={setVisibleNotification}
+          />
+        </Modal>
+      </div>
+    );
+  }
+);

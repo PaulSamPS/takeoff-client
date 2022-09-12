@@ -50,7 +50,7 @@ export const Basic = (): JSX.Element => {
   };
 
   React.useEffect(() => {
-    setSaved && setTimeout(() => setSaved(false), 3000);
+    saved && setTimeout(() => setSaved(false), 3000);
   }, [saved]);
 
   return (
