@@ -1,5 +1,25 @@
+@import './src/scss/index';
+
 .wrapper {
 	display: grid;
 	grid-template-columns: 550px 1fr;
 	column-gap: 10px;
+
+	@include _tablet {
+		grid-template-columns: 1fr;
+		grid-template-areas: 'rightbar' 'content';
+		row-gap: 20px;
+	}
+
+	.content {
+		@include _tablet {
+			grid-area: content;
+		}
+	}
+
+	.rightBar {
+		@include _tablet {
+			grid-area: rightbar;
+		}
+	}
 }

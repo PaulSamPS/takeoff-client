@@ -4,8 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import { calculateFriendsCount } from '../../../helpers/calculateFriendsCount';
 import { calculateFollowersCount } from '../../../helpers/calculateFollowersCount';
 import { useAppSelector } from '../../../hooks/redux';
-import { useRequest } from '../../../hooks/useRequest';
-import { useFollow } from '../../../hooks/useFollow';
 import { Button, Modal, Spinner } from '../../UI';
 import { ModalUsers } from '../../ModalUsers/ModalUsers';
 import { ProfileBioProps } from './Bio.props';
@@ -18,13 +16,13 @@ import styles from './Bio.module.scss';
 export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Element => {
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+  const { friendsUserInfo } = useAppSelector((state) => state.friendsUserInfoReducer);
+  const { followers } = useAppSelector((state) => state.followersUserReducer);
 
   const [visibleInfo, setVisibleInfo] = React.useState<boolean>(false);
   const [friendsModal, setFriendsModal] = React.useState<boolean>(false);
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
 
-  const { friendsUserInfo } = useRequest();
-  const { followings } = useFollow();
   const { id } = useParams();
 
   const usersOnline = users.map((user: any) => user.userId);
@@ -141,8 +139,8 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
               {calculateFriendsCount(friendsUserInfo.length)}
             </Link>
             <Link to={'#'} className={styles.friends} onClick={handleOpenModalFollowings}>
-              <span className={styles.count}>{followings && followings.length}</span>
-              {calculateFollowersCount(followings && followings.length)}
+              <span className={styles.count}>{followers && followers.length}</span>
+              {calculateFollowersCount(followers && followers.length)}
             </Link>
           </div>
         </>
