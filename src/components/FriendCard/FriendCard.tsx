@@ -4,6 +4,7 @@ import { API_URL } from '../../http/axios';
 import { FriendCardProps } from './FriendCard.props';
 import { Modal } from '../UI';
 import { ModalMessage } from '../ModalMessage/ModalMessage';
+import { AVATAR_URL } from '../../helpers/constants';
 
 import styles from './FriendCard.module.scss';
 
@@ -20,7 +21,7 @@ export const FriendCard = ({ friend }: FriendCardProps): JSX.Element => {
       <div className={styles.card}>
         <Link to={`/main/profile/${friend.id}`} replace className={styles.followers}>
           <img
-            src={friend.avatar == null ? `/photo.png` : `${API_URL}/avatar/${friend.avatar}`}
+            src={friend.avatar == null ? `/photo.png` : `${API_URL}/${AVATAR_URL}/${friend.avatar}`}
             alt={friend.name.firstName + ' ' + friend.name.lastName}
           />
         </Link>

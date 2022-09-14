@@ -22,10 +22,7 @@ export const ConversationsList = (): JSX.Element => {
       .reduce((sum: number, elem: number) => {
         return sum + elem;
       }, 0);
-
-    return () => {
-      setTotal(totalUnreadMessages);
-    };
+    setTotal(totalUnreadMessages);
   }, [socket, chats]);
 
   React.useEffect(() => {

@@ -110,14 +110,14 @@ export const useChat = (): IReturn => {
     };
   }, [socket, id]);
 
-  const sendMessage = React.useCallback((message: string | null) => {
+  const sendMessage = (message: string | null) => {
     socket?.emit('message:add', {
       _id: uuid.v4(),
       sender: user.id,
       receiver: receiverUserId,
       message,
     });
-  }, []);
+  };
 
   React.useEffect(() => {
     socket?.on('messages:sent', ({ newMessage }: { newMessage: IMessages }) => {

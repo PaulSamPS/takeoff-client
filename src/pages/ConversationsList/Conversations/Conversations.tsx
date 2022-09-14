@@ -13,12 +13,8 @@ export const Conversations = (): JSX.Element => {
     chat.name.toLowerCase().includes(search?.toLowerCase())
   );
 
-  const handleSearch = (e: FormEvent<HTMLDivElement>) => {
+  const handleSearch = React.useCallback((e: FormEvent<HTMLDivElement>) => {
     setSearch(e.currentTarget.textContent!.toString());
-  };
-
-  React.useEffect(() => {
-    document.getElementById('input')?.focus();
   }, []);
 
   return (

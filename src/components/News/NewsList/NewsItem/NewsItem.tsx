@@ -20,6 +20,7 @@ export const NewsItem = ({
       className={styles.wrapper}
       onMouseEnter={() => setHoverPost(true)}
       onMouseLeave={() => setHoverPost(false)}
+      onTouchStart={() => setHoverPost(true)}
     >
       <NewsItemBody post={post} hoverPost={hoverPost} />
       <NewsItemIcons

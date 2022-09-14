@@ -10,6 +10,7 @@ import openChatReducer from './reducers/openChatReducer';
 import socketOnlineUserReducer from './reducers/socketUsersReducer';
 import changePassword from './reducers/auth/changePasswordReducer';
 import friendsUserInfoReducer from './reducers/friendsUserInfoReducer';
+import followersUserReducer from './reducers/followersUserReducer';
 
 const persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   registrationReducer,
   changePassword,
   friendsUserInfoReducer,
+  followersUserReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

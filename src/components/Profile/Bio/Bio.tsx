@@ -3,9 +3,7 @@ import { calculateTime } from '../../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { calculateFriendsCount } from '../../../helpers/calculateFriendsCount';
 import { calculateFollowersCount } from '../../../helpers/calculateFollowersCount';
-import { useAppSelector } from '../../../hooks/redux';
-import { useRequest } from '../../../hooks/useRequest';
-import { useFollow } from '../../../hooks/useFollow';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { Button, Modal, Spinner } from '../../UI';
 import { ModalUsers } from '../../ModalUsers/ModalUsers';
 import { ProfileBioProps } from './Bio.props';
@@ -14,17 +12,22 @@ import cn from 'classnames';
 import { motion } from 'framer-motion';
 
 import styles from './Bio.module.scss';
+import { IFollow } from '../../../interfaces/useFollow.interface';
+import { setFollowersUser } from '../../../redux/reducers/followersUserReducer';
+import { SocketContext } from '../../../helpers/socketContext';
 
 export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Element => {
+  const socket = React.useContext(SocketContext);
+  const dispatch = useAppDispatch();
   const loginUser = useAppSelector((state) => state.loginReducer.user);
   const { users } = useAppSelector((state) => state.socketOnlineUserReducer);
+  const { friendsUserInfo } = useAppSelector((state) => state.friendsUserInfoReducer);
+  const { followers } = useAppSelector((state) => state.followersUserReducer);
 
   const [visibleInfo, setVisibleInfo] = React.useState<boolean>(false);
   const [friendsModal, setFriendsModal] = React.useState<boolean>(false);
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
 
-  const { friendsUserInfo } = useRequest();
-  const { followings } = useFollow();
   const { id } = useParams();
 
   const usersOnline = users.map((user: any) => user.userId);
@@ -47,6 +50,19 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
   React.useEffect(() => {
     setVisibleInfo(false);
   }, [id]);
+
+  React.useEffect(() => {
+    socket?.emit('followersUserInfo:get', {
+      userId: id,
+    });
+    socket?.on('followersUserInfo:set', ({ followingsUser }: IFollow) => {
+      dispatch(setFollowersUser(followingsUser));
+    });
+
+    return () => {
+      socket?.off('followersUserInfo:set');
+    };
+  }, [socket, id]);
 
   return (
     <div className={styles.bio}>
@@ -137,12 +153,12 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
           </div>
           <div className={styles.bottom}>
             <Link to={'#'} className={styles.friends} onClick={handleOpenModalFriends}>
-              <span className={styles.count}>{friendsUserInfo.length}</span>
-              {calculateFriendsCount(friendsUserInfo.length)}
+              <span className={styles.count}>{friendsUserInfo && friendsUserInfo.length}</span>
+              {calculateFriendsCount(friendsUserInfo && friendsUserInfo.length)}
             </Link>
             <Link to={'#'} className={styles.friends} onClick={handleOpenModalFollowings}>
-              <span className={styles.count}>{followings && followings.length}</span>
-              {calculateFollowersCount(followings && followings.length)}
+              <span className={styles.count}>{followers && followers.length}</span>
+              {calculateFollowersCount(followers && followers.length)}
             </Link>
           </div>
         </>
