@@ -9,3 +9,4 @@ export * from './Modal/Modal';
 export * from './Search/Search';
 export * from './Spinner/Spinner';
 export * from './Toast/Toast';
+export * from './Logo/Logo';

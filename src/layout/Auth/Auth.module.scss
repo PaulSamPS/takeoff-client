@@ -19,33 +19,6 @@
 		margin: 0;
 	}
 
-	.top {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		.firstLetter {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			height: 30px;
-			width: 30px;
-			background: rgba(1, 119, 255, 100);
-			border-radius: 10px;
-			color: var(--white);
-			font-size: 20px;
-			font-family: 'VKSansDisplay-Bold', sans-serif;
-			margin-right: 01px;
-		}
-
-		h1 {
-			font-family: 'VKSansDisplay-Bold', sans-serif;
-			text-transform: uppercase;
-			font-size: 20px;
-			color: var(--greyDark);
-		}
-	}
-
 	.bottom {
 		h2 {
 			font-size: 20px;

@@ -3,9 +3,10 @@ import { MobileSidebarType } from '../../layout/Main/MobileHeader/MobileSidebar.
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { API_URL } from '../../http/axios';
-import { CustomLink } from '../UI';
+import { CustomLink, Logo } from '../UI';
 import { ReactComponent as SettingsIcon } from '../../helpers/icons/settings.svg';
 import { ReactComponent as ExitIcon } from '../../helpers/icons/exit.svg';
+import { ReactComponent as SearchIcon } from '../../helpers/icons/search.svg';
 import { logout } from '../../redux/actions/authAction';
 import { SocketContext } from '../../helpers/socketContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -63,7 +64,7 @@ export const MobileSidebar = ({ setModal, modal }: MobileSidebarType) => {
             }}
           >
             <Link to={'/main/news'} className={styles.logo} onClick={() => setModal(false)}>
-              <h2>TakeOff</h2>
+              <Logo justify='flex-start' />
             </Link>
             <Link
               to={`/main/profile/${loginUser.id}`}
@@ -87,6 +88,15 @@ export const MobileSidebar = ({ setModal, modal }: MobileSidebarType) => {
               >
                 <SettingsIcon />
                 Настройки
+              </CustomLink>
+              <CustomLink
+                className={styles.search}
+                to={'/main/friends/find'}
+                style={{ padding: '5px 10px' }}
+                onClick={() => setModal(false)}
+              >
+                <SearchIcon />
+                Поиск
               </CustomLink>
               <CustomLink to={'/'} style={{ padding: '5px 10px' }} onClick={handleLogout}>
                 <ExitIcon />

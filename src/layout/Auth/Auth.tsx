@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { Logo } from '../../components/UI';
 
 import styles from './Auth.module.scss';
 
@@ -16,10 +17,7 @@ export const Auth = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.top}>
-        <div className={styles.firstLetter}>T</div>
-        <h1>Takeoff</h1>
-      </div>
+      <Logo justify='center' />
       <div className={styles.bottom}>
         <Outlet />
       </div>

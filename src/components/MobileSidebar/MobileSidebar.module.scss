@@ -53,6 +53,12 @@
 
     .profileMenu {
       margin-top: 40px;
+
+      .search {
+        svg {
+          fill: var(--blue-alternative);
+        }
+      }
     }
   }
 }

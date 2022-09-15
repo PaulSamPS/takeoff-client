@@ -5,7 +5,7 @@ import { useAppSelector } from '../../../hooks/redux';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../../../http/axios';
 import { ProfileMenu } from '../../../components/ProfileMenu/ProfileMenu';
-import { Count } from '../../../components/UI';
+import { Count, Logo } from '../../../components/UI';
 import { NotificationList } from '../../../components/NotificationList/NotificationList';
 import { useNotifications } from '../../../hooks/useNotifications';
 import { Search } from './Search/Search';
@@ -33,7 +33,7 @@ export const Header: React.FC<
   return (
     <div className={cn(styles.wrapper, className)}>
       <Link to={'/main/news'} className={styles.logo}>
-        <h2>TakeOff</h2>
+        <Logo justify='flex-start' />
       </Link>
       <Search className={styles.search} />
       <div className={styles.notification} onClick={handleOpenNotifications}>
