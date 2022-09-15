@@ -17,6 +17,7 @@ export const Auth = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
+        <div className={styles.firstLetter}>T</div>
         <h1>Takeoff</h1>
       </div>
       <div className={styles.bottom}>

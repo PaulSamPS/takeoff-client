@@ -7,7 +7,7 @@ import { calculateTime } from '../../../helpers/calculateTime';
 import { Link, useParams } from 'react-router-dom';
 import { Spinner } from '../../../components/UI';
 import { SocketContext } from '../../../helpers/socketContext';
-import { ChatMessages } from '../../../components/ChatMessage/ChatMessages';
+import { ChatMessages } from '../../../components/ChatMessages/ChatMessages';
 import { AVATAR_URL } from '../../../helpers/constants';
 import { Form } from './Form/Form';
 

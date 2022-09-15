@@ -17,7 +17,6 @@ export const useFollow = (): IFollowReturn => {
   const { id } = useParams();
 
   const followId = localStorage.getItem('followId');
-  console.log(id);
 
   const handleFollow = React.useCallback(() => {
     socket?.emit('follow', {
