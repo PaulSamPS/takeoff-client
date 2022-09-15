@@ -17,7 +17,6 @@ export const useNotifications = (): INotificationsReturn => {
   const [notifications, setNotifications] =
     React.useState<INotifications>(initialStateNotifications);
   const [notificationsCount, setNotificationsCount] = React.useState<number>(0);
-  console.log(notificationsCount);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
