@@ -17,6 +17,7 @@ export const useNotifications = (): INotificationsReturn => {
   const [notifications, setNotifications] =
     React.useState<INotifications>(initialStateNotifications);
   const [notificationsCount, setNotificationsCount] = React.useState<number>(0);
+  console.log(notificationsCount);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -51,7 +52,7 @@ export const useNotifications = (): INotificationsReturn => {
     };
   }, [socket]);
 
-  const handleReadNotifications = React.useCallback(() => {
+  const handleReadNotifications = () => {
     socket?.emit('notifications:read', {
       userId: loginUser.id,
       readNotificationsCount: notificationsCount,
@@ -59,7 +60,7 @@ export const useNotifications = (): INotificationsReturn => {
     socket?.on('notifications:unread', ({ count }: { count: number }) => {
       setNotificationsCount(count);
     });
-  }, []);
+  };
 
   return {
     notifications,

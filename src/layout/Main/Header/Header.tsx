@@ -36,7 +36,11 @@ export const Header: React.FC<
         <Logo justify='flex-start' />
       </Link>
       <Search className={styles.search} />
-      <div className={styles.notification} onClick={handleOpenNotifications}>
+      <div
+        className={styles.notification}
+        onClick={handleOpenNotifications}
+        onTouchStart={handleOpenNotifications}
+      >
         <div className={cn(styles.icon, { [styles.notificationVisible]: visibleNotification })}>
           <NotificationIcon />
         </div>
