@@ -82,7 +82,6 @@ export const usePost = (post: IPost): IPostReturn => {
       handleFindPost(post._id);
     });
     setText('');
-    console.log('123');
   };
 
   const handleFindPost = (postId: string) => {

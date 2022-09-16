@@ -19,7 +19,7 @@ export const NewsItemComment = ({
   isAllComments,
   setIsAllComments,
 }: NewsItemCommentProps): JSX.Element => {
-  const [countComments, setCountComments] = React.useState<number>(10);
+  const [countComments, setCountComments] = React.useState<number>(0);
   const { comments, handleComment, setText, text } = usePost(post);
 
   const handleViewComments = () => {
@@ -27,7 +27,7 @@ export const NewsItemComment = ({
     setCountComments((prevState) => prevState + 10);
   };
 
-  const handleMoreComments = () => {
+  const handleHideComments = () => {
     setCountComments(3);
     setIsAllComments(false);
   };
@@ -38,7 +38,7 @@ export const NewsItemComment = ({
 
   return (
     <>
-      {post.comments.length > 0 && !isAllComments && (
+      {post.comments.length > 0 && (
         <div className={styles.lastComments}>
           {comments.slice(0, isAllComments ? countComments : 3).map((comment) => (
             <div key={comment._id} className={styles.grid}>
@@ -70,7 +70,7 @@ export const NewsItemComment = ({
               {comments.length > 3 && !isAllComments ? (
                 <span onClick={handleViewComments}>Показать все комментарии</span>
               ) : (
-                isAllComments && <span onClick={handleMoreComments}>Скрыть комментарии</span>
+                isAllComments && <span onClick={handleHideComments}>Скрыть комментарии</span>
               )}
             </div>
           )}
