@@ -40,11 +40,15 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
   const handleOpenModalFriends = () => {
     setActiveIndex(1);
     setFriendsModal(true);
+    localStorage.setItem('friendsUserInfo', id!);
+    localStorage.setItem('followId', id!);
   };
 
   const handleOpenModalFollowings = () => {
     setActiveIndex(0);
     setFriendsModal(true);
+    localStorage.setItem('friendsUserInfo', id!);
+    localStorage.setItem('followId', id!);
   };
 
   React.useEffect(() => {
