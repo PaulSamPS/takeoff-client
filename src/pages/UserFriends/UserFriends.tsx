@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom';
 import { RightBar } from '../../components/RightBar/RightBar';
 
 export const UserFriends = () => {
+  const backToUser = localStorage.getItem('backToProfile');
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -13,8 +15,10 @@ export const UserFriends = () => {
         className={styles.rightBar}
         firstItem={'Друзья'}
         secondItem={'Подписчики'}
+        thirdItem={'Назад к профилю'}
         firstItemLink={'/main/user-friends'}
         secondItemLink={'/main/user-friends/followers'}
+        thirdItemLink={`${backToUser}`}
       />
     </div>
   );

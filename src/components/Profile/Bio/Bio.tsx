@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { calculateTime } from '../../../helpers/calculateTime';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { calculateFriendsCount } from '../../../helpers/calculateFriendsCount';
 import { calculateFollowersCount } from '../../../helpers/calculateFollowersCount';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
@@ -15,6 +15,7 @@ import styles from './Bio.module.scss';
 import { IFollow } from '../../../interfaces/useFollow.interface';
 import { setFollowersUser } from '../../../redux/reducers/followersUserReducer';
 import { SocketContext } from '../../../helpers/socketContext';
+import { useScreenWidth } from '../../../hooks/useScreenWidth';
 
 export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Element => {
   const socket = React.useContext(SocketContext);
@@ -29,6 +30,8 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
 
   const { id } = useParams();
+  const { screenWidth } = useScreenWidth();
+  const { pathname } = useLocation();
 
   const usersOnline = users.map((user: any) => user.userId);
 
@@ -42,6 +45,13 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
     setFriendsModal(true);
     localStorage.setItem('friendsUserInfo', id!);
     localStorage.setItem('followId', id!);
+    localStorage.setItem('backToProfile', pathname);
+  };
+
+  const setBackToProfile = () => {
+    localStorage.setItem('friendsUserInfo', id!);
+    localStorage.setItem('followId', id!);
+    localStorage.setItem('backToProfile', pathname);
   };
 
   const handleOpenModalFollowings = () => {
@@ -49,6 +59,7 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
     setFriendsModal(true);
     localStorage.setItem('friendsUserInfo', id!);
     localStorage.setItem('followId', id!);
+    localStorage.setItem('backToProfile', pathname);
   };
 
   React.useEffect(() => {
@@ -156,11 +167,19 @@ export const Bio = memo(({ user, isLoadingUserInfo }: ProfileBioProps): JSX.Elem
             )}
           </div>
           <div className={styles.bottom}>
-            <Link to={'#'} className={styles.friends} onClick={handleOpenModalFriends}>
+            <Link
+              to={screenWidth < 1000 ? '/main/user-friends' : '#'}
+              className={styles.friends}
+              onClick={screenWidth < 1000 ? setBackToProfile : handleOpenModalFriends}
+            >
               <span className={styles.count}>{friendsUserInfo && friendsUserInfo.length}</span>
               {calculateFriendsCount(friendsUserInfo && friendsUserInfo.length)}
             </Link>
-            <Link to={'#'} className={styles.friends} onClick={handleOpenModalFollowings}>
+            <Link
+              to={screenWidth < 1000 ? '/main/user-friends' : '#'}
+              className={styles.friends}
+              onClick={screenWidth < 1000 ? setBackToProfile : handleOpenModalFollowings}
+            >
               <span className={styles.count}>{followers && followers.length}</span>
               {calculateFollowersCount(followers && followers.length)}
             </Link>
