@@ -1,6 +1,7 @@
 # Social network Takeoff
 
 * [Available Scripts](#Available-Scripts)
+* [Project description](#Project-description)
 * [Demo](#Demo)
 * [Technical specifications](#Technical-specifications)
 
@@ -18,6 +19,20 @@ Runs style linter for files .scss
 ### `npm run lint:fix`
 Runs eslint for files .ts
 
+## Project description
+
+The project implements:
+* personal messages
+* creating posts
+* likes post
+* comments on posts
+* uploading an avatar
+* profile editing
+* password change
+* profile removal
+* adding and deleting from friends
+* search for people
+* instant notifications using a socket.
 
 ## Demo
 
