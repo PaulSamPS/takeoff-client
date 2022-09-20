@@ -35,7 +35,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "lint": "eslint src/*",
     "lint:fix": "eslint src/* --fix",
     "stylelint": "stylelint \"**/*.scss\" --fix"
