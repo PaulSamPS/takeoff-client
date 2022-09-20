@@ -1,8 +1,8 @@
 # Social network Takeoff
 
-* [Start Project](#Available Scripts)
+* [Available Scripts](#Available-Scripts)
 * [Demo](#Demo)
-* [Technical specifications](#Technical specifications)
+* [Technical specifications](#Technical-specifications)
 
 ## Available Scripts
 
